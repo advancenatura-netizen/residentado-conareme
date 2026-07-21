@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Inteligencia — Residentado Médico Perú (CONAREME) 2026</title>
+<style>
+  :root{
+    --bg:#0d1321; --panel:#1a2238; --panel2:#212b47; --ink:#e8ecf4; --muted:#9fb0cc;
+    --accent:#4cc9f0; --gold:#ffd166; --green:#06d6a0; --red:#ef476f; --violet:#9b5de5;
+    --med:#4cc9f0; --ped:#06d6a0; --cir:#ef476f; --gin:#ff9e6d; --sp:#ffd166; --cb:#9b5de5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.6;}
+  .wrap{max-width:1100px; margin:0 auto; padding:24px;}
+  header{background:linear-gradient(135deg,#13315c 0%,#0d1321 70%); border-bottom:3px solid var(--accent); padding:48px 24px 36px;}
+  header h1{font-size:2rem; color:#fff; margin-bottom:8px;}
+  header .sub{color:var(--accent); font-weight:600; font-size:1.05rem;}
+  header .meta{color:var(--muted); font-size:.85rem; margin-top:14px;}
+  .badge{display:inline-block; padding:2px 10px; border-radius:12px; font-size:.75rem; font-weight:700; margin-right:6px;}
+  .b-ver{background:rgba(6,214,160,.15); color:var(--green); border:1px solid var(--green);}
+  .b-emp{background:rgba(76,201,240,.15); color:var(--accent); border:1px solid var(--accent);}
+  .b-warn{background:rgba(255,209,102,.15); color:var(--gold); border:1px solid var(--gold);}
+  nav{background:var(--panel); position:sticky; top:0; z-index:10; border-bottom:1px solid #2e3a5c; overflow-x:auto; white-space:nowrap;}
+  nav .wrap{padding:10px 24px;}
+  nav a{color:var(--muted); text-decoration:none; font-size:.82rem; margin-right:18px; font-weight:600;}
+  nav a:hover{color:var(--accent);}
+  section{margin:42px 0;}
+  h2{color:var(--accent); font-size:1.45rem; border-left:4px solid var(--accent); padding-left:12px; margin-bottom:18px;}
+  h3{color:var(--gold); font-size:1.1rem; margin:22px 0 10px;}
+  p{margin-bottom:12px; color:#cdd7e8;}
+  .card{background:var(--panel); border:1px solid #2e3a5c; border-radius:10px; padding:20px; margin-bottom:16px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media(max-width:780px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .kpi{background:var(--panel2); border-radius:10px; padding:18px; text-align:center; border:1px solid #2e3a5c;}
+  .kpi .n{font-size:2rem; font-weight:800; color:var(--accent);}
+  .kpi .l{font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px;}
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:.9rem;}
+  th{background:var(--panel2); color:var(--accent); text-align:left; padding:9px 12px; border-bottom:2px solid var(--accent); font-size:.82rem; text-transform:uppercase; letter-spacing:.4px;}
+  td{padding:8px 12px; border-bottom:1px solid #2e3a5c; color:#cdd7e8;}
+  tr:hover td{background:rgba(76,201,240,.05);}
+  .num{text-align:right; font-variant-numeric:tabular-nums;}
+  .ctr{text-align:center;}
+  .hl{color:var(--gold); font-weight:700;}
+  .ok{color:var(--green); font-weight:700;}
+  .warn-box{background:rgba(255,209,102,.08); border:1px solid var(--gold); border-radius:10px; padding:18px; margin:16px 0;}
+  .warn-box b{color:var(--gold);}
+  .alert-box{background:rgba(239,71,111,.08); border:1px solid var(--red); border-radius:10px; padding:18px; margin:16px 0;}
+  .alert-box b{color:var(--red);}
+  .info-box{background:rgba(76,201,240,.07); border:1px solid var(--accent); border-radius:10px; padding:18px; margin:16px 0;}
+  .bar-row{display:flex; align-items:center; margin:7px 0; gap:10px;}
+  .bar-label{width:200px; font-size:.85rem; color:#cdd7e8; flex-shrink:0;}
+  .bar-track{flex:1; background:#0d1321; border-radius:6px; height:26px; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:6px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; font-size:.78rem; font-weight:700; color:#0d1321; min-width:36px;}
+  .timeline{border-left:3px solid var(--accent); margin-left:10px; padding-left:24px;}
+  .tl-item{position:relative; margin-bottom:22px;}
+  .tl-item::before{content:''; position:absolute; left:-31px; top:5px; width:13px; height:13px; border-radius:50%; background:var(--accent); border:3px solid var(--bg);}
+  .tl-year{color:var(--gold); font-weight:800; font-size:1rem;}
+  .pill{display:inline-block; padding:1px 9px; border-radius:10px; font-size:.74rem; font-weight:700;}
+  .p-med{background:rgba(76,201,240,.18); color:var(--med);}
+  .p-ped{background:rgba(6,214,160,.18); color:var(--ped);}
+  .p-cir{background:rgba(239,71,111,.18); color:var(--cir);}
+  .p-gin{background:rgba(255,158,109,.18); color:var(--gin);}
+  .p-sp{background:rgba(255,209,102,.18); color:var(--sp);}
+  .p-cb{background:rgba(155,93,229,.18); color:var(--cb);}
+  footer{border-top:1px solid #2e3a5c; padding:28px 24px; color:var(--muted); font-size:.8rem; margin-top:48px;}
+  a{color:var(--accent);}
+  ul,ol{margin:0 0 12px 22px; color:#cdd7e8;}
+  li{margin-bottom:5px;}
+  .src{font-size:.78rem; color:var(--muted); word-break:break-all;}
+  details{background:var(--panel2); border:1px solid #2e3a5c; border-radius:8px; padding:12px 16px; margin:10px 0;}
+  summary{cursor:pointer; font-weight:700; color:var(--accent);}
+  @media print{
+    *{-webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;}
+    body{background:var(--bg) !important;}
+    nav{display:none;}
+    .card,.kpi,.warn-box,.alert-box,.info-box,details,.tl-item,section{break-inside:avoid; page-break-inside:avoid;}
+    table{break-inside:avoid; page-break-inside:avoid;}
+    tr{break-inside:avoid; page-break-inside:avoid;}
+    h2,h3{break-after:avoid; page-break-after:avoid;}
+    .grid2,.grid3{break-inside:avoid; page-break-inside:avoid;}
+    .bar-row{break-inside:avoid; page-break-inside:avoid;}
+    .timeline{break-inside:avoid; page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>🩺 Informe de Inteligencia: Examen Nacional de Residentado Médico — Perú</h1>
+    <div class="sub">CONAREME · Análisis normativo verificado + estadística empírica de 400 preguntas oficiales reales</div>
+    <div class="meta">
+      Elaborado: 10 de junio de 2026 · Investigación: 104 agentes, 22 fuentes, 25 afirmaciones verificadas (3-0 unánime, 0 refutadas) · Clasificación manual de exámenes oficiales 2021 y 2023 (Pruebas A y B)<br><br>
+      <span class="badge b-ver">✓ VERIFICADO = dato confirmado contra fuente primaria (norma/PDF oficial)</span>
+      <span class="badge b-emp">📊 EMPÍRICO = estadística construida clasificando los exámenes reales</span>
+      <span class="badge b-warn">⚠ ESTIMADO = inferencia razonable, no oficial</span>
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#resumen">Resumen</a>
+  <a href="#estructura">Estructura</a>
+  <a href="#temario">¿Temario oficial?</a>
+  <a href="#stats">Estadística real</a>
+  <a href="#temas">Temas frecuentes</a>
+  <a href="#evolucion">Evolución</a>
+  <a href="#cronograma">Cronograma 2026</a>
+  <a href="#puntaje">Puntaje</a>
+  <a href="#plan">Plan de estudio</a>
+  <a href="#fuentes">Fuentes</a>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ============ RESUMEN EJECUTIVO ============ -->
+<section id="resumen">
+  <h2>1. Resumen ejecutivo</h2>
+  <div class="grid3">
+    <div class="kpi"><div class="n">200</div><div class="l">preguntas (desde 2024)</div></div>
+    <div class="kpi"><div class="n">80% / 20%</div><div class="l">examen / currículo</div></div>
+    <div class="kpi"><div class="n">6 sep 2026</div><div class="l">fecha de tu examen</div></div>
+    <div class="kpi"><div class="n">6</div><div class="l">áreas oficiales</div></div>
+    <div class="kpi"><div class="n">≥50%</div><div class="l">casos clínicos (por norma)</div></div>
+    <div class="kpi"><div class="n">~66%</div><div class="l">casos clínicos reales (observado)</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <p><b>Lo esencial en 6 puntos:</b></p>
+    <ol>
+      <li><span class="badge b-ver">✓</span> El concurso CONAREME es el <b>único medio de ingreso</b> al residentado (Ley 30453, vigente desde 2016). Nota final = <b>80% examen escrito + 20% evaluación curricular</b>.</li>
+      <li><span class="badge b-ver">✓</span> El examen para especialidades tiene <b>200 preguntas</b> (subió de 180 en 2024), de conocimientos de <b>pregrado</b>, en 6 áreas: Clínicas Médicas, Quirúrgicas, Pediátricas, Gineco-Obstétricas, Salud Pública y Ciencias Básicas. Mínimo 50% en formato caso clínico. Siempre presencial.</li>
+      <li><span class="badge b-ver">✓</span> <b>NO existe tabla de especificaciones oficial</b> con porcentajes por área. Los porcentajes que circulan en internet son del ENAM (otro examen) o estimaciones de academias. El Jurado de Admisión define las preguntas cada año.</li>
+      <li><span class="badge b-emp">📊</span> Por eso este informe construyó la distribución <b>clasificando pregunta por pregunta 400 preguntas de 4 exámenes oficiales reales</b> (Pruebas A y B de 2021 y 2023, descargadas de conareme.org.pe): <b>Medicina ~32%, Pediatría ~23%, Cirugía ~16%, Gineco-Obstetricia ~15%, Ciencias Básicas ~8%, Salud Pública ~6%</b>.</li>
+      <li><span class="badge b-emp">📊</span> Tendencia 2021→2023: <b>Medicina sube</b> (28.5%→35%), <b>Ciencias Básicas baja</b> (10%→6%), los <b>casos clínicos suben</b> (60%→71.5%). El examen es cada vez más clínico.</li>
+      <li><span class="badge b-ver">✓</span> Cronograma 2026 ya aprobado (15-may-2026): inscripción SIGESIN <b>8–27 julio</b>, examen <b>domingo 6 de septiembre</b>, adjudicación 9–11 septiembre, inicio del residentado 1 de octubre. <b>Tienes ~12.5 semanas.</b></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ ESTRUCTURA ============ -->
+<section id="estructura">
+  <h2>2. Estructura del concurso y del examen <span class="badge b-ver">✓ VERIFICADO</span></h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>El examen escrito (80 puntos)</h3>
+      <ul>
+        <li><b>200 preguntas</b> de opción múltiple para especialidades (norma 2024 y 2025; era 180 en 2020–2023). Subespecialidades: examen aparte de 100 preguntas sobre la especialidad prerrequisito.</li>
+        <li>Contenido de <b>nivel pregrado</b> — no se evalúa conocimiento de especialista.</li>
+        <li><b>Mínimo 50% de preguntas en base a casos clínicos</b> (viñeta con paciente). En la práctica observamos 54–74% según la prueba.</li>
+        <li>Distribuido en 6 áreas: <span class="pill p-med">Clínicas Médicas</span> <span class="pill p-cir">Clínicas Quirúrgicas</span> <span class="pill p-ped">Clínicas Pediátricas</span> <span class="pill p-gin">Gineco-Obstétricas</span> <span class="pill p-sp">Salud Pública</span> <span class="pill p-cb">Ciencias Básicas</span></li>
+        <li>Las preguntas van <b>intercaladas, sin secciones rotuladas por área</b> (verificado en los PDFs reales: la pregunta 1 puede ser gineco-oncología y la 2 endocrino).</li>
+        <li><b>Siempre presencial</b> — incluso en pandemia se mantuvo presencial "en aras de proteger la imparcialidad". Fichas ópticas leídas en la misma sede; resultados en ~24 h. Prohibidos celulares, relojes y todo dispositivo electrónico.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>La evaluación curricular (20 puntos)</h3>
+      <table>
+        <tr><th>Componente</th><th class="num">Máx.</th></tr>
+        <tr><td><b>SERUMS</b> (según quintil de dificultad del establecimiento)</td><td class="num hl">10</td></tr>
+        <tr><td><b>ENAM + promedio de pregrado</b> (50% nota ENAM / 50% promedio incl. internado)</td><td class="num hl">5</td></tr>
+        <tr><td><b>Años de servicio</b> en primer nivel de atención público (no incluye SERUMS; 1–4 pts por 2–5 años)</td><td class="num hl">4</td></tr>
+        <tr><td><b>Quinto superior</b> de pregrado</td><td class="num hl">1</td></tr>
+        <tr><td><b>Total</b></td><td class="num ok">20</td></tr>
+      </table>
+      <p style="font-size:.85rem; color:var(--muted)">Egresados antes de 2009 (sin ENAM): los 5 puntos salen solo del promedio de pregrado. Este bloque ya está definido por tu historia — <b>el único componente que aún controlas es el examen (80%)</b>.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Requisitos para postular (Ley 30453 + operativos CONAREME)</h3>
+    <ul>
+      <li>Título de <b>médico cirujano</b> + <b>colegiatura habilitada</b> en el CMP + <b>SERUMS cumplido</b>.</li>
+      <li>Tres modalidades: <b>vacante libre</b>, <b>por destaque</b> (trabajadores MINSA/EsSalud/FFAA/PNP, requiere registro INFORHUS) y <b>cautiva</b>.</li>
+      <li>Proceso 100% informatizado vía <b>SIGESIN</b> (inscripción, expediente, reclamos), excepto el examen que es presencial. Pago de tasa a cuenta recaudadora de CONAREME antes de inscribirse.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TEMARIO ============ -->
+<section id="temario">
+  <h2>3. ¿Existe un temario oficial? — El hallazgo más importante</h2>
+  <div class="alert-box">
+    <p><b>NO. No existe tabla de especificaciones oficial de CONAREME.</b> La verificación exhaustiva sobre el texto completo de los procedimientos 2020-2023, 2024, 2025 y las Disposiciones Complementarias 2025 encontró <b>cero menciones</b> de "temario", "tabla de especificaciones" o porcentajes por área (los únicos porcentajes normados son 80/20 y el 50% de casos clínicos). Las Disposiciones 2025 delegan expresamente "duración, modalidad, preguntas" al Jurado de Admisión de cada año.</p>
+    <p style="margin-top:8px"><b>Implicancia práctica:</b> cualquier "distribución oficial CONAREME" que veas en academias o redes es (a) la tabla del ENAM —que es otro examen—, o (b) una estimación propia de la academia. La única forma honesta de saber qué viene es analizar los exámenes reales — que es lo que hace la sección siguiente.</p>
+  </div>
+</section>
+
+<!-- ============ ESTADISTICA ============ -->
+<section id="stats">
+  <h2>4. Estadística real: 400 preguntas oficiales clasificadas <span class="badge b-emp">📊 EMPÍRICO</span></h2>
+  <p><b>Metodología:</b> se descargaron de conareme.org.pe los 4 exámenes oficiales completos disponibles públicamente — Pruebas A y B del concurso 2021 (13-jun-2021) y Pruebas A y B del 2023 (03-sep-2023), 100 preguntas cada uno — y se clasificó cada una de las 400 preguntas en una de las 6 áreas oficiales, con tema específico y formato (caso clínico vs. pregunta directa). Los PDFs originales están en tu carpeta <code>Desktop\CONAREME\</code>.</p>
+
+  <h3>4.1 Distribución por área (n = 400 preguntas)</h3>
+  <div class="card">
+    <div class="bar-row"><div class="bar-label"><span class="pill p-med">Clínicas Médicas</span></div><div class="bar-track"><div class="bar-fill" style="width:88%; background:var(--med)">127 — 31.8%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-ped">Clínicas Pediátricas</span></div><div class="bar-track"><div class="bar-fill" style="width:64%; background:var(--ped)">92 — 23.0%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-cir">Clínicas Quirúrgicas</span></div><div class="bar-track"><div class="bar-fill" style="width:44%; background:var(--cir)">64 — 16.0%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-gin">Gineco-Obstétricas</span></div><div class="bar-track"><div class="bar-fill" style="width:41%; background:var(--gin)">60 — 15.0%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-cb">Ciencias Básicas</span></div><div class="bar-track"><div class="bar-fill" style="width:22%; background:var(--cb)">32 — 8.0%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-sp">Salud Pública</span></div><div class="bar-track"><div class="bar-fill" style="width:17%; background:var(--sp)">25 — 6.3%</div></div></div>
+    <p style="font-size:.8rem; color:var(--muted); margin-top:10px">Margen de error aproximado (IC 95%, n=400): ±3 a ±4.6 puntos porcentuales por área. La clasificación de preguntas fronterizas (p. ej. toxicología pediátrica, salud ocupacional) puede mover 1–2 puntos entre áreas vecinas.</p>
+  </div>
+
+  <h3>4.2 Detalle por examen y tendencia 2021 → 2023</h3>
+  <table>
+    <tr><th>Área</th><th class="num">2021-A</th><th class="num">2021-B</th><th class="num">2023-A</th><th class="num">2023-B</th><th class="num">Total</th><th class="num">% global</th><th class="num">% 2021</th><th class="num">% 2023</th><th>Tendencia</th></tr>
+    <tr><td><span class="pill p-med">Medicina</span></td><td class="num">30</td><td class="num">27</td><td class="num">33</td><td class="num">37</td><td class="num"><b>127</b></td><td class="num hl">31.8%</td><td class="num">28.5%</td><td class="num">35.0%</td><td class="ok">▲ sube fuerte</td></tr>
+    <tr><td><span class="pill p-ped">Pediatría</span></td><td class="num">25</td><td class="num">23</td><td class="num">25</td><td class="num">19</td><td class="num"><b>92</b></td><td class="num hl">23.0%</td><td class="num">24.0%</td><td class="num">22.0%</td><td>≈ estable</td></tr>
+    <tr><td><span class="pill p-cir">Cirugía</span></td><td class="num">13</td><td class="num">21</td><td class="num">12</td><td class="num">18</td><td class="num"><b>64</b></td><td class="num hl">16.0%</td><td class="num">17.0%</td><td class="num">15.0%</td><td>≈ estable</td></tr>
+    <tr><td><span class="pill p-gin">Gineco-Obst.</span></td><td class="num">14</td><td class="num">15</td><td class="num">17</td><td class="num">14</td><td class="num"><b>60</b></td><td class="num hl">15.0%</td><td class="num">14.5%</td><td class="num">15.5%</td><td>≈ estable</td></tr>
+    <tr><td><span class="pill p-cb">C. Básicas</span></td><td class="num">12</td><td class="num">8</td><td class="num">6</td><td class="num">6</td><td class="num"><b>32</b></td><td class="num hl">8.0%</td><td class="num">10.0%</td><td class="num">6.0%</td><td style="color:var(--red)">▼ baja</td></tr>
+    <tr><td><span class="pill p-sp">Salud Pública</span></td><td class="num">6</td><td class="num">6</td><td class="num">7</td><td class="num">6</td><td class="num"><b>25</b></td><td class="num hl">6.3%</td><td class="num">6.0%</td><td class="num">6.5%</td><td>≈ estable</td></tr>
+    <tr><td><b>Casos clínicos</b></td><td class="num">54%</td><td class="num">66%</td><td class="num">74%</td><td class="num">69%</td><td class="num"><b>263</b></td><td class="num hl">65.8%</td><td class="num">60%</td><td class="num">71.5%</td><td class="ok">▲ sube</td></tr>
+  </table>
+
+  <h3>4.3 Proyección al examen actual de 200 preguntas <span class="badge b-warn">⚠ ESTIMADO</span></h3>
+  <div class="card">
+    <table>
+      <tr><th>Área</th><th class="num">Si se repite el % global</th><th class="num">Si se repite el % de 2023 (más reciente)</th></tr>
+      <tr><td><span class="pill p-med">Clínicas Médicas</span></td><td class="num">~64 preguntas</td><td class="num hl">~70 preguntas</td></tr>
+      <tr><td><span class="pill p-ped">Clínicas Pediátricas</span></td><td class="num">~46 preguntas</td><td class="num hl">~44 preguntas</td></tr>
+      <tr><td><span class="pill p-cir">Clínicas Quirúrgicas</span></td><td class="num">~32 preguntas</td><td class="num hl">~30 preguntas</td></tr>
+      <tr><td><span class="pill p-gin">Gineco-Obstétricas</span></td><td class="num">~30 preguntas</td><td class="num hl">~31 preguntas</td></tr>
+      <tr><td><span class="pill p-cb">Ciencias Básicas</span></td><td class="num">~16 preguntas</td><td class="num hl">~12 preguntas</td></tr>
+      <tr><td><span class="pill p-sp">Salud Pública</span></td><td class="num">~13 preguntas</td><td class="num hl">~13 preguntas</td></tr>
+    </table>
+    <p style="font-size:.85rem; color:var(--muted)">Medicina + Pediatría + Gineco-Obstetricia concentran ~70% del examen. Medicina sola vale más que Cirugía + Ciencias Básicas + Salud Pública juntas.</p>
+  </div>
+</section>
+
+<!-- ============ TEMAS ============ -->
+<section id="temas">
+  <h2>5. Temas más frecuentes por área <span class="badge b-emp">📊 EMPÍRICO (400 preguntas, 2021+2023)</span></h2>
+
+  <h3>5.1 Los temas que más se repiten entre exámenes</h3>
+  <div class="card">
+    <table>
+      <tr><th>Tema</th><th>Área(s)</th><th class="num">Apariciones</th><th>Detalle</th></tr>
+      <tr><td class="hl">Trauma / manejo inicial (ATLS)</td><td><span class="pill p-cir">CIR</span></td><td class="num">~10</td><td>ATLS, trauma hepático (AAST, Pringle), pélvico, tórax inestable, neumotórax a tensión, zonas del cuello, taponamiento, TEC</td></tr>
+      <tr><td class="hl">Neumonía (todas las formas)</td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num">~8</td><td>NAC (criterios, gérmenes), nosocomial/Pseudomonas, asociada a ventilador, Pneumocystis, neumonía pediátrica</td></tr>
+      <tr><td class="hl">Patología biliar</td><td><span class="pill p-cir">CIR</span></td><td class="num">7</td><td>Colecistitis aguda (x3), colangitis, coledocolitiasis/CPRE (x3) — el tema quirúrgico-digestivo estrella</td></tr>
+      <tr><td class="hl">Síndrome coronario agudo / arritmias</td><td><span class="pill p-med">MED</span></td><td class="num">~8</td><td>IAM ST (x4: diagnóstico, fibrinólisis, complicado, emergencia HTA), TPSV/adenosina (x4), FA (x2)</td></tr>
+      <tr><td class="hl">Cáncer colorrectal y gástrico</td><td><span class="pill p-cir">CIR</span></td><td class="num">~6</td><td>Vía de propagación, hemicolectomía, seguimiento CEA, Borrmann, ca gástrico temprano, pólipos</td></tr>
+      <tr><td class="hl">Ictericia neonatal</td><td><span class="pill p-ped">PED</span></td><td class="num">4</td><td>Fisiológica, por leche materna, incompatibilidad ABO — aparece en cada examen</td></tr>
+      <tr><td class="hl">Preeclampsia</td><td><span class="pill p-gin">GIN</span></td><td class="num">3</td><td>Diagnóstico, severa, prevención con aspirina — el tema obstétrico más repetido</td></tr>
+      <tr><td class="hl">Monitoreo del bienestar fetal</td><td><span class="pill p-gin">GIN</span></td><td class="num">4</td><td>Categorías de monitoreo, test no estresante, perfil biofísico, oligohidramnios</td></tr>
+      <tr><td class="hl">Intoxicaciones</td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num">~9</td><td>Organofosforados (x3), paracetamol (x2), metanol, opioides/naloxona, cáusticos, hidrocarburos</td></tr>
+      <tr><td class="hl">Atresia esofágica</td><td><span class="pill p-ped">PED</span></td><td class="num">3</td><td>En 3 de los 4 exámenes — neonatología quirúrgica recurrente</td></tr>
+      <tr><td class="hl">TBC</td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num">3</td><td>Esquema sensible, TBC en gestación, TBC enteroperitoneal</td></tr>
+      <tr><td class="hl">Cetoacidosis / crisis hiperglicémicas</td><td><span class="pill p-med">MED</span></td><td class="num">3</td><td>CAD (x2), estado hiperosmolar</td></tr>
+      <tr><td class="hl">Hipercalcemia</td><td><span class="pill p-med">MED</span></td><td class="num">3</td><td>Maligna, por tiazidas, manejo</td></tr>
+      <tr><td class="hl">Meningitis bacteriana</td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num">3</td><td>LCR, gérmenes por edad, manejo</td></tr>
+      <tr><td class="hl">Vacunas / inmunizaciones</td><td><span class="pill p-sp">SP</span></td><td class="num">~5</td><td>Esquema MINSA, polio, VPH, varicela postexposición, profilaxis antitetánica</td></tr>
+      <tr><td class="hl">Vulvovaginitis</td><td><span class="pill p-gin">GIN</span></td><td class="num">~6</td><td>Candidiasis (¡x3 solo en 2023-A!), vaginosis bacteriana (x2), tricomoniasis</td></tr>
+      <tr><td class="hl">TEP / embolias</td><td><span class="pill p-med">MED</span></td><td class="num">4</td><td>TEP (x3), embolia grasa</td></tr>
+      <tr><td class="hl">Guillain-Barré</td><td><span class="pill p-med">MED</span></td><td class="num">2</td><td>Diagnóstico y manejo</td></tr>
+      <tr><td class="hl">Hemorragia digestiva alta</td><td><span class="pill p-med">MED</span></td><td class="num">3</td><td>Manejo, clasificación de Forrest, sangrado oculto</td></tr>
+      <tr><td class="hl">PTI / púrpuras</td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num">4</td><td>PTI adulto y pediátrico, Henoch-Schönlein</td></tr>
+    </table>
+  </div>
+
+  <h3>5.2 Composición interna de cada área</h3>
+
+  <div class="card">
+    <h3 style="margin-top:0"><span class="pill p-med">CLÍNICAS MÉDICAS</span> — 127 preguntas (31.8%) — el área decisiva</h3>
+    <div class="bar-row"><div class="bar-label">Cardiología</div><div class="bar-track"><div class="bar-fill" style="width:65%; background:var(--med)">~20 (16%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Infectología</div><div class="bar-track"><div class="bar-fill" style="width:55%; background:var(--med)">~17 (13%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Endocrinología</div><div class="bar-track"><div class="bar-fill" style="width:52%; background:var(--med)">~16 (13%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Neumología</div><div class="bar-track"><div class="bar-fill" style="width:42%; background:var(--med)">~13 (10%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Gastroenterología</div><div class="bar-track"><div class="bar-fill" style="width:39%; background:var(--med)">~12 (9%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Neurología</div><div class="bar-track"><div class="bar-fill" style="width:36%; background:var(--med)">~11 (9%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Nefro / ácido-base</div><div class="bar-track"><div class="bar-fill" style="width:29%; background:var(--med)">~9 (7%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Hemato-oncología</div><div class="bar-track"><div class="bar-fill" style="width:26%; background:var(--med)">~8 (6%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Toxicología</div><div class="bar-track"><div class="bar-fill" style="width:20%; background:var(--med)">~6 (5%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Psiquiatría</div><div class="bar-track"><div class="bar-fill" style="width:10%; background:var(--med)">3 (2%)</div></div></div>
+    <p style="font-size:.85rem; margin-top:8px"><b>Imprescindibles:</b> IAM/SCA, arritmias (TPSV, FA), insuficiencia cardiaca, NAC y neumonías intrahospitalarias, TBC, VIH/oportunistas, sífilis, dengue, CAD/EHH, tiroides (hipo, hiper, cáncer), Cushing, hipercalcemia, TEP, EPOC, derrame pleural, HDA/Forrest, PBE, EII, pancreatitis, ACV, Guillain-Barré, síndromes nefrótico/nefrítico, IRA, trastornos electrolíticos y ácido-base, anemias, PTI, intoxicaciones (organofosforados, paracetamol).</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0"><span class="pill p-ped">CLÍNICAS PEDIÁTRICAS</span> — 92 preguntas (23.0%) — neonatología es un tercio</h3>
+    <div class="bar-row"><div class="bar-label">Neonatología</div><div class="bar-track"><div class="bar-fill" style="width:75%; background:var(--ped)">~28 (30%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Infectología pediátrica</div><div class="bar-track"><div class="bar-fill" style="width:65%; background:var(--ped)">~24 (26%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Crecimiento/desarrollo/nutrición</div><div class="bar-track"><div class="bar-fill" style="width:38%; background:var(--ped)">~14 (15%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Respiratorio (crup, bronquiolitis…)</div><div class="bar-track"><div class="bar-fill" style="width:22%; background:var(--ped)">~8 (9%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Hemato-nefro-genética</div><div class="bar-track"><div class="bar-fill" style="width:30%; background:var(--ped)">~11 (12%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Otros (maltrato, intoxicaciones…)</div><div class="bar-track"><div class="bar-fill" style="width:19%; background:var(--ped)">~7 (8%)</div></div></div>
+    <p style="font-size:.85rem; margin-top:8px"><b>Imprescindibles:</b> atención inmediata del RN y APGAR, ictericia neonatal (todas las causas), sepsis neonatal, atresia esofágica, enterocolitis necrosante, taquipnea transitoria, hipoglicemia neonatal, exantemáticas (sarampión, varicela, exantema súbito), tos ferina, crup/epiglotitis, bronquiolitis, EDA y deshidratación, parasitosis (giardia, fasciola, trichuris), test de desarrollo psicomotor, desnutrición y deficiencias (Fe, Zn, vit A, vit D), convulsión febril, SUH, maltrato infantil, cardiopatías congénitas (PCA, CIV), genética (Turner, T13, fenilcetonuria).</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0"><span class="pill p-cir">CLÍNICAS QUIRÚRGICAS</span> — 64 preguntas (16.0%) — trauma + abdomen agudo = 60%</h3>
+    <div class="bar-row"><div class="bar-label">Trauma / emergencias</div><div class="bar-track"><div class="bar-fill" style="width:60%; background:var(--cir)">~14 (22%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Cirugía digestiva y oncológica</div><div class="bar-track"><div class="bar-fill" style="width:95%; background:var(--cir)">~24 (38%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Urología</div><div class="bar-track"><div class="bar-fill" style="width:33%; background:var(--cir)">~8 (13%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Anestesiología</div><div class="bar-track"><div class="bar-fill" style="width:25%; background:var(--cir)">~6 (9%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Ortopedia</div><div class="bar-track"><div class="bar-fill" style="width:21%; background:var(--cir)">~5 (8%)</div></div></div>
+    <div class="bar-row"><div class="bar-label">Oftalmo / ORL / otros</div><div class="bar-track"><div class="bar-fill" style="width:29%; background:var(--cir)">~7 (11%)</div></div></div>
+    <p style="font-size:.85rem; margin-top:8px"><b>Imprescindibles:</b> ATLS y politrauma, trauma hepático/esplénico, neumotórax a tensión, fracturas pélvicas y ruptura uretral, apendicitis (Alvarado) incluso en gestante, colecistitis-colangitis-coledocolitiasis, úlcera perforada, obstrucción intestinal, diverticulitis (Hinchey), hernias (Nyhus), ca gástrico y colorrectal, HBP, torsión testicular, litiasis renal, anestésicos locales, glaucoma agudo.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0"><span class="pill p-gin">GINECO-OBSTÉTRICAS</span> — 60 preguntas (15.0%) — obstetricia domina ~60/40</h3>
+    <p style="font-size:.85rem"><b>Obstetricia (~36):</b> preeclampsia (x3, incluida prevención con aspirina), hemorragia postparto/ácido tranexámico, placenta previa, ruptura uterina, RPM, embarazo ectópico (x2), monitoreo fetal (x4), diabetes gestacional y pregestacional (x3), presentaciones fetales (x3), partograma, embarazo gemelar/corionicidad, polihidramnios/oligohidramnios, hiperémesis, cribado de aneuploidías, enfermedad trofoblástica, bacteriuria en gestante, cambios fisiológicos del embarazo.</p>
+    <p style="font-size:.85rem"><b>Ginecología (~24):</b> vulvovaginitis (candidiasis x3, vaginosis x2, tricomoniasis), EPI, cáncer de endometrio (x2), ovario (x2 + Krukenberg + estruma), cérvix/PAP, miomatosis (x3), endometriosis, prolapso/POPQ (x2), incontinencia, anticoncepción (x3), climaterio, infertilidad, SUA/PALM-COEIN, mastitis.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0"><span class="pill p-cb">CIENCIAS BÁSICAS</span> — 32 preguntas (8.0%, en descenso)</h3>
+      <p style="font-size:.85rem">Fisiología (~14: insulina, tiroides, estrógenos, prolactina, renal, deglución, ruidos cardiacos, potencial de acción), anatomía (~5: Brown-Séquard, diafragma, suprarrenales), embriología (~5: cardiaca x2, ocular, SNC), histología (~4), farmacología pura (~5: azoles, espironolactona, sucralfato, antihistamínicos), inmunología y parasitología básica.</p>
+      <p style="font-size:.85rem; color:var(--muted)">Cayó de 10% (2021) a 6% (2023). Estudiarla integrada a la clínica, no como bloque aparte.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0"><span class="pill p-sp">SALUD PÚBLICA</span> — 25 preguntas (6.3%, estable)</h3>
+      <p style="font-size:.85rem">Bioestadística/epidemiología (~11: densidad de incidencia, especificidad, cociente de verosimilitud, error tipo II, diseño de estudios, causalidad, niveles de prevención), gestión (~8: planificación, costos, indicadores), inmunizaciones (~5), salud ocupacional (silicosis, edificio enfermo), bioética.</p>
+      <p style="font-size:.85rem; color:var(--muted)">Área pequeña pero de altísimo rendimiento: pocos conceptos, preguntas predecibles, se domina en pocos días.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVOLUCION ============ -->
+<section id="evolucion">
+  <h2>6. Evolución histórica del examen <span class="badge b-ver">✓ VERIFICADO</span></h2>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">1976</div><p>Se crea el <b>SINAREME</b> (Sistema Nacional de Residentado Médico). En 2026 cumple 50 años — de ahí el logo "50° aniversario" en los documentos oficiales.</p></div>
+      <div class="tl-item"><div class="tl-year">Antes de 2010</div><p>Cada facultad de medicina gestionaba su propio concurso por separado; el examen de conocimientos lo elaboraba <b>ASPEFAM</b>. Se postulaba ante una sola facultad por área clínica/quirúrgica.</p></div>
+      <div class="tl-item"><div class="tl-year">2010</div><p><b>Primer examen único y simultáneo</b> en todas las universidades del sistema. No se permitía retirar el cuadernillo ni se publicaban claves — por eso casi no existen exámenes oficiales públicos de 2010–2013 (solo reconstrucciones de academias; compilaciones con claves abarcan ~2014 en adelante).</p></div>
+      <div class="tl-item"><div class="tl-year">2016</div><p><b>Ley 30453</b> (10-jun-2016): el concurso nacional pasa a ser por ley el único medio de ingreso, a cargo de CONAREME. Fija el 80/20 y el desglose curricular que sigue vigente.</p></div>
+      <div class="tl-item"><div class="tl-year">2020–2023</div><p><b>Procedimiento Especial</b> (Acuerdo 032-CONAREME-2020): examen de <b>180 preguntas</b> para especialidades, 100 para subespecialidades, mínimo 50% casos clínicos, 6 áreas. Pandemia: se informatiza todo el proceso (SIGESIN) <b>excepto el examen, que siguió presencial</b> por imparcialidad. 2023 se rindió tarde: 3 de septiembre.</p></div>
+      <div class="tl-item"><div class="tl-year">2024</div><p>El examen sube a <b>200 preguntas</b> (único cambio estructural del periodo). Se rinde el 30 de junio en sedes universitarias (UNMSM, UPCH, USMP, UNT, UPAO, UNSA, etc.).</p></div>
+      <div class="tl-item"><div class="tl-year">2025</div><p>El examen adopta el nombre <b>EXUN (Examen Único Nacional)</b>. Se rinde el 6 de julio; resultados al día siguiente. Misma estructura de 200 preguntas.</p></div>
+      <div class="tl-item"><div class="tl-year">2026 — tu año</div><p>Cronograma aprobado el 15-may-2026: examen el <b>domingo 6 de septiembre</b>. A partir de 2026 rige el Reglamento regular de la Ley 30453 (DS 024-2024-SA) en lugar del "procedimiento especial". <span class="badge b-warn">⚠</span> Existe un proyecto de ley en el Congreso (PL 13830) que propone cambiar a 70% examen / 30% currículo — <b>aún no es ley</b>; verificar las disposiciones 2026 cuando salgan con la convocatoria (5 de julio).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRONOGRAMA ============ -->
+<section id="cronograma">
+  <h2>7. Cronograma oficial 2026 — tus fechas <span class="badge b-ver">✓ VERIFICADO (PDF oficial, aprobado 15-may-2026)</span></h2>
+  <div class="card">
+    <table>
+      <tr><th>Hito</th><th>Fecha 2026</th><th>Nota</th></tr>
+      <tr><td>Aprobación del Cuadro General de Vacantes</td><td>vie 3 julio</td><td>Aquí sabrás cuántas vacantes hay por especialidad</td></tr>
+      <tr><td>Convocatoria pública</td><td>dom 5 julio</td><td>Web CONAREME + diario nacional; saldrán las disposiciones 2026</td></tr>
+      <tr><td class="hl">Pago a cuenta recaudadora</td><td class="hl">mar 7 – vie 24 julio (18:00)</td><td>Sin pago no hay inscripción</td></tr>
+      <tr><td class="hl">Inscripción en SIGESIN</td><td class="hl">mié 8 – lun 27 julio (23:59)</td><td>⚠ No dejarlo para el final</td></tr>
+      <tr><td>Evaluación curricular</td><td>15 julio – 14 agosto</td><td>Publicación: sáb 15 agosto</td></tr>
+      <tr><td>Reclamos por observaciones/puntaje</td><td>17 – 20 agosto</td><td>Vía SIGESIN</td></tr>
+      <tr><td>Listado final de aptos</td><td>vie 28 agosto</td><td></td></tr>
+      <tr><td class="hl" style="font-size:1.05rem">EXAMEN DE ADMISIÓN</td><td class="hl" style="font-size:1.05rem">DOMINGO 6 SEPTIEMBRE</td><td>Presencial, en sede designada</td></tr>
+      <tr><td>Resultados finales (orden de mérito)</td><td>hasta lun 7 septiembre</td><td>~24 h después del examen</td></tr>
+      <tr><td>Adjudicación de vacantes (tiempo real, software CONAREME)</td><td>mié 9 – vie 11 septiembre</td><td>Por estricto orden de mérito</td></tr>
+      <tr><td>Publicación de ingresantes</td><td>lun 14 septiembre</td><td></td></tr>
+      <tr><td>Matrícula / renuncia a vacante</td><td>15 septiembre</td><td>Renuncia hasta 23:59 vía SIGESIN</td></tr>
+      <tr><td>Adjudicación Complementaria (vacantes libres + renuncias)</td><td>vie 18 septiembre</td><td>Segunda oportunidad si quedaste cerca</td></tr>
+      <tr><td class="ok">INICIO DEL RESIDENTADO</td><td class="ok">jueves 1 octubre</td><td></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ PUNTAJE ============ -->
+<section id="puntaje">
+  <h2>8. Cómo se decide tu ingreso</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">La aritmética del puntaje</h3>
+      <p>Nota final sobre 100 = <b>examen (máx. 80)</b> + <b>currículo (máx. 20)</b>. Con 200 preguntas, cada pregunta vale <b>0.4 puntos</b> de la nota final. La adjudicación es por <b>estricto orden de mérito dentro de cada especialidad y modalidad</b>: eliges especialidad y sede al postular, y compites contra quienes eligieron lo mismo.</p>
+      <p style="font-size:.85rem; color:var(--muted)">Tu bloque curricular (SERUMS + ENAM + promedio + quinto superior) ya está fijado por tu historia. La diferencia entre ingresar o no a una especialidad competitiva se juega casi íntegramente en el examen: 5 preguntas más equivalen a 2 puntos finales — muchas veces decenas de puestos en el orden de mérito.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Lo que este informe NO pudo verificar</h3>
+      <ul style="font-size:.88rem">
+        <li><b>Puntajes de corte y ratio postulante/vacante por especialidad:</b> CONAREME publica cuadros de adjudicación por año, pero no quedaron verificados en esta investigación. El Cuadro de Vacantes 2026 sale el 3 de julio — ahí conviene analizar la competitividad de tu especialidad objetivo.</li>
+        <li><b>Detalle normativo 2010–2019</b> (número de preguntas por año en ese periodo).</li>
+        <li>Una rareza documental: la norma 2020-2023 manda 180 preguntas, pero cada PDF publicado (Prueba A y B) trae 100 distintas entre sí. La hipótesis más plausible es que sean cuadernillos/turnos distintos. <b>No afecta la distribución porcentual</b>, que es consistente entre las 4 pruebas.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section id="plan">
+  <h2>9. Plan de priorización de estudio (12.5 semanas: 10 jun → 6 sep)</h2>
+
+  <div class="info-box">
+    <p><b>Tres principios que salen directo de la data:</b></p>
+    <ol>
+      <li><b>Estudia en proporción al peso real:</b> Medicina (32%) y Pediatría (23%) son más de la mitad del examen. Cada hora en Ciencias Básicas puras rinde 4 veces menos que una hora en Medicina.</li>
+      <li><b>Entrena con viñetas clínicas, no con memoria factual:</b> 2 de cada 3 preguntas reales son casos clínicos (y la tendencia sube: 71.5% en 2023). El formato típico: paciente + datos → diagnóstico más probable / conducta inicial / examen más útil.</li>
+      <li><b>Los exámenes se repiten:</b> patología biliar, trauma, IAM/arritmias, neumonías, ictericia neonatal, preeclampsia e intoxicaciones aparecen prácticamente todos los años. Dominar la lista de "imprescindibles" de la sección 5 cubre el núcleo duro.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Fase 1 — Cobertura por sistemas (10 jun – 31 jul, ~7 semanas)</h3>
+    <table>
+      <tr><th>Bloque</th><th>Semanas sugeridas</th><th>Justificación (peso empírico)</th></tr>
+      <tr><td><span class="pill p-med">Medicina</span>: cardio → infecto → endocrino → neumo → gastro → neuro → nefro → hemato</td><td class="num">3.0</td><td>32% del examen; cardio+infecto+endocrino = 42% del área</td></tr>
+      <tr><td><span class="pill p-ped">Pediatría</span>: neonatología primero (30% del área), luego infecciosas y desarrollo/nutrición</td><td class="num">1.5</td><td>23% del examen</td></tr>
+      <tr><td><span class="pill p-cir">Cirugía</span>: trauma/ATLS + abdomen agudo + patología biliar; urología y anestesia someras</td><td class="num">1.0</td><td>16% del examen, muy concentrado en pocos temas</td></tr>
+      <tr><td><span class="pill p-gin">Gineco-Obstetricia</span>: emergencias obstétricas + monitoreo fetal; ginecología oncológica y vulvovaginitis</td><td class="num">1.0</td><td>15% del examen</td></tr>
+      <tr><td><span class="pill p-sp">Salud Pública</span> + <span class="pill p-cb">C. Básicas</span>: bioestadística/epidemiología en bloque; básicas solo integradas a la clínica</td><td class="num">0.5–1.0</td><td>14% combinado; SP es el área de mayor rendimiento/hora</td></tr>
+    </table>
+    <p style="font-size:.85rem; color:var(--muted)">⚠ Recordatorio administrativo dentro de esta fase: <b>pagar (desde 7-jul) e inscribirte en SIGESIN (8–27 jul)</b>.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Fase 2 — Banco de preguntas (1 – 28 ago)</h3>
+      <ul style="font-size:.9rem">
+        <li>Resolver los <b>exámenes oficiales reales</b> (los 4 PDFs ya están en tu carpeta <code>Desktop\CONAREME\</code>) en condiciones de tiempo real.</li>
+        <li>Complementar con bancos de años anteriores (las compilaciones con claves oficiales abarcan ~2014–2023).</li>
+        <li>Registrar errores por área y re-estudiar solo lo fallado (repaso dirigido por datos, igual que hace este informe).</li>
+        <li>Meta de ritmo: el examen real da ~1 min/pregunta o menos.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Fase 3 — Simulacros y cierre (29 ago – 5 sep)</h3>
+      <ul style="font-size:.9rem">
+        <li>2–3 simulacros completos de 200 preguntas cronometrados.</li>
+        <li>Repaso exprés de la tabla de "temas que más se repiten" (sección 5.1).</li>
+        <li>Verificar sede asignada y reglas (sin celular, sin reloj, documento de identidad).</li>
+        <li>Último día: descanso. El 6 de septiembre se rinde mejor con sueño que con un tema más.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUENTES ============ -->
+<section id="fuentes">
+  <h2>10. Fuentes y materiales</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">Archivos descargados en <code>Desktop\CONAREME\</code></h3>
+    <ul style="font-size:.88rem">
+      <li><b>PruebaA_2021.pdf / PruebaB_2021.pdf</b> — exámenes oficiales del 13-jun-2021 (100 preguntas c/u)</li>
+      <li><b>PruebaA_2023.pdf / PruebaB_2023.pdf</b> — exámenes oficiales del 03-sep-2023 (100 preguntas c/u)</li>
+      <li><b>Cronograma_2026.pdf</b> — cronograma oficial del concurso 2026</li>
+      <li><b>pruebaA_2021_text.txt / pruebaA2023_full.txt</b> — texto extraído de los exámenes (reutilizable)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Fuentes primarias (verificadas por descarga y extracción de texto)</h3>
+    <ul class="src">
+      <li>Ley 30453 — Ley del SINAREME (El Peruano, 10-jun-2016): busquedas.elperuano.pe/normaslegales/ley-del-sistema-nacional-de-residentado-medico-sinareme-ley-n-30453-1391144-1/</li>
+      <li>Procedimiento Especial Concurso Nacional 2020-2023 (Acuerdo 032-CONAREME-2020): conareme.org.pe/web/Documentos/Normas Legales/PROCEDIMIENTO ESPECIAL CONCURSO NACIONAL 2020-2023.pdf</li>
+      <li>Procedimiento Especial Concurso Admisión 2024: conareme.org.pe/web/Documentos/Normas Legales/PROCEDIMIENTO ESPECIAL - CONCURSO ADMISION 2024.pdf</li>
+      <li>Procedimiento Especial Concurso Nacional 2025: conareme.org.pe/web/Documentos/Normas Legales/PROCEDIMIENTO ESPECIAL CONCURSO NACIONAL 2025.pdf</li>
+      <li>Disposiciones Complementarias 2025 (16-may-2025): conareme.org.pe/web/Documentos/Admision2025/DISPOSICIONES COMPLEMENTARIAS 2025 - final - 16 mayo.pdf</li>
+      <li>FAQ oficial Admisión 2024: conareme.org.pe/web/Documentos/Admision2024/PREGUNTAS REPUESTAS - ADMISION 2024.pdf</li>
+      <li>Cronograma Admisión 2026: conareme.org.pe/web/Documentos/Admision2026/Cronograma Admision 2026.pdf</li>
+      <li>Páginas de proceso de admisión 2025 y 2026: conareme.org.pe/web/proceso-de-admision-2025.php · /proceso-de-admision-2026.php</li>
+      <li>Galán-Rodas et al. "Proceso de Admisión al Residentado Médico en Perú", Acta Médica Peruana 2010;27(4) — redalyc.org/pdf/966/96618991008.pdf</li>
+    </ul>
+  </div>
+
+  <div class="warn-box">
+    <h3 style="margin-top:0; color:var(--gold)">Advertencias metodológicas (léelas una vez)</h3>
+    <ul style="font-size:.85rem">
+      <li>La distribución por área/tema es <b>empírica</b> (400 preguntas de 2021 y 2023 clasificadas manualmente), <b>no oficial</b>: CONAREME no publica tabla de especificaciones y el Jurado de cada año puede variar la mezcla. Margen ±3–5 pts por área.</li>
+      <li>Casos límite de clasificación (toxicología pediátrica, salud ocupacional, farmacología con viñeta) se asignaron con criterio explícito y consistente, pero otro clasificador podría mover 1–2 puntos entre áreas vecinas.</li>
+      <li>Las afirmaciones normativas cubren con fuerza 2020–2025. El ciclo 2026 pasa al Reglamento regular (DS 024-2024-SA) y hay un proyecto de ley (PL 13830, propone 70/30) en trámite: <b>revisar las disposiciones 2026 cuando salgan el 5 de julio</b>.</li>
+      <li>Bancos de academias (Villamedic, Qx Medic, USAMEDIC, etc.) existen y compilan 2000–2023, pero sus claves y estadísticas no fueron validadas aquí.</li>
+      <li>No se verificaron puntajes de corte ni ratios de competitividad por especialidad — pendiente con el Cuadro de Vacantes 2026 (3 de julio).</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    Informe generado el 10 de junio de 2026 · Investigación verificada: 104 agentes, 22 fuentes consultadas, 25 afirmaciones confirmadas 3-0 contra fuente primaria, 0 refutadas · Estadística empírica: 400 preguntas oficiales CONAREME (2021 A/B, 2023 A/B) clasificadas por área, tema y formato · Uso personal de preparación académica.
+  </div>
+</footer>
+
+</body>
+</html>

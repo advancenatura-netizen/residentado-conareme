@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma de Estudio — Residentado CONAREME 2026 | Plan de 13 semanas</title>
+<style>
+  :root{
+    --bg:#0b0f1a; --panel:#161d30; --panel2:#1e2740; --ink:#eaf0fb; --muted:#9aabc9;
+    --accent:#34d3ff; --gold:#ffd166; --green:#22d39a; --red:#ff5d7a; --violet:#a78bfa; --orange:#ff9e57;
+    --med:#34d3ff; --ped:#22d39a; --cir:#ff5d7a; --gin:#ff9e57; --sp:#ffd166; --cb:#a78bfa;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.6;}
+  .wrap{max-width:1180px; margin:0 auto; padding:24px;}
+  header{background:radial-gradient(1200px 400px at 20% -10%, #1b3a5c 0%, #0b0f1a 60%); border-bottom:3px solid var(--accent); padding:50px 24px 36px;}
+  header h1{font-size:2rem; color:#fff; margin-bottom:10px; line-height:1.2;}
+  header .sub{color:var(--accent); font-weight:600; font-size:1.05rem;}
+  header .meta{color:var(--muted); font-size:.86rem; margin-top:14px;}
+  nav{background:var(--panel); position:sticky; top:0; z-index:20; border-bottom:1px solid #2a3550; overflow-x:auto; white-space:nowrap;}
+  nav .wrap{padding:11px 24px;}
+  nav a{color:var(--muted); text-decoration:none; font-size:.83rem; margin-right:18px; font-weight:600;}
+  nav a:hover{color:var(--accent);}
+  section{margin:40px 0;}
+  h2{color:var(--accent); font-size:1.45rem; border-left:4px solid var(--accent); padding-left:13px; margin-bottom:16px;}
+  h3{color:var(--gold); font-size:1.1rem; margin:20px 0 10px;}
+  p{margin-bottom:12px; color:#d2dcef;}
+  .card{background:var(--panel); border:1px solid #2a3550; border-radius:12px; padding:20px; margin-bottom:16px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  @media(max-width:820px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+  .kpi{background:var(--panel2); border-radius:12px; padding:16px; text-align:center; border:1px solid #2a3550;}
+  .kpi .n{font-size:1.7rem; font-weight:800; color:var(--accent);}
+  .kpi .l{font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-top:2px;}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:.88rem;}
+  th{background:var(--panel2); color:var(--accent); text-align:left; padding:9px 11px; border-bottom:2px solid var(--accent); font-size:.78rem; text-transform:uppercase; letter-spacing:.3px;}
+  td{padding:8px 11px; border-bottom:1px solid #2a3550; color:#d2dcef; vertical-align:top;}
+  tr:hover td{background:rgba(52,211,255,.05);}
+  .num{text-align:center; font-variant-numeric:tabular-nums; font-weight:700;}
+  .hl{color:var(--gold); font-weight:700;}
+  .ok{color:var(--green); font-weight:700;}
+  .pill{display:inline-block; padding:1px 9px; border-radius:10px; font-size:.72rem; font-weight:800; white-space:nowrap;}
+  .p-med{background:rgba(52,211,255,.18); color:var(--med);}
+  .p-ped{background:rgba(34,211,154,.18); color:var(--ped);}
+  .p-cir{background:rgba(255,93,122,.18); color:var(--cir);}
+  .p-gin{background:rgba(255,158,87,.18); color:var(--gin);}
+  .p-sp{background:rgba(255,209,102,.18); color:var(--sp);}
+  .p-cb{background:rgba(167,139,250,.18); color:var(--cb);}
+  .phase{border-left:4px solid var(--accent); padding:4px 0 4px 16px; margin:6px 0 14px;}
+  .phase.f1{border-color:var(--red);} .phase.f2{border-color:var(--orange);}
+  .phase.f3{border-color:var(--gold);} .phase.f4{border-color:var(--green);}
+  .weekcard{background:var(--panel); border:1px solid #2a3550; border-radius:12px; padding:0; margin-bottom:14px; overflow:hidden;}
+  .weekhead{display:flex; justify-content:space-between; align-items:center; padding:12px 18px; background:var(--panel2); border-bottom:1px solid #2a3550;}
+  .weekhead .wk{font-weight:800; color:var(--accent); font-size:1rem;}
+  .weekhead .dt{color:var(--muted); font-size:.8rem;}
+  .weekbody{padding:14px 18px;}
+  .daygrid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:8px;}
+  @media(max-width:820px){.daygrid{grid-template-columns:repeat(2,1fr);}}
+  .day{background:var(--panel2); border:1px solid #2a3550; border-radius:8px; padding:8px; font-size:.78rem; min-height:74px;}
+  .day .d{font-weight:800; color:var(--gold); font-size:.72rem; text-transform:uppercase; margin-bottom:3px;}
+  .info-box{background:rgba(52,211,255,.06); border:1px solid var(--accent); border-radius:12px; padding:16px; margin:14px 0;}
+  .warn-box{background:rgba(255,209,102,.07); border:1px solid var(--gold); border-radius:12px; padding:16px; margin:14px 0;}
+  .ok-box{background:rgba(34,211,154,.07); border:1px solid var(--green); border-radius:12px; padding:16px; margin:14px 0;}
+  footer{border-top:1px solid #2a3550; padding:26px 24px; color:var(--muted); font-size:.8rem; margin-top:44px;}
+  ul,ol{margin:0 0 10px 22px; color:#d2dcef;} li{margin-bottom:5px;}
+  a{color:var(--accent);}
+  .chk{color:var(--green); font-weight:800;}
+  @media print{*{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}nav{display:none;}.card,.weekcard,.kpi,.info-box,.warn-box,.ok-box,table,tr{break-inside:avoid;page-break-inside:avoid;}h2,h3{break-after:avoid;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>📅 Cronograma de Estudio — Residentado CONAREME 2026</h1>
+    <div class="sub">Plan de 13 semanas hacia el examen del domingo 6 de septiembre · Diseñado por frecuencia real de temas</div>
+    <div class="meta">Para Momar (postulante a Pediatría) · Inicio: 10 de junio de 2026 · Basado en el análisis de 10 exámenes oficiales (980 preguntas)</div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#filosofia">Filosofía</a>
+  <a href="#cifras">Las cifras</a>
+  <a href="#fases">4 fases</a>
+  <a href="#semanas">Semana a semana</a>
+  <a href="#dia">El día tipo</a>
+  <a href="#admin">Hitos admin</a>
+  <a href="#reglas">Reglas de oro</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="filosofia">
+  <h2>1. La filosofía de este plan</h2>
+  <div class="card">
+    <p>No vas a estudiar "todo el pregrado". Vas a estudiar <b>lo que cae, en el orden en que rinde</b>. El plan ataca primero los temas <b>Nivel S</b> (caen 8–10 de 10 exámenes) y <b>Nivel A</b> (5–7 de 10), reparte las horas <b>en proporción al peso de cada área</b>, y deja las últimas 3 semanas para <b>practicar con los exámenes oficiales reales</b> y simulacros. Active recall &gt; lectura pasiva.</p>
+    <div class="info-box">
+      <b>Regla 80/20:</b> el TOP 30 de fijas + las fijas por área cubren la mayoría de las preguntas. Dominar eso a fondo rinde más que leer un tratado entero superficialmente. Este cronograma se acompaña de: <b>Destilado de las 30 fijas</b> (qué responder), <b>Banco de preguntas interactivo</b> (practicar) y <b>Flashcards</b> (repaso espaciado).
+    </div>
+  </div>
+</section>
+
+<section id="cifras">
+  <h2>2. Las cifras del plan</h2>
+  <div class="grid4">
+    <div class="kpi"><div class="n">13</div><div class="l">semanas</div></div>
+    <div class="kpi"><div class="n">~88</div><div class="l">días hasta el examen</div></div>
+    <div class="kpi"><div class="n">4–6 h</div><div class="l">estudio/día sugerido</div></div>
+    <div class="kpi"><div class="n">6 sep</div><div class="l">día del examen</div></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <h3 style="margin-top:0">Reparto de horas por área (según su peso en el examen)</h3>
+    <table>
+      <tr><th>Área</th><th class="num">% examen</th><th class="num">Prioridad</th><th>Cómo distribuir tu tiempo</th></tr>
+      <tr><td><span class="pill p-med">Clínicas Médicas</span></td><td class="num">~32%</td><td class="num">★★★★★</td><td>El mayor bloque de horas. Cardio, infecto y endocrino primero.</td></tr>
+      <tr><td><span class="pill p-ped">Clínicas Pediátricas</span></td><td class="num">~24%</td><td class="num">★★★★★</td><td>Tu especialidad y 2.º bloque. Neonatología es ⅓ del área.</td></tr>
+      <tr><td><span class="pill p-cir">Clínicas Quirúrgicas</span></td><td class="num">~17%</td><td class="num">★★★★</td><td>Concentrado: trauma + biliar + abdomen agudo cubren el 60%.</td></tr>
+      <tr><td><span class="pill p-gin">Gineco-Obstetricia</span></td><td class="num">~16%</td><td class="num">★★★★</td><td>Obstetricia manda. Emergencias obstétricas + oncología gine.</td></tr>
+      <tr><td><span class="pill p-sp">Salud Pública</span></td><td class="num">~9%</td><td class="num">★★★</td><td>Puntos baratos: pocos temas, alta predictibilidad. No la dejes para el final.</td></tr>
+      <tr><td><span class="pill p-cb">Ciencias Básicas</span></td><td class="num">~9%</td><td class="num">★★</td><td>Estudiar integrada a la clínica, no como bloque aparte.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="fases">
+  <h2>3. Las 4 fases</h2>
+  <div class="phase f1"><h3 style="margin:0; color:var(--red)">FASE 1 · Núcleo duro (Sem 1–5 · 10 jun – 14 jul)</h3>
+    <p style="margin:6px 0">Cubrir TODOS los temas <b>Nivel S</b> y el grueso del <b>Nivel A</b>, área por área. Meta: ningún tema fijo sin ver al menos una vez. Estudiar el ángulo exacto (del Destilado), no el capítulo entero.</p></div>
+  <div class="phase f2"><h3 style="margin:0; color:var(--orange)">FASE 2 · Cobertura y profundización (Sem 6–9 · 15 jul – 11 ago)</h3>
+    <p style="margin:6px 0">Completar <b>Nivel A</b> y <b>Nivel B</b>. Cerrar Salud Pública entera. Integrar Ciencias Básicas dentro de cada tema clínico. Empezar a intercalar preguntas del banco.</p></div>
+  <div class="phase f3"><h3 style="margin:0; color:var(--gold)">FASE 3 · Banco oficial (Sem 10–12 · 12 ago – 1 sep)</h3>
+    <p style="margin:6px 0">Resolver los <b>10 exámenes oficiales reales</b> (en tu carpeta) cronometrados, + el banco interactivo. Registrar fallos por tema y re-estudiar SOLO lo fallado. Aquí se consolida.</p></div>
+  <div class="phase f4"><h3 style="margin:0; color:var(--green)">FASE 4 · Simulacros y cierre (Sem 13 · 2–6 sep)</h3>
+    <p style="margin:6px 0">2–3 simulacros completos de 200 preguntas cronometrados. Repaso exprés del TOP 30. Verificar sede y reglas. Descanso el día previo.</p></div>
+</section>
+
+<section id="semanas">
+  <h2>4. Semana a semana</h2>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 1 — Cardio + Neonatología I</span><span class="dt">10–15 jun · Fase 1</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-med">MED</span> Cardiología: IAM/SCA, FA, TPSV, ICC, taponamiento, emergencia hipertensiva. &nbsp; <span class="pill p-ped">PED</span> Neonatología I: APGAR/reanimación, ictericia neonatal, taquipnea transitoria, membrana hialina.</p>
+      <div class="daygrid">
+        <div class="day"><div class="d">Lun</div>IAM/SCA + EKG</div>
+        <div class="day"><div class="d">Mar</div>Arritmias (FA, TPSV)</div>
+        <div class="day"><div class="d">Mié</div>ICC + taponamiento</div>
+        <div class="day"><div class="d">Jue</div>APGAR + reanimación neonatal</div>
+        <div class="day"><div class="d">Vie</div>Ictericia neonatal</div>
+        <div class="day"><div class="d">Sáb</div>Taquipnea transitoria + EMH</div>
+        <div class="day"><div class="d">Dom</div>Repaso + 30 preguntas banco</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 2 — Infectología + Neonatología II</span><span class="dt">16–21 jun · Fase 1</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-med">MED</span> Infecto: neumonía (CURB-65), TBC (todas las formas), dengue, meningitis, VIH/oportunistas. &nbsp; <span class="pill p-ped">PED</span> Neonatología II: sepsis neonatal, aspiración meconial, hipoglicemia, ECN, atresia esofágica.</p>
+      <div class="daygrid">
+        <div class="day"><div class="d">Lun</div>Neumonía + CURB-65</div>
+        <div class="day"><div class="d">Mar</div>TBC (formas + esquema)</div>
+        <div class="day"><div class="d">Mié</div>Dengue + meningitis</div>
+        <div class="day"><div class="d">Jue</div>VIH y oportunistas</div>
+        <div class="day"><div class="d">Vie</div>Sepsis neonatal + meconio</div>
+        <div class="day"><div class="d">Sáb</div>Hipoglicemia, ECN, atresia esofágica</div>
+        <div class="day"><div class="d">Dom</div>Repaso + 30 preguntas banco</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 3 — Endocrino/Nefro + Trauma y biliar</span><span class="dt">22–27 jun · Fase 1</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-med">MED</span> CAD/EHH, tiroides, Addison, hiperaldosteronismo, hipercalcemia, IRA prerrenal, nefropatía diabética. &nbsp; <span class="pill p-cir">CIR</span> Trauma/ATLS, neumotórax a tensión, patología biliar (colecistitis/colangitis/coledocolitiasis).</p>
+      <div class="daygrid">
+        <div class="day"><div class="d">Lun</div>CAD/EHH + tiroides</div>
+        <div class="day"><div class="d">Mar</div>Addison, Conn, hipercalcemia</div>
+        <div class="day"><div class="d">Mié</div>IRA prerrenal + nefropatía DM</div>
+        <div class="day"><div class="d">Jue</div>ATLS + prioridad ABC</div>
+        <div class="day"><div class="d">Vie</div>Neumotórax a tensión + trauma tórax</div>
+        <div class="day"><div class="d">Sáb</div>Patología biliar completa</div>
+        <div class="day"><div class="d">Dom</div>Repaso + 30 preguntas banco</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 4 — Neumo/Gastro/Neuro + Obstetricia I</span><span class="dt">28 jun – 4 jul · Fase 1</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-med">MED</span> TEP, EPOC, derrame pleural, HDA (Forrest), cirrosis/PBE, ACV, Guillain-Barré. &nbsp; <span class="pill p-gin">GIN</span> Obstetricia I: preeclampsia, hemorragias obstétricas, diabetes gestacional, monitoreo fetal.</p>
+      <div class="daygrid">
+        <div class="day"><div class="d">Lun</div>TEP + EPOC + derrame</div>
+        <div class="day"><div class="d">Mar</div>HDA + cirrosis/PBE</div>
+        <div class="day"><div class="d">Mié</div>ACV + Guillain-Barré</div>
+        <div class="day"><div class="d">Jue</div>Preeclampsia (+ aspirina)</div>
+        <div class="day"><div class="d">Vie</div>Hemorragias obstétricas</div>
+        <div class="day"><div class="d">Sáb</div>Diabetes gestacional + monitoreo fetal</div>
+        <div class="day"><div class="d">Dom</div>Repaso + 30 preguntas banco</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 5 — Abdomen agudo + Exantemáticas + cierre Fase 1</span><span class="dt">5–11 jul · Fase 1</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-cir">CIR</span> Apendicitis, obstrucción/bridas, diverticulitis, hernias, pancreatitis. &nbsp; <span class="pill p-ped">PED</span> Exantemáticas, tos ferina, bronquiolitis, crup, Kawasaki. &nbsp; <span class="pill p-sp">SP</span> Diseño de estudios.</p>
+      <div class="daygrid">
+        <div class="day"><div class="d">Lun</div>Apendicitis + obstrucción</div>
+        <div class="day"><div class="d">Mar</div>Diverticulitis + hernias + pancreatitis</div>
+        <div class="day"><div class="d">Mié</div>Exantemáticas + escarlatina</div>
+        <div class="day"><div class="d">Jue</div>Bronquiolitis, crup, tos ferina</div>
+        <div class="day"><div class="d">Vie</div>Kawasaki + SP: diseño de estudios</div>
+        <div class="day"><div class="d">Sáb</div><b>Mini-simulacro 100 preguntas</b></div>
+        <div class="day"><div class="d">Dom</div>Revisar fallos + descanso</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 6 — Hemato/Reuma/Tox + Pediatría hemato</span><span class="dt">12–18 jul · Fase 2</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-med">MED</span> Anemias, PTI, gota/pseudogota, LES/AR, intoxicaciones (organofosforados, paracetamol, arácnidos), psiquiatría. &nbsp; <span class="pill p-ped">PED</span> PTI, Henoch-Schönlein, anemia falciforme, SUH, leucemia.</p>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 7 — Ginecología + Pediatría neuro/nutrición</span><span class="dt">19–25 jul · Fase 2</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-gin">GIN</span> Cáncer endometrio/sangrado postmenopáusico, cáncer cérvix, vulvovaginitis, miomatosis, EPI, SOP, ectópico, anticoncepción. &nbsp; <span class="pill p-ped">PED</span> Convulsión febril, crisis de ausencia, déficit de zinc, desnutrición, galactosemia, desarrollo psicomotor.</p>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 8 — Urología/Ortopedia/Anestesia + Obstetricia II</span><span class="dt">26 jul – 1 ago · Fase 2</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-cir">CIR</span> HBP, litiasis, torsión testicular, fracturas, síndrome compartimental, anestésicos locales. &nbsp; <span class="pill p-gin">GIN</span> TBC/VIH gestante, dTpa, anti-D, amenaza parto pretérmino, partograma. &nbsp; <span class="pill p-cir">+</span> oncología digestiva (ca gástrico/colorrectal).</p>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 9 — Salud Pública completa + Ciencias Básicas</span><span class="dt">2–8 ago · Fase 2</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px"><span class="pill p-sp">SP</span> Medidas de frecuencia, pruebas diagnósticas, medidas de asociación (RR/OR), pruebas estadísticas, niveles de prevención, vacunación MINSA, ocupacional, legal, muestreo, bioética. &nbsp; <span class="pill p-cb">CB</span> Fisiología hormonal/renal/respiratoria, farmacología clave, anatomía y embriología de alto rendimiento.</p>
+      <div class="ok-box" style="margin:8px 0 0"><b>Fin de Fase 2:</b> deberías haber visto el 100% de las fijas (S+A+B). De aquí en adelante es PRACTICAR.</div>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 10 — Banco oficial: 2018–2019</span><span class="dt">9–15 ago · Fase 3</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px">Resolver cronometrados: <b>Prueba A y B de 2018 y 2019</b> (~1 min/pregunta). Corregir, anotar fallos por tema en una hoja, re-estudiar solo lo fallado. + banco interactivo por áreas débiles.</p>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 11 — Banco oficial: 2020–2021</span><span class="dt">16–22 ago · Fase 3</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px">Resolver cronometrados: <b>Prueba A y B de 2020 y 2021</b>. Misma rutina: corregir → fallos por tema → re-estudio dirigido. Repaso de flashcards diario.</p>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 12 — Banco oficial 2023 + repaso de fallos</span><span class="dt">23 ago – 1 sep · Fase 3</span></div>
+    <div class="weekbody">
+      <p style="margin:0 0 6px">Resolver <b>Prueba A y B de 2023</b> (las más recientes y representativas). Repasar TODOS los fallos acumulados de las semanas 10–12. Segundo pase del Destilado de las 30 fijas.</p>
+    </div>
+  </div>
+
+  <div class="weekcard">
+    <div class="weekhead"><span class="wk">Semana 13 — Simulacros y cierre</span><span class="dt">2–6 sep · Fase 4</span></div>
+    <div class="weekbody">
+      <div class="daygrid">
+        <div class="day"><div class="d">Mié 2</div>Simulacro completo 200 preg.</div>
+        <div class="day"><div class="d">Jue 3</div>Revisar fallos del simulacro</div>
+        <div class="day"><div class="d">Vie 4</div>2.º simulacro + repaso TOP 30</div>
+        <div class="day"><div class="d">Sáb 5</div>Repaso ligero · verificar sede/DNI · <b>descanso</b></div>
+        <div class="day" style="background:rgba(34,211,154,.12); border-color:var(--green)"><div class="d" style="color:var(--green)">DOM 6</div><b>EXAMEN</b> 🎯</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dia">
+  <h2>5. El día tipo (4–6 horas)</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Estructura diaria</h3>
+      <table>
+        <tr><th>Bloque</th><th>Qué</th></tr>
+        <tr><td class="hl">0:00–0:15</td><td>Repaso de flashcards del día anterior (repetición espaciada)</td></tr>
+        <tr><td class="hl">0:15–2:00</td><td>Tema nuevo nº1: leer el ángulo (Destilado) + fuente/guía + hacer tus propias notas</td></tr>
+        <tr><td class="hl">2:00–2:15</td><td>Descanso</td></tr>
+        <tr><td class="hl">2:15–3:45</td><td>Tema nuevo nº2 (o pediatría si el nº1 fue médica)</td></tr>
+        <tr><td class="hl">3:45–4:30</td><td><b>Banco de preguntas</b> del tema visto hoy (active recall)</td></tr>
+        <tr><td class="hl">4:30–5:00</td><td>Crear flashcards de lo que fallaste hoy</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Técnica de estudio (lo que funciona)</h3>
+      <ul style="font-size:.92rem">
+        <li><b>Active recall:</b> después de leer, cierra y responde preguntas. Recordar &gt; releer.</li>
+        <li><b>Repetición espaciada:</b> repasa cada tema a las 24h, 7 días y 21 días (las flashcards lo automatizan).</li>
+        <li><b>Aprende el "ángulo":</b> CONAREME pregunta el diagnóstico más probable, la conducta inicial o el examen confirmatorio. Estudia con esa lente.</li>
+        <li><b>Casos clínicos:</b> ~75% son viñetas. Practica el patrón "paciente → respuesta" más que listas.</li>
+        <li><b>Cuaderno de errores:</b> todo lo que fallas va a una hoja; esa hoja es tu repaso final.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="admin">
+  <h2>6. Hitos administrativos (no los pierdas de vista)</h2>
+  <div class="warn-box">
+    <table>
+      <tr><th>Fecha 2026</th><th>Trámite</th></tr>
+      <tr><td class="hl">3 jul</td><td>Sale el Cuadro de Vacantes → comparar sedes de Pediatría</td></tr>
+      <tr><td class="hl">5 jul</td><td>Convocatoria oficial + disposiciones 2026 (revisar si cambia algo)</td></tr>
+      <tr><td class="hl">7–24 jul</td><td>Pago a cuenta recaudadora CONAREME (hasta 18:00 del 24)</td></tr>
+      <tr><td class="hl">8–27 jul</td><td><b>Inscripción en SIGESIN</b> (hasta 23:59 del 27) — no lo dejes para el final</td></tr>
+      <tr><td class="hl">15 jul–14 ago</td><td>Evaluación curricular (publicación 15 ago; reclamos 17–20 ago)</td></tr>
+      <tr><td class="hl">28 ago</td><td>Listado final de aptos para rendir</td></tr>
+      <tr><td class="hl ok">6 sep</td><td><b>EXAMEN</b> · presencial · sin celular ni reloj · llevar DNI</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="reglas">
+  <h2>7. Reglas de oro</h2>
+  <div class="card">
+    <ol>
+      <li><b>Constancia &gt; intensidad.</b> 4 horas diarias sostenidas 13 semanas ganan a maratones aislados.</li>
+      <li><b>No persigas lo raro.</b> Una enfermedad exótica perfecta no compensa fallar ictericia neonatal. Domina lo frecuente primero.</li>
+      <li><b>Mide tu avance con preguntas, no con páginas leídas.</b> Tu % de acierto en el banco es tu termómetro real.</li>
+      <li><b>El examen completo decide tu ingreso a Pediatría,</b> no solo Pediatría. Mantén Medicina fuerte.</li>
+      <li><b>Duerme.</b> La consolidación de memoria ocurre durmiendo; trasnochar antes del examen resta más de lo que suma.</li>
+      <li><b>Simula condiciones reales</b> en los simulacros: cronómetro, sin pausas, sin apuntes.</li>
+    </ol>
+  </div>
+  <div class="info-box">
+    <b>Tus herramientas (carpeta <code>Desktop\CONAREME\</code>):</b> este Cronograma · el Destilado de las 30 fijas · el Banco de preguntas interactivo · las Flashcards (Anki) · los 10 exámenes oficiales en PDF · los dos informes de inteligencia.
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">Cronograma de estudio personalizado para el Concurso Nacional de Admisión al Residentado Médico 2026 (CONAREME). Diseñado a partir del análisis de frecuencia de 10 exámenes oficiales. Ajústalo a tus horas reales disponibles. Elaborado el 10 de junio de 2026 para Momar.</div>
+</footer>
+
+</body>
+</html>

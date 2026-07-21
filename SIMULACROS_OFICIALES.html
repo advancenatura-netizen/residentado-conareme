@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulacros Oficiales — Residentado CONAREME</title>
+<style>
+  :root{--bg:#0b0f1a;--panel:#161d30;--panel2:#1e2740;--ink:#eaf0fb;--muted:#9aabc9;--accent:#34d3ff;--gold:#ffd166;--green:#22d39a;--red:#ff5d7a;--violet:#a78bfa;--orange:#ff9e57;
+  --MED:#34d3ff;--PED:#22d39a;--CIR:#ff5d7a;--GIN:#ff9e57;--SP:#ffd166;--CB:#a78bfa;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:20px;}
+  header{background:radial-gradient(900px 300px at 30% -20%,#1b3a5c,#0b0f1a 65%);border-bottom:3px solid var(--gold);padding:26px 20px;}
+  header h1{font-size:1.5rem;color:#fff;} header .sub{color:var(--gold);font-size:.9rem;font-weight:600;margin-top:3px;}
+  .panel{background:var(--panel);border:1px solid #2a3550;border-radius:14px;padding:18px;margin:14px 0;}
+  h2{color:var(--accent);font-size:1.1rem;margin-bottom:10px;}
+  .btn{background:var(--accent);color:#06121a;border:none;border-radius:10px;padding:11px 18px;font-weight:800;cursor:pointer;margin:5px 5px 0 0;font-family:inherit;font-size:.92rem;}
+  .btn:hover{filter:brightness(1.1);} .btn.gold{background:var(--gold);color:#1a1208;} .btn.green{background:var(--green);color:#06121a;} .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent);}
+  select{background:var(--panel2);color:var(--ink);border:1px solid #2a3550;border-radius:8px;padding:9px 11px;font-family:inherit;font-size:.92rem;margin:4px 6px 4px 0;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;}
+  .chip{background:var(--panel2);border:1px solid #2a3550;border-radius:20px;padding:5px 12px;font-size:.8rem;cursor:pointer;font-weight:600;color:var(--muted);}
+  .chip.on{background:rgba(52,211,255,.18);color:var(--accent);border-color:var(--accent);}
+  .pill{display:inline-block;padding:1px 9px;border-radius:10px;font-size:.7rem;font-weight:800;}
+  .pill.MED{background:rgba(52,211,255,.18);color:var(--MED);}.pill.PED{background:rgba(34,211,154,.18);color:var(--PED);}
+  .pill.CIR{background:rgba(255,93,122,.18);color:var(--CIR);}.pill.GIN{background:rgba(255,158,87,.18);color:var(--GIN);}
+  .pill.SP{background:rgba(255,209,102,.18);color:var(--SP);}.pill.CB{background:rgba(167,139,250,.18);color:var(--CB);}
+  .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:.8rem;color:var(--muted);}
+  .timer{font-variant-numeric:tabular-nums;font-weight:800;color:var(--gold);}
+  .bar{height:7px;background:var(--panel2);border-radius:4px;overflow:hidden;margin:8px 0;} .bar>div{height:100%;background:var(--accent);width:0;}
+  .qtext{font-size:1.04rem;line-height:1.6;margin:6px 0 14px;}
+  .opt{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid #2a3550;border-radius:10px;padding:12px 15px;margin:7px 0;cursor:pointer;color:var(--ink);font-size:.94rem;}
+  .opt:hover{border-color:var(--accent);} .opt.correct{background:rgba(34,211,154,.15);border-color:var(--green);} .opt.wrong{background:rgba(255,93,122,.15);border-color:var(--red);} .opt.disabled{cursor:default;}
+  .exp{background:rgba(52,211,255,.06);border:1px solid var(--accent);border-radius:10px;padding:12px;margin-top:12px;font-size:.9rem;display:none;} .exp.show{display:block;} .exp b{color:var(--gold);}
+  .hidden{display:none;} .scorebig{font-size:2.6rem;font-weight:900;text-align:center;}
+  .stat{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px;} .stat div{background:var(--panel2);border:1px solid #2a3550;border-radius:10px;padding:8px 14px;font-size:.85rem;} .stat b{color:var(--accent);}
+  .arearow{display:flex;align-items:center;gap:10px;margin:6px 0;} .arealbl{width:120px;font-size:.84rem;flex-shrink:0;}
+  .areabar{flex:1;height:20px;background:#0b0f1a;border-radius:6px;overflow:hidden;border:1px solid #2a3550;} .areabar>div{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:.72rem;font-weight:800;color:#06121a;}
+  .muted{color:var(--muted);font-size:.85rem;} .warn{background:rgba(255,209,102,.08);border:1px solid var(--gold);border-radius:10px;padding:12px;font-size:.82rem;margin-top:10px;}
+  footer{color:var(--muted);font-size:.76rem;padding:18px;text-align:center;}
+</style>
+</head>
+<body>
+<header><div class="wrap" style="padding:0">
+  <h1>🏆 Simulacros Oficiales — CONAREME</h1>
+  <div class="sub">Las preguntas REALES de los 10 exámenes (2018-2023), resueltas y comentadas</div>
+</div></header>
+
+<div class="wrap">
+  <!-- CONFIG -->
+  <div id="config">
+    <div class="panel" id="loadinfo"><h2>Cargando banco oficial…</h2><p class="muted" id="loadtext">Si esta pantalla no cambia, el archivo de datos aún se está generando.</p></div>
+
+    <div class="panel hidden" id="modes">
+      <h2>Elige tu práctica</h2>
+      <div style="margin-bottom:10px">
+        <label class="muted">Por examen completo:</label><br>
+        <select id="examSel"></select>
+        <button class="btn" onclick="startExam()">▶ Resolver examen</button>
+      </div>
+      <div style="margin-bottom:10px">
+        <label class="muted">Filtrar por área (para modo mixto):</label>
+        <div class="chips" id="areaChips"></div>
+        <button class="btn green" onclick="startMixed(false)">🔀 Mixto (estudio)</button>
+        <button class="btn ghost" onclick="startMixed(true)">⏱️ Mixto cronometrado</button>
+      </div>
+      <div style="border-top:1px solid #2a3550;padding-top:12px">
+        <label class="muted">Simulacro espejo del examen real:</label><br>
+        <button class="btn gold" onclick="startSimulacro()">🎯 SIMULACRO 200 preguntas (ponderado, cronometrado)</button>
+        <p class="muted" style="margin-top:6px">Distribuido como el examen real: ~64 Medicina, 48 Pediatría, 34 Cirugía, 30 Gineco, 14 C. Básicas, 10 Salud Pública.</p>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="panel hidden" id="analytics">
+      <h2>📈 Tu rendimiento acumulado</h2>
+      <p class="muted" id="anaSummary"></p>
+      <div id="anaBars"></div>
+      <p class="muted" id="anaWeak" style="margin-top:8px"></p>
+      <button class="btn ghost" style="margin-top:8px" onclick="resetAna()">↺ Reiniciar estadísticas</button>
+    </div>
+    <div class="warn">⚠ Las respuestas correctas fueron determinadas con criterio clínico por IA a partir de los exámenes oficiales (CONAREME no siempre publica las claves). Úsalas para entrenar; ante duda, contrasta con guías.</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="panel hidden" id="quiz">
+    <div class="qmeta"><span id="qpos"></span><span class="timer hidden" id="timer">00:00</span></div>
+    <div class="bar"><div id="prog"></div></div>
+    <div style="margin-bottom:6px"><span class="pill" id="qarea"></span> <span class="muted" id="qtema"></span> <span class="muted" id="qsrc" style="float:right"></span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="exp" id="exp"></div>
+    <div style="margin-top:12px"><button class="btn ghost hidden" id="btnNext" onclick="next()">Siguiente →</button><button class="btn ghost" onclick="quit()">Terminar</button></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="panel hidden" id="result">
+    <h2>Resultado</h2>
+    <div class="scorebig" id="scoreBig"></div>
+    <p class="muted" id="scoreMsg" style="text-align:center"></p>
+    <div class="stat"><div>Correctas <b id="rOk"></b></div><div>Incorrectas <b id="rBad"></b></div><div>Tiempo <b id="rTime"></b></div><div id="rNotaWrap" style="display:none">Nota /20 <b id="rNota"></b></div></div>
+    <div id="byArea" style="margin-top:14px"></div>
+    <div id="competit" class="warn hidden" style="margin-top:12px"></div>
+    <div style="margin-top:14px;text-align:center"><button class="btn" onclick="location.reload()">Volver al menú</button> <button class="btn ghost" onclick="reviewWrong()">Revisar falladas</button></div>
+  </div>
+</div>
+<footer>Simulacros oficiales CONAREME · banco de preguntas reales 2018-2023 · claves por IA, contrasta con guías · para Momar.</footer>
+
+<script src="examenes_data.js"></script>
+<script>
+const AREAS=["MED","PED","CIR","GIN","SP","CB"];
+const ANAMES={MED:"Medicina",PED:"Pediatría",CIR:"Cirugía",GIN:"Gineco-Obst.",SP:"Salud Pública",CB:"C. Básicas"};
+const WEIGHTS={MED:64,PED:48,CIR:34,GIN:30,CB:14,SP:10}; // simulacro 200
+let BANK=(window.EXAMENES||[]).filter(x=>x&&x.q&&Array.isArray(x.o)&&x.o.length>=2&&typeof x.c==="number");
+let queue=[],idx=0,ok=0,bad=0,answered=false,wrong=[],aStats={},t0=0,timerInt=null,timed=false,isSim=false,activeAreas=new Set(AREAS);
+let fuente="",logging=true;
+const ANA_KEY="conareme_analytics_v1",HKEY="conareme_history_v1",EKEY="conareme_errores_v1";
+function qkey(q){return (q.ex||"Banco")+"|"+(q.n||"")+"|"+(q.q||"").slice(0,40);}
+function saveError(q,chosen){
+  try{ let e=JSON.parse(localStorage.getItem(EKEY)||"[]"); const k=qkey(q);
+    e=e.filter(x=>x._k!==k);
+    e.push({_k:k,ex:q.ex||"Banco",n:q.n||null,area:q.area,tema:q.tema||"",q:q.q,o:q.o,c:q.c,e:q.e||"",yo:chosen,t:new Date().toISOString()});
+    localStorage.setItem(EKEY,JSON.stringify(e));
+  }catch(err){}
+}
+function saveHistory(total,okN,badN,pct,sim){
+  try{ let h=JSON.parse(localStorage.getItem(HKEY)||"[]");
+    h.push({t:new Date().toISOString(),fuente:fuente||"Práctica",ok:okN,tot:total,pct:pct,nota:sim?(okN/total*20).toFixed(1):null,timed:timed?document.getElementById("timer").textContent:null});
+    localStorage.setItem(HKEY,JSON.stringify(h));
+  }catch(err){}
+}
+
+function init(){
+  if(BANK.length===0){document.getElementById("loadtext").textContent="Aún no se generó el banco oficial (examenes_data.js). Vuelve cuando esté listo.";return;}
+  document.getElementById("loadinfo").classList.add("hidden");
+  document.getElementById("modes").classList.remove("hidden");
+  document.getElementById("analytics").classList.remove("hidden");
+  // exam selector
+  const exams=[...new Set(BANK.map(x=>x.ex))].sort();
+  const sel=document.getElementById("examSel");
+  exams.forEach(e=>{const o=document.createElement("option");o.value=e;o.textContent="Examen "+e+" ("+BANK.filter(x=>x.ex===e).length+" preg.)";sel.appendChild(o);});
+  // area chips
+  const ac=document.getElementById("areaChips");
+  AREAS.forEach(a=>{const d=document.createElement("div");d.className="chip on";d.textContent=ANAMES[a]+" ("+BANK.filter(x=>x.area===a).length+")";d.onclick=()=>{d.classList.toggle("on");activeAreas.has(a)?activeAreas.delete(a):activeAreas.add(a);};ac.appendChild(d);});
+  renderAna();
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startExam(){const e=document.getElementById("examSel").value;queue=BANK.filter(x=>x.ex===e);fuente="Examen "+e;begin(false,false);}
+function startMixed(t){queue=shuffle(BANK.filter(x=>activeAreas.has(x.area)).slice());fuente=t?"Mixto cronometrado":"Mixto (estudio)";begin(t,false);}
+function startSimulacro(){
+  let q=[];
+  AREAS.forEach(a=>{const pool=shuffle(BANK.filter(x=>x.area===a).slice());q=q.concat(pool.slice(0,WEIGHTS[a]));});
+  queue=shuffle(q);fuente="Simulacro 200";begin(true,true);
+}
+function begin(t,sim){
+  if(queue.length===0){alert("No hay preguntas con ese filtro.");return;}
+  logging=true;
+  timed=t;isSim=sim;idx=0;ok=0;bad=0;wrong=[];aStats={};AREAS.forEach(a=>aStats[a]={ok:0,tot:0});
+  document.getElementById("config").classList.add("hidden");
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("timer").classList.toggle("hidden",!timed);
+  if(timed){t0=Date.now();timerInt=setInterval(tick,1000);}
+  render();
+}
+function tick(){const s=Math.floor((Date.now()-t0)/1000);document.getElementById("timer").textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
+function render(){
+  answered=false;const q=queue[idx];
+  document.getElementById("qpos").textContent="Pregunta "+(idx+1)+" de "+queue.length;
+  document.getElementById("prog").style.width=(idx/queue.length*100)+"%";
+  document.getElementById("qarea").textContent=ANAMES[q.area]||q.area;document.getElementById("qarea").className="pill "+q.area;
+  document.getElementById("qtema").textContent=q.tema||"";
+  document.getElementById("qsrc").textContent=q.ex+" · N°"+(q.n||"-");
+  document.getElementById("qtext").textContent=q.q;
+  const ob=document.getElementById("opts");ob.innerHTML="";const L=["A","B","C","D","E","F"];
+  q.o.forEach((op,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=L[i]+". "+op;b.onclick=()=>choose(i,b);ob.appendChild(b);});
+  document.getElementById("exp").className="exp";document.getElementById("btnNext").classList.add("hidden");
+}
+function choose(i,btn){
+  if(answered)return;answered=true;const q=queue[idx];
+  if(aStats[q.area])aStats[q.area].tot++;
+  document.querySelectorAll("#opts .opt").forEach(o=>o.classList.add("disabled"));
+  if(i===q.c){ok++;if(aStats[q.area])aStats[q.area].ok++;btn.classList.add("correct");}
+  else{bad++;btn.classList.add("wrong");wrong.push(q);if(logging)saveError(q,i);if(!timed)document.querySelectorAll("#opts .opt")[q.c].classList.add("correct");}
+  if(!timed){document.getElementById("exp").className="exp show";document.getElementById("exp").innerHTML="<b>Respuesta: "+["A","B","C","D","E","F"][q.c]+".</b> "+(q.e||"");}
+  document.getElementById("btnNext").classList.remove("hidden");
+  if(timed)setTimeout(next,200);
+}
+function next(){idx++;if(idx>=queue.length){finish();return;}render();}
+function finish(){
+  if(timerInt)clearInterval(timerInt);
+  // guardar analítica acumulada
+  let ana=JSON.parse(localStorage.getItem(ANA_KEY)||"{}");
+  AREAS.forEach(a=>{if(aStats[a]&&aStats[a].tot>0){if(!ana[a])ana[a]={ok:0,tot:0};ana[a].ok+=aStats[a].ok;ana[a].tot+=aStats[a].tot;}});
+  localStorage.setItem(ANA_KEY,JSON.stringify(ana));
+  const _total=ok+bad,_pct=_total?Math.round(ok/_total*100):0;
+  if(logging&&_total>0)saveHistory(_total,ok,bad,_pct,isSim);
+  document.getElementById("quiz").classList.add("hidden");
+  const res=document.getElementById("result");res.classList.remove("hidden");
+  const total=ok+bad,pct=total?Math.round(ok/total*100):0;
+  const sb=document.getElementById("scoreBig");sb.textContent=pct+"%";sb.style.color=pct>=70?"var(--green)":pct>=55?"var(--gold)":"var(--red)";
+  document.getElementById("scoreMsg").textContent=pct>=70?"¡Muy bien! En zona de ingreso.":pct>=55?"Vas bien, refuerza lo flojo.":"A reforzar las áreas débiles.";
+  document.getElementById("rOk").textContent=ok;document.getElementById("rBad").textContent=bad;
+  document.getElementById("rTime").textContent=timed?document.getElementById("timer").textContent:"—";
+  // nota /20 y competitividad solo en simulacro
+  if(isSim){
+    const nota=(ok/total*20).toFixed(1);
+    document.getElementById("rNotaWrap").style.display="";document.getElementById("rNota").textContent=nota;
+    const comp=document.getElementById("competit");comp.classList.remove("hidden");
+    let msg;
+    if(pct>=75)msg="Con este nivel estarías muy competitivo para Pediatría. Mantén el ritmo.";
+    else if(pct>=60)msg="Nivel intermedio: con estas notas el ingreso a Pediatría depende mucho de la sede que elijas. Sigue subiendo.";
+    else msg="Por debajo de lo deseable para una especialidad demandada como Pediatría. Enfócate en las fijas y áreas débiles de abajo.";
+    comp.innerHTML="<b>Lectura para Pediatría:</b> "+msg+" (El examen vale 80% de la nota; recuerda que se entra por orden de mérito, sin puntaje mínimo.)";
+  }
+  let html="<h2 style='font-size:1rem;color:var(--gold)'>Desempeño por área (esta sesión)</h2>";
+  AREAS.forEach(a=>{const s=aStats[a];if(!s||s.tot===0)return;const p=Math.round(s.ok/s.tot*100);html+="<div class='arearow'><div class='arealbl'><span class='pill "+a+"'>"+ANAMES[a]+"</span></div><div class='areabar'><div style='width:"+Math.max(p,8)+"%;background:var(--"+a+")'>"+s.ok+"/"+s.tot+" ("+p+"%)</div></div></div>";});
+  document.getElementById("byArea").innerHTML=html;
+}
+function reviewWrong(){if(wrong.length===0){alert("¡No fallaste ninguna! 🎉");return;}queue=wrong.slice();idx=0;ok=0;bad=0;wrong=[];timed=false;isSim=false;logging=false;AREAS.forEach(a=>aStats[a]={ok:0,tot:0});document.getElementById("result").classList.add("hidden");document.getElementById("quiz").classList.remove("hidden");document.getElementById("timer").classList.add("hidden");render();}
+function quit(){if(timerInt)clearInterval(timerInt);if(ok+bad>0)finish();else location.reload();}
+
+// ANALYTICS dashboard
+function renderAna(){
+  const ana=JSON.parse(localStorage.getItem(ANA_KEY)||"{}");
+  const tot=AREAS.reduce((s,a)=>s+(ana[a]?ana[a].tot:0),0);
+  if(tot===0){document.getElementById("anaSummary").textContent="Aún no tienes estadísticas. Resuelve preguntas y aquí verás tus áreas fuertes y débiles acumuladas.";document.getElementById("anaBars").innerHTML="";document.getElementById("anaWeak").textContent="";return;}
+  const okTot=AREAS.reduce((s,a)=>s+(ana[a]?ana[a].ok:0),0);
+  document.getElementById("anaSummary").textContent="Has respondido "+tot+" preguntas · acierto global "+Math.round(okTot/tot*100)+"%.";
+  let html="",weakest=null,weakp=101;
+  AREAS.forEach(a=>{if(!ana[a]||ana[a].tot===0)return;const p=Math.round(ana[a].ok/ana[a].tot*100);if(p<weakp){weakp=p;weakest=a;}html+="<div class='arearow'><div class='arealbl'><span class='pill "+a+"'>"+ANAMES[a]+"</span></div><div class='areabar'><div style='width:"+Math.max(p,8)+"%;background:var(--"+a+")'>"+ana[a].ok+"/"+ana[a].tot+" ("+p+"%)</div></div></div>";});
+  document.getElementById("anaBars").innerHTML=html;
+  if(weakest)document.getElementById("anaWeak").innerHTML="🎯 <b style='color:var(--red)'>Tu área más débil: "+ANAMES[weakest]+" ("+weakp+"%)</b> — prioriza repasarla.";
+}
+function resetAna(){if(confirm("¿Borrar tus estadísticas acumuladas?")){localStorage.removeItem(ANA_KEY);renderAna();}}
+
+init();
+</script>
+</body>
+</html>

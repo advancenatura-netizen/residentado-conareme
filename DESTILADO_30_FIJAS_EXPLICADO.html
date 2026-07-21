@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destilado EXPLICADO de las 30 Fijas — Residentado CONAREME</title>
+<style>
+  :root{
+    --bg:#0b0f1a; --panel:#161d30; --panel2:#1e2740; --ink:#eaf0fb; --muted:#9aabc9;
+    --accent:#34d3ff; --gold:#ffd166; --green:#22d39a; --red:#ff5d7a; --violet:#a78bfa; --orange:#ff9e57;
+    --med:#34d3ff; --ped:#22d39a; --cir:#ff5d7a; --gin:#ff9e57; --sp:#ffd166; --cb:#a78bfa;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.6;}
+  .wrap{max-width:1000px; margin:0 auto; padding:22px;}
+  header{background:radial-gradient(1000px 350px at 25% -15%, #1b3a5c, #0b0f1a 62%); border-bottom:3px solid var(--accent); padding:44px 22px 34px;}
+  header h1{font-size:1.85rem; color:#fff; margin-bottom:8px;}
+  header .sub{color:var(--accent); font-weight:600; font-size:1rem;}
+  header .meta{color:var(--muted); font-size:.84rem; margin-top:12px;}
+  nav{background:var(--panel); position:sticky; top:0; z-index:20; border-bottom:1px solid #2a3550; overflow-x:auto; white-space:nowrap;}
+  nav .wrap{padding:10px 22px;}
+  nav a{color:var(--muted); text-decoration:none; font-size:.82rem; margin-right:14px; font-weight:600;}
+  nav a:hover{color:var(--accent);}
+  section{margin:30px 0;}
+  h2{color:var(--accent); font-size:1.3rem; border-left:4px solid var(--accent); padding-left:12px; margin-bottom:14px;}
+  p{margin-bottom:10px; color:#d2dcef;}
+  .fija{background:var(--panel); border:1px solid #2a3550; border-radius:14px; padding:0; margin-bottom:20px; overflow:hidden;}
+  .fija .head{display:flex; align-items:center; gap:10px; padding:13px 18px; background:var(--panel2); border-bottom:1px solid #2a3550;}
+  .fija .num{font-weight:900; font-size:1.15rem; color:var(--gold); min-width:30px;}
+  .fija .ttl{font-weight:800; font-size:1.08rem; flex:1;}
+  .fija .body{padding:16px 18px;}
+  .pill{display:inline-block; padding:1px 9px; border-radius:10px; font-size:.7rem; font-weight:800; white-space:nowrap;}
+  .p-MED{background:rgba(52,211,255,.18); color:var(--med);} .p-PED{background:rgba(34,211,154,.18); color:var(--ped);}
+  .p-CIR{background:rgba(255,93,122,.18); color:var(--cir);} .p-GIN{background:rgba(255,158,87,.18); color:var(--gin);}
+  .p-SP{background:rgba(255,209,102,.18); color:var(--sp);} .p-CB{background:rgba(167,139,250,.18); color:var(--cb);}
+  .freq{display:inline-block; padding:1px 8px; border-radius:8px; font-weight:800; font-size:.72rem; background:var(--red); color:#fff;}
+  .lbl{display:flex; align-items:center; gap:7px; font-weight:800; color:var(--accent); font-size:.95rem; margin:16px 0 6px;}
+  .lbl:first-child{margin-top:0;}
+  .ctx{font-size:.95rem; color:#e6edf8; background:rgba(52,211,255,.05); border-radius:8px; padding:11px 13px;}
+  .qa{border-left:3px solid var(--gold); padding:8px 0 8px 13px; margin:9px 0;}
+  .qa .q{font-style:italic; color:var(--gold); font-size:.92rem; margin-bottom:3px;}
+  .qa .a{font-size:.94rem; color:#e6edf8;}
+  .qa .a b{color:var(--green);}
+  .clave{background:rgba(34,211,154,.08); border-left:3px solid var(--green); padding:10px 13px; border-radius:6px; margin-top:12px; font-size:.93rem;}
+  .clave b{color:var(--green);}
+  .gloss{background:rgba(167,139,250,.07); border:1px solid rgba(167,139,250,.3); border-radius:8px; padding:10px 13px; margin-top:12px; font-size:.86rem; color:#d2dcef;}
+  .gloss b{color:var(--violet);}
+  .gloss .term{color:var(--violet); font-weight:700;}
+  .info-box{background:rgba(52,211,255,.06); border:1px solid var(--accent); border-radius:12px; padding:16px; margin:14px 0;}
+  .warn-box{background:rgba(255,209,102,.07); border:1px solid var(--gold); border-radius:12px; padding:16px; margin:14px 0; font-size:.86rem;}
+  footer{border-top:1px solid #2a3550; padding:24px; color:var(--muted); font-size:.78rem; margin-top:40px;}
+  @media print{*{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}nav{display:none;}.fija,.info-box,.warn-box{break-inside:avoid;page-break-inside:avoid;}h2{break-after:avoid;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap" style="padding:0">
+    <h1>📖 Destilado EXPLICADO de las 30 Fijas — CONAREME</h1>
+    <div class="sub">Versión amigable y detallada: cada tema con contexto, cada pregunta con su respuesta, cada término explicado</div>
+    <div class="meta">Para Momar · 10 jun 2026 · Pensado para entender de verdad, no solo memorizar. Construido sobre 10 exámenes oficiales (2018-2023).</div>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="#como">Cómo leerlo</a>
+  <a href="#f1">1-10</a><a href="#f11">11-20</a><a href="#f21">21-30</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="como">
+  <div class="info-box">
+    <b>Cómo está armada cada ficha:</b> primero <b>"¿De qué trata?"</b> te da el contexto (qué es la enfermedad o el concepto, en palabras sencillas). Luego <b>"Cómo te lo preguntan"</b> muestra las preguntas típicas del examen, cada una <b>con su respuesta completa</b>. Después <b>"Clave para no fallar"</b> es el atajo para acertar. Y cuando hay palabras técnicas, abajo va un <b>"Glosario"</b> que las explica. Nada queda a la imaginación.
+  </div>
+</section>
+
+<h2 id="f1">Fichas 1 a 10</h2>
+
+<!-- 1 -->
+<div class="fija"><div class="head"><span class="num">1</span><span class="ttl">Trauma / Politraumatizado (ATLS)</span><span class="pill p-CIR">Cirugía</span><span class="freq">cayó 10/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Un paciente llega grave a emergencia por un accidente, caída o herida (un "politraumatizado"). El <b>ATLS</b> es el protocolo mundial para atenderlo, y su idea central es simple: <b>atiende primero lo que mata más rápido</b>. Para eso se sigue un orden fijo de letras —el <b>ABCDE</b>— y no puedes saltarte ninguna: no pasas a la "B" hasta resolver la "A".</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"¿Cuál es la PRIMERA acción / la prioridad en este paciente?"</div><div class="a"><b>Respuesta: la "A" — asegurar la vía aérea, cuidando siempre el cuello</b> (control de la columna cervical). Aunque el paciente esté sangrando, si el aire no entra, se muere primero por eso.</div></div>
+  <div class="qa"><div class="q">"Paciente con golpe en el abdomen, con presión baja que NO mejora con suero (inestable), y la ecografía FAST sale positiva. ¿Qué se hace?"</div><div class="a"><b>Respuesta: laparotomía de urgencia</b> (abrir el abdomen en quirófano para frenar el sangrado). En el inestable no hay tiempo para más estudios.</div></div>
+  <div class="qa"><div class="q">"El mismo trauma abdominal, pero el paciente está ESTABLE. ¿Qué estudio se pide?"</div><div class="a"><b>Respuesta: tomografía (TC) con contraste</b>, porque hay tiempo de estudiarlo con calma.</div></div>
+  <div class="clave"><b>🔑 Clave para no fallar:</b> si la viñeta menciona <b>estridor</b> (ruido áspero al respirar) o <b>sangre en la boca</b>, la respuesta es <b>asegurar la vía aérea ANTES</b> que poner vías, dar líquidos o pedir radiografías.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">FAST</span> = ecografía rápida a pie de cama que busca sangre dentro del abdomen. · <span class="term">Inestable</span> = presión arterial baja que no se recupera. · <span class="term">Laparotomía</span> = cirugía abriendo el abdomen.</div>
+</div></div>
+
+<!-- 2 -->
+<div class="fija"><div class="head"><span class="num">2</span><span class="ttl">Patología biliar (vesícula y vías biliares)</span><span class="pill p-CIR">Cirugía</span><span class="freq">cayó ~9/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">La vesícula guarda la bilis y a veces forma <b>cálculos</b> (piedras). Esas piedras causan tres cuadros distintos que el examen adora confundir. Lo importante es diferenciarlos por la pista clínica y saber qué hacer en cada uno.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Mujer con dolor en el lado derecho de arriba del abdomen, fiebre, y al palpar deja de respirar por el dolor (signo de Murphy). ¿Diagnóstico y conducta?"</div><div class="a"><b>Respuesta: colecistitis aguda</b> (vesícula inflamada) → tratamiento con antibióticos y <b>colecistectomía</b> (sacar la vesícula).</div></div>
+  <div class="qa"><div class="q">"Paciente con ictericia (piel amarilla) y una piedra atascada en el colédoco. ¿Qué se hace?"</div><div class="a"><b>Respuesta: coledocolitiasis</b> → se saca la piedra con una <b>CPRE</b> (endoscopía especial de las vías biliares).</div></div>
+  <div class="qa"><div class="q">"Paciente con fiebre + ictericia + dolor del lado derecho a la vez (tríada de Charcot). ¿Diagnóstico y conducta urgente?"</div><div class="a"><b>Respuesta: colangitis</b> (infección de la vía biliar, es una urgencia) → antibióticos + <b>CPRE para drenar</b> de inmediato.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> los tres se parecen, pero la <b>colangitis</b> es la más grave porque hay infección dentro de la vía biliar → hay que <b>descomprimir/drenar rápido con CPRE</b>.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Signo de Murphy</span> = el paciente interrumpe la inspiración por dolor cuando le palpas bajo las costillas derechas. · <span class="term">Colédoco</span> = el conducto que lleva la bilis al intestino. · <span class="term">CPRE</span> = colangiopancreatografía retrógrada endoscópica; una endoscopía que entra hasta la vía biliar para sacar piedras o drenar. · <span class="term">Ictericia</span> = color amarillo de piel y ojos por exceso de bilirrubina.</div>
+</div></div>
+
+<!-- 3 -->
+<div class="fija"><div class="head"><span class="num">3</span><span class="ttl">Ictericia neonatal (recién nacido amarillo)</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~9/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Muchos recién nacidos se ponen amarillos (ictericia) por la bilirrubina. Lo crucial para el examen es distinguir cuándo es <b>normal/fisiológica</b> (no hay que hacer nada) y cuándo es <b>patológica</b> (hay un problema de fondo, como destrucción de glóbulos rojos).</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Recién nacido que se pone amarillo al 3.º-4.º día, con buen estado, buena succión y subiendo de peso. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: ictericia fisiológica (normal)</b> → solo observar. Aparece DESPUÉS de las 24 horas.</div></div>
+  <div class="qa"><div class="q">"Recién nacido amarillo en las PRIMERAS 24 horas. ¿Qué significa?"</div><div class="a"><b>Respuesta: es patológica</b> → casi siempre por hemólisis (destrucción de glóbulos rojos), típicamente incompatibilidad de grupo sanguíneo (madre O / hijo A o B) o de Rh.</div></div>
+  <div class="qa"><div class="q">"Bebé amarillo a las 2-3 semanas, con buen estado general, alimentado solo con pecho. ¿Causa?"</div><div class="a"><b>Respuesta: ictericia por leche materna</b> → se continúa la lactancia, no se suspende.</div></div>
+  <div class="qa"><div class="q">"Bebé amarillo con orina oscura (coluria). ¿Qué tipo de bilirrubina y qué sospechar?"</div><div class="a"><b>Respuesta: bilirrubina DIRECTA</b> (conjugada). Si hay coluria, sospechar <b>atresia de vías biliares</b> (un problema quirúrgico serio).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> la regla de oro es el TIEMPO: ictericia en las <b>primeras 24 horas = patológica</b> hasta demostrar lo contrario.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Hemólisis</span> = destrucción de glóbulos rojos, que libera bilirrubina. · <span class="term">Coluria</span> = orina de color oscuro (como té) por bilirrubina. · <span class="term">Atresia de vías biliares</span> = las vías biliares del bebé están cerradas; requiere cirugía temprana.</div>
+</div></div>
+
+<!-- 4 -->
+<div class="fija"><div class="head"><span class="num">4</span><span class="ttl">Bioestadística y diseño de estudios</span><span class="pill p-SP">Salud Pública</span><span class="freq">cayó ~9/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Son las preguntas de "investigación": te describen cómo se hizo un estudio y debes <b>nombrar el tipo</b>, o te dan números y debes <b>calcular</b> un indicador. Son puntos fáciles y muy predecibles si aprendes a reconocer el patrón.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Siguen a fumadores y no fumadores durante 10 años para ver quién enferma. ¿Qué estudio es?"</div><div class="a"><b>Respuesta: cohorte</b> (parte de la EXPOSICIÓN y mira hacia adelante en el tiempo). Permite calcular incidencia y riesgo relativo.</div></div>
+  <div class="qa"><div class="q">"Toman enfermos y sanos y miran hacia atrás quién estuvo expuesto. ¿Qué estudio es?"</div><div class="a"><b>Respuesta: casos y controles</b> (parte del DESENLACE y mira hacia atrás). Su medida es el odds ratio (OR).</div></div>
+  <div class="qa"><div class="q">"Relacionan el consumo promedio de sal POR PAÍS con la hipertensión de cada país. ¿Qué estudio es?"</div><div class="a"><b>Respuesta: ecológico</b> (usa datos de grupos/poblaciones, no de personas individuales).</div></div>
+  <div class="qa"><div class="q">"Una prueba detecta a 90 de 100 enfermos reales. ¿Qué parámetro es?"</div><div class="a"><b>Respuesta: sensibilidad = 90%</b> (capacidad de detectar a los enfermos). Una prueba muy sensible, si sale negativa, sirve para descartar.</div></div>
+  <div class="clave"><b>🔑 Clave (fórmulas que SÍ caen):</b> Riesgo relativo = incidencia en expuestos ÷ incidencia en no expuestos. · Odds ratio = (a×d)÷(b×c). · Sensibilidad = VP÷(VP+FN). · VPP = VP÷(VP+FP). · Para comparar 2 promedios → t de Student.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Incidencia</span> = casos NUEVOS en un periodo (mide riesgo). · <span class="term">Prevalencia</span> = casos EXISTENTES en un momento (mide carga). · <span class="term">VP/FN/FP</span> = verdaderos positivos / falsos negativos / falsos positivos.</div>
+</div></div>
+
+<!-- 5 -->
+<div class="fija"><div class="head"><span class="num">5</span><span class="ttl">Neumonía (en adulto y en niño)</span><span class="pill p-MED">Medicina</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~8/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Infección del pulmón con tos, fiebre y dificultad para respirar. El examen pregunta dos cosas: <b>qué germen la causa</b> y <b>si el paciente debe hospitalizarse</b> (para eso existe una escala llamada CURB-65).</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"¿Cuál es el germen más frecuente de neumonía adquirida en la comunidad?"</div><div class="a"><b>Respuesta: Streptococcus pneumoniae (neumococo)</b>. También es el más común en el niño mayor de 5 años.</div></div>
+  <div class="qa"><div class="q">"Paciente confuso, con urea alta, respirando muy rápido y con presión baja. Según CURB-65, ¿dónde se maneja?"</div><div class="a"><b>Respuesta: hospitalización con valoración de UCI</b>, porque tiene varios puntos de la escala (es una neumonía grave).</div></div>
+  <div class="qa"><div class="q">"Neumonía que aparece estando ya internado en el hospital. ¿Qué germen sospechar?"</div><div class="a"><b>Respuesta: gérmenes hospitalarios como Pseudomonas</b> u otros gram negativos (distintos a los de la comunidad).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> CURB-65 cuenta 1 punto por cada uno: <b>C</b>onfusión, <b>U</b>rea alta, <b>R</b>espiración ≥30, presión (<b>B</b>) baja, edad ≥<b>65</b>. 0-1 punto = a casa; 3 o más = UCI.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Adquirida en la comunidad</span> = se contagió fuera del hospital (lo habitual). · <span class="term">UCI</span> = Unidad de Cuidados Intensivos.</div>
+</div></div>
+
+<!-- 6 -->
+<div class="fija"><div class="head"><span class="num">6</span><span class="ttl">Tuberculosis (TBC)</span><span class="pill p-MED">Medicina</span><span class="freq">cayó ~8/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Infección por el bacilo de Koch, muy frecuente en Perú. El examen pregunta el <b>esquema de tratamiento</b> (memorízalo tal cual) y variantes especiales (meningitis TB, TB en embarazo, en VIH).</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Paciente con TBC pulmonar sensible, nunca tratado. ¿Esquema según MINSA?"</div><div class="a"><b>Respuesta: 2 meses de HRZE + 4 meses de HR</b> = 2 meses con cuatro fármacos (Isoniacida, Rifampicina, Pirazinamida, Etambutol) y luego 4 meses con dos (Isoniacida y Rifampicina).</div></div>
+  <div class="qa"><div class="q">"¿A quién se le hace baciloscopía buscando TBC?"</div><div class="a"><b>Respuesta: al sintomático respiratorio</b> = persona con tos por más de 15 días. Se piden 2 muestras de esputo.</div></div>
+  <div class="qa"><div class="q">"Gestante con TBC. ¿Qué fármaco se evita?"</div><div class="a"><b>Respuesta: la estreptomicina</b> (es tóxica para el oído del bebé). El resto del esquema se mantiene.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> memoriza la receta "2HRZE / 4HR". Es la pregunta de TBC que más cae.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Sensible</span> = la bacteria responde a los fármacos de primera línea (no es resistente). · <span class="term">Baciloscopía</span> = examen del esputo al microscopio buscando el bacilo.</div>
+</div></div>
+
+<!-- 7 -->
+<div class="fija"><div class="head"><span class="num">7</span><span class="ttl">Infarto agudo de miocardio (IAM)</span><span class="pill p-MED">Medicina</span><span class="freq">cayó ~8/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Se tapa una arteria del corazón y el músculo empieza a morir. Lo urgente es <b>reabrir la arteria lo más rápido posible</b> ("reperfusión"). El examen pregunta cómo reperfundir y cómo se diagnostica.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"IAM con elevación del ST y un hospital con sala de cateterismo disponible pronto. ¿Reperfusión de elección?"</div><div class="a"><b>Respuesta: angioplastia primaria</b> (entrar por la arteria y abrirla con un balón/stent), si está disponible en menos de 120 minutos.</div></div>
+  <div class="qa"><div class="q">"El mismo IAM pero NO hay cateterismo disponible a tiempo. ¿Qué se hace?"</div><div class="a"><b>Respuesta: trombólisis</b> (fármaco que disuelve el coágulo, como la estreptoquinasa).</div></div>
+  <div class="qa"><div class="q">"¿Qué examen de sangre confirma el infarto?"</div><div class="a"><b>Respuesta: la troponina</b> (se eleva a las 3-6 horas; es el marcador más específico).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> si hay cateterismo disponible a tiempo, <b>angioplastia gana a la trombólisis</b>. La cara inferior del corazón se ve en las derivaciones DII, DIII y aVF.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Elevación del ST</span> = un patrón en el electrocardiograma que indica arteria totalmente tapada. · <span class="term">Angioplastia</span> = abrir la arteria con un catéter. · <span class="term">Reperfusión</span> = restablecer el flujo de sangre.</div>
+</div></div>
+
+<!-- 8 -->
+<div class="fija"><div class="head"><span class="num">8</span><span class="ttl">Preeclampsia (presión alta en el embarazo)</span><span class="pill p-GIN">Gineco-Obst.</span><span class="freq">cayó ~8/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">A partir de la semana 20, la gestante sube la presión y daña órganos (riñón, hígado, cerebro). Si no se controla, puede convulsionar (eso se llama <b>eclampsia</b>) — la complicación que hay que prevenir.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Gestante con presión 165/110, dolor de cabeza, dolor en la boca del estómago y visión borrosa. ¿Qué fármaco se da para prevenir la complicación más temida?"</div><div class="a"><b>Respuesta: sulfato de magnesio</b>. Sirve para prevenir/tratar las convulsiones (eclampsia). OJO: no baja la presión, es anticonvulsivante.</div></div>
+  <div class="qa"><div class="q">"¿Cómo se previene la preeclampsia en una gestante de alto riesgo?"</div><div class="a"><b>Respuesta: aspirina a dosis baja</b>, comenzando desde la semana 12.</div></div>
+  <div class="qa"><div class="q">"¿Qué define que la preeclampsia es SEVERA?"</div><div class="a"><b>Respuesta: presión ≥160/110, plaquetas bajas, transaminasas o creatinina altas, o síntomas</b> (dolor de cabeza, epigastralgia, escotomas).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> el error típico es elegir un antihipertensivo cuando hay síntomas de alarma. La respuesta es el <b>sulfato de magnesio</b> (para que no convulsione); el antihipertensivo es complementario.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Eclampsia</span> = convulsiones por la preeclampsia. · <span class="term">Epigastralgia</span> = dolor en la "boca del estómago". · <span class="term">Escotomas</span> = ver lucecitas o manchas.</div>
+</div></div>
+
+<!-- 9 -->
+<div class="fija"><div class="head"><span class="num">9</span><span class="ttl">APGAR y reanimación neonatal</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~8/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Apenas nace el bebé, se evalúa su vitalidad con el <b>puntaje de APGAR</b>. Si nace deprimido (sin respirar bien), hay una secuencia de reanimación con un orden estricto, igual que en el adulto.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"¿Qué evalúa el APGAR y cuándo se toma?"</div><div class="a"><b>Respuesta: 5 cosas (frecuencia cardiaca, respiración, tono, reflejos y color), cada una de 0 a 2 puntos, al minuto 1 y al minuto 5</b>. Mide la vitalidad; NO sirve para decidir si se reanima.</div></div>
+  <div class="qa"><div class="q">"Recién nacido con frecuencia cardiaca menor de 100 o sin respirar. ¿Qué es lo PRIMERO?"</div><div class="a"><b>Respuesta: ventilar (VPP, dar respiraciones con bolsa y máscara)</b>. La ventilación es el paso más importante.</div></div>
+  <div class="qa"><div class="q">"¿Cuándo se inicia el masaje cardiaco en el recién nacido?"</div><div class="a"><b>Respuesta: si la frecuencia cardiaca sigue por debajo de 60 tras 30 segundos de ventilación efectiva</b>. Si persiste, se da adrenalina.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> en el recién nacido, lo primero NO es el masaje ni la adrenalina: es <b>ventilar</b>. La mayoría se recupera solo con buena ventilación.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">VPP</span> = ventilación a presión positiva, dar respiraciones con bolsa autoinflable y máscara. · <span class="term">Deprimido</span> = recién nacido sin buen esfuerzo respiratorio ni tono.</div>
+</div></div>
+
+<!-- 10 -->
+<div class="fija"><div class="head"><span class="num">10</span><span class="ttl">PTI — Púrpura trombocitopénica inmune</span><span class="pill p-PED">Pediatría</span><span class="pill p-MED">Medicina</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">El cuerpo, por error, destruye sus propias plaquetas (las células que coagulan). Resultado: aparecen moretones y puntitos rojos (petequias), casi siempre en un niño que tuvo un virus hace poco. Lo clave: <b>solo bajan las plaquetas, todo lo demás está normal</b>.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Niño con petequias y moretones tras un cuadro viral, plaquetas muy bajas, pero sin anemia, sin ganglios y sin bazo grande. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: PTI (púrpura trombocitopénica inmune)</b>. La pista es que SOLO las plaquetas están bajas.</div></div>
+  <div class="qa"><div class="q">"¿Cuál es el manejo en el niño?"</div><div class="a"><b>Respuesta: muchas veces solo observación</b> si el sangrado es leve; corticoides o inmunoglobulina si el sangrado es importante.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> lo que descarta otras cosas graves (como leucemia) es que <b>no haya anemia, ni ganglios, ni bazo grande, ni células raras (blastos)</b>: solo plaquetas bajas.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Petequias</span> = puntitos rojos en la piel por sangrado pequeño. · <span class="term">Plaquetas</span> = células que ayudan a coagular. · <span class="term">Blastos</span> = células inmaduras que aparecen en la leucemia.</div>
+</div></div>
+
+<h2 id="f11">Fichas 11 a 20</h2>
+
+<!-- 11 -->
+<div class="fija"><div class="head"><span class="num">11</span><span class="ttl">TEP — Tromboembolismo pulmonar</span><span class="pill p-MED">Medicina</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Un coágulo (casi siempre venido de las piernas) viaja y tapa una arteria del pulmón. Aparece de golpe falta de aire. Es clásico en pacientes recién operados o que estuvieron mucho tiempo inmóviles.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Paciente operado hace días, con disnea súbita, dolor al respirar y baja oxigenación. Está estable. ¿Examen que confirma?"</div><div class="a"><b>Respuesta: angiotomografía pulmonar (angio-TC)</b>. Es la prueba que confirma el TEP.</div></div>
+  <div class="qa"><div class="q">"¿Para qué sirve el dímero D?"</div><div class="a"><b>Respuesta: solo para DESCARTAR</b> el TEP cuando la sospecha es baja (si sale normal, casi seguro no hay TEP). Si ya hay alta sospecha, no aporta.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> sospecha alta + paciente estable → la respuesta es <b>angio-TC pulmonar</b>, no repetir el dímero D.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Disnea</span> = sensación de falta de aire. · <span class="term">Dímero D</span> = análisis de sangre que sube cuando hay coágulos (pero también en muchas otras situaciones, por eso solo descarta).</div>
+</div></div>
+
+<!-- 12 -->
+<div class="fija"><div class="head"><span class="num">12</span><span class="ttl">Sepsis neonatal</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Infección generalizada en el recién nacido. Es grave porque los síntomas son sutiles (el bebé "no se ve bien"). La forma <b>precoz</b> (primeras 72 horas) se contagia de la mamá durante el parto.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Recién nacido que a las 12 horas está decaído, con dificultad para respirar y mala temperatura. La mamá tuvo ruptura de membranas prolongada y fiebre. ¿Agente más frecuente de sepsis precoz?"</div><div class="a"><b>Respuesta: Streptococcus agalactiae (estreptococo del grupo B)</b> y E. coli son los principales.</div></div>
+  <div class="qa"><div class="q">"¿Qué factores de la mamá aumentan el riesgo?"</div><div class="a"><b>Respuesta: ruptura de membranas mayor de 18 horas, fiebre materna y corioamnionitis</b> (infección de las membranas).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> ante un recién nacido con factores de riesgo + clínica vaga → no esperes: <b>hemocultivo + antibióticos empíricos de inmediato</b>.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Precoz</span> = antes de las 72 horas de vida. · <span class="term">Ruptura de membranas</span> = se rompió la "fuente". · <span class="term">Empírico</span> = tratamiento que se inicia antes de tener el resultado del cultivo.</div>
+</div></div>
+
+<!-- 13 -->
+<div class="fija"><div class="head"><span class="num">13</span><span class="ttl">Convulsión febril</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Un niño pequeño con fiebre convulsiona. Asusta mucho a los padres, pero la forma "simple" es benigna. El examen quiere que la clasifiques en simple o compleja, porque eso cambia el pronóstico.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Niño de 18 meses con fiebre que convulsiona de forma generalizada por 3 minutos y se recupera completo. Único episodio. ¿Cómo se clasifica?"</div><div class="a"><b>Respuesta: convulsión febril SIMPLE</b> (generalizada, menos de 15 minutos, no se repite en 24 horas, sin secuelas). Buen pronóstico.</div></div>
+  <div class="qa"><div class="q">"¿Qué la haría COMPLEJA?"</div><div class="a"><b>Respuesta: que sea focal (de una parte del cuerpo), dure más de 15 minutos, o se repita dentro de las 24 horas.</b></div></div>
+  <div class="qa"><div class="q">"¿Qué se hace PRIMERO si el niño está convulsionando?"</div><div class="a"><b>Respuesta: el ABC</b> (vía aérea, respiración, circulación) — estabilizarlo.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> la convulsión febril simple <b>no necesita</b> antiepilépticos de por vida ni estudios complejos. Solo control de la fiebre y tranquilizar.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Generalizada</span> = involucra todo el cuerpo. · <span class="term">Focal</span> = afecta solo una parte (un brazo, una mitad).</div>
+</div></div>
+
+<!-- 14 -->
+<div class="fija"><div class="head"><span class="num">14</span><span class="ttl">Cáncer de endometrio / sangrado postmenopáusico</span><span class="pill p-GIN">Gineco-Obst.</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Una mujer que ya pasó la menopausia (no menstrúa hace años) vuelve a sangrar. Ese sangrado <b>nunca es normal</b> y obliga a descartar cáncer del endometrio (la capa interna del útero).</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Mujer de 58 años, menopáusica hace 8 años, con sangrado vaginal. ¿Cuál es el PRIMER examen?"</div><div class="a"><b>Respuesta: ecografía transvaginal</b> para medir el grosor del endometrio. Si está engrosado (más de 4-5 mm), se hace biopsia.</div></div>
+  <div class="qa"><div class="q">"¿Cuáles son los factores de riesgo?"</div><div class="a"><b>Respuesta: obesidad, diabetes, no haber tenido hijos (nuliparidad) y estrógenos sin oposición.</b></div></div>
+  <div class="clave"><b>🔑 Clave:</b> el error común es pedir Papanicolaou (eso es para cáncer de cérvix). Aquí el primer paso es la <b>ecografía transvaginal</b>.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Endometrio</span> = capa interna del útero que se descama en la menstruación. · <span class="term">Ecografía transvaginal</span> = ecografía con una sonda por la vagina, que ve muy bien el útero.</div>
+</div></div>
+
+<!-- 15 -->
+<div class="fija"><div class="head"><span class="num">15</span><span class="ttl">Vulvovaginitis (flujo vaginal)</span><span class="pill p-GIN">Gineco-Obst.</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Una mujer consulta por flujo vaginal anormal. Hay tres causas frecuentes y cada una tiene una "pista de oro" para distinguirlas. El examen te da la pista y pide el diagnóstico y/o el tratamiento.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Flujo gris, con olor a pescado, células clave en el microscopio. ¿Diagnóstico y tratamiento?"</div><div class="a"><b>Respuesta: vaginosis bacteriana</b> → tratar con metronidazol.</div></div>
+  <div class="qa"><div class="q">"Flujo verde, espumoso, y el cuello del útero se ve 'en fresa'. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: tricomoniasis</b> → metronidazol (en dosis única de 2 g).</div></div>
+  <div class="qa"><div class="q">"Flujo blanco, grumoso (como leche cortada), con mucha picazón. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: candidiasis</b> (hongo) → fluconazol.</div></div>
+  <div class="clave"><b>🔑 Clave (las pistas de oro):</b> olor a pescado + células clave = vaginosis · cérvix "en fresa" = tricomonas · grumoso con picazón = cándida.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Células clave</span> = células vaginales cubiertas de bacterias, vistas al microscopio (típicas de vaginosis). · <span class="term">Criterios de Amsel</span> = los 4 criterios que confirman vaginosis (flujo, pH alto, olor con KOH, células clave).</div>
+</div></div>
+
+<!-- 16 -->
+<div class="fija"><div class="head"><span class="num">16</span><span class="ttl">Cetoacidosis diabética (CAD)</span><span class="pill p-MED">Medicina</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Una complicación grave de la diabetes (sobre todo tipo 1): el azúcar está muy alto y la sangre se vuelve ácida. El paciente respira hondo y rápido (respiración de Kussmaul) y está deshidratado. El examen pregunta el ORDEN del tratamiento.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Paciente con glucosa muy alta, sangre ácida y cetonas. ¿Cuál es el PRIMER paso del tratamiento?"</div><div class="a"><b>Respuesta: hidratación con suero salino</b>. Reponer líquidos va primero; mejora la perfusión y baja el azúcar.</div></div>
+  <div class="qa"><div class="q">"¿Y la insulina y el potasio?"</div><div class="a"><b>Respuesta: insulina después de iniciar líquidos; el potasio se repone cuando empieza a bajar</b> (la insulina lo mete a las células). El bicarbonato solo si el pH es muy bajo (menor de 6.9).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> la trampa clásica es elegir "insulina en bolo primero". <b>NO</b>: primero van los líquidos (suero).</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Cetonas</span> = sustancias ácidas que produce el cuerpo cuando no puede usar el azúcar. · <span class="term">Kussmaul</span> = respiración profunda y rápida para compensar la acidez.</div>
+</div></div>
+
+<!-- 17 -->
+<div class="fija"><div class="head"><span class="num">17</span><span class="ttl">Meningitis bacteriana</span><span class="pill p-MED">Medicina</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~6/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Infección de las meninges (las membranas que cubren el cerebro). Da fiebre, dolor de cabeza intenso y rigidez de nuca. Es una emergencia: el tratamiento NO espera. El líquido cefalorraquídeo (LCR) dice si es bacteriana o viral.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"LCR turbio, con muchos neutrófilos, glucosa baja y proteínas altas. ¿Qué tipo de meningitis y qué tratamiento?"</div><div class="a"><b>Respuesta: bacteriana</b> → ceftriaxona empírica de inmediato + dexametasona (si se sospecha neumococo). No esperar el cultivo.</div></div>
+  <div class="qa"><div class="q">"LCR claro, con linfocitos y glucosa normal. ¿Qué tipo es?"</div><div class="a"><b>Respuesta: viral</b> (y si es por herpes, se da aciclovir).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> bacteriana = LCR turbio, neutrófilos, glucosa BAJA. Viral = LCR claro, linfocitos, glucosa NORMAL.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">LCR</span> = líquido cefalorraquídeo, que se obtiene con una punción lumbar. · <span class="term">Neutrófilos</span> = glóbulos blancos típicos de infección bacteriana. · <span class="term">Empírico</span> = se inicia sin esperar resultados.</div>
+</div></div>
+
+<!-- 18 -->
+<div class="fija"><div class="head"><span class="num">18</span><span class="ttl">Anemia falciforme (drepanocitosis)</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~5/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Enfermedad genética donde los glóbulos rojos tienen forma de hoz y se atascan en los vasos, causando dolor intenso ("crisis") y destrucción de glóbulos rojos (anemia hemolítica).</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Niño con dolor óseo intenso, anemia, e hígado y bazo grandes, que aparece tras un esfuerzo o infección. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: anemia falciforme en crisis</b> (vaso-oclusiva o hemolítica).</div></div>
+  <div class="qa"><div class="q">"¿A qué infecciones son más propensos estos niños?"</div><div class="a"><b>Respuesta: a gérmenes encapsulados</b> (porque el bazo deja de funcionar), por eso necesitan vacunas y a veces penicilina profiláctica.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> la combinación <b>dolor óseo + anemia hemolítica + hepatoesplenomegalia</b> en un niño orienta a drepanocitosis.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Hemolítica</span> = anemia por destrucción de glóbulos rojos. · <span class="term">Vaso-oclusiva</span> = los glóbulos en hoz tapan los vasos y duelen. · <span class="term">Hepatoesplenomegalia</span> = hígado y bazo agrandados.</div>
+</div></div>
+
+<!-- 19 -->
+<div class="fija"><div class="head"><span class="num">19</span><span class="ttl">Torsión testicular</span><span class="pill p-CIR">Cirugía</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~5/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">El testículo se gira sobre su cordón y se corta su irrigación. Es una <b>emergencia con reloj en mano</b>: si pasan más de 6 horas, el testículo se pierde. Típico en adolescentes con dolor escrotal súbito.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Adolescente con dolor brusco e intenso en un testículo, que está elevado, y al rascar el muslo el testículo no sube (reflejo cremastérico abolido). ¿Conducta?"</div><div class="a"><b>Respuesta: exploración quirúrgica INMEDIATA</b> (no perder tiempo en ecografías). La ventana para salvarlo es menor a 6 horas.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> ante la sospecha, <b>la conducta es operar ya</b>, no pedir estudios que retrasen. Reflejo cremastérico ausente = fuerte sospecha.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Reflejo cremastérico</span> = al rozar la cara interna del muslo, el testículo sube; en la torsión NO sube. · <span class="term">Escrotal</span> = del escroto (la bolsa de los testículos).</div>
+</div></div>
+
+<!-- 20 -->
+<div class="fija"><div class="head"><span class="num">20</span><span class="ttl">Arritmias: fibrilación auricular y TPSV</span><span class="pill p-MED">Medicina</span><span class="freq">cayó ~5/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">El corazón late de forma anormal. Dos clásicas: la <b>TPSV</b> (late rapidísimo de golpe) y la <b>fibrilación auricular</b> (late de forma totalmente irregular). Cada una tiene su manejo.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Joven con palpitaciones súbitas, electrocardiograma con taquicardia regular de complejo estrecho a 190. Las maniobras vagales fallan. ¿Fármaco?"</div><div class="a"><b>Respuesta: adenosina</b> en bolo rápido. Es el fármaco de elección para la TPSV.</div></div>
+  <div class="qa"><div class="q">"Paciente con latido totalmente irregular sin ondas P (fibrilación auricular). ¿Qué decide la anticoagulación a largo plazo?"</div><div class="a"><b>Respuesta: el puntaje CHA2DS2-VASc</b> (mide el riesgo de que se forme un coágulo y dé un ACV).</div></div>
+  <div class="qa"><div class="q">"Cualquier arritmia rápida con el paciente INESTABLE (presión baja, mal estado). ¿Conducta?"</div><div class="a"><b>Respuesta: cardioversión eléctrica</b> (una descarga sincronizada).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> TPSV estable → adenosina. Cualquier taquiarritmia con paciente inestable → choque eléctrico (cardioversión).</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Maniobras vagales</span> = trucos para frenar el corazón (soplar, masaje carotídeo). · <span class="term">Complejo estrecho</span> = el QRS del electrocardiograma es angosto. · <span class="term">Cardioversión</span> = descarga eléctrica controlada para reordenar el ritmo.</div>
+</div></div>
+
+<h2 id="f21">Fichas 21 a 30</h2>
+
+<!-- 21 -->
+<div class="fija"><div class="head"><span class="num">21</span><span class="ttl">Abdomen agudo: obstrucción, diverticulitis y hernias</span><span class="pill p-CIR">Cirugía</span><span class="freq">cayó ~5/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Varios cuadros de "dolor abdominal que puede necesitar cirugía". El examen mezcla obstrucción intestinal, diverticulitis y hernias; cada uno tiene su pista y su conducta.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Paciente operado del abdomen antes, ahora con dolor cólico, distensión, vómitos y sin eliminar gases ni heces. ¿Causa más frecuente de la obstrucción?"</div><div class="a"><b>Respuesta: bridas (adherencias) de la cirugía previa</b>. Manejo inicial conservador (sonda, suero) salvo signos de estrangulación.</div></div>
+  <div class="qa"><div class="q">"Diverticulitis con un absceso pequeño localizado (Hinchey I-II). ¿Manejo?"</div><div class="a"><b>Respuesta: antibióticos y, si el absceso es grande, drenaje por la piel</b>. La cirugía se reserva para peritonitis (Hinchey III-IV).</div></div>
+  <div class="qa"><div class="q">"Mujer mayor con un bulto doloroso por DEBAJO del ligamento inguinal, que no se reduce y con vómitos. ¿Diagnóstico y conducta?"</div><div class="a"><b>Respuesta: hernia crural (femoral) estrangulada</b> → cirugía de urgencia.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> obstrucción en paciente ya operado = bridas. Hernia crural = más en mujeres y se estrangula fácil.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Bridas/adherencias</span> = cicatrices internas que pegan las asas del intestino. · <span class="term">Estrangulada</span> = la hernia atrapó intestino y le cortó la irrigación (urgencia). · <span class="term">Hinchey</span> = clasificación de gravedad de la diverticulitis.</div>
+</div></div>
+
+<!-- 22 -->
+<div class="fija"><div class="head"><span class="num">22</span><span class="ttl">Bronquiolitis</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Infección viral de las vías respiratorias pequeñas en bebés menores de 2 años. Empieza como un resfrío y progresa a dificultad para respirar con silbidos. Es el <b>primer episodio</b> de silbidos, típico en otoño-invierno.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Lactante de 5 meses, primer episodio de silbidos y subcrépitos tras un resfrío, en invierno. ¿Agente más frecuente?"</div><div class="a"><b>Respuesta: el virus sincitial respiratorio (VSR)</b>.</div></div>
+  <div class="qa"><div class="q">"¿Cuál es el tratamiento?"</div><div class="a"><b>Respuesta: de soporte</b> (oxígeno si lo necesita, hidratación). NO se usan antibióticos ni broncodilatadores de rutina.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> "primer episodio de silbidos en un bebé + invierno + VSR" = bronquiolitis; el tratamiento es solo apoyo.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Lactante</span> = niño menor de 2 años. · <span class="term">Subcrépitos</span> = ruiditos finos al auscultar el pulmón. · <span class="term">VSR</span> = virus sincitial respiratorio.</div>
+</div></div>
+
+<!-- 23 -->
+<div class="fija"><div class="head"><span class="num">23</span><span class="ttl">Hemorragias obstétricas</span><span class="pill p-GIN">Gineco-Obst.</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Sangrados peligrosos del embarazo y el parto. Dos escenarios clásicos: el sangrado en el tercer trimestre (antes del parto) y el sangrado después del parto (hemorragia postparto).</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Tras el parto, la mujer sangra mucho y el útero está blando (no se contrae). ¿Causa más frecuente y primer manejo?"</div><div class="a"><b>Respuesta: atonía uterina</b> (el útero no se contrae) → masaje uterino + oxitocina. Si falla, otros uterotónicos y luego cirugía.</div></div>
+  <div class="qa"><div class="q">"Gestante del tercer trimestre con sangrado rojo brillante, INDOLORO y útero relajado. ¿Diagnóstico y qué NO se debe hacer?"</div><div class="a"><b>Respuesta: placenta previa</b> → NO hacer tacto vaginal (puede provocar hemorragia masiva); confirmar con ecografía.</div></div>
+  <div class="qa"><div class="q">"Gestante con sangrado + dolor + útero duro y contraído. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: desprendimiento de placenta (DPP)</b>.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> sangrado INDOLORO con útero blando = placenta previa (no tacto vaginal). Sangrado CON dolor y útero duro = desprendimiento. Postparto con útero blando = atonía.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Atonía uterina</span> = el útero no se contrae tras el parto. · <span class="term">Uterotónicos</span> = fármacos que contraen el útero (oxitocina). · <span class="term">Placenta previa</span> = la placenta está tapando la salida del útero.</div>
+</div></div>
+
+<!-- 24 -->
+<div class="fija"><div class="head"><span class="num">24</span><span class="ttl">Diabetes gestacional</span><span class="pill p-GIN">Gineco-Obst.</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Azúcar alto que aparece durante el embarazo. Se busca con una prueba de tolerancia a la glucosa entre las semanas 24 y 28. Importa porque puede causar bebés muy grandes y problemas en el parto.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Prueba de tolerancia con 75 g: basal 88, a 1 hora 195, a 2 horas 140. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: diabetes gestacional</b>. Basta UN valor alterado; aquí el de 1 hora (195) ya pasa el límite.</div></div>
+  <div class="qa"><div class="q">"¿Cuáles son los límites que diagnostican?"</div><div class="a"><b>Respuesta: basal ≥92, a 1 hora ≥180, a 2 horas ≥153 mg/dL.</b></div></div>
+  <div class="qa"><div class="q">"¿Qué complicaciones causa en el bebé?"</div><div class="a"><b>Respuesta: macrosomía (bebé muy grande), hipoglicemia al nacer y distocia de hombros</b> en el parto.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> con que UN solo valor de la curva supere el límite, ya es diabetes gestacional.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Prueba de tolerancia (PTOG)</span> = se mide la glucosa en ayunas y después de tomar 75 g de azúcar. · <span class="term">Macrosomía</span> = bebé con peso muy elevado. · <span class="term">Distocia de hombros</span> = los hombros del bebé se atascan al nacer.</div>
+</div></div>
+
+<!-- 25 -->
+<div class="fija"><div class="head"><span class="num">25</span><span class="ttl">Intoxicaciones y sus antídotos</span><span class="pill p-MED">Medicina</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">El examen te describe un cuadro de intoxicación y pide el <b>antídoto</b>. Hay que reconocer el patrón (los síntomas típicos de cada tóxico) y emparejarlo con su tratamiento. En Perú son frecuentes los plaguicidas (organofosforados).</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Agricultor con pupilas chiquitas, saliva y secreciones abundantes, latido lento y temblores (síndrome colinérgico). ¿Antídoto?"</div><div class="a"><b>Respuesta: atropina</b> (más pralidoxima). Es intoxicación por organofosforados.</div></div>
+  <div class="qa"><div class="q">"Intoxicación por paracetamol. ¿Antídoto?"</div><div class="a"><b>Respuesta: N-acetilcisteína.</b></div></div>
+  <div class="qa"><div class="q">"Intoxicación por opioides (somnolencia, pupilas chiquitas, respira lento). ¿Antídoto?"</div><div class="a"><b>Respuesta: naloxona.</b></div></div>
+  <div class="clave"><b>🔑 Clave (parejas que debes saber de memoria):</b> organofosforados → atropina · paracetamol → N-acetilcisteína · opioides → naloxona · benzodiacepinas → flumazenil.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Síndrome colinérgico</span> = exceso de secreciones, pupilas chicas, bradicardia (lo que dan los organofosforados). · <span class="term">Antídoto</span> = fármaco que contrarresta el tóxico.</div>
+</div></div>
+
+<!-- 26 -->
+<div class="fija"><div class="head"><span class="num">26</span><span class="ttl">EPOC exacerbado</span><span class="pill p-MED">Medicina</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">El EPOC es la enfermedad pulmonar crónica del fumador. Una "exacerbación" es cuando empeora de golpe: más falta de aire y más flema. El examen pregunta el manejo y cómo dar oxígeno con cuidado.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Fumador con EPOC que en 2 días tiene más disnea, más flema y la flema más purulenta. ¿Manejo?"</div><div class="a"><b>Respuesta: broncodilatadores de acción corta + corticoides sistémicos + antibiótico</b> (porque cumple los criterios de Anthonisen).</div></div>
+  <div class="qa"><div class="q">"¿Cómo se da el oxígeno en estos pacientes y por qué con cuidado?"</div><div class="a"><b>Respuesta: oxígeno controlado, apuntando a una saturación de 88-92%</b>. Si das demasiado oxígeno, puedes provocar retención de CO2 (narcosis).</div></div>
+  <div class="qa"><div class="q">"Paciente con falla respiratoria que retiene CO2 (tipo II). ¿Qué apoyo se usa?"</div><div class="a"><b>Respuesta: ventilación no invasiva (VNI)</b>, una máscara que ayuda a respirar sin intubar.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> en EPOC, el oxígeno NO es "cuanto más, mejor": se titula a 88-92% para no causar narcosis por CO2.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">EPOC</span> = enfermedad pulmonar obstructiva crónica. · <span class="term">Criterios de Anthonisen</span> = los 3 signos (más disnea, más flema, flema más purulenta) que indican dar antibiótico. · <span class="term">VNI</span> = ventilación no invasiva (con máscara, sin tubo).</div>
+</div></div>
+
+<!-- 27 -->
+<div class="fija"><div class="head"><span class="num">27</span><span class="ttl">Cáncer de cérvix (cuello uterino)</span><span class="pill p-GIN">Gineco-Obst.</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Cáncer del cuello del útero, causado por el virus del papiloma humano (VPH). Es de los más frecuentes en mujeres en Perú y, por eso, muy prevenible con vacuna y tamizaje.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"¿Cuál es el factor que causa el cáncer de cérvix?"</div><div class="a"><b>Respuesta: la infección persistente por VPH de alto riesgo</b> (sobre todo los tipos 16 y 18).</div></div>
+  <div class="qa"><div class="q">"Mujer con sangrado después de tener relaciones (postcoital) y una lesión visible confinada al cuello. ¿Qué sugiere y qué estadio?"</div><div class="a"><b>Respuesta: cáncer de cérvix, estadio FIGO IB</b> (lesión visible limitada al cérvix). En estadios iniciales se puede hacer conización.</div></div>
+  <div class="qa"><div class="q">"¿Cómo se previene?"</div><div class="a"><b>Respuesta: vacuna contra el VPH + tamizaje</b> (Papanicolaou o inspección visual / pruebas de VPH).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> sangrado postcoital + factor VPH = pensar en cáncer de cérvix. Es prevenible (vacuna + PAP).</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">VPH</span> = virus del papiloma humano. · <span class="term">FIGO</span> = sistema para clasificar el estadio del cáncer ginecológico. · <span class="term">Conización</span> = sacar un cono de tejido del cuello uterino. · <span class="term">Postcoital</span> = después de las relaciones sexuales.</div>
+</div></div>
+
+<!-- 28 -->
+<div class="fija"><div class="head"><span class="num">28</span><span class="ttl">Taquipnea transitoria del recién nacido</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Un recién nacido (sobre todo si nació por cesárea sin trabajo de parto) respira muy rápido las primeras horas porque le quedó líquido en los pulmones. Es leve y se resuelve solo en 1-3 días. Hay que diferenciarla de cosas más graves.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Recién nacido por cesárea, a la hora respira rápido (FR 80), con quejido leve y radiografía con 'pulmón húmedo'. Mejora en 48-72 h. ¿Diagnóstico y tratamiento?"</div><div class="a"><b>Respuesta: taquipnea transitoria del recién nacido</b> → tratamiento con oxígeno de soporte; es autolimitada.</div></div>
+  <div class="qa"><div class="q">"¿Cómo la diferencio de la enfermedad de membrana hialina?"</div><div class="a"><b>Respuesta: la membrana hialina es del PREMATURO, con radiografía en 'vidrio esmerilado' y es más grave (déficit de surfactante)</b>. La transitoria es del bebé a término por cesárea y es leve.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> cesárea sin trabajo de parto + taquipnea leve + "pulmón húmedo" en la radiografía = taquipnea transitoria; solo necesita oxígeno.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Taquipnea</span> = respirar muy rápido. · <span class="term">Pulmón húmedo</span> = imagen radiológica con líquido en las cisuras. · <span class="term">Surfactante</span> = sustancia que evita que los pulmones se colapsen.</div>
+</div></div>
+
+<!-- 29 -->
+<div class="fija"><div class="head"><span class="num">29</span><span class="ttl">Púrpura de Henoch-Schönlein</span><span class="pill p-PED">Pediatría</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Es la vasculitis (inflamación de vasos pequeños) más común en niños, mediada por un anticuerpo llamado IgA. Se reconoce por una combinación muy característica de síntomas.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Niño con manchas moradas que se palpan (púrpura palpable) en las piernas, dolor de articulaciones, dolor abdominal y sangre en la orina. ¿Diagnóstico?"</div><div class="a"><b>Respuesta: púrpura de Henoch-Schönlein</b> (vasculitis por IgA). Esa tétrada es la pista.</div></div>
+  <div class="qa"><div class="q">"¿Qué pronóstico tiene?"</div><div class="a"><b>Respuesta: suele ser autolimitada</b> (se cura sola); lo que hay que vigilar es el compromiso del riñón.</div></div>
+  <div class="clave"><b>🔑 Clave:</b> la tétrada <b>púrpura palpable + artralgia + dolor abdominal + afectación renal (hematuria)</b> = Henoch-Schönlein.</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Vasculitis</span> = inflamación de los vasos sanguíneos. · <span class="term">Púrpura palpable</span> = manchas moradas en la piel que se sienten al tacto. · <span class="term">Artralgia</span> = dolor de articulaciones. · <span class="term">Hematuria</span> = sangre en la orina.</div>
+</div></div>
+
+<!-- 30 -->
+<div class="fija"><div class="head"><span class="num">30</span><span class="ttl">Niveles de prevención (Leavell y Clark)</span><span class="pill p-SP">Salud Pública</span><span class="freq">cayó ~4/10</span></div>
+<div class="body">
+  <div class="lbl">🩺 ¿De qué trata?</div>
+  <div class="ctx">Un concepto de salud pública que clasifica las acciones de salud según el momento en que actúan frente a la enfermedad. El examen te da un ejemplo y pide el nivel.</div>
+  <div class="lbl">❓ Cómo te lo preguntan</div>
+  <div class="qa"><div class="q">"Vacunar a un niño sano para que no enferme. ¿Qué nivel de prevención es?"</div><div class="a"><b>Respuesta: prevención PRIMARIA</b> (actúa antes de que aparezca la enfermedad).</div></div>
+  <div class="qa"><div class="q">"Hacer un Papanicolaou o una gota gruesa para detectar la enfermedad temprano. ¿Qué nivel?"</div><div class="a"><b>Respuesta: prevención SECUNDARIA</b> (detección precoz cuando la enfermedad ya empezó pero no da síntomas).</div></div>
+  <div class="qa"><div class="q">"Rehabilitar a un paciente que ya tuvo un ACV. ¿Qué nivel?"</div><div class="a"><b>Respuesta: prevención TERCIARIA</b> (reducir secuelas y rehabilitar).</div></div>
+  <div class="clave"><b>🔑 Clave:</b> Primaria = evitar que aparezca (vacuna). Secundaria = detectar temprano (tamizaje). Terciaria = rehabilitar. Primordial = evitar los factores de riesgo en la población (ej. políticas anti-tabaco).</div>
+  <div class="gloss"><b>📖 Glosario:</b> <span class="term">Tamizaje</span> = buscar enfermedad en personas que aún no tienen síntomas. · <span class="term">Gota gruesa</span> = examen de sangre para detectar malaria.</div>
+</div></div>
+
+<section>
+  <div class="warn-box">
+    <b>⚠ Aviso:</b> este destilado lo elaboró una IA (Claude) como apoyo de estudio, a partir de los temas que más caen en CONAREME (10 exámenes oficiales 2018-2023). Es un mapa de prioridades y conceptos clave para <b>entender y priorizar</b>, <b>no reemplaza el estudio de las guías y normas vigentes</b> (MINSA, fuentes clínicas). Verifica conductas y dosis en tus fuentes antes de darlas por definitivas. Acompáñalo del Banco de preguntas, las Flashcards, el Cronograma y los 10 exámenes oficiales de tu carpeta.
+  </div>
+</section>
+
+</div>
+
+<footer>Destilado EXPLICADO de las 30 fijas · Concurso Nacional de Admisión al Residentado Médico 2026 (CONAREME) · versión amigable con contexto, preguntas con respuesta y glosario · para Momar, 10 de junio de 2026.</footer>
+</body>
+</html>

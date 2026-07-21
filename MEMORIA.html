@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Memoria de Estudio — CONAREME</title>
+<style>
+  :root{--bg:#0b0f1a;--panel:#161d30;--panel2:#1e2740;--ink:#eaf0fb;--muted:#9aabc9;--accent:#34d3ff;--gold:#ffd166;--green:#22d39a;--red:#ff5d7a;--violet:#a78bfa;--orange:#ff9e57;
+  --MED:#34d3ff;--PED:#22d39a;--CIR:#ff5d7a;--GIN:#ff9e57;--SP:#ffd166;--CB:#a78bfa;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;}
+  .wrap{max-width:920px;margin:0 auto;padding:20px;}
+  header{background:radial-gradient(900px 300px at 30% -20%,#2a1f57,#0b0f1a 65%);border-bottom:3px solid var(--violet);padding:26px 20px;}
+  header h1{font-size:1.5rem;color:#fff;} header .sub{color:var(--violet);font-size:.9rem;font-weight:600;margin-top:3px;}
+  h2{color:var(--accent);font-size:1.12rem;margin:22px 0 10px;border-left:4px solid var(--accent);padding-left:10px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:10px 0;}
+  .kpi{background:var(--panel2);border:1px solid #2a3550;border-radius:12px;padding:14px;text-align:center;}
+  .kpi .n{font-size:1.6rem;font-weight:900;color:var(--gold);} .kpi .l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+  .panel{background:var(--panel);border:1px solid #2a3550;border-radius:14px;padding:16px;margin:10px 0;}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;} th{background:var(--panel2);color:var(--accent);text-align:left;padding:7px 9px;font-size:.74rem;text-transform:uppercase;} td{padding:7px 9px;border-bottom:1px solid #2a3550;}
+  .pill{display:inline-block;padding:1px 8px;border-radius:9px;font-size:.68rem;font-weight:800;}
+  .pill.MED{background:rgba(52,211,255,.18);color:var(--MED);}.pill.PED{background:rgba(34,211,154,.18);color:var(--PED);}
+  .pill.CIR{background:rgba(255,93,122,.18);color:var(--CIR);}.pill.GIN{background:rgba(255,158,87,.18);color:var(--GIN);}
+  .pill.SP{background:rgba(255,209,102,.18);color:var(--SP);}.pill.CB{background:rgba(167,139,250,.18);color:var(--CB);}
+  .btn{background:var(--accent);color:#06121a;border:none;border-radius:9px;padding:9px 15px;font-weight:800;cursor:pointer;font-family:inherit;font-size:.88rem;margin:3px 4px 3px 0;}
+  .btn.green{background:var(--green);color:#06121a;} .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent);} .btn.red{background:transparent;color:var(--red);border:1px solid var(--red);} .btn.gold{background:var(--gold);color:#1a1208;}
+  .err{border:1px solid #2a3550;border-radius:10px;margin:8px 0;overflow:hidden;}
+  .err .eh{padding:10px 12px;background:var(--panel2);cursor:pointer;display:flex;gap:8px;align-items:center;justify-content:space-between;}
+  .err .eb{padding:12px;display:none;font-size:.9rem;border-top:1px solid #2a3550;} .err.open .eb{display:block;}
+  .err .q{color:#fff;font-weight:600;margin-bottom:8px;}
+  .opt{padding:6px 10px;border-radius:7px;margin:4px 0;font-size:.88rem;border:1px solid #2a3550;}
+  .opt.ok{background:rgba(34,211,154,.14);border-color:var(--green);color:#dffaf0;}
+  .opt.bad{background:rgba(255,93,122,.12);border-color:var(--red);color:#ffe0e6;}
+  .expl{background:rgba(52,211,255,.06);border-left:3px solid var(--accent);padding:8px 10px;border-radius:6px;margin-top:8px;font-size:.86rem;}
+  select{background:var(--panel2);color:var(--ink);border:1px solid #2a3550;border-radius:8px;padding:7px 10px;font-family:inherit;margin:0 6px 6px 0;}
+  .empty{color:var(--muted);text-align:center;padding:24px;font-size:.92rem;}
+  .muted{color:var(--muted);font-size:.84rem;}
+  /* quiz */
+  #quiz{display:none;} .qtext{font-size:1.04rem;margin:8px 0 12px;} .qopt{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid #2a3550;border-radius:10px;padding:11px 14px;margin:6px 0;cursor:pointer;color:var(--ink);font-size:.92rem;} .qopt:hover{border-color:var(--accent);} .qopt.correct{background:rgba(34,211,154,.15);border-color:var(--green);} .qopt.wrong{background:rgba(255,93,122,.15);border-color:var(--red);}
+  footer{color:var(--muted);font-size:.76rem;padding:18px;text-align:center;}
+</style>
+</head>
+<body>
+<header><div class="wrap" style="padding:0">
+  <h1>📒 Mi Memoria de Estudio</h1>
+  <div class="sub">Tu historial de simulacros y tu cuaderno de errores · se guarda en este navegador</div>
+</div></header>
+
+<div class="wrap">
+  <div id="dashboard">
+    <h2>Resumen</h2>
+    <div class="kpis" id="kpis"></div>
+
+    <h2>📈 Historial de prácticas</h2>
+    <div class="panel" id="histPanel"></div>
+
+    <h2>📕 Cuaderno de errores</h2>
+    <div class="panel">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px">
+        <span class="muted">Filtrar:</span>
+        <select id="areaFilter" onchange="renderErrors()"><option value="">Todas las áreas</option><option value="MED">Medicina</option><option value="PED">Pediatría</option><option value="CIR">Cirugía</option><option value="GIN">Gineco-Obst.</option><option value="SP">Salud Pública</option><option value="CB">C. Básicas</option></select>
+        <button class="btn green" onclick="practiceErrors()">🔁 Practicar mis errores</button>
+      </div>
+      <div id="errList"></div>
+    </div>
+
+    <div class="panel">
+      <button class="btn red" onclick="clearHist()">🗑 Borrar historial</button>
+      <button class="btn red" onclick="clearErr()">🗑 Vaciar cuaderno de errores</button>
+      <p class="muted" style="margin-top:8px">Nota: todo esto se guarda en este navegador y dispositivo. Si abres el sitio en otro equipo o borras los datos del navegador, empieza vacío.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ de errores -->
+  <div id="quiz" class="panel">
+    <div class="muted" id="qpos" style="margin-bottom:6px"></div>
+    <div style="margin-bottom:4px"><span class="pill" id="qarea"></span> <span class="muted" id="qtema"></span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="qopts"></div>
+    <div class="expl" id="qexp" style="display:none"></div>
+    <div style="margin-top:10px">
+      <button class="btn ghost" id="qnext" style="display:none" onclick="qNext()">Siguiente →</button>
+      <button class="btn green" id="qsuperada" style="display:none" onclick="markSuperada()">✅ Ya la domino (quitar del cuaderno)</button>
+      <button class="btn ghost" onclick="exitQuiz()">Salir</button>
+    </div>
+  </div>
+</div>
+<footer>Mi memoria de estudio · CONAREME 2026 · datos guardados localmente en tu navegador.</footer>
+
+<script>
+const HKEY="conareme_history_v1",EKEY="conareme_errores_v1";
+const ANAMES={MED:"Medicina",PED:"Pediatría",CIR:"Cirugía",GIN:"Gineco-Obst.",SP:"Salud Pública",CB:"C. Básicas"};
+function getH(){return JSON.parse(localStorage.getItem(HKEY)||"[]");}
+function getE(){return JSON.parse(localStorage.getItem(EKEY)||"[]");}
+function setE(e){localStorage.setItem(EKEY,JSON.stringify(e));}
+function fdate(iso){try{const d=new Date(iso);return d.toLocaleDateString()+" "+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});}catch(e){return iso;}}
+
+function renderDash(){
+  const h=getH(),e=getE();
+  // KPIs
+  const sims=h.filter(x=>x.fuente&&x.fuente.indexOf("Simulacro")>=0);
+  const avg=h.length?Math.round(h.reduce((s,x)=>s+x.pct,0)/h.length):0;
+  const best=h.length?Math.max(...h.map(x=>x.pct)):0;
+  document.getElementById("kpis").innerHTML=
+    '<div class="kpi"><div class="n">'+h.length+'</div><div class="l">prácticas hechas</div></div>'+
+    '<div class="kpi"><div class="n">'+avg+'%</div><div class="l">promedio</div></div>'+
+    '<div class="kpi"><div class="n">'+best+'%</div><div class="l">tu mejor</div></div>'+
+    '<div class="kpi"><div class="n">'+e.length+'</div><div class="l">errores guardados</div></div>';
+  // historial
+  const hp=document.getElementById("histPanel");
+  if(h.length===0){hp.innerHTML='<div class="empty">Aún no hay prácticas. Resuelve un simulacro o examen y aquí quedará registrado con su fecha y nota.</div>';}
+  else{
+    let rows=h.slice().reverse().map(x=>'<tr><td>'+fdate(x.t)+'</td><td>'+x.fuente+'</td><td>'+x.ok+'/'+x.tot+'</td><td><b style="color:'+(x.pct>=70?'var(--green)':x.pct>=55?'var(--gold)':'var(--red)')+'">'+x.pct+'%</b></td><td>'+(x.nota?x.nota+'/20':'—')+'</td></tr>').join("");
+    hp.innerHTML='<table><tr><th>Fecha</th><th>Práctica</th><th>Aciertos</th><th>%</th><th>Nota</th></tr>'+rows+'</table>';
+  }
+  renderErrors();
+}
+function renderErrors(){
+  const filter=document.getElementById("areaFilter").value;
+  let e=getE(); if(filter)e=e.filter(x=>x.area===filter);
+  const el=document.getElementById("errList");
+  if(e.length===0){el.innerHTML='<div class="empty">No tienes errores guardados'+(filter?' en esta área':'')+'. Cuando falles una pregunta en los simulacros, aparecerá aquí para que la repases.</div>';return;}
+  el.innerHTML=e.map((x,i)=>{
+    const L=["A","B","C","D","E","F"];
+    let opts=x.o.map((op,j)=>{let cls="opt";if(j===x.c)cls+=" ok";else if(j===x.yo)cls+=" bad";return '<div class="'+cls+'">'+L[j]+". "+op+(j===x.c?' ✓':'')+(j===x.yo&&j!==x.c?' ✗ (tu respuesta)':'')+'</div>';}).join("");
+    return '<div class="err" id="err'+i+'"><div class="eh" onclick="document.getElementById(\'err'+i+'\').classList.toggle(\'open\')">'+
+      '<span><span class="pill '+x.area+'">'+(ANAMES[x.area]||x.area)+'</span> <b>'+(x.tema||"")+'</b> <span class="muted">· '+(x.ex||"")+'</span></span><span class="muted">▾</span></div>'+
+      '<div class="eb"><div class="q">'+x.q+'</div>'+opts+'<div class="expl"><b style="color:var(--gold)">Respuesta: '+L[x.c]+'.</b> '+(x.e||"")+'</div>'+
+      '<button class="btn green" style="margin-top:8px" onclick="superar(\''+x._k+'\')">✅ Ya la domino</button></div></div>';
+  }).join("");
+}
+function superar(k){let e=getE();e=e.filter(x=>x._k!==k);setE(e);renderDash();}
+function clearHist(){if(confirm("¿Borrar todo tu historial de prácticas?")){localStorage.removeItem(HKEY);renderDash();}}
+function clearErr(){if(confirm("¿Vaciar todo tu cuaderno de errores?")){localStorage.removeItem(EKEY);renderDash();}}
+
+// QUIZ de errores
+let q=[],qi=0,qans=false;
+function practiceErrors(){
+  const filter=document.getElementById("areaFilter").value;
+  q=getE(); if(filter)q=q.filter(x=>x.area===filter);
+  if(q.length===0){alert("No hay errores para practicar"+(filter?" en esta área":"")+".");return;}
+  for(let i=q.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[q[i],q[j]]=[q[j],q[i]];}
+  qi=0;document.getElementById("dashboard").style.display="none";document.getElementById("quiz").style.display="block";qRender();
+}
+function qRender(){
+  qans=false;const x=q[qi];const L=["A","B","C","D","E","F"];
+  document.getElementById("qpos").textContent="Error "+(qi+1)+" de "+q.length;
+  document.getElementById("qarea").textContent=ANAMES[x.area]||x.area;document.getElementById("qarea").className="pill "+x.area;
+  document.getElementById("qtema").textContent=x.tema||"";
+  document.getElementById("qtext").textContent=x.q;
+  const ob=document.getElementById("qopts");ob.innerHTML="";
+  x.o.forEach((op,j)=>{const b=document.createElement("button");b.className="qopt";b.textContent=L[j]+". "+op;b.onclick=()=>qChoose(j,b);ob.appendChild(b);});
+  document.getElementById("qexp").style.display="none";document.getElementById("qnext").style.display="none";document.getElementById("qsuperada").style.display="none";
+}
+function qChoose(j,btn){
+  if(qans)return;qans=true;const x=q[qi];const opts=document.querySelectorAll("#qopts .qopt");
+  if(j===x.c){btn.classList.add("correct");}else{btn.classList.add("wrong");opts[x.c].classList.add("correct");}
+  document.getElementById("qexp").style.display="block";document.getElementById("qexp").innerHTML="<b style='color:var(--gold)'>Respuesta: "+["A","B","C","D","E","F"][x.c]+".</b> "+(x.e||"");
+  document.getElementById("qnext").style.display="";document.getElementById("qsuperada").style.display="";
+}
+function qNext(){qi++;if(qi>=q.length){exitQuiz();alert("¡Terminaste de repasar tus errores! 🎉");return;}qRender();}
+function markSuperada(){superar(q[qi]._k);q.splice(qi,1);if(q.length===0){exitQuiz();return;}if(qi>=q.length)qi=0;qRender();}
+function exitQuiz(){document.getElementById("quiz").style.display="none";document.getElementById("dashboard").style.display="block";renderDash();}
+
+renderDash();
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards Interactivas — Residentado CONAREME</title>
+<style>
+  :root{
+    --bg:#0b0f1a; --panel:#161d30; --panel2:#1e2740; --ink:#eaf0fb; --muted:#9aabc9;
+    --accent:#34d3ff; --gold:#ffd166; --green:#22d39a; --red:#ff5d7a; --violet:#a78bfa; --orange:#ff9e57;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; min-height:100vh;}
+  .wrap{max-width:720px; margin:0 auto; padding:20px;}
+  header{background:radial-gradient(800px 280px at 30% -20%, #1b3a5c, #0b0f1a 65%); border-bottom:3px solid var(--accent); padding:26px 20px;}
+  header h1{font-size:1.4rem; color:#fff;}
+  header .sub{color:var(--accent); font-size:.88rem; font-weight:600; margin-top:3px;}
+  .panel{background:var(--panel); border:1px solid #2a3550; border-radius:14px; padding:16px; margin:14px 0;}
+  label{font-size:.82rem; color:var(--muted); font-weight:600;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0;}
+  .chip{background:var(--panel2); border:1px solid #2a3550; border-radius:20px; padding:6px 13px; font-size:.8rem; cursor:pointer; user-select:none; font-weight:600; color:var(--muted);}
+  .chip.on{background:rgba(52,211,255,.18); color:var(--accent); border-color:var(--accent);}
+  .btn{background:var(--accent); color:#06121a; border:none; border-radius:10px; padding:11px 18px; font-weight:800; cursor:pointer; margin:4px;}
+  .btn:hover{filter:brightness(1.1);}
+  .btn.ghost{background:transparent; color:var(--accent); border:1px solid var(--accent);}
+  .btn.green{background:var(--green); color:#06121a;} .btn.red{background:var(--red); color:#fff;} .btn.gold{background:var(--gold); color:#1a1208;}
+  .counter{text-align:center; color:var(--muted); font-size:.85rem; margin:8px 0;}
+  /* CARD */
+  .scene{perspective:1400px; margin:18px 0;}
+  .card{position:relative; width:100%; min-height:280px; transition:transform .55s; transform-style:preserve-3d; cursor:pointer;}
+  .card.flipped{transform:rotateY(180deg);}
+  .face{position:absolute; inset:0; backface-visibility:hidden; border-radius:18px; padding:26px; display:flex; flex-direction:column; justify-content:center; border:1px solid #2a3550;}
+  .front{background:linear-gradient(160deg,#1e2740,#161d30);}
+  .back{background:linear-gradient(160deg,#13322a,#0f2620); transform:rotateY(180deg); border-color:var(--green);}
+  .tag{position:absolute; top:14px; left:18px; font-size:.72rem; font-weight:800; color:var(--violet); text-transform:uppercase; letter-spacing:.5px;}
+  .hint{position:absolute; bottom:14px; right:18px; font-size:.72rem; color:var(--muted);}
+  .face .q{font-size:1.15rem; font-weight:700; color:#fff; text-align:center;}
+  .face .a{font-size:1.05rem; color:#d6f7ec; text-align:center;}
+  .face .alabel{font-size:.72rem; color:var(--green); font-weight:800; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; text-align:center;}
+  .controls{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:8px;}
+  .selfeval{display:none; gap:10px; justify-content:center; margin-top:10px;}
+  .selfeval.show{display:flex;}
+  .progress{height:8px; background:var(--panel2); border-radius:4px; overflow:hidden; margin:6px 0;}
+  .progress > div{height:100%; background:var(--accent); width:0; transition:.3s;}
+  .done{text-align:center; padding:30px 10px;}
+  .done .big{font-size:2.6rem; font-weight:900; color:var(--green);}
+  .hidden{display:none;}
+  .stat{display:flex; gap:12px; justify-content:center; margin-top:10px; font-size:.85rem;}
+  .stat div{background:var(--panel2); border:1px solid #2a3550; border-radius:8px; padding:6px 12px;}
+  footer{color:var(--muted); font-size:.76rem; padding:18px; text-align:center;}
+</style>
+</head>
+<body>
+<header><div class="wrap" style="padding:0">
+  <h1>🔄 Flashcards Interactivas — CONAREME</h1>
+  <div class="sub">90 tarjetas de las fijas · toca para voltear · autoevalúate</div>
+</div></header>
+
+<div class="wrap">
+  <div class="panel" id="config">
+    <label>Elige las áreas/temas a repasar:</label>
+    <div class="chips" id="chips"></div>
+    <div style="margin-top:8px">
+      <label>Modo:</label><br>
+      <button class="btn green" onclick="start(false)">📚 Repaso normal</button>
+      <button class="btn gold" onclick="start(true)">🔀 Mezclar (aleatorio)</button>
+    </div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:10px">En cada tarjeta: lee la pregunta, piensa tu respuesta, toca la tarjeta para voltearla y comprobar. Luego marca si la sabías o no — al final repasas solo las que fallaste.</p>
+  </div>
+
+  <div class="hidden" id="study">
+    <div class="counter" id="counter"></div>
+    <div class="progress"><div id="prog"></div></div>
+    <div class="scene"><div class="card" id="card" onclick="flip()">
+      <div class="face front"><span class="tag" id="tagF"></span><div class="q" id="frontText"></div><span class="hint">toca para voltear ↻</span></div>
+      <div class="face back"><span class="tag" id="tagB"></span><div class="alabel">Respuesta</div><div class="a" id="backText"></div><span class="hint">toca para voltear ↻</span></div>
+    </div></div>
+    <div class="selfeval" id="selfeval">
+      <button class="btn red" onclick="grade(false)">✗ No la sabía</button>
+      <button class="btn green" onclick="grade(true)">✓ La sabía</button>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="prev()">← Anterior</button>
+      <button class="btn ghost" onclick="next()">Saltar →</button>
+      <button class="btn ghost" onclick="quit()">Salir</button>
+    </div>
+  </div>
+
+  <div class="hidden panel" id="done">
+    <div class="done">
+      <div class="big" id="doneBig"></div>
+      <p id="doneMsg" style="color:var(--muted);margin-top:6px"></p>
+      <div class="stat"><div>Sabías: <b id="dOk" style="color:var(--green)"></b></div><div>Falladas: <b id="dBad" style="color:var(--red)"></b></div></div>
+      <div style="margin-top:16px">
+        <button class="btn red" id="btnRetry" onclick="retryWrong()">Repasar las falladas</button>
+        <button class="btn" onclick="location.reload()">Nueva sesión</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>Flashcards de estudio CONAREME · generadas por IA para Momar · contrasta con guías oficiales · 10 jun 2026</footer>
+
+<script>
+const CARDS=[
+{t:"PED · Neonatología",f:"Ictericia neonatal: ¿cuándo es PATOLÓGICA por el tiempo de aparición?",b:"Si aparece en las primeras 24 horas de vida (sugiere hemólisis: ABO, Rh)."},
+{t:"PED · Neonatología",f:"Ictericia fisiológica: ¿cuándo aparece y características?",b:"Después de 24-48h, pico al 3.º-5.º día, indirecta, buen estado, Coombs negativo. Solo observar."},
+{t:"PED · Neonatología",f:"Incompatibilidad ABO: ¿qué combinación madre/hijo?",b:"Madre O con hijo A o B; Coombs directo positivo (débil), microesferocitos y reticulocitosis."},
+{t:"PED · Neonatología",f:"Coluria en neonato: ¿qué tipo de bilirrubina y qué sospechar?",b:"Bilirrubina DIRECTA (conjugada); sospechar atresia de vías biliares."},
+{t:"PED · Neonatología",f:"APGAR: ¿qué 5 parámetros evalúa?",b:"FC, respiración, tono muscular, irritabilidad refleja y color (0-2 cada uno, al 1.º y 5.º minuto)."},
+{t:"PED · Neonatología",f:"Reanimación neonatal: ¿qué hacer si FC<100 o apnea?",b:"Ventilación a presión positiva (VPP). Es lo PRIMERO, antes del masaje."},
+{t:"PED · Neonatología",f:"Reanimación neonatal: ¿cuándo iniciar masaje cardiaco?",b:"Si FC<60 tras 30 segundos de VPP efectiva. Relación 3:1; luego adrenalina si persiste."},
+{t:"PED · Neonatología",f:"Sepsis neonatal precoz: ¿agentes y factores de riesgo?",b:"S. agalactiae (grupo B) y E. coli; RPM>18h, fiebre materna, corioamnionitis."},
+{t:"PED · Neonatología",f:"Taquipnea transitoria del RN: ¿contexto y radiografía?",b:"Cesárea sin trabajo de parto; Rx con líquido en cisuras (pulmón húmedo); resuelve en 24-72h con oxígeno."},
+{t:"PED · Neonatología",f:"Enfermedad de membrana hialina: ¿causa y radiografía?",b:"Déficit de surfactante en prematuro; Rx en vidrio esmerilado con broncograma aéreo."},
+{t:"PED · Neonatología",f:"Atresia esofágica: ¿cómo se sospecha y confirma?",b:"Polihidramnios + sialorrea + no avanza la sonda; Rx con sonda radiopaca enrollada en bolsón proximal."},
+{t:"PED · Neonatología",f:"Enterocolitis necrotizante: ¿hallazgo radiológico patognomónico?",b:"Neumatosis intestinal (gas en la pared). El neumoperitoneo obliga a cirugía."},
+{t:"PED · Neonatología",f:"Hipoglicemia neonatal en hijo de madre diabética: ¿causa?",b:"Hiperinsulinismo transitorio; tratar con dextrosa y alimentación precoz."},
+{t:"PED · Infecto",f:"Síndrome de rubéola congénita: ¿tríada clásica?",b:"Catarata + sordera neurosensorial + cardiopatía (ductus arterioso persistente)."},
+{t:"PED · Infecto",f:"Escarlatina: ¿agente y signos?",b:"Streptococcus pyogenes (toxina); exantema en lija, lengua aframbuesada, facies de Filatov; tratar con penicilina."},
+{t:"PED · Infecto",f:"Exantema súbito (roséola): ¿agente y patrón?",b:"HHV-6; fiebre alta 3-5 días que cede bruscamente y luego exantema en tronco, buen estado."},
+{t:"PED · Infecto",f:"Tos ferina: ¿agente y clínica?",b:"Bordetella pertussis; tos paroxística en quintas + gallo + vómito postusivo + linfocitosis; tratar con macrólidos."},
+{t:"PED · Respiratorio",f:"Bronquiolitis: ¿agente más frecuente y manejo?",b:"VSR; lactante <2 años, 1.er episodio de sibilancias; manejo de soporte (oxígeno), no broncodilatadores de rutina."},
+{t:"PED · Respiratorio",f:"Crup (laringotraqueítis): ¿clínica y signo radiológico?",b:"Tos perruna, disfonía, estridor; signo del campanario; corticoides + adrenalina nebulizada si grave."},
+{t:"PED · Infecto",f:"Enfermedad de Kawasaki: ¿complicación más temida y prevención?",b:"Aneurismas coronarios; prevenir con inmunoglobulina IV + aspirina precoces."},
+{t:"PED · Neuro",f:"Convulsión febril simple: ¿criterios?",b:"6 meses-5 años, generalizada, <15 min, no recurre en 24h, sin focalidad. Buen pronóstico."},
+{t:"PED · Quirúrgica",f:"Estenosis hipertrófica de píloro: ¿trastorno metabólico?",b:"Alcalosis metabólica hipoclorémica e hipokalémica (vómito de HCl); oliva palpable; ecografía confirma."},
+{t:"PED · Hemato",f:"PTI pediátrica: ¿cuadro típico?",b:"Petequias post-virales + plaquetopenia aislada, resto del hemograma y examen normales."},
+{t:"PED · Hemato",f:"Púrpura de Henoch-Schönlein: ¿tétrada?",b:"Púrpura palpable + artralgia + dolor abdominal + hematuria (vasculitis por IgA)."},
+{t:"CIR · Trauma",f:"Trauma/ATLS: ¿cuál es la primera prioridad?",b:"A: vía aérea con control de la columna cervical (antes que vías, fluidos o radiografías)."},
+{t:"CIR · Trauma",f:"Neumotórax a tensión: ¿diagnóstico y conducta?",b:"Diagnóstico CLÍNICO (no esperar Rx); descompresión con aguja en 2.º EIC línea medioclavicular + tubo de tórax."},
+{t:"CIR · Trauma",f:"Trauma abdominal en paciente inestable: ¿estudio inicial?",b:"Ecografía FAST a pie de cama; si es positiva en inestable → laparotomía."},
+{t:"CIR · Biliar",f:"Colecistitis aguda: ¿signo clave?",b:"Signo de Murphy positivo; ecografía con litiasis y pared engrosada."},
+{t:"CIR · Biliar",f:"Colangitis aguda: ¿tríada y tratamiento del drenaje?",b:"Tríada de Charcot (fiebre+ictericia+dolor HD); ATB + CPRE para descompresión biliar."},
+{t:"CIR · Biliar",f:"Coledocolitiasis: ¿laboratorio y eco?",b:"Colestasis (bilirrubina directa, FA, GGT) + colédoco >6 mm con cálculo; confirmar con colangio-RM."},
+{t:"CIR · Abdomen",f:"Apendicitis aguda: ¿escala usada?",b:"Escala de Alvarado (migración, anorexia, náuseas, dolor FID, rebote, fiebre, leucocitosis, neutrofilia)."},
+{t:"CIR · Abdomen",f:"Obstrucción intestinal en adulto operado: ¿causa más frecuente?",b:"Bridas/adherencias; manejo inicial conservador (SNG) salvo signos de estrangulación."},
+{t:"CIR · Abdomen",f:"Diverticulitis: ¿clasificación y manejo?",b:"Hinchey: I-II (absceso) ATB ± drenaje percutáneo; III-IV (peritonitis) cirugía (Hartmann)."},
+{t:"CIR · Abdomen",f:"Hernia crural estrangulada: ¿características?",b:"Bajo el ligamento inguinal, más en mujeres, alto riesgo de estrangulación → cirugía urgente."},
+{t:"CIR · Abdomen",f:"Pancreatitis aguda: ¿causa más frecuente en Perú y escala tomográfica?",b:"Litiásica; índice de severidad de Balthazar/CTSI en TC con contraste."},
+{t:"CIR · Onco",f:"Cáncer gástrico: ¿signo de enfermedad metastásica?",b:"Ganglio de Virchow (supraclavicular izquierdo); diagnóstico con endoscopia + biopsia."},
+{t:"CIR · Ortopedia",f:"Síndrome compartimental: ¿signo precoz y tratamiento?",b:"Dolor desproporcionado y dolor al estiramiento pasivo (pulsos pueden estar presentes); fasciotomía urgente."},
+{t:"MED · Cardio",f:"IAM con elevación del ST: ¿reperfusión de elección?",b:"Angioplastia primaria si disponible en <120 min; si no, fibrinólisis."},
+{t:"MED · Cardio",f:"TPSV estable que no responde a maniobras vagales: ¿fármaco?",b:"Adenosina en bolo rápido con flush."},
+{t:"MED · Cardio",f:"Fibrilación auricular: ¿qué define la anticoagulación crónica?",b:"El puntaje CHA2DS2-VASc (riesgo embólico)."},
+{t:"MED · Cardio",f:"Taponamiento cardiaco: ¿tríada y signo?",b:"Tríada de Beck (hipotensión, ingurgitación yugular, ruidos apagados) + pulso paradójico."},
+{t:"MED · Infecto",f:"Neumonía: ¿agente más frecuente y escala de gravedad?",b:"S. pneumoniae; CURB-65 (≥3 = UCI)."},
+{t:"MED · Infecto",f:"TBC sensible: ¿esquema MINSA?",b:"2 meses HRZE + 4 meses HR (isoniacida, rifampicina, pirazinamida, etambutol)."},
+{t:"MED · Infecto",f:"Dengue con signos de alarma: ¿conducta?",b:"Hospitalización e hidratación EV; NO aspirina (riesgo hemorrágico)."},
+{t:"MED · Infecto",f:"Meningitis bacteriana: ¿LCR y tratamiento?",b:"LCR turbio, PMN, glucosa baja; ceftriaxona empírica + dexametasona; no esperar cultivo."},
+{t:"MED · Endocrino",f:"Cetoacidosis diabética: ¿primer paso terapéutico?",b:"Hidratación con salino isotónico (antes que insulina); potasio cuando baja; bicarbonato solo si pH<6.9."},
+{t:"MED · Endocrino",f:"Enfermedad de Graves: ¿clínica distintiva?",b:"Hipertiroidismo + exoftalmos + bocio difuso (anticuerpos anti-receptor de TSH)."},
+{t:"MED · Endocrino",f:"Enfermedad de Addison: ¿laboratorio?",b:"Hiperpigmentación, hiponatremia, hiperkalemia y cortisol bajo (insuficiencia suprarrenal primaria)."},
+{t:"MED · Endocrino",f:"Hiperaldosteronismo primario (Conn): ¿clínica?",b:"HTA resistente + hipokalemia espontánea + alcalosis metabólica + relación aldosterona/renina alta."},
+{t:"MED · Endocrino",f:"Hiperparatiroidismo primario: ¿laboratorio?",b:"Calcio alto + fósforo bajo + PTH elevada (causa más frecuente de hipercalcemia ambulatoria)."},
+{t:"MED · Neumo",f:"TEP: ¿examen confirmatorio en paciente estable?",b:"Angiotomografía pulmonar."},
+{t:"MED · Neumo",f:"EPOC exacerbado: ¿criterios de antibiótico y manejo?",b:"Criterios de Anthonisen (más disnea, purulencia, volumen); broncodilatadores + corticoides + ATB; O2 a sat 88-92%."},
+{t:"MED · Toxicología",f:"Intoxicación por organofosforados: ¿antídoto?",b:"Atropina (+ pralidoxima) para el síndrome colinérgico muscarínico."},
+{t:"MED · Toxicología",f:"Intoxicación por paracetamol: ¿antídoto?",b:"N-acetilcisteína."},
+{t:"GIN · Obstetricia",f:"Preeclampsia con criterios de severidad: ¿fármaco para prevenir convulsiones?",b:"Sulfato de magnesio (anticonvulsivante, no antihipertensivo)."},
+{t:"GIN · Obstetricia",f:"Preeclampsia: ¿prevención en gestante de riesgo?",b:"Aspirina a dosis baja desde la semana 12."},
+{t:"GIN · Obstetricia",f:"Hemorragia postparto: ¿causa más frecuente y primer manejo?",b:"Atonía uterina; masaje uterino + oxitocina."},
+{t:"GIN · Obstetricia",f:"Placenta previa: ¿signo y examen contraindicado?",b:"Sangrado rojo INDOLORO con útero relajado; tacto vaginal CONTRAINDICADO; confirmar con eco."},
+{t:"GIN · Obstetricia",f:"Diabetes gestacional: ¿criterios PTOG 75 g?",b:"Un valor: basal ≥92, 1h ≥180, 2h ≥153 mg/dL."},
+{t:"GIN · Obstetricia",f:"Amenaza de parto pretérmino: ¿qué reduce más la morbimortalidad neonatal?",b:"Corticoides antenatales (betametasona) entre 24-34 semanas."},
+{t:"GIN · Obstetricia",f:"Profilaxis anti-D Rh: ¿cuándo se administra?",b:"Gestante Rh negativa no sensibilizada: a las 28 semanas y posparto si el RN es Rh positivo."},
+{t:"GIN · Obstetricia",f:"VIH en gestante: ¿conducta MINSA?",b:"Iniciar TARGA lo antes posible, independiente de los CD4, + profilaxis al RN."},
+{t:"GIN · Obstetricia",f:"Vacuna en el embarazo contra tos ferina: ¿cuál y cuándo?",b:"dTpa entre las semanas 27-36."},
+{t:"GIN · Ginecología",f:"Sangrado postmenopáusico: ¿primer examen?",b:"Ecografía transvaginal (grosor >4-5 mm → biopsia). Descartar cáncer de endometrio."},
+{t:"GIN · Ginecología",f:"Cáncer de cérvix: ¿factor etiológico y prevención?",b:"VPH de alto riesgo (16/18); prevención con vacuna y tamizaje."},
+{t:"GIN · Ginecología",f:"EPI: ¿tríada diagnóstica?",b:"Dolor pélvico + dolor a la movilización cervical + dolor anexial; masa compleja = absceso tuboovárico."},
+{t:"GIN · Ginecología",f:"SOP: ¿criterios y primera línea si no busca embarazo?",b:"Criterios de Rotterdam (2 de 3); anticonceptivos orales combinados."},
+{t:"GIN · Ginecología",f:"Embarazo ectópico no roto y estable: ¿manejo médico?",b:"Metotrexato si β-hCG <5000, masa <4 cm, sin actividad cardiaca ni líquido libre."},
+{t:"GIN · Ginecología",f:"Vaginosis bacteriana: ¿criterios y tratamiento?",b:"Criterios de Amsel (flujo gris, pH>4.5, KOH+, células clave); metronidazol."},
+{t:"SP · Epidemiología",f:"Estudio de cohorte: ¿cómo se identifica y qué mide?",b:"Parte de la exposición y sigue en el tiempo; mide incidencia y riesgo relativo."},
+{t:"SP · Epidemiología",f:"Estudio de casos y controles: ¿cómo se identifica y qué mide?",b:"Parte del desenlace y mira hacia atrás la exposición; mide odds ratio."},
+{t:"SP · Epidemiología",f:"Estudio ecológico: ¿qué lo caracteriza?",b:"Unidad de análisis poblacional (datos agregados); riesgo de falacia ecológica."},
+{t:"SP · Epidemiología",f:"Prevalencia vs incidencia: ¿diferencia?",b:"Prevalencia = casos existentes en un momento (carga); incidencia = casos nuevos en un periodo (riesgo)."},
+{t:"SP · Pruebas dx",f:"Sensibilidad: ¿fórmula y para qué sirve?",b:"VP/(VP+FN); una prueba sensible sirve para descartar cuando es negativa."},
+{t:"SP · Pruebas dx",f:"VPP: ¿fórmula y de qué depende?",b:"VP/(VP+FP); depende de la prevalencia."},
+{t:"SP · Epidemiología",f:"Riesgo relativo: ¿fórmula?",b:"Incidencia en expuestos / incidencia en no expuestos."},
+{t:"SP · Epidemiología",f:"Odds ratio: ¿fórmula?",b:"(a×d)/(b×c) en la tabla 2x2 de casos y controles."},
+{t:"SP · Bioestadística",f:"Comparar 2 medias (numérica, normal, grupos independientes): ¿prueba?",b:"t de Student para muestras independientes."},
+{t:"SP · Prevención",f:"Niveles de prevención: ¿vacunación y tamizaje a qué nivel corresponden?",b:"Vacunación = primaria; tamizaje/detección precoz = secundaria."},
+{t:"SP · Medicina legal",f:"Muerte materna indirecta: ¿definición?",b:"Por enfermedad preexistente o surgida en el embarazo, agravada por la gestación (ej. cardiopatía descompensada)."},
+{t:"CB · Fisiología",f:"Pico de LH ovulatorio: ¿qué lo induce?",b:"Retroalimentación POSITIVA del estradiol alto y sostenido sobre el eje hipotálamo-hipófisis."},
+{t:"CB · Fisiología",f:"FeNa <1% en oliguria: ¿qué indica?",b:"Azoemia prerrenal (el túbulo conserva sodio). NTA tiene FeNa >2%."},
+{t:"CB · Fisiología",f:"Acidosis metabólica crónica: ¿cómo aumenta el riñón la excreción de ácido?",b:"Amoniogénesis a partir de glutamina en el túbulo proximal (genera NH4+ y nuevo bicarbonato)."},
+{t:"CB · Fisiología",f:"Curva de O2-Hb a la DERECHA: ¿qué la desplaza?",b:"Aumento de PCO2, temperatura, 2,3-DPG y descenso del pH (efecto Bohr); favorece entrega de O2."},
+{t:"CB · Histología",f:"Surfactante pulmonar: ¿qué célula lo produce?",b:"Neumocito tipo II (dipalmitoilfosfatidilcolina)."},
+{t:"CB · Farmacología",f:"Aminoglucósidos: ¿efectos adversos característicos?",b:"Ototoxicidad y nefrotoxicidad."},
+{t:"CB · Farmacología",f:"Crisis de ausencia: ¿fármaco de elección y mecanismo?",b:"Etosuximida; bloquea canales de calcio tipo T talámicos."},
+{t:"CB · Farmacología",f:"Salbutamol a dosis altas: ¿alteración electrolítica?",b:"Hipokalemia (beta-2 desplaza potasio al interior celular)."},
+{t:"CB · Anatomía",f:"Abducción del hombro 0-15°: ¿qué músculo y cuál se lesiona más?",b:"Supraespinoso (el tendón del manguito que más se lesiona)."},
+{t:"CB · Anatomía",f:"Nervio laríngeo recurrente: ¿con qué arteria se relaciona en la tiroidectomía?",b:"Arteria tiroidea inferior."},
+{t:"CB · Embriología",f:"Fecundación: ¿en qué porción de la trompa ocurre?",b:"En la ampolla."},
+{t:"CB · Inmunología",f:"Hipersensibilidad tipo I: ¿qué la media?",b:"IgE unida a mastocitos y basófilos (atopia, rinitis, anafilaxia)."}
+];
+
+let pool=[],i=0,ok=0,bad=0,wrong=[],graded=new Set();
+const chipsEl=document.getElementById("chips");
+const groups=[...new Set(CARDS.map(c=>c.t.split(" · ")[0]))];
+const GN={PED:"Pediatría",MED:"Medicina",CIR:"Cirugía",GIN:"Gineco-Obst.",SP:"Salud Pública",CB:"C. Básicas"};
+let active=new Set(groups);
+groups.forEach(g=>{const d=document.createElement("div");d.className="chip on";d.textContent=GN[g]+" ("+CARDS.filter(c=>c.t.startsWith(g)).length+")";d.onclick=()=>{d.classList.toggle("on");active.has(g)?active.delete(g):active.add(g);};chipsEl.appendChild(d);});
+
+function shuffle(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]];}return a;}
+function start(mix){
+  pool=CARDS.filter(c=>active.has(c.t.split(" · ")[0]));
+  if(pool.length===0){alert("Selecciona al menos un área.");return;}
+  if(mix)shuffle(pool);
+  i=0;ok=0;bad=0;wrong=[];graded=new Set();
+  document.getElementById("config").classList.add("hidden");
+  document.getElementById("done").classList.add("hidden");
+  document.getElementById("study").classList.remove("hidden");
+  show();
+}
+function show(){
+  const c=pool[i];
+  document.getElementById("card").classList.remove("flipped");
+  document.getElementById("tagF").textContent=c.t;
+  document.getElementById("tagB").textContent=c.t;
+  document.getElementById("frontText").textContent=c.f;
+  document.getElementById("backText").textContent=c.b;
+  document.getElementById("counter").textContent="Tarjeta "+(i+1)+" de "+pool.length;
+  document.getElementById("prog").style.width=(i/pool.length*100)+"%";
+  document.getElementById("selfeval").classList.remove("show");
+}
+function flip(){
+  const card=document.getElementById("card");
+  card.classList.toggle("flipped");
+  if(card.classList.contains("flipped"))document.getElementById("selfeval").classList.add("show");
+}
+function grade(known){
+  if(!graded.has(i)){graded.add(i);if(known)ok++;else{bad++;wrong.push(pool[i]);}}
+  next();
+}
+function next(){if(i<pool.length-1){i++;show();}else finish();}
+function prev(){if(i>0){i--;show();}}
+function finish(){
+  document.getElementById("study").classList.add("hidden");
+  const d=document.getElementById("done");d.classList.remove("hidden");
+  const tot=ok+bad;const pct=tot?Math.round(ok/tot*100):0;
+  document.getElementById("doneBig").textContent=pct+"% dominado";
+  document.getElementById("doneMsg").textContent=bad===0?"¡Te las sabías todas! 🎉":"Repasa las "+bad+" que fallaste para cerrarlas.";
+  document.getElementById("dOk").textContent=ok;document.getElementById("dBad").textContent=bad;
+  document.getElementById("btnRetry").style.display=wrong.length?"inline-block":"none";
+}
+function retryWrong(){pool=wrong.slice();i=0;ok=0;bad=0;wrong=[];graded=new Set();document.getElementById("done").classList.add("hidden");document.getElementById("study").classList.remove("hidden");show();}
+function quit(){finish();}
+</script>
+</body>
+</html>

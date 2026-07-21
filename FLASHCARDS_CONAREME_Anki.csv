@@ -1,0 +1,93 @@
+Pregunta;Respuesta;Tema
+"Ictericia neonatal: ¿cuándo es PATOLÓGICA por el tiempo de aparición?";"Si aparece en las primeras 24 horas de vida (sugiere hemólisis: ABO, Rh).";PED-Neonatología
+"Ictericia neonatal fisiológica: ¿cuándo aparece y características?";"Después de 24-48h, pico al 3.º-5.º día, indirecta, buen estado, Coombs negativo. Solo observar.";PED-Neonatología
+"Incompatibilidad ABO: ¿qué combinación madre/hijo?";"Madre O con hijo A o B; Coombs directo positivo (débil), microesferocitos y reticulocitosis.";PED-Neonatología
+"Coluria en neonato: ¿qué tipo de bilirrubina y qué sospechar?";"Bilirrubina DIRECTA (conjugada); sospechar atresia de vías biliares.";PED-Neonatología
+"APGAR: ¿qué 5 parámetros evalúa?";"FC, respiración, tono muscular, irritabilidad refleja y color (0-2 cada uno, al 1.º y 5.º minuto).";PED-Neonatología
+"Reanimación neonatal: ¿qué hacer si FC<100 o apnea?";"Ventilación a presión positiva (VPP). Es lo PRIMERO, antes del masaje.";PED-Neonatología
+"Reanimación neonatal: ¿cuándo iniciar masaje cardiaco?";"Si FC<60 tras 30 segundos de VPP efectiva. Relación 3:1; luego adrenalina si persiste.";PED-Neonatología
+"Sepsis neonatal precoz: ¿agentes y factores de riesgo?";"S. agalactiae (grupo B) y E. coli; RPM>18h, fiebre materna, corioamnionitis.";PED-Neonatología
+"Taquipnea transitoria del RN: ¿contexto y radiografía?";"Cesárea sin trabajo de parto; Rx con líquido en cisuras (pulmón húmedo); resuelve en 24-72h con oxígeno.";PED-Neonatología
+"Enfermedad de membrana hialina: ¿causa y radiografía?";"Déficit de surfactante en prematuro; Rx en vidrio esmerilado con broncograma aéreo.";PED-Neonatología
+"Atresia esofágica: ¿cómo se sospecha y confirma?";"Polihidramnios + sialorrea + no avanza la sonda; Rx con sonda radiopaca enrollada en bolsón proximal.";PED-Neonatología
+"Enterocolitis necrotizante: ¿hallazgo radiológico patognomónico?";"Neumatosis intestinal (gas en la pared). El neumoperitoneo obliga a cirugía.";PED-Neonatología
+"Hipoglicemia neonatal en hijo de madre diabética: ¿causa?";"Hiperinsulinismo transitorio fetal; tratar con dextrosa y alimentación precoz.";PED-Neonatología
+"Síndrome de rubéola congénita: ¿tríada clásica?";"Catarata + sordera neurosensorial + cardiopatía (ductus arterioso persistente).";PED-Infecto
+"Escarlatina: ¿agente y signos?";"Streptococcus pyogenes (toxina); exantema en lija, lengua aframbuesada, facies de Filatov; tratar con penicilina.";PED-Infecto
+"Exantema súbito (roséola): ¿agente y patrón?";"HHV-6; fiebre alta 3-5 días que cede bruscamente y luego exantema en tronco, buen estado.";PED-Infecto
+"Tos ferina: ¿agente y clínica?";"Bordetella pertussis; tos paroxística en quintas + gallo + vómito postusivo + linfocitosis; tratar con macrólidos.";PED-Infecto
+"Bronquiolitis: ¿agente más frecuente y manejo?";"VSR; lactante <2 años, 1.er episodio de sibilancias; manejo de soporte (oxígeno), no broncodilatadores de rutina.";PED-Respiratorio
+"Crup (laringotraqueítis): ¿clínica y signo radiológico?";"Tos perruna, disfonía, estridor; signo del campanario; corticoides + adrenalina nebulizada si grave.";PED-Respiratorio
+"Enfermedad de Kawasaki: ¿complicación más temida y prevención?";"Aneurismas coronarios; prevenir con inmunoglobulina IV + aspirina precoces.";PED-Infecto
+"Convulsión febril simple: ¿criterios?";"6 meses-5 años, generalizada, <15 min, no recurre en 24h, sin focalidad. Buen pronóstico.";PED-Neuro
+"Estenosis hipertrófica de píloro: ¿trastorno metabólico?";"Alcalosis metabólica hipoclorémica e hipokalémica (vómito de HCl); oliva palpable; ecografía confirma.";PED-Quirúrgica
+"PTI pediátrica: ¿cuadro típico?";"Petequias post-virales + plaquetopenia aislada, resto del hemograma y examen normales.";PED-Hemato
+"Púrpura de Henoch-Schönlein: ¿tétrada?";"Púrpura palpable + artralgia + dolor abdominal + hematuria (vasculitis por IgA).";PED-Hemato
+"Trauma/ATLS: ¿cuál es la primera prioridad?";"A: vía aérea con control de la columna cervical (antes que vías, fluidos o radiografías).";CIR-Trauma
+"Neumotórax a tensión: ¿diagnóstico y conducta?";"Diagnóstico CLÍNICO (no esperar Rx); descompresión con aguja en 2.º EIC línea medioclavicular + tubo de tórax.";CIR-Trauma
+"Trauma abdominal en paciente inestable: ¿estudio inicial?";"Ecografía FAST a pie de cama; si es positiva en inestable → laparotomía.";CIR-Trauma
+"Colecistitis aguda: ¿signo clave?";"Signo de Murphy positivo; ecografía con litiasis y pared engrosada.";CIR-Biliar
+"Colangitis aguda: ¿tríada y tratamiento del drenaje?";"Tríada de Charcot (fiebre+ictericia+dolor HD); ATB + CPRE para descompresión biliar.";CIR-Biliar
+"Coledocolitiasis: ¿laboratorio y eco?";"Colestasis (bilirrubina directa, FA, GGT) + colédoco >6 mm con cálculo; confirmar con colangio-RM.";CIR-Biliar
+"Apendicitis aguda: ¿escala usada?";"Escala de Alvarado (migración, anorexia, náuseas, dolor FID, rebote, fiebre, leucocitosis, neutrofilia).";CIR-Abdomen
+"Obstrucción intestinal en adulto operado: ¿causa más frecuente?";"Bridas/adherencias; manejo inicial conservador (SNG) salvo signos de estrangulación.";CIR-Abdomen
+"Diverticulitis: ¿clasificación y manejo?";"Hinchey: I-II (absceso) ATB ± drenaje percutáneo; III-IV (peritonitis) cirugía (Hartmann).";CIR-Abdomen
+"Hernia crural estrangulada: ¿características?";"Bajo el ligamento inguinal, más en mujeres, alto riesgo de estrangulación → cirugía urgente.";CIR-Abdomen
+"Pancreatitis aguda: ¿causa más frecuente en Perú y escala tomográfica?";"Litiásica; índice de severidad de Balthazar/CTSI en TC con contraste.";CIR-Abdomen
+"Cáncer gástrico: ¿signo de enfermedad metastásica?";"Ganglio de Virchow (supraclavicular izquierdo); diagnóstico con endoscopia + biopsia.";CIR-Onco
+"Síndrome compartimental: ¿signo precoz y tratamiento?";"Dolor desproporcionado y dolor al estiramiento pasivo (pulsos pueden estar presentes); fasciotomía urgente.";CIR-Ortopedia
+"IAM con elevación del ST: ¿reperfusión de elección?";"Angioplastia primaria si disponible en <120 min; si no, fibrinólisis.";MED-Cardio
+"TPSV estable que no responde a maniobras vagales: ¿fármaco?";"Adenosina en bolo rápido con flush.";MED-Cardio
+"Fibrilación auricular: ¿qué define la anticoagulación crónica?";"El puntaje CHA2DS2-VASc (riesgo embólico).";MED-Cardio
+"Taponamiento cardiaco: ¿tríada y signo?";"Tríada de Beck (hipotensión, ingurgitación yugular, ruidos apagados) + pulso paradójico.";MED-Cardio
+"Neumonía: ¿agente más frecuente y escala de gravedad?";"S. pneumoniae; CURB-65 (≥3 = UCI).";MED-Infecto
+"TBC sensible: ¿esquema MINSA?";"2 meses HRZE + 4 meses HR (isoniacida, rifampicina, pirazinamida, etambutol).";MED-Infecto
+"Dengue con signos de alarma: ¿conducta?";"Hospitalización e hidratación EV; NO aspirina (riesgo hemorrágico).";MED-Infecto
+"Meningitis bacteriana: ¿LCR y tratamiento?";"LCR turbio, PMN, glucosa baja; ceftriaxona empírica + dexametasona; no esperar cultivo.";MED-Infecto
+"Cetoacidosis diabética: ¿primer paso terapéutico?";"Hidratación con salino isotónico (antes que insulina); potasio cuando empieza a bajar; bicarbonato solo si pH<6.9.";MED-Endocrino
+"Enfermedad de Graves: ¿clínica distintiva?";"Hipertiroidismo + exoftalmos + bocio difuso (anticuerpos anti-receptor de TSH).";MED-Endocrino
+"Enfermedad de Addison: ¿laboratorio?";"Hiperpigmentación, hiponatremia, hiperkalemia y cortisol bajo (insuficiencia suprarrenal primaria).";MED-Endocrino
+"Hiperaldosteronismo primario (Conn): ¿clínica?";"HTA resistente + hipokalemia espontánea + alcalosis metabólica + relación aldosterona/renina alta.";MED-Endocrino
+"Hiperparatiroidismo primario: ¿laboratorio?";"Calcio alto + fósforo bajo + PTH elevada (causa más frecuente de hipercalcemia ambulatoria).";MED-Endocrino
+"TEP: ¿examen confirmatorio en paciente estable?";"Angiotomografía pulmonar.";MED-Neumo
+"EPOC exacerbado: ¿criterios de antibiótico y manejo?";"Criterios de Anthonisen (más disnea, purulencia, volumen); broncodilatadores + corticoides + ATB; O2 a sat 88-92%.";MED-Neumo
+"Intoxicación por organofosforados: ¿antídoto?";"Atropina (+ pralidoxima) para el síndrome colinérgico muscarínico.";MED-Toxicología
+"Intoxicación por paracetamol: ¿antídoto?";"N-acetilcisteína.";MED-Toxicología
+"Preeclampsia con criterios de severidad: ¿fármaco para prevenir convulsiones?";"Sulfato de magnesio (anticonvulsivante, no antihipertensivo).";GIN-Obstetricia
+"Preeclampsia: ¿prevención en gestante de riesgo?";"Aspirina a dosis baja desde la semana 12.";GIN-Obstetricia
+"Hemorragia postparto: ¿causa más frecuente y primer manejo?";"Atonía uterina; masaje uterino + oxitocina.";GIN-Obstetricia
+"Placenta previa: ¿signo y examen contraindicado?";"Sangrado rojo INDOLORO con útero relajado; tacto vaginal CONTRAINDICADO; confirmar con eco.";GIN-Obstetricia
+"Diabetes gestacional: ¿criterios PTOG 75 g?";"Un valor: basal ≥92, 1h ≥180, 2h ≥153 mg/dL.";GIN-Obstetricia
+"Amenaza de parto pretérmino: ¿intervención que más reduce morbimortalidad neonatal?";"Corticoides antenatales (betametasona) entre 24-34 semanas.";GIN-Obstetricia
+"Profilaxis anti-D Rh: ¿cuándo se administra?";"Gestante Rh negativa no sensibilizada: a las 28 semanas y posparto si el RN es Rh positivo.";GIN-Obstetricia
+"VIH en gestante: ¿conducta MINSA?";"Iniciar TARGA lo antes posible, independiente de los CD4, + profilaxis al RN.";GIN-Obstetricia
+"Vacuna en el embarazo contra tos ferina: ¿cuál y cuándo?";"dTpa entre las semanas 27-36.";GIN-Obstetricia
+"Sangrado postmenopáusico: ¿primer examen?";"Ecografía transvaginal (grosor endometrial >4-5 mm → biopsia). Descartar cáncer de endometrio.";GIN-Ginecología
+"Cáncer de cérvix: ¿factor etiológico y prevención?";"VPH de alto riesgo (16/18); prevención con vacuna y tamizaje.";GIN-Ginecología
+"EPI: ¿tríada diagnóstica?";"Dolor pélvico + dolor a la movilización cervical + dolor anexial; masa compleja = absceso tuboovárico.";GIN-Ginecología
+"SOP: ¿criterios y primera línea si no busca embarazo?";"Criterios de Rotterdam (2 de 3); anticonceptivos orales combinados.";GIN-Ginecología
+"Embarazo ectópico no roto y estable: ¿manejo médico?";"Metotrexato si β-hCG <5000, masa <4 cm, sin actividad cardiaca ni líquido libre.";GIN-Ginecología
+"Vaginosis bacteriana: ¿criterios y tratamiento?";"Criterios de Amsel (flujo gris, pH>4.5, KOH+, células clave); metronidazol.";GIN-Ginecología
+"Estudio de cohorte: ¿cómo se identifica y qué mide?";"Parte de la exposición y sigue en el tiempo; mide incidencia y riesgo relativo.";SP-Epidemiología
+"Estudio de casos y controles: ¿cómo se identifica y qué mide?";"Parte del desenlace y mira hacia atrás la exposición; mide odds ratio.";SP-Epidemiología
+"Estudio ecológico: ¿qué lo caracteriza?";"Unidad de análisis poblacional (datos agregados); riesgo de falacia ecológica.";SP-Epidemiología
+"Prevalencia vs incidencia: ¿diferencia?";"Prevalencia = casos existentes en un momento (carga); incidencia = casos nuevos en un periodo (riesgo).";SP-Epidemiología
+"Sensibilidad: ¿fórmula y para qué sirve?";"VP/(VP+FN); una prueba sensible sirve para descartar cuando es negativa.";SP-Pruebas diagnósticas
+"VPP: ¿fórmula y de qué depende?";"VP/(VP+FP); depende de la prevalencia.";SP-Pruebas diagnósticas
+"Riesgo relativo: ¿fórmula?";"Incidencia en expuestos / incidencia en no expuestos.";SP-Epidemiología
+"Odds ratio: ¿fórmula?";"(a×d)/(b×c) en la tabla 2x2 de casos y controles.";SP-Epidemiología
+"Comparar 2 medias (numérica, normal, grupos independientes): ¿prueba?";"t de Student para muestras independientes.";SP-Bioestadística
+"Niveles de prevención: ¿vacunación y tamizaje a qué nivel corresponden?";"Vacunación = primaria; tamizaje/detección precoz = secundaria.";SP-Prevención
+"Muerte materna indirecta: ¿definición?";"Por enfermedad preexistente o surgida en el embarazo, agravada por la gestación (ej. cardiopatía descompensada).";SP-Medicina legal
+"Pico de LH ovulatorio: ¿qué lo induce?";"Retroalimentación POSITIVA del estradiol alto y sostenido sobre el eje hipotálamo-hipófisis.";CB-Fisiología
+"FeNa <1% en oliguria: ¿qué indica?";"Azoemia prerrenal (el túbulo conserva sodio). NTA tiene FeNa >2%.";CB-Fisiología
+"Acidosis metabólica crónica: ¿cómo aumenta el riñón la excreción de ácido?";"Amoniogénesis a partir de glutamina en el túbulo proximal (genera NH4+ y nuevo bicarbonato).";CB-Fisiología
+"Curva de O2-Hb a la DERECHA: ¿qué la desplaza?";"Aumento de PCO2, temperatura, 2,3-DPG y descenso del pH (efecto Bohr); favorece entrega de O2.";CB-Fisiología
+"Surfactante pulmonar: ¿qué célula lo produce?";"Neumocito tipo II (dipalmitoilfosfatidilcolina).";CB-Histología
+"Aminoglucósidos: ¿efectos adversos característicos?";"Ototoxicidad y nefrotoxicidad.";CB-Farmacología
+"Crisis de ausencia: ¿fármaco de elección y mecanismo?";"Etosuximida; bloquea canales de calcio tipo T talámicos.";CB-Farmacología
+"Salbutamol a dosis altas: ¿alteración electrolítica?";"Hipokalemia (beta-2 desplaza potasio al interior celular).";CB-Farmacología
+"Abducción del hombro 0-15°: ¿qué músculo y cuál se lesiona más?";"Supraespinoso (el tendón del manguito que más se lesiona).";CB-Anatomía
+"Nervio laríngeo recurrente: ¿con qué arteria se relaciona en la tiroidectomía?";"Arteria tiroidea inferior.";CB-Anatomía
+"Fecundación: ¿en qué porción de la trompa ocurre?";"En la ampolla.";CB-Embriología
+"Hipersensibilidad tipo I: ¿qué la media?";"IgE unida a mastocitos y basófilos (atopia, rinitis, anafilaxia).";CB-Inmunología

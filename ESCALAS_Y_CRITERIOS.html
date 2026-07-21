@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escalas y Criterios — Residentado CONAREME</title>
+<style>
+  :root{--bg:#0b0f1a;--panel:#161d30;--panel2:#1e2740;--ink:#eaf0fb;--muted:#9aabc9;--accent:#34d3ff;--gold:#ffd166;--green:#22d39a;--red:#ff5d7a;--violet:#a78bfa;--orange:#ff9e57;
+  --med:#34d3ff;--ped:#22d39a;--cir:#ff5d7a;--gin:#ff9e57;--sp:#ffd166;--cb:#a78bfa;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.62;}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  header{background:radial-gradient(1000px 350px at 25% -15%,#1b3a5c,#0b0f1a 62%);border-bottom:3px solid var(--accent);padding:40px 22px 30px;}
+  header h1{font-size:1.8rem;color:#fff;}
+  header .sub{color:var(--accent);font-weight:600;margin-top:4px;}
+  .intro{color:var(--muted);font-size:.92rem;margin:14px 0;font-style:italic;}
+  .search{margin:16px 0;}
+  .search input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid #2a3550;background:var(--panel2);color:var(--ink);font-size:1rem;}
+  h2{color:var(--accent);font-size:1.25rem;border-left:4px solid var(--accent);padding-left:12px;margin:26px 0 12px;}
+  .card{background:var(--panel);border:1px solid #2a3550;border-radius:12px;padding:0;margin-bottom:14px;overflow:hidden;}
+  .card .h{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel2);border-bottom:1px solid #2a3550;}
+  .card .h .n{font-weight:800;font-size:1.05rem;flex:1;}
+  .card .b{padding:14px 16px;}
+  .pill{display:inline-block;padding:1px 9px;border-radius:10px;font-size:.7rem;font-weight:800;}
+  .p-MED{background:rgba(52,211,255,.18);color:var(--med);}.p-PED{background:rgba(34,211,154,.18);color:var(--ped);}
+  .p-CIR{background:rgba(255,93,122,.18);color:var(--cir);}.p-GIN{background:rgba(255,158,87,.18);color:var(--gin);}
+  .p-SP{background:rgba(255,209,102,.18);color:var(--sp);}.p-CB{background:rgba(167,139,250,.18);color:var(--cb);}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.88rem;}
+  th{background:var(--panel2);color:var(--accent);text-align:left;padding:7px 10px;font-size:.76rem;text-transform:uppercase;}
+  td{padding:6px 10px;border-bottom:1px solid #2a3550;color:#dbe4f3;}
+  .que{font-size:.92rem;color:#dbe4f3;margin-bottom:8px;}
+  .que b{color:var(--gold);}
+  .why{background:rgba(52,211,255,.06);border-left:3px solid var(--accent);padding:9px 12px;border-radius:6px;margin:8px 0;font-size:.9rem;}
+  .why b{color:var(--accent);}
+  .key{background:rgba(34,211,154,.08);border-left:3px solid var(--green);padding:9px 12px;border-radius:6px;margin-top:8px;font-size:.9rem;}
+  .key b{color:var(--green);}
+  ul{margin:4px 0 4px 20px;} li{margin-bottom:4px;font-size:.9rem;color:#dbe4f3;}
+  .warn-box{background:rgba(255,209,102,.07);border:1px solid var(--gold);border-radius:12px;padding:16px;margin:16px 0;font-size:.85rem;}
+  footer{border-top:1px solid #2a3550;padding:22px;color:var(--muted);font-size:.78rem;margin-top:36px;text-align:center;}
+  @media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}.card,table,tr,.why{break-inside:avoid;}.search{display:none;}}
+</style>
+</head>
+<body>
+<header><div class="wrap" style="padding:0">
+  <h1>📏 Escalas y Criterios — CONAREME</h1>
+  <div class="sub">Las escalas que el examen adora · qué miden, cómo se interpretan y por qué existen</div>
+</div></header>
+
+<div class="wrap">
+  <p class="intro">Una escala clínica convierte signos y síntomas en un puntaje reproducible para tomar decisiones (¿hospitalizo?, ¿opero?, ¿anticoagulo?). El examen no solo pregunta el número de corte: premia que entiendas <b>qué fenómeno mide</b> la escala y por qué cada variable está dentro. Aquí cada una viene explicada.</p>
+  <div class="search"><input type="text" id="q" placeholder="🔍 Buscar escala (ej: Alvarado, CURB, Apgar, Wells...)" oninput="filtrar()"></div>
+
+  <h2>Cardiología y Neumología</h2>
+
+  <div class="card" data-k="cha2ds2 vasc fibrilacion auricular anticoagulacion ictus"><div class="h"><span class="n">CHA₂DS₂-VASc</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> El riesgo anual de ictus (ACV embólico) en un paciente con <b>fibrilación auricular no valvular</b>, para decidir si necesita anticoagulación de por vida.</div>
+    <table><tr><th>Letra</th><th>Factor</th><th>Pts</th></tr>
+    <tr><td>C</td><td>Insuficiencia cardiaca</td><td>1</td></tr><tr><td>H</td><td>Hipertensión</td><td>1</td></tr>
+    <tr><td>A₂</td><td>Edad ≥75</td><td>2</td></tr><tr><td>D</td><td>Diabetes</td><td>1</td></tr>
+    <tr><td>S₂</td><td>ACV/AIT previo</td><td>2</td></tr><tr><td>V</td><td>Enf. vascular</td><td>1</td></tr>
+    <tr><td>A</td><td>Edad 65-74</td><td>1</td></tr><tr><td>Sc</td><td>Sexo femenino</td><td>1</td></tr></table>
+    <div class="why"><b>Por qué importa:</b> en la fibrilación auricular las aurículas no se contraen bien, la sangre se estanca y forma coágulos que pueden viajar al cerebro. Esta escala estima ese riesgo embólico; el beneficio de anticoagular supera el riesgo de sangrado cuando el puntaje es alto.</div>
+    <div class="key"><b>Corte:</b> ≥2 (varón) o ≥3 (mujer) → anticoagular. 0 → no. Un ACV previo, por sí solo, ya suma 2 y obliga a anticoagular.</div>
+  </div></div>
+
+  <div class="card" data-k="wells tep tromboembolismo pulmonar trombosis dimero d"><div class="h"><span class="n">Wells (TEP)</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La <b>probabilidad pre-test</b> de tromboembolismo pulmonar, es decir, cuán probable es un TEP <i>antes</i> de hacer estudios, para elegir el siguiente paso.</div>
+    <ul><li>Signos de TVP: 3 · "TEP es el diagnóstico más probable": 3</li><li>FC&gt;100: 1.5 · Inmovilización/cirugía reciente: 1.5 · TVP/TEP previo: 1.5</li><li>Hemoptisis: 1 · Cáncer: 1</li></ul>
+    <div class="why"><b>Por qué importa:</b> condiciona la estrategia diagnóstica. Si la probabilidad es baja, un <b>dímero D</b> normal descarta el TEP sin necesidad de TC (evitando radiación y contraste). Si es alta, se va directo a la angio-TC, porque un dímero D normal ya no sería confiable para descartar.</div>
+    <div class="key"><b>Corte:</b> ≤4 = improbable → dímero D. &gt;4 = probable → angio-TC pulmonar.</div>
+  </div></div>
+
+  <div class="card" data-k="curb 65 neumonia gravedad hospitalizacion"><div class="h"><span class="n">CURB-65</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La gravedad de una <b>neumonía adquirida en comunidad</b> y, con ello, dónde tratarla (casa, sala o UCI). Cada variable suma 1 punto.</div>
+    <ul><li><b>C</b>onfusión · <b>U</b>rea &gt;44 mg/dl · <b>R</b>espiración ≥30/min · presión (<b>B</b>) &lt;90/60 · edad ≥<b>65</b></li></ul>
+    <div class="why"><b>Por qué importa:</b> cada criterio refleja un órgano que empieza a fallar (cerebro, riñón, pulmón, circulación), o un huésped vulnerable (edad). A mayor puntaje, mayor mortalidad, lo que justifica un nivel de cuidado más alto.</div>
+    <div class="key"><b>Corte:</b> 0-1 ambulatorio · 2 hospitalizar/observar · ≥3 valorar UCI.</div>
+  </div></div>
+
+  <div class="card" data-k="light derrame pleural exudado trasudado"><div class="h"><span class="n">Criterios de Light</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> Si un derrame pleural es <b>exudado</b> (líquido inflamatorio, rico en proteínas) o <b>trasudado</b> (líquido por desequilibrio de presiones, pobre en proteínas). Es EXUDADO si cumple ≥1 criterio:</div>
+    <ul><li>Proteínas pleura/suero &gt;0.5</li><li>LDH pleura/suero &gt;0.6</li><li>LDH pleural &gt; ⅔ del límite normal sérico</li></ul>
+    <div class="why"><b>Por qué importa:</b> orienta la causa y el estudio. El <b>exudado</b> implica daño de la pleura (infección, neoplasia, TBC) y obliga a investigar; el <b>trasudado</b> resulta de problemas sistémicos de presión (insuficiencia cardiaca, cirrosis, síndrome nefrótico) y se trata la enfermedad de fondo.</div>
+  </div></div>
+
+  <div class="card" data-k="killip infarto insuficiencia cardiaca iam"><div class="h"><span class="n">Killip-Kimball (IAM)</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> El grado de <b>insuficiencia cardiaca</b> en el contexto de un infarto agudo, lo que predice la mortalidad.</div>
+    <table><tr><th>Clase</th><th>Hallazgo</th></tr><tr><td>I</td><td>Sin signos de IC</td></tr><tr><td>II</td><td>Crepitantes / 3.er ruido</td></tr><tr><td>III</td><td>Edema agudo de pulmón</td></tr><tr><td>IV</td><td>Shock cardiogénico</td></tr></table>
+    <div class="why"><b>Por qué importa:</b> cuanto más músculo se infarta, peor bombea el corazón; la congestión pulmonar y el shock son la expresión clínica de ese fallo de bomba. A mayor clase Killip, mayor mortalidad.</div>
+  </div></div>
+
+  <h2>Gastroenterología y Cirugía</h2>
+
+  <div class="card" data-k="alvarado apendicitis"><div class="h"><span class="n">Alvarado (apendicitis)</span><span class="pill p-CIR">CIR</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La probabilidad de <b>apendicitis aguda</b> combinando síntomas, signos y laboratorio. Mnemotecnia <b>MANTRELS</b> (total 10):</div>
+    <ul><li><b>M</b>igración del dolor (1) · <b>A</b>norexia (1) · <b>N</b>áuseas/vómitos (1)</li><li><b>T</b>ensibilidad en FID (2) · <b>R</b>ebote/Blumberg (1) · <b>E</b>levación de T° (1)</li><li><b>L</b>eucocitosis (2) · desviación izquierda/neutrofilia (<b>S</b>hift) (1)</li></ul>
+    <div class="why"><b>Por qué importa:</b> ordena el cuadro clásico (el dolor que migra del ombligo a la fosa iliaca derecha refleja la progresión de la irritación visceral a la peritoneal) y evita tanto operar de más como dejar pasar una apendicitis.</div>
+    <div class="key"><b>Corte:</b> ≤4 poco probable · 5-6 dudoso (observar/imagen) · ≥7 alta probabilidad → cirugía.</div>
+  </div></div>
+
+  <div class="card" data-k="hinchey diverticulitis absceso peritonitis"><div class="h"><span class="n">Hinchey (diverticulitis)</span><span class="pill p-CIR">CIR</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La gravedad anatómica de una <b>diverticulitis complicada</b>, que decide entre tratamiento médico y cirugía.</div>
+    <table><tr><th>Grado</th><th>Hallazgo</th><th>Manejo</th></tr>
+    <tr><td>I</td><td>Absceso pericólico</td><td>ATB ± drenaje</td></tr><tr><td>II</td><td>Absceso pélvico/a distancia</td><td>ATB + drenaje percutáneo</td></tr>
+    <tr><td>III</td><td>Peritonitis purulenta</td><td>Cirugía</td></tr><tr><td>IV</td><td>Peritonitis fecaloidea</td><td>Cirugía (Hartmann)</td></tr></table>
+    <div class="why"><b>Por qué importa:</b> mientras la infección esté "contenida" (absceso), se puede drenar y dar antibióticos; cuando se rompe a la cavidad (peritonitis), hay contaminación generalizada que exige quirófano urgente.</div>
+  </div></div>
+
+  <div class="card" data-k="balthazar ctsi pancreatitis severidad tomografia"><div class="h"><span class="n">Balthazar / CTSI (pancreatitis)</span><span class="pill p-CIR">CIR</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La gravedad de la <b>pancreatitis aguda por tomografía</b>: combina el grado de inflamación (A→E) con el porcentaje de necrosis.</div>
+    <ul><li>Inflamación: A (normal) → E (≥2 colecciones o gas) = 0-4 pts</li><li>Necrosis: 0% (0), &lt;30% (2), 30-50% (4), &gt;50% (6)</li></ul>
+    <div class="why"><b>Por qué importa:</b> la necrosis del páncreas predice la complicación más temida (infección de la necrosis) y la mortalidad; identificarla cambia el seguimiento y la conducta.</div>
+    <div class="key"><b>Clave:</b> Balthazar E + necrosis &gt;30% = máxima gravedad. La etiología más frecuente en Perú es la litiásica.</div>
+  </div></div>
+
+  <div class="card" data-k="child pugh cirrosis hepatica meld"><div class="h"><span class="n">Child-Pugh (cirrosis)</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La reserva funcional del hígado y el pronóstico en la <b>cirrosis</b>. Mnemotecnia <b>BEAAT</b>: <b>B</b>ilirrubina, <b>E</b>ncefalopatía, <b>A</b>lbúmina, <b>A</b>scitis, <b>T</b>iempo de protrombina (INR).</div>
+    <div class="why"><b>Por qué importa:</b> reúne lo que el hígado deja de hacer cuando falla: depurar bilirrubina y amonio (de ahí la encefalopatía), sintetizar albúmina (de ahí la ascitis y los edemas) y producir factores de coagulación (de ahí el INR alargado).</div>
+    <div class="key"><b>Corte:</b> A (5-6) buen pronóstico · B (7-9) intermedio · C (10-15) avanzado. El MELD usa bilirrubina, INR y creatinina y se usa para priorizar trasplante.</div>
+  </div></div>
+
+  <div class="card" data-k="forrest hemorragia digestiva alta ulcera resangrado"><div class="h"><span class="n">Forrest (HDA por úlcera)</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> El aspecto endoscópico de una úlcera sangrante para estimar el <b>riesgo de resangrado</b> y decidir si requiere terapia endoscópica.</div>
+    <table><tr><th>Tipo</th><th>Endoscopía</th><th>Resangrado</th></tr>
+    <tr><td>Ia</td><td>Sangrado en chorro</td><td>Alto</td></tr><tr><td>Ib</td><td>Babeante</td><td>Alto</td></tr>
+    <tr><td>IIa</td><td>Vaso visible</td><td>Alto</td></tr><tr><td>IIb</td><td>Coágulo adherido</td><td>Medio</td></tr>
+    <tr><td>IIc</td><td>Mancha plana</td><td>Bajo</td></tr><tr><td>III</td><td>Base limpia</td><td>Mínimo</td></tr></table>
+    <div class="why"><b>Por qué importa:</b> las lesiones con sangrado activo o vaso visible (Ia-IIb) tienen alto riesgo de volver a sangrar, por lo que se tratan en el mismo acto endoscópico; las de base limpia (IIc-III) pueden manejarse solo con fármacos.</div>
+  </div></div>
+
+  <h2>Pediatría y Neonatología</h2>
+
+  <div class="card" data-k="apgar recien nacido neonato vitalidad"><div class="h"><span class="n">APGAR</span><span class="pill p-PED">PED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La <b>vitalidad del recién nacido</b> al minuto 1 y a los 5 minutos. Cada signo vale 0-2 (máximo 10).</div>
+    <table><tr><th>Signo</th><th>0</th><th>1</th><th>2</th></tr>
+    <tr><td>FC</td><td>Ausente</td><td>&lt;100</td><td>&gt;100</td></tr>
+    <tr><td>Respiración</td><td>Ausente</td><td>Irregular/débil</td><td>Llanto vigoroso</td></tr>
+    <tr><td>Tono</td><td>Flácido</td><td>Algo de flexión</td><td>Movimiento activo</td></tr>
+    <tr><td>Reflejos</td><td>Sin respuesta</td><td>Mueca</td><td>Tos/estornudo</td></tr>
+    <tr><td>Color</td><td>Pálido/azul</td><td>Acrocianosis</td><td>Rosado</td></tr></table>
+    <div class="why"><b>Por qué importa (y el error clásico):</b> el APGAR <b>documenta</b> el estado y la respuesta a la reanimación, pero <b>NO la dirige</b>. La reanimación neonatal se decide por la frecuencia cardiaca y la respiración en tiempo real, no esperando el puntaje.</div>
+  </div></div>
+
+  <div class="card" data-k="silverman anderson distres respiratorio recien nacido"><div class="h"><span class="n">Silverman-Anderson</span><span class="pill p-PED">PED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La <b>dificultad respiratoria del recién nacido</b> según el esfuerzo que hace para respirar (5 signos, 0-2 cada uno).</div>
+    <ul><li>Quejido espiratorio, aleteo nasal, tiraje intercostal, retracción xifoidea y disociación toracoabdominal.</li></ul>
+    <div class="why"><b>Por qué importa (ojo, es al revés del APGAR):</b> aquí <b>más puntaje es PEOR</b>. Cada signo refleja que el bebé recluta músculos accesorios para vencer un pulmón rígido o mal expandido.</div>
+    <div class="key"><b>Corte:</b> 0 = sin dificultad; ≥7 = dificultad respiratoria grave.</div>
+  </div></div>
+
+  <div class="card" data-k="capurro ballard edad gestacional"><div class="h"><span class="n">Capurro / Ballard</span><span class="pill p-PED">PED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La <b>edad gestacional</b> del recién nacido a partir del examen físico, cuando la fecha de la última regla no es confiable.</div>
+    <div class="why"><b>Por qué importa:</b> saber si un bebé es prematuro, a término o postérmino cambia por completo los riesgos que hay que vigilar (membrana hialina en el prematuro, aspiración meconial en el postérmino). Capurro usa signos somáticos; Ballard añade la madurez neuromuscular y es más útil en prematuros.</div>
+  </div></div>
+
+  <div class="card" data-k="kramer ictericia zonas bilirrubina"><div class="h"><span class="n">Zonas de Kramer (ictericia)</span><span class="pill p-PED">PED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> Estima de forma clínica el nivel de bilirrubina según hasta dónde "baja" la ictericia en el cuerpo del neonato (progresión cefalocaudal).</div>
+    <div class="why"><b>Por qué importa:</b> la bilirrubina tiñe la piel de arriba hacia abajo a medida que sube en sangre: zona 1 (cara, ~5 mg/dl) → zona 5 (palmas y plantas, &gt;15 mg/dl). Cuanto más distal la ictericia, más alto el riesgo de neurotoxicidad (kernícterus).</div>
+    <div class="key"><b>Alarma:</b> ictericia en las primeras 24 h o que alcanza palmas/plantas → estudiar y tratar.</div>
+  </div></div>
+
+  <div class="card" data-k="aiepi deshidratacion plan a b c diarrea"><div class="h"><span class="n">Deshidratación (AIEPI/OMS)</span><span class="pill p-PED">PED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> El grado de deshidratación en el niño con diarrea, para elegir el plan de rehidratación.</div>
+    <table><tr><th>Grado</th><th>Signos</th><th>Plan</th></tr>
+    <tr><td>Sin deshidratación</td><td>Alerta, bebe normal</td><td>Plan A (casa, SRO)</td></tr>
+    <tr><td>Algún grado</td><td>Irritable, ojos hundidos, sed ávida, pliegue lento</td><td>Plan B (SRO 75 ml/kg/4h)</td></tr>
+    <tr><td>Grave / shock</td><td>Letárgico, no bebe, pliegue muy lento</td><td>Plan C (endovenoso)</td></tr></table>
+    <div class="why"><b>Por qué importa:</b> los signos son ventanas a la volemia (los ojos hundidos y el pliegue lento reflejan la pérdida de agua del intersticio; la letargia, la hipoperfusión cerebral). Clasificar bien evita tanto sobre-hidratar como dejar al niño en shock.</div>
+  </div></div>
+
+  <h2>Gineco-Obstetricia</h2>
+
+  <div class="card" data-k="bishop induccion parto cervix"><div class="h"><span class="n">Bishop (inducción del parto)</span><span class="pill p-GIN">GIN</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> Cuán "maduro" o favorable está el cuello uterino para inducir el parto con éxito. Evalúa dilatación, borramiento, consistencia, posición y altura de la presentación.</div>
+    <div class="why"><b>Por qué importa:</b> inducir sobre un cuello cerrado y firme (desfavorable) tiene más riesgo de fracaso y de terminar en cesárea; por eso, con Bishop bajo, primero se "madura" el cuello (prostaglandinas) antes de inducir.</div>
+    <div class="key"><b>Corte:</b> Bishop ≥6-8 = favorable (buena probabilidad de inducción exitosa); &lt;6 = desfavorable → maduración cervical previa.</div>
+  </div></div>
+
+  <div class="card" data-k="amsel vaginosis bacteriana nugent"><div class="h"><span class="n">Criterios de Amsel (vaginosis)</span><span class="pill p-GIN">GIN</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> Diagnostica <b>vaginosis bacteriana</b> (desequilibrio de la flora vaginal con sobrecrecimiento de Gardnerella). Se confirma con ≥3 de 4:</div>
+    <ul><li>Flujo homogéneo grisáceo</li><li>pH vaginal &gt;4.5</li><li>Test de aminas (KOH) positivo: olor a pescado</li><li>"Células clave" (clue cells) al microscopio</li></ul>
+    <div class="why"><b>Por qué importa:</b> cada criterio refleja la pérdida de los lactobacilos que acidifican la vagina: al subir el pH, prolifera la flora anaerobia que produce aminas (el olor) y recubre las células epiteliales (clue cells). Tratamiento: metronidazol.</div>
+  </div></div>
+
+  <div class="card" data-k="rotterdam ovario poliquistico sop"><div class="h"><span class="n">Rotterdam (SOP)</span><span class="pill p-GIN">GIN</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> Diagnostica el <b>síndrome de ovario poliquístico</b>. Requiere 2 de 3 (habiendo descartado otras causas):</div>
+    <ul><li>Oligo/anovulación (ciclos irregulares)</li><li>Hiperandrogenismo clínico (hirsutismo, acné) o bioquímico</li><li>Ovarios poliquísticos en ecografía</li></ul>
+    <div class="why"><b>Por qué importa:</b> es un diagnóstico de exclusión por criterios, no por un solo dato; refleja un trastorno endocrino-metabólico (resistencia a la insulina) con repercusión reproductiva. 1.ª línea para regular ciclos sin buscar embarazo: anticonceptivos orales combinados.</div>
+  </div></div>
+
+  <div class="card" data-k="diabetes gestacional ptog 75 sobrecarga glucosa"><div class="h"><span class="n">Diabetes gestacional (PTOG 75 g)</span><span class="pill p-GIN">GIN</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> Detecta la <b>diabetes gestacional</b> con una sobrecarga oral de 75 g de glucosa (semanas 24-28). Basta <b>UN</b> valor alterado:</div>
+    <table><tr><th>Tiempo</th><th>Umbral (mg/dl)</th></tr><tr><td>Ayunas</td><td>≥92</td></tr><tr><td>1 hora</td><td>≥180</td></tr><tr><td>2 horas</td><td>≥153</td></tr></table>
+    <div class="why"><b>Por qué importa:</b> la hiperglucemia materna pasa al feto y estimula su insulina (factor de crecimiento), causando macrosomía, hipoglucemia neonatal y distocia de hombros. Detectarla y controlarla previene esas complicaciones.</div>
+  </div></div>
+
+  <h2>Quemaduras, Trauma y Cuidados críticos</h2>
+
+  <div class="card" data-k="parkland quemaduras hidratacion fluidos"><div class="h"><span class="n">Parkland (quemaduras)</span><span class="pill p-CIR">CIR</span></div><div class="b">
+    <div class="que"><b>¿Para qué sirve?</b> Calcula los líquidos que necesita un gran quemado en las primeras 24 horas: <b>4 mL × peso(kg) × %SCQ</b> de Ringer lactato.</div>
+    <div class="why"><b>Por qué importa:</b> la quemadura extensa rompe la barrera cutánea y aumenta la permeabilidad capilar; se pierde enorme cantidad de plasma al tercer espacio y el paciente entra en shock hipovolémico ("shock por quemadura"). Reponer volumen calculado y titulado evita esa muerte temprana.</div>
+    <div class="key"><b>Clave:</b> la MITAD del volumen en las primeras 8 horas (desde la quemadura, no desde el ingreso) y el resto en 16 horas. Se titula por diuresis (0.5-1 ml/kg/h).</div>
+  </div></div>
+
+  <div class="card" data-k="regla de los nueve wallace quemadura superficie corporal"><div class="h"><span class="n">Regla de los 9 (Wallace)</span><span class="pill p-CIR">CIR</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> El <b>porcentaje de superficie corporal quemada (%SCQ)</b>, dato que alimenta la fórmula de Parkland y define la gravedad.</div>
+    <ul><li>Adulto: cabeza 9, cada brazo 9, tórax-abdomen anterior 18, espalda 18, cada pierna 18, periné 1.</li></ul>
+    <div class="why"><b>Por qué importa:</b> sin estimar bien el %SCQ no se puede calcular la reposición. En niños las proporciones cambian (la cabeza pesa más, ~18%). Un truco práctico: la palma de la mano del paciente equivale a ~1%.</div>
+  </div></div>
+
+  <div class="card" data-k="glasgow coma escala tec trauma craneo"><div class="h"><span class="n">Glasgow (coma)</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> El nivel de conciencia (3 a 15) sumando tres respuestas: <b>Ocular (1-4) + Verbal (1-5) + Motora (1-6)</b>.</div>
+    <div class="why"><b>Por qué importa:</b> objetiva la profundidad del compromiso neurológico y su evolución. El umbral clave: con <b>Glasgow ≤8 el paciente no protege su vía aérea</b> (riesgo de broncoaspiración), por lo que se intuba.</div>
+    <div class="key"><b>Corte:</b> 13-15 leve · 9-12 moderado · ≤8 grave (= coma → intubar).</div>
+  </div></div>
+
+  <div class="card" data-k="atls abcde trauma politraumatizado"><div class="h"><span class="n">ABCDE (ATLS)</span><span class="pill p-CIR">CIR</span></div><div class="b">
+    <div class="que"><b>¿Qué es?</b> La secuencia de evaluación y tratamiento del politraumatizado, ordenada por lo que mata más rápido.</div>
+    <ul><li><b>A</b> Vía aérea + control cervical · <b>B</b> Ventilación · <b>C</b> Circulación (control de hemorragia) · <b>D</b> Déficit neurológico · <b>E</b> Exposición</li></ul>
+    <div class="why"><b>Por qué importa:</b> es un orden de prioridades, no una lista; no se avanza a la "B" sin resolver la "A", porque una vía aérea obstruida mata en minutos, antes que una hemorragia. Por eso la primera acción siempre es A.</div>
+  </div></div>
+
+  <div class="card" data-k="qsofa sofa sepsis"><div class="h"><span class="n">qSOFA (sepsis)</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> Tamiza de forma rápida (sin laboratorio) qué paciente con infección tiene riesgo de mala evolución por sepsis. 1 punto cada uno:</div>
+    <ul><li>FR ≥22 · Alteración del estado mental (Glasgow &lt;15) · PA sistólica ≤100</li></ul>
+    <div class="why"><b>Por qué importa:</b> la sepsis es una respuesta desregulada a la infección con disfunción de órganos; estos tres signos detectan precozmente esa disfunción a pie de cama y disparan la búsqueda activa y el tratamiento.</div>
+    <div class="key"><b>Corte:</b> ≥2 → alto riesgo, valorar sepsis e iniciar manejo.</div>
+  </div></div>
+
+  <h2>Infectología y otros</h2>
+
+  <div class="card" data-k="centor mcisaac faringitis estreptococo"><div class="h"><span class="n">Centor / McIsaac (faringitis)</span><span class="pill p-MED">MED</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La probabilidad de que una faringitis sea <b>estreptocócica</b> (y no viral), para decidir test rápido o antibiótico. 1 punto cada uno:</div>
+    <ul><li>Fiebre · exudado amigdalino · adenopatía cervical anterior dolorosa · ausencia de tos · (+1 si 3-14 años, −1 si ≥45)</li></ul>
+    <div class="why"><b>Por qué importa:</b> la mayoría de las faringitis son virales y no necesitan antibiótico; los criterios apuntan a los datos que sí sugieren estreptococo (cuya importancia es prevenir la fiebre reumática). A más puntos, más justificado tratar.</div>
+  </div></div>
+
+  <div class="card" data-k="ranson pancreatitis pronostico"><div class="h"><span class="n">Ranson (pancreatitis)</span><span class="pill p-CIR">CIR</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> El pronóstico de la pancreatitis aguda con datos al ingreso y a las 48 horas (edad, leucocitos, glucosa, LDH, AST al ingreso; y caída del hematocrito, urea, calcio, PaO₂, déficit de base y secuestro de líquidos a las 48 h).</div>
+    <div class="why"><b>Por qué importa:</b> los parámetros reflejan la respuesta inflamatoria sistémica y el secuestro de líquidos que sufren los casos graves. Identificar gravedad temprano permite vigilancia intensiva.</div>
+    <div class="key"><b>Corte:</b> ≥3 criterios = pancreatitis grave.</div>
+  </div></div>
+
+  <div class="card" data-k="ppd tuberculina induracion tuberculosis"><div class="h"><span class="n">PPD (tuberculina)</span><span class="pill p-SP">SP</span></div><div class="b">
+    <div class="que"><b>¿Qué mide?</b> La respuesta inmune celular frente a antígenos del bacilo de la TBC: indica <b>infección</b> (no necesariamente enfermedad activa). El punto de corte de positividad cambia según el riesgo del paciente:</div>
+    <ul><li>≥5 mm: VIH, contacto reciente, inmunosuprimidos, secuela radiológica de TBC.</li><li>≥10 mm: poblaciones de riesgo (personal de salud, migrantes de zona endémica, niños &lt;4 años).</li><li>≥15 mm: población general sin factores de riesgo.</li></ul>
+    <div class="why"><b>Por qué importa:</b> el corte se baja en quienes tienen más riesgo de progresar a enfermedad (un VIH+ con 5 mm ya es "positivo"), porque en ellos conviene tratar la infección latente para evitar la TBC activa.</div>
+  </div></div>
+
+  <div class="warn-box">⚠ <b>Cómo usar estas escalas:</b> no las memorices como números sueltos. Entiende qué fenómeno mide cada una y por qué cada variable está incluida; así reconocerás la escala correcta aunque la pregunta describa el caso con otras palabras. Resumen de estudio elaborado con apoyo de IA; verifica puntos de corte con guías vigentes.</div>
+
+  <p id="noresult" style="display:none;color:var(--muted);text-align:center;padding:20px">Sin resultados. Prueba otro término.</p>
+</div>
+
+<footer>Escalas y criterios explicados con enfoque académico · CONAREME 2026 · contrasta los cortes con guías oficiales.</footer>
+<script>
+function filtrar(){
+  const q=document.getElementById("q").value.toLowerCase().trim();let any=false;
+  document.querySelectorAll(".card").forEach(c=>{const txt=(c.dataset.k+" "+c.textContent).toLowerCase();const show=q===""||txt.includes(q);c.style.display=show?"":"none";if(show)any=true;});
+  document.querySelectorAll("h2").forEach(h=>{let n=h.nextElementSibling,vis=false;while(n&&n.classList.contains("card")){if(n.style.display!=="none")vis=true;n=n.nextElementSibling;}h.style.display=vis?"":"none";});
+  document.getElementById("noresult").style.display=any?"none":"block";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Fijas de las Fijas — Residentado CONAREME | Análisis de 10 exámenes oficiales</title>
+<style>
+  :root{
+    --bg:#0b0f1a; --panel:#161d30; --panel2:#1e2740; --ink:#eaf0fb; --muted:#9aabc9;
+    --accent:#34d3ff; --gold:#ffd166; --green:#22d39a; --red:#ff5d7a; --violet:#a78bfa; --orange:#ff9e57;
+    --med:#34d3ff; --ped:#22d39a; --cir:#ff5d7a; --gin:#ff9e57; --sp:#ffd166; --cb:#a78bfa;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.62;}
+  .wrap{max-width:1180px; margin:0 auto; padding:24px;}
+  header{background:radial-gradient(1200px 400px at 20% -10%, #1b3a5c 0%, #0b0f1a 60%); border-bottom:3px solid var(--accent); padding:52px 24px 38px;}
+  header h1{font-size:2.1rem; color:#fff; margin-bottom:10px; line-height:1.2;}
+  header .sub{color:var(--accent); font-weight:600; font-size:1.08rem;}
+  header .meta{color:var(--muted); font-size:.86rem; margin-top:16px;}
+  .badge{display:inline-block; padding:2px 10px; border-radius:12px; font-size:.74rem; font-weight:700; margin:2px 4px 2px 0;}
+  .b-ver{background:rgba(34,211,154,.15); color:var(--green); border:1px solid var(--green);}
+  .b-emp{background:rgba(52,211,255,.15); color:var(--accent); border:1px solid var(--accent);}
+  .b-warn{background:rgba(255,209,102,.15); color:var(--gold); border:1px solid var(--gold);}
+  nav{background:var(--panel); position:sticky; top:0; z-index:20; border-bottom:1px solid #2a3550; overflow-x:auto; white-space:nowrap;}
+  nav .wrap{padding:11px 24px;}
+  nav a{color:var(--muted); text-decoration:none; font-size:.83rem; margin-right:20px; font-weight:600;}
+  nav a:hover{color:var(--accent);}
+  section{margin:44px 0;}
+  h2{color:var(--accent); font-size:1.5rem; border-left:4px solid var(--accent); padding-left:13px; margin-bottom:18px;}
+  h3{color:var(--gold); font-size:1.12rem; margin:24px 0 10px;}
+  p{margin-bottom:12px; color:#d2dcef;}
+  .card{background:var(--panel); border:1px solid #2a3550; border-radius:12px; padding:22px; margin-bottom:16px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  @media(max-width:820px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+  .kpi{background:var(--panel2); border-radius:12px; padding:18px; text-align:center; border:1px solid #2a3550;}
+  .kpi .n{font-size:1.9rem; font-weight:800; color:var(--accent);}
+  .kpi .l{font-size:.76rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-top:2px;}
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:.9rem;}
+  th{background:var(--panel2); color:var(--accent); text-align:left; padding:10px 12px; border-bottom:2px solid var(--accent); font-size:.8rem; text-transform:uppercase; letter-spacing:.4px;}
+  td{padding:9px 12px; border-bottom:1px solid #2a3550; color:#d2dcef; vertical-align:top;}
+  tr:hover td{background:rgba(52,211,255,.05);}
+  .num{text-align:center; font-variant-numeric:tabular-nums; font-weight:700;}
+  .hl{color:var(--gold); font-weight:700;}
+  .ok{color:var(--green); font-weight:700;}
+  .rank{font-size:1.05rem; font-weight:800; color:var(--gold); text-align:center;}
+  .freq{display:inline-block; min-width:42px; text-align:center; padding:2px 8px; border-radius:8px; font-weight:800; font-size:.85rem;}
+  .f10{background:var(--red); color:#fff;}
+  .f8{background:var(--orange); color:#1a1208;}
+  .f6{background:var(--gold); color:#1a1208;}
+  .f4{background:rgba(52,211,255,.25); color:var(--accent);}
+  .warn-box{background:rgba(255,209,102,.07); border:1px solid var(--gold); border-radius:12px; padding:18px; margin:16px 0;}
+  .alert-box{background:rgba(255,93,122,.08); border:1px solid var(--red); border-radius:12px; padding:18px; margin:16px 0;}
+  .info-box{background:rgba(52,211,255,.06); border:1px solid var(--accent); border-radius:12px; padding:18px; margin:16px 0;}
+  .ok-box{background:rgba(34,211,154,.07); border:1px solid var(--green); border-radius:12px; padding:18px; margin:16px 0;}
+  .bar-row{display:flex; align-items:center; margin:7px 0; gap:10px;}
+  .bar-label{width:210px; font-size:.85rem; color:#d2dcef; flex-shrink:0;}
+  .bar-track{flex:1; background:#0b0f1a; border-radius:6px; height:26px; overflow:hidden; border:1px solid #2a3550;}
+  .bar-fill{height:100%; border-radius:6px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; font-size:.77rem; font-weight:800; color:#0b0f1a; min-width:40px;}
+  .pill{display:inline-block; padding:1px 9px; border-radius:10px; font-size:.72rem; font-weight:800; white-space:nowrap;}
+  .p-med{background:rgba(52,211,255,.18); color:var(--med);}
+  .p-ped{background:rgba(34,211,154,.18); color:var(--ped);}
+  .p-cir{background:rgba(255,93,122,.18); color:var(--cir);}
+  .p-gin{background:rgba(255,158,87,.18); color:var(--gin);}
+  .p-sp{background:rgba(255,209,102,.18); color:var(--sp);}
+  .p-cb{background:rgba(167,139,250,.18); color:var(--cb);}
+  footer{border-top:1px solid #2a3550; padding:28px 24px; color:var(--muted); font-size:.8rem; margin-top:48px;}
+  a{color:var(--accent);}
+  ul,ol{margin:0 0 12px 22px; color:#d2dcef;}
+  li{margin-bottom:6px;}
+  .tierhead{display:flex; align-items:center; gap:12px; margin:8px 0 6px;}
+  .tierbadge{font-size:1.4rem; font-weight:900; width:54px; height:54px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .t-s{background:linear-gradient(135deg,#ff5d7a,#ff9e57); color:#fff;}
+  .t-a{background:linear-gradient(135deg,#ff9e57,#ffd166); color:#1a1208;}
+  .t-b{background:linear-gradient(135deg,#34d3ff,#22d39a); color:#06121a;}
+  .angle{color:var(--muted); font-size:.86rem;}
+  .src{font-size:.78rem; color:var(--muted); word-break:break-all;}
+  @media print{
+    *{-webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;}
+    body{background:var(--bg) !important;}
+    nav{display:none;}
+    .card,.kpi,.warn-box,.alert-box,.info-box,.ok-box,.tierhead{break-inside:avoid; page-break-inside:avoid;}
+    table{break-inside:avoid; page-break-inside:avoid;}
+    tr{break-inside:avoid; page-break-inside:avoid;}
+    h2,h3{break-after:avoid; page-break-after:avoid;}
+    .grid2,.grid3,.grid4{break-inside:avoid; page-break-inside:avoid;}
+    .bar-row{break-inside:avoid; page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>🎯 Las Fijas de las Fijas — Residentado Médico CONAREME</h1>
+    <div class="sub">Qué cae todos los años: análisis de frecuencia de 10 exámenes oficiales reales (2018–2023) · 980 preguntas clasificadas una por una</div>
+    <div class="meta">
+      Para Momar · 10 de junio de 2026 · Examen 2026: domingo 6 de septiembre<br><br>
+      <span class="badge b-emp">📊 Frecuencia construida sobre exámenes oficiales descargados de conareme.org.pe</span>
+      <span class="badge b-ver">✓ Datos normativos verificados contra fuente primaria</span>
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#metodo">Metodología</a>
+  <a href="#tabla">TOP 30 Fijas</a>
+  <a href="#tiers">Por niveles</a>
+  <a href="#areas">Por área</a>
+  <a href="#distribucion">Distribución</a>
+  <a href="#caso">Tu caso</a>
+  <a href="#plan">Plan inteligente</a>
+  <a href="#caveats">Advertencias</a>
+</div></nav>
+
+<div class="wrap">
+
+<!-- METODOLOGIA -->
+<section id="metodo">
+  <h2>1. Cómo se construyó esta lista</h2>
+  <div class="grid4">
+    <div class="kpi"><div class="n">10</div><div class="l">exámenes oficiales</div></div>
+    <div class="kpi"><div class="n">980</div><div class="l">preguntas clasificadas</div></div>
+    <div class="kpi"><div class="n">6</div><div class="l">áreas analizadas</div></div>
+    <div class="kpi"><div class="n">2018–2023</div><div class="l">rango temporal</div></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <p>Descargué de <b>conareme.org.pe</b> los exámenes oficiales completos y clasifiqué <b>cada pregunta</b> por área, tema específico y formato (caso clínico vs. directa). Exámenes incluidos: <b>Pruebas A y B de 2018, 2019, 2020, 2021 y 2023</b> (los PDFs de 2022, 2024 y 2025 no están publicados en el portal; 2020 se rindió el 15-nov por pandemia y sus pruebas tuvieron 90 preguntas en vez de 100).</p>
+    <p>La columna <b>"Apariciones"</b> cuenta en cuántos de los 10 exámenes apareció ese tema (o su familia directa). <b>Un tema con 8–10/10 es prácticamente una garantía de que cae en tu examen.</b> No es magia ni filtración: CONAREME evalúa <b>conocimientos de pregrado</b> y la patología nacional de alta prevalencia se repite año tras año.</p>
+    <div class="info-box" style="margin-top:6px">
+      <b>Por qué esto te sirve aunque quieras Pediatría:</b> el examen es <b>el mismo para todos</b> — 200 preguntas mixtas de las 6 áreas, no un examen de Pediatría. Ingresas a Pediatría por <b>orden de mérito</b> con tu nota global. Dominar "las fijas" de TODAS las áreas es la forma más eficiente de subir esa nota.
+    </div>
+  </div>
+</section>
+
+<!-- TOP 30 TABLA -->
+<section id="tabla">
+  <h2>2. TOP 30 — Las fijas de las fijas (todas las áreas)</h2>
+  <p>Ordenadas por frecuencia en los 10 exámenes. La columna "ángulo confirmado" es <b>cómo CONAREME suele preguntar el tema</b> (extraído de las preguntas reales): eso es lo que debes saber responder.</p>
+  <table>
+    <tr><th>#</th><th>Tema</th><th>Área</th><th>Apar.</th><th>Ángulo confirmado con que lo preguntan</th></tr>
+    <tr><td class="rank">1</td><td><b>Trauma / politraumatizado (ATLS)</b></td><td><span class="pill p-cir">CIR</span></td><td class="num"><span class="freq f10">10</span></td><td class="angle">Prioridad ABC, vía aérea primero; neumotórax a tensión → descompresión con aguja; trauma abdominal → FAST/eco; tórax inestable</td></tr>
+    <tr><td class="rank">2</td><td><b>Patología biliar</b> (colecistitis · coledocolitiasis · colangitis)</td><td><span class="pill p-cir">CIR</span></td><td class="num"><span class="freq f10">~9</span></td><td class="angle">Murphy+ → colecistitis; ictericia+fiebre+dolor → colangitis → CPRE; cálculo en colédoco → colangioRM/CPRE</td></tr>
+    <tr><td class="rank">3</td><td><b>Ictericia neonatal</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f10">~9</span></td><td class="angle">Diferenciar fisiológica vs patológica; por leche materna (continuar lactancia); incompatibilidad ABO/Rh; coluria = bilirrubina directa</td></tr>
+    <tr><td class="rank">4</td><td><b>Bioestadística y diseño de estudios</b></td><td><span class="pill p-sp">SP</span></td><td class="num"><span class="freq f10">~9</span></td><td class="angle">Identificar tipo de estudio (cohorte/casos-controles/transversal/ecológico); incidencia vs prevalencia; sensibilidad/especificidad/LR; prueba estadística según variable</td></tr>
+    <tr><td class="rank">5</td><td><b>Neumonía</b> (NAC adulto + neumonía pediátrica)</td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num"><span class="freq f8">~8</span></td><td class="angle">Agente más frecuente (neumococo); CURB-65 para UCI; empírico; en niño &gt;5 años = neumococo; intrahospitalaria = Pseudomonas</td></tr>
+    <tr><td class="rank">6</td><td><b>Tuberculosis</b> (todas las formas)</td><td><span class="pill p-med">MED</span></td><td class="num"><span class="freq f8">~8</span></td><td class="angle">Complejo primario; meningitis TB (LCR); TB en gestante (esquema sin pirazinamida); PPD en VIH; transaminasas pre-tratamiento</td></tr>
+    <tr><td class="rank">7</td><td><b>IAM / síndrome coronario agudo</b></td><td><span class="pill p-med">MED</span></td><td class="num"><span class="freq f8">~8</span></td><td class="angle">Tipo de IAM (clasificación universal); troponinas (cinética); complicación mecánica → ICC; fibrinólisis</td></tr>
+    <tr><td class="rank">8</td><td><b>Preeclampsia / trastorno hipertensivo del embarazo</b></td><td><span class="pill p-gin">GIN</span></td><td class="num"><span class="freq f8">~8</span></td><td class="angle">Criterios de severidad (plaquetopenia, etc.); prevención con aspirina; manejo; vs HTA crónica</td></tr>
+    <tr><td class="rank">9</td><td><b>APGAR / reanimación neonatal</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f8">~8</span></td><td class="angle">Calcular el puntaje exacto; qué evalúa (vitalidad); secuencia de reanimación (VPP → masaje a los 30s → adrenalina); meconio</td></tr>
+    <tr><td class="rank">10</td><td><b>PTI / trombocitopenia inmune</b></td><td><span class="pill p-ped">PED</span> <span class="pill p-med">MED</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">Niño con petequias post-viral, plaquetas bajas, resto normal → dx; manejo</td></tr>
+    <tr><td class="rank">11</td><td><b>TEP — tromboembolismo pulmonar</b></td><td><span class="pill p-med">MED</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">Diagnóstico con angio-TC; factores de riesgo; clínica súbita</td></tr>
+    <tr><td class="rank">12</td><td><b>Sepsis neonatal</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">Precoz (factores: RPM, fiebre materna) vs tardía; agente (SGB/E. coli); inestabilidad térmica</td></tr>
+    <tr><td class="rank">13</td><td><b>Convulsión febril</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">Simple vs compleja (duración &gt;15min, focal, recurrencia 24h); primera conducta = ABC</td></tr>
+    <tr><td class="rank">14</td><td><b>Cáncer de endometrio / sangrado postmenopáusico</b></td><td><span class="pill p-gin">GIN</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">Sangrado postmenopáusico → eco TV → biopsia endometrial; factores de riesgo; atrofia como causa benigna</td></tr>
+    <tr><td class="rank">15</td><td><b>Vulvovaginitis</b> (candidiasis · vaginosis · tricomoniasis)</td><td><span class="pill p-gin">GIN</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">Cérvix en fresa = tricomoniasis; criterios de Amsel = vaginosis; flujo y tratamiento</td></tr>
+    <tr><td class="rank">16</td><td><b>Cetoacidosis diabética / crisis hiperglicémicas</b></td><td><span class="pill p-med">MED</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">Kussmaul; manejo; vs estado hiperosmolar</td></tr>
+    <tr><td class="rank">17</td><td><b>Meningitis bacteriana</b></td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num"><span class="freq f6">~6</span></td><td class="angle">LCR característico; agente por edad; meningococo → ATB + corticoides</td></tr>
+    <tr><td class="rank">18</td><td><b>Anemia falciforme / drepanocitosis</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f6">~5</span></td><td class="angle">Crisis hemolítica/vaso-oclusiva; hepatoesplenomegalia + dolor óseo tras esfuerzo</td></tr>
+    <tr><td class="rank">19</td><td><b>Torsión testicular</b></td><td><span class="pill p-cir">CIR</span> <span class="pill p-ped">PED</span></td><td class="num"><span class="freq f6">~5</span></td><td class="angle">Dolor escrotal brusco, cremastérico abolido → exploración Qx en ventana &lt;6h</td></tr>
+    <tr><td class="rank">20</td><td><b>Fibrilación auricular / TPSV</b></td><td><span class="pill p-med">MED</span></td><td class="num"><span class="freq f6">~5</span></td><td class="angle">TPSV → adenosina; FA con IC → digoxina/control</td></tr>
+    <tr><td class="rank">21</td><td><b>Obstrucción intestinal / diverticulitis / hernias</b></td><td><span class="pill p-cir">CIR</span></td><td class="num"><span class="freq f6">~5</span></td><td class="angle">Bridas = causa más común en adulto; Hinchey en diverticulitis; hernia crural estrangulada</td></tr>
+    <tr><td class="rank">22</td><td><b>Bronquiolitis</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Lactante &lt;2 años, sibilancias + subcrepitantes post-IRA; pilar = oxígeno</td></tr>
+    <tr><td class="rank">23</td><td><b>Hemorragias obstétricas</b> (postparto · placenta previa · DPP · acretismo)</td><td><span class="pill p-gin">GIN</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Atonía = causa más común de HPP; acretismo; manejo</td></tr>
+    <tr><td class="rank">24</td><td><b>Diabetes gestacional</b></td><td><span class="pill p-gin">GIN</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Tamizaje PTOG; complicaciones fetales; manejo</td></tr>
+    <tr><td class="rank">25</td><td><b>Intoxicaciones</b> (organofosforados · paracetamol · arácnidos)</td><td><span class="pill p-med">MED</span> <span class="pill p-ped">PED</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Organofosforados → atropina; latrodectismo/loxoscelismo → antídoto; dosis tóxica paracetamol</td></tr>
+    <tr><td class="rank">26</td><td><b>EPOC exacerbado</b></td><td><span class="pill p-med">MED</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Falla respiratoria tipo II; VNI; apoyo ventilatorio</td></tr>
+    <tr><td class="rank">27</td><td><b>Cáncer de cérvix</b></td><td><span class="pill p-gin">GIN</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Estadiaje FIGO; conización en estadios iniciales; VPH oncogénico; conducta según PAP</td></tr>
+    <tr><td class="rank">28</td><td><b>Taquipnea transitoria del RN</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Cesárea/término, distrés leve, Rx "pulmón húmedo"; tratamiento = oxígeno</td></tr>
+    <tr><td class="rank">29</td><td><b>Púrpura de Henoch-Schönlein</b></td><td><span class="pill p-ped">PED</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Púrpura palpable + artralgia + dolor abdominal + hematuria (IgA)</td></tr>
+    <tr><td class="rank">30</td><td><b>Niveles de prevención (Leavell-Clark)</b></td><td><span class="pill p-sp">SP</span></td><td class="num"><span class="freq f4">~4</span></td><td class="angle">Clasificar primaria/secundaria/terciaria/primordial; gota gruesa = prevención secundaria</td></tr>
+  </table>
+  <p class="angle">Apariciones = nº de los 10 exámenes donde cayó el tema o su familia directa (clasificación manual, margen ±1). El símbolo "~" indica que incluye variantes muy cercanas del mismo tema.</p>
+</section>
+
+<!-- TIERS -->
+<section id="tiers">
+  <h2>3. Las fijas por nivel de certeza</h2>
+
+  <div class="card">
+    <div class="tierhead"><div class="tierbadge t-s">S</div><div><h3 style="margin:0; color:var(--red)">NIVEL S — "Caen seguro" (8–10 de 10 exámenes)</h3><span class="angle">Si dominas solo esto, ya cubres el corazón del examen. No negociable.</span></div></div>
+    <ul>
+      <li><b>Trauma/ATLS</b> · <b>Patología biliar</b> · <b>Ictericia neonatal</b> · <b>Bioestadística/diseño de estudios</b> · <b>Neumonía</b> · <b>Tuberculosis</b> · <b>IAM/SCA</b> · <b>Preeclampsia</b> · <b>APGAR/reanimación neonatal</b></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="tierhead"><div class="tierbadge t-a">A</div><div><h3 style="margin:0; color:var(--orange)">NIVEL A — "Muy probables" (5–7 de 10)</h3><span class="angle">Alta rentabilidad. Cada uno vale 1–3 preguntas casi cada año.</span></div></div>
+    <ul>
+      <li>PTI · TEP · Sepsis neonatal · Convulsión febril · Cáncer de endometrio/sangrado postmenopáusico · Vulvovaginitis · Cetoacidosis diabética · Meningitis bacteriana · Anemia falciforme · Torsión testicular · FA/TPSV · Obstrucción intestinal/diverticulitis/hernias · Cáncer gástrico y colorrectal · Hipercalcemia y trastornos electrolíticos · Nefropatía diabética / IRA prerrenal · ACV · Anestésicos locales/bloqueos · Vacunación (esquema MINSA + embarazo)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="tierhead"><div class="tierbadge t-b">B</div><div><h3 style="margin:0; color:var(--accent)">NIVEL B — "Frecuentes" (3–4 de 10)</h3><span class="angle">Completan la cobertura. Estudiarlos sube el techo de tu nota.</span></div></div>
+    <ul>
+      <li>Bronquiolitis · Hemorragias obstétricas · Diabetes gestacional · Intoxicaciones · EPOC exacerbado · Cáncer de cérvix · Taquipnea transitoria RN · Henoch-Schönlein · Niveles de prevención · Déficit de zinc/acrodermatitis · Atresia esofágica · Rubéola congénita · Enfermedades exantemáticas (sarampión, varicela, exantema súbito) · Kawasaki · Galactosemia · Hernia diafragmática congénita · SUH · Crisis de ausencia · Desarrollo psicomotor · Addison · Hiperaldosteronismo · Síndrome de Fanconi/mieloma · Guillain-Barré · Fracturas y síndrome compartimental · SOP · EPI/absceso tuboovárico · Embarazo ectópico · Anticoncepción · Pruebas diagnósticas (sens/espec) · Medicina ocupacional</li>
+    </ul>
+  </div>
+</section>
+
+<!-- POR AREA -->
+<section id="areas">
+  <h2>4. Las fijas de cada área (con el ángulo exacto)</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0"><span class="pill p-med">CLÍNICAS MÉDICAS</span> — la más grande (~32% del examen)</h3>
+    <table>
+      <tr><th>Subárea</th><th>Fijas confirmadas</th></tr>
+      <tr><td><b>Cardiología</b></td><td>IAM/SCA · FA · TPSV (adenosina) · taponamiento/pericarditis (pulso paradójico) · emergencia hipertensiva</td></tr>
+      <tr><td><b>Infectología</b></td><td>Neumonía (NAC, CURB-65) · TBC (todas las formas) · dengue (signos de alarma) · meningitis · VIH y oportunistas (candidiasis esofágica, herpes zoster, PCP) · neurocisticercosis</td></tr>
+      <tr><td><b>Endocrino</b></td><td>Cetoacidosis/EHH · tiroides (hipo, Graves, ca papilar) · Addison · hiperaldosteronismo (Conn) · hipercalcemia</td></tr>
+      <tr><td><b>Neumología</b></td><td>TEP (angio-TC) · EPOC exacerbado (falla tipo II) · derrame pleural (Light) · SDRA</td></tr>
+      <tr><td><b>Nefro</b></td><td>IRA prerrenal (FeNa&lt;1%) · ERC (estadios) · nefropatía diabética (IECA/ARA) · Fanconi/mieloma · trastornos del sodio y ácido-base</td></tr>
+      <tr><td><b>Gastro</b></td><td>HDA (Forrest) · cirrosis/PBE · pancreatitis · EII · isquemia mesentérica</td></tr>
+      <tr><td><b>Neuro</b></td><td>ACV (territorios) · Guillain-Barré · parálisis facial · meningoencefalitis</td></tr>
+      <tr><td><b>Hemato/Onco/Reuma</b></td><td>Anemias (megaloblástica, perniciosa, hemolítica) · PTI · gota/pseudogota · LES/AR · dermatomiositis</td></tr>
+      <tr><td><b>Toxicología/Psiquiatría</b></td><td>Organofosforados (atropina) · paracetamol · arácnidos · tricíclicos · depresión mayor · abstinencia alcohólica</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0"><span class="pill p-ped">CLÍNICAS PEDIÁTRICAS</span> — tu especialidad, ~23% del examen</h3>
+    <table>
+      <tr><th>Subárea</th><th>Fijas confirmadas (en orden de frecuencia)</th></tr>
+      <tr><td><b>Neonatología</b> <span class="angle">(~⅓ de PED)</span></td><td><b>Ictericia neonatal</b> · <b>APGAR/reanimación</b> · <b>sepsis neonatal</b> · taquipnea transitoria · aspiración meconial · membrana hialina (prematuro) · atresia esofágica · hipoglicemia neonatal · enterocolitis necrotizante · hemorragia intraventricular · caput succedaneum · policitemia · rubéola congénita · conjuntivitis neonatal</td></tr>
+      <tr><td><b>Infectología</b></td><td>Exantemáticas (sarampión, varicela, exantema súbito, eritema infeccioso) · tos ferina · bronquiolitis · crup/epiglotitis · mononucleosis · Kawasaki · escarlatina · mano-pie-boca · parasitosis · ITU del lactante (E. coli)</td></tr>
+      <tr><td><b>Hematología</b></td><td><b>PTI</b> · Henoch-Schönlein · anemia falciforme · leucemia aguda · SUH</td></tr>
+      <tr><td><b>Neuro</b></td><td>Convulsión febril · crisis de ausencia · ataxia cerebelosa post-varicela</td></tr>
+      <tr><td><b>Nutrición/Metabólico</b></td><td>Déficit de zinc · desnutrición aguda · hipervitaminosis D · galactosemia · fenilcetonuria</td></tr>
+      <tr><td><b>Desarrollo/Genética</b></td><td>Hitos del desarrollo psicomotor · obesidad/IMC · displasia de cadera (Ortolani) · Turner, trisomía 13</td></tr>
+      <tr><td><b>Quirúrgica/Uro</b></td><td>Torsión testicular · estenosis hipertrófica de píloro · hernia diafragmática · reflujo vesicoureteral</td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0"><span class="pill p-cir">CLÍNICAS QUIRÚRGICAS</span> ~16%</h3>
+      <ul style="font-size:.9rem">
+        <li><b>Trauma/ATLS</b> (cae siempre): ABC, neumotórax a tensión, FAST, tórax inestable</li>
+        <li><b>Patología biliar</b> (cae siempre): colecistitis (Murphy), colangitis→CPRE, coledocolitiasis</li>
+        <li><b>Abdomen agudo</b>: apendicitis (Alvarado), obstrucción por bridas, diverticulitis (Hinchey), hernias (Nyhus/crural)</li>
+        <li><b>Onco digestiva</b>: cáncer gástrico, colorrectal (estadiaje, cirugía)</li>
+        <li><b>Pancreatitis</b> (Balthazar, etiología litiásica)</li>
+        <li><b>Urología</b>: HBP, litiasis, torsión testicular</li>
+        <li><b>Ortopedia</b>: fracturas (Colles, cadera), síndrome compartimental→fasciotomía, manguito rotador</li>
+        <li><b>Anestesia</b>: anestésicos locales, bloqueos, vía aérea difícil</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0"><span class="pill p-gin">GINECO-OBSTETRICIA</span> ~15%</h3>
+      <ul style="font-size:.9rem">
+        <li><b>Obstetricia (~60%):</b> preeclampsia, hemorragias (HPP/placenta previa/DPP/acretismo), diabetes gestacional, monitoreo fetal, TBC/VIH en gestante, vacunación en embarazo (dTpa), profilaxis anti-D, amenaza de parto pretérmino (corticoides), partograma</li>
+        <li><b>Ginecología (~40%):</b> cáncer de endometrio (sangrado postmenopáusico→biopsia), cáncer de cérvix (FIGO/conización), vulvovaginitis, miomatosis, EPI/absceso tuboovárico, SOP, embarazo ectópico, anticoncepción, dismenorrea</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0"><span class="pill p-sp">SALUD PÚBLICA</span> ~7% · el área más rentable</h3>
+      <p style="font-size:.88rem">Pocos conceptos, muy predecibles, se domina en días:</p>
+      <ul style="font-size:.9rem">
+        <li><b>Diseño de estudios</b> (cohorte/casos-controles/transversal/ecológico) — casi siempre cae</li>
+        <li>Medidas de frecuencia (incidencia, prevalencia, densidad)</li>
+        <li>Pruebas diagnósticas (sensibilidad, especificidad, VPP, cociente de verosimilitud)</li>
+        <li>Pruebas estadísticas según tipo de variable (t de Student, correlación)</li>
+        <li>Niveles de prevención (Leavell-Clark)</li>
+        <li>Esquema de vacunación MINSA</li>
+        <li>Medicina ocupacional y medicina legal (muerte materna, alcoholemia)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0"><span class="pill p-cb">CIENCIAS BÁSICAS</span> ~8% · en descenso</h3>
+      <p style="font-size:.88rem">No hay un tema "fijo" único; se repiten las <b>categorías</b>. Estúdialas integradas a la clínica:</p>
+      <ul style="font-size:.9rem">
+        <li><b>Fisiología</b>: hormonal (insulina, tiroides, LH, aldosterona), renal, respiratoria (curva O2-Hb), cardiaca</li>
+        <li><b>Farmacología pura</b>: antimicrobianos, broncodilatadores, antiepilépticos, sus mecanismos/efectos adversos</li>
+        <li><b>Anatomía</b>: manguito rotador, nervio laríngeo recurrente, irrigación (apéndice, nodo sinusal)</li>
+        <li><b>Embriología</b>: fecundación, blastulación, cardiaca, ocular</li>
+        <li><b>Histología</b>: piel, neumocito II (surfactante), túbulo renal</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DISTRIBUCION -->
+<section id="distribucion">
+  <h2>5. Distribución por área (10 exámenes, 980 preguntas) <span class="badge b-emp">📊</span></h2>
+  <div class="card">
+    <div class="bar-row"><div class="bar-label"><span class="pill p-med">Clínicas Médicas</span></div><div class="bar-track"><div class="bar-fill" style="width:88%; background:var(--med)">~32%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-ped">Clínicas Pediátricas</span></div><div class="bar-track"><div class="bar-fill" style="width:65%; background:var(--ped)">~24%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-cir">Clínicas Quirúrgicas</span></div><div class="bar-track"><div class="bar-fill" style="width:46%; background:var(--cir)">~17%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-gin">Gineco-Obstétricas</span></div><div class="bar-track"><div class="bar-fill" style="width:45%; background:var(--gin)">~16%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-cb">Ciencias Básicas</span></div><div class="bar-track"><div class="bar-fill" style="width:26%; background:var(--cb)">~9%</div></div></div>
+    <div class="bar-row"><div class="bar-label"><span class="pill p-sp">Salud Pública</span></div><div class="bar-track"><div class="bar-fill" style="width:24%; background:var(--sp)">~9%</div></div></div>
+    <p style="font-size:.85rem; color:var(--muted); margin-top:10px"><b>Medicina + Pediatría = más de la mitad del examen (~56%).</b> Las cuatro áreas clínicas (MED+PED+CIR+GIN) suman ~89%. El ~75% de las preguntas son <b>casos clínicos</b> con viñeta de paciente. En 200 preguntas: ≈64 Medicina, ≈48 Pediatría, ≈34 Cirugía, ≈32 Gineco, ≈18 C. Básicas, ≈18 Salud Pública.</p>
+  </div>
+</section>
+
+<!-- TU CASO -->
+<section id="caso">
+  <h2>6. Tu caso: cómo entrar a Pediatría — análisis y soluciones</h2>
+
+  <div class="alert-box">
+    <p><b>La verdad estratégica nº1:</b> No rindes un "examen de Pediatría". Rindes <b>el mismo examen mixto de 200 preguntas que todos</b>, y entras a Pediatría por <b>estricto orden de mérito</b> con tu nota global. <span class="badge b-ver">✓ verificado</span> <b>No hay puntaje mínimo</b> para adjudicar: compites contra los demás postulantes a Pediatría por las vacantes disponibles. Por eso tu meta no es "saber Pediatría" — es <b>maximizar la nota total</b>.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Las palancas de tu nota (qué controlas)</h3>
+      <ul style="font-size:.92rem">
+        <li><b>Examen = 80% (80 pts).</b> Es lo único que aún puedes mover. Cada 5 preguntas = 2 puntos finales = a menudo decenas de puestos en el orden de mérito.</li>
+        <li><b>Currículo = 20% (20 pts):</b> SERUMS (10) + ENAM/promedio (5) + años de servicio (4) + quinto superior (1). Ya está fijado por tu historia.</li>
+        <li><b>Implicación:</b> con el currículo dado, <b>el examen decide todo</b>. Y en el examen, las "fijas" deciden la mayor parte.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Soluciones concretas para ganar</h3>
+      <ol style="font-size:.92rem">
+        <li><b>Estudia en proporción al peso real,</b> no a tu gusto. Pediatría te encanta, pero Medicina (32%) trae más preguntas. Domina ambas.</li>
+        <li><b>Ataca primero el Nivel S y A</b> de TODAS las áreas: es donde está la mayor densidad de puntos por hora.</li>
+        <li><b>Entrena con casos clínicos,</b> no con memoria suelta: ~75% son viñetas. Practica el patrón "paciente → diagnóstico/conducta".</li>
+        <li><b>Salud Pública y las fijas de Gineco/Cirugía</b> son "puntos baratos": pocos temas, muy predecibles. No los dejes para el final.</li>
+        <li><b>Resuelve los 10 exámenes oficiales</b> que ya están en tu carpeta: es el mejor simulador posible porque el estilo se repite.</li>
+        <li><b>Elige sede/modalidad con cabeza</b> cuando salga el Cuadro de Vacantes (3-jul-2026): más vacantes en una sede = umbral de ingreso más bajo.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="ok-box" id="vacantes-box">
+    <p style="margin-bottom:10px"><b>Competitividad de Pediatría — buenas noticias para ti</b> <span class="badge b-emp">📊 datos MINSA 2024–2025</span></p>
+    <p><b>Pediatría es la especialidad nº1 en número de vacantes</b> de todo el concurso: <b>109 vacantes en 2025</b> (88 libres + 21 cautivas) y 107 en 2024, estable año a año. Eso es una oferta grande — no un cuello de botella por escasez de plazas.</p>
+    <table>
+      <tr><th>#</th><th>Especialidad</th><th class="num">Vacantes 2025</th></tr>
+      <tr><td class="num">1</td><td class="hl">PEDIATRÍA</td><td class="num">109</td></tr>
+      <tr><td class="num">2</td><td>Ginecología y Obstetricia</td><td class="num">83</td></tr>
+      <tr><td class="num">3</td><td>Anestesiología</td><td class="num">80</td></tr>
+      <tr><td class="num">4</td><td>Psiquiatría</td><td class="num">61</td></tr>
+      <tr><td class="num">5</td><td>Cirugía General</td><td class="num">54</td></tr>
+      <tr><td class="num">6</td><td>Medicina Interna</td><td class="num">52</td></tr>
+      <tr><td class="num">7</td><td>Neonatología</td><td class="num">44</td></tr>
+    </table>
+    <p style="font-size:.9rem"><b>Qué significa para tu estrategia:</b></p>
+    <ul style="font-size:.9rem">
+      <li>Para un postulante libre, lo relevante son las <b>88 plazas libres</b> de 2025 (las cautivas son para médicos ya vinculados a la institución, en cupo aparte).</li>
+      <li>Toda esta oferta es de <b>Lima</b> (documento MINSA-Lima). La sede dominante es el <b>Instituto Nacional de Salud del Niño</b> (~36 vacantes entre Breña y San Borja), seguido de San Bartolomé y Cayetano Heredia (~14 c/u).</li>
+      <li>Muchas vacantes en pocas sedes grandes = puedes <b>elegir sede con cabeza</b>: una sede con más cupos suele tener umbral de ingreso más bajo. Cuando salga el Cuadro de Vacantes 2026 (3-jul) comparamos sedes.</li>
+      <li>Pediatría general (109) es distinta de las <b>subespecialidades pediátricas</b> (71 vacantes más en 2025: Cirugía Pediátrica, Intensiva Pediátrica, Neurología Pediátrica, etc.), que se postulan aparte y requieren la especialidad base.</li>
+    </ul>
+    <p style="font-size:.85rem; color:var(--muted)">Los números de <b>2026</b> saldrán con la convocatoria; históricamente Pediatría se mantiene como la nº1 en oferta.</p>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section id="plan">
+  <h2>7. Plan de estudio inteligente (basado en la frecuencia)</h2>
+  <div class="info-box">
+    <b>Principio rector:</b> ordena tu estudio por <b>rentabilidad = (probabilidad de que caiga) × (nº de preguntas que vale)</b>. Eso es exactamente lo que ordena la tabla del TOP 30 y los niveles S/A/B.
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Secuencia sugerida (12.5 semanas → 6 sep)</h3>
+    <table>
+      <tr><th>Fase</th><th>Semanas</th><th>Qué</th></tr>
+      <tr><td><b>1. Núcleo duro</b></td><td>Sem 1–5</td><td>Todos los temas <b>Nivel S</b> + el grueso del <b>Nivel A</b>, repartidos por área proporcionalmente (más Medicina y Pediatría). Estudiar el ángulo exacto, no el capítulo entero.</td></tr>
+      <tr><td><b>2. Cobertura</b></td><td>Sem 6–9</td><td>Completar <b>Nivel A</b> y <b>Nivel B</b>. Integrar Ciencias Básicas dentro de cada tema clínico. Cerrar Salud Pública (es rápida y rinde).</td></tr>
+      <tr><td><b>3. Banco oficial</b></td><td>Sem 8–11</td><td>Resolver los <b>10 exámenes oficiales</b> cronometrados (~1 min/pregunta). Registrar fallos por tema y re-estudiar solo eso.</td></tr>
+      <tr><td><b>4. Simulacros</b></td><td>Sem 12–12.5</td><td>2–3 simulacros completos de 200 preguntas. Repaso exprés del TOP 30. Descanso el día previo.</td></tr>
+    </table>
+    <p style="font-size:.85rem; color:var(--muted)">Recordatorio administrativo: pago 7–24 jul, inscripción SIGESIN 8–27 jul. No lo dejes para el final.</p>
+  </div>
+  <p>👉 En el <b>siguiente documento</b> (el que me pediste para organizarte) convertimos esto en un <b>cronograma día por día</b> con metas semanales, asignación de horas por área según su peso, y checklist de los temas del TOP 30 + niveles. Avísame y lo armamos.</p>
+</section>
+
+<!-- CAVEATS -->
+<section id="caveats">
+  <h2>8. Advertencias metodológicas (léelas)</h2>
+  <div class="warn-box">
+    <ul style="font-size:.88rem">
+      <li><b>Frecuencia empírica, no oficial:</b> CONAREME no publica tabla de especificaciones. Las "apariciones" salen de clasificar manualmente 980 preguntas de 10 exámenes reales (2018–2023). Margen ±1 examen por tema, según cómo se agrupen variantes.</li>
+      <li><b>Sesgo de muestra:</b> faltan los PDFs de 2022, 2024 y 2025 (no publicados en el portal). El examen 2020 fue atípico (90 preguntas, noviembre). La tendencia reciente (2023) muestra <b>más casos clínicos</b> y <b>más Medicina</b>.</li>
+      <li><b>"Fija" no es garantía absoluta:</b> un tema 9/10 es altísima probabilidad, no certeza matemática. El Jurado de Admisión define las preguntas cada año y puede variar la mezcla.</li>
+      <li><b>El examen 2026 sube a 200 preguntas</b> (era 100 por prueba en estos años; desde 2024 son 200). La proporción por área se mantiene; cambian los números absolutos.</li>
+      <li><b>Esto NO reemplaza el estudio de fuentes:</b> es un mapa de prioridades para estudiar más inteligente, no un resumen de contenido. Para cada tema, estudia la guía/norma correspondiente.</li>
+      <li><b>No uses esto como única fuente de respuestas:</b> las claves oficiales no siempre se publican; verifica el manejo correcto en guías vigentes (MINSA, guías clínicas).</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Archivos en tu carpeta <code>Desktop\CONAREME\</code></h3>
+    <p class="src">PruebaA/B_2018.pdf · PruebaA/B_2019.pdf · PruebaA/B_2020.pdf · PruebaA/B_2021.pdf · PruebaA/B_2023.pdf (10 exámenes oficiales) · Cronograma_2026.pdf · Vacantes_MINSA_2024/2025.pdf · INFORME_RESIDENTADO_CONAREME.html (informe general) · FIJAS_RESIDENTADO_CONAREME.html (este).</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    Análisis de frecuencia construido sobre 10 exámenes oficiales del Concurso Nacional de Admisión al Residentado Médico (CONAREME), Pruebas A y B de 2018, 2019, 2020, 2021 y 2023, descargados de conareme.org.pe · 980 preguntas clasificadas manualmente por área, tema y formato · Datos normativos verificados contra Ley 30453 y procedimientos CONAREME · Elaborado el 10 de junio de 2026 para preparación académica personal de Momar.
+  </div>
+</footer>
+
+</body>
+</html>

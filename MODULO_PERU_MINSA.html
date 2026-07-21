@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo Perú / MINSA — Residentado CONAREME</title>
+<style>
+  :root{--bg:#0b0f1a;--panel:#161d30;--panel2:#1e2740;--ink:#eaf0fb;--muted:#9aabc9;--accent:#34d3ff;--gold:#ffd166;--green:#22d39a;--red:#ff5d7a;--violet:#a78bfa;--orange:#ff9e57;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  header{background:radial-gradient(1000px 350px at 25% -15%,#7a1f2b,#0b0f1a 62%);border-bottom:3px solid var(--red);padding:40px 22px 30px;}
+  header h1{font-size:1.8rem;color:#fff;}
+  header .sub{color:var(--red);font-weight:600;margin-top:4px;}
+  nav{background:var(--panel);position:sticky;top:0;z-index:20;border-bottom:1px solid #2a3550;overflow-x:auto;white-space:nowrap;}
+  nav .wrap{padding:10px 22px;}
+  nav a{color:var(--muted);text-decoration:none;font-size:.82rem;margin-right:14px;font-weight:600;}
+  nav a:hover{color:var(--red);}
+  h2{color:var(--red);font-size:1.3rem;border-left:4px solid var(--red);padding-left:12px;margin:30px 0 6px;}
+  .lead{color:var(--muted);font-size:.92rem;margin-bottom:12px;font-style:italic;}
+  p{margin-bottom:11px;color:#dbe4f3;}
+  .card{background:var(--panel);border:1px solid #2a3550;border-radius:12px;padding:20px;margin-bottom:14px;}
+  h3{color:var(--gold);font-size:1.08rem;margin:16px 0 8px;}
+  h3:first-child{margin-top:0;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88rem;}
+  th{background:var(--panel2);color:var(--red);text-align:left;padding:8px 10px;font-size:.74rem;text-transform:uppercase;}
+  td{padding:8px 10px;border-bottom:1px solid #2a3550;color:#dbe4f3;vertical-align:top;}
+  .why{background:rgba(52,211,255,.06);border-left:3px solid var(--accent);padding:11px 14px;border-radius:6px;margin:10px 0;font-size:.92rem;}
+  .why b{color:var(--accent);}
+  .key{background:rgba(34,211,154,.08);border-left:3px solid var(--green);padding:10px 13px;border-radius:6px;margin-top:10px;font-size:.92rem;}
+  .key b{color:var(--green);}
+  .term{color:var(--violet);font-weight:700;}
+  .def{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.3);border-radius:8px;padding:10px 13px;margin:10px 0;font-size:.88rem;}
+  .def b{color:var(--violet);}
+  ul,ol{margin:6px 0 10px 22px;} li{margin-bottom:6px;font-size:.93rem;color:#dbe4f3;}
+  .verbox{background:rgba(34,211,154,.08);border:1px solid var(--green);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:.9rem;}
+  .verbox b{color:var(--green);}
+  .warn-box{background:rgba(255,209,102,.07);border:1px solid var(--gold);border-radius:12px;padding:14px;margin:16px 0;font-size:.86rem;}
+  footer{border-top:1px solid #2a3550;padding:22px;color:var(--muted);font-size:.78rem;margin-top:36px;text-align:center;}
+  @media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}nav{display:none;}.card,table,tr,.why,.def{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<header><div class="wrap" style="padding:0">
+  <h1>🇵🇪 Módulo Perú / MINSA — CONAREME</h1>
+  <div class="sub">Las normas nacionales explicadas a fondo: qué dicen, por qué, y cómo lo pregunta el examen</div>
+</div></header>
+<nav><div class="wrap">
+  <a href="#vac">Vacunación</a><a href="#tbc">Tuberculosis</a><a href="#dengue">Dengue y metaxénicas</a>
+  <a href="#cred">CRED y anemia</a><a href="#mat">Salud materna</a><a href="#vih">VIH / ITS</a><a href="#sp">Salud pública</a>
+</div></nav>
+
+<div class="wrap">
+
+  <div class="verbox"><b>✅ Verificado contra las normas MINSA vigentes (junio 2026):</b> Vacunación <b>NTS N° 196-MINSA/DGIESP-2022</b> (RM 884-2022, con modificaciones 2024-2026) · Tuberculosis <b>NTS N° 221-MINSA/DGIESP-2024</b> (RM 894-2024) · Dengue <b>NTS N° 211-MINSA/DGIESP-2024</b> + Guía de Práctica Clínica 2024 · Anemia <b>NTS N° 213-MINSA/DGIESP-2024</b> · Malaria (NTS de Malaria con tafenoquina, 2024). Las normas técnicas se actualizan periódicamente: ante cualquier discrepancia, prevalece la norma oficial más reciente.</div>
+
+  <!-- ============ VACUNACIÓN ============ -->
+  <h2 id="vac">1. Esquema Nacional de Vacunación</h2>
+  <p class="lead">Por qué importa: la inmunización es la intervención de salud pública más costo-efectiva, y CONAREME la pregunta casi todos los años. No basta memorizar el calendario; hay que entender la lógica inmunológica detrás de cada edad y cada dosis.</p>
+
+  <div class="card">
+    <h3>El fundamento inmunológico (por qué a esas edades)</h3>
+    <p>El recién nacido nace con <span class="term">inmunidad pasiva</span>: anticuerpos maternos (IgG) que cruzaron la placenta en el tercer trimestre. Estos lo protegen los primeros meses, pero <b>también interfieren con algunas vacunas de virus vivos</b>, neutralizando el antígeno antes de que el bebé monte su propia respuesta. Por eso la <span class="term">SPR</span> (sarampión-paperas-rubéola), que es de virus vivos atenuados, se posterga hasta los <b>12 meses</b>: antes, los anticuerpos maternos residuales reducirían su eficacia.</p>
+    <div class="def"><b>Inmunidad activa vs pasiva:</b> la <b>pasiva</b> es prestada (anticuerpos ya formados que recibes de la madre o de una inmunoglobulina): protege rápido pero dura semanas-meses. La <b>activa</b> es la que tu propio sistema inmune genera tras la vacuna o la enfermedad: tarda en aparecer pero deja <span class="term">memoria inmunológica</span> (linfocitos B y T de memoria) que protege años. Las vacunas buscan inmunidad activa.</div>
+    <p>Las vacunas que requieren <b>varias dosis</b> (pentavalente, polio, neumococo) lo hacen porque la primera dosis "ceba" el sistema (respuesta primaria, sobre todo IgM, de baja afinidad) y las siguientes generan la <b>respuesta secundaria</b>: más rápida, más potente y con IgG de alta afinidad por maduración. Los <b>refuerzos</b> (a los 18 meses y 4 años) reactivan la memoria que con el tiempo decae.</p>
+  </div>
+
+  <div class="card">
+    <h3>Calendario nacional por edad (NTS 196-2022)</h3>
+    <table>
+      <tr><th>Edad</th><th>Vacunas</th><th>Qué previene / nota</th></tr>
+      <tr><td><b>Recién nacido</b></td><td>BCG + Hepatitis B (monodosis)</td><td>BCG protege de formas graves de TBC (miliar y meníngea) en el niño. HvB al nacer corta la transmisión vertical madre-hijo del virus.</td></tr>
+      <tr><td><b>2 meses</b></td><td>Pentavalente 1.ª · Polio IPV 1.ª · Rotavirus 1.ª · Neumococo 1.ª</td><td>Inicio de la serie primaria. La polio inactivada (IPV, inyectable) se usa primero por seguridad.</td></tr>
+      <tr><td><b>4 meses</b></td><td>Pentavalente 2.ª · Polio IPV 2.ª · Rotavirus 2.ª · Neumococo 2.ª</td><td>Segunda dosis de la serie primaria.</td></tr>
+      <tr><td><b>6 meses</b></td><td>Pentavalente 3.ª · Polio APO 3.ª · Influenza 1.ª</td><td>Influenza pediátrica recién aquí (antes el sistema inmune responde mal a los polisacáridos).</td></tr>
+      <tr><td><b>12 meses</b></td><td>SPR 1.ª · Neumococo refuerzo · Antiamarílica</td><td>SPR al año (anticuerpos maternos ya cayeron). Antiamarílica por riesgo en zonas selváticas.</td></tr>
+      <tr><td><b>18 meses</b></td><td>DPT 1.er refuerzo · Polio refuerzo · SPR 2.ª</td><td>Refuerzos que sostienen la memoria.</td></tr>
+      <tr><td><b>4 años</b></td><td>DPT 2.º refuerzo · Polio refuerzo</td><td>Última dosis pediátrica de difteria-tétanos-pertussis.</td></tr>
+      <tr><td><b>Niñas y niños (≈9 años / 5.º prim.)</b></td><td>VPH — <b>1 sola dosis</b></td><td>⚠ <b>Cambio reciente:</b> pasó de 2 dosis a <b>1</b>, y ahora también se aplica a varones. Previene cáncer de cuello uterino (y otros) por VPH 16/18.</td></tr>
+      <tr><td><b>Gestante</b></td><td>dTpa (27-36 sem) · Influenza</td><td>La dTpa hace que la madre fabrique anticuerpos que pasan al feto y lo protegen de tos ferina los primeros meses de vida.</td></tr>
+      <tr><td><b>Adulto mayor (≥60)</b></td><td>Influenza anual · Neumococo</td><td>Grupo de riesgo de neumonía e influenza grave.</td></tr>
+    </table>
+    <div class="why"><b>Razón de las contraindicaciones (cae mucho):</b> las vacunas de <b>virus vivos atenuados</b> (SPR, varicela, antiamarílica, BCG, rotavirus) están <b>contraindicadas en inmunosuprimidos y gestantes</b>, porque el virus vacunal —aunque debilitado— podría replicarse sin control en un sistema inmune incompetente y causar enfermedad. En cambio, las vacunas <b>inactivadas o de subunidades</b> (pentavalente, IPV, neumococo, influenza inactivada, VPH, HvB) son seguras en estos grupos porque no contienen microorganismo vivo.</div>
+    <div class="key"><b>Claves de examen:</b> el esquema tiene <b>18 vacunas que protegen contra 28 enfermedades</b> · BCG + HvB al NACER · SPR a los 12 y 18 meses · <b>VPH = 1 sola dosis</b> (niñas y niños) · la <b>pentavalente</b> combina difteria, tétanos, tos ferina (DPT), Haemophilus influenzae b (Hib) y hepatitis B. Incorporaciones recientes a la NTS 196: <b>hexavalente</b>, <b>neumococo 20-valente</b> y, desde 2026, la vacuna contra el <b>virus sincitial respiratorio (VRS)</b> (RM 403-2026/MINSA).</div>
+  </div>
+
+  <!-- ============ TBC ============ -->
+  <h2 id="tbc">2. Tuberculosis — NTS N° 221-MINSA/DGIESP-2024</h2>
+  <p class="lead">Perú es uno de los países con mayor carga de TBC de América. El examen exige dominar la captación de casos (sintomático respiratorio), el diagnóstico molecular y el esquema farmacológico, entendiendo por qué se usan cuatro fármacos y dos fases.</p>
+
+  <div class="card">
+    <h3>Captación y diagnóstico</h3>
+    <p>El <span class="term">sintomático respiratorio (SR)</span> es toda persona con <b>tos y expectoración por 15 días o más</b>. Identificarlo es la base del control: a todo SR se le solicita estudio de esputo. La <b>prueba molecular rápida (Xpert MTB/RIF)</b> es hoy el examen de <b>primera línea</b>.</p>
+    <div class="def"><b>¿Qué es el Xpert MTB/RIF y por qué se prefiere?</b> Es una prueba de <span class="term">biología molecular (PCR en tiempo real)</span> que en ~2 horas (1) detecta el ADN del <i>Mycobacterium tuberculosis</i> con mayor sensibilidad que la baciloscopía, y (2) identifica simultáneamente la <b>resistencia a rifampicina</b> (marcador de TBC multidrogorresistente). Esto permite iniciar el tratamiento correcto de inmediato. La <b>baciloscopía</b> (tinción de Ziehl-Neelsen que busca bacilos ácido-alcohol resistentes al microscopio) sigue siendo útil y barata, sobre todo para el <b>seguimiento</b> mensual de la respuesta al tratamiento.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>Esquema para TBC sensible y por qué es así</h3>
+    <p>Esquema para el paciente nuevo con TBC pansensible: <b>2 meses de HRZE (fase intensiva, diaria) + 4 meses de HR (fase de continuación, diaria)</b>, lo que se abrevia <b>2RHZE/4RH</b>.</p>
+    <table>
+      <tr><th>Fármaco</th><th>Rol</th></tr>
+      <tr><td><b>Isoniacida (H)</b></td><td>Bactericida potente contra bacilos de multiplicación rápida.</td></tr>
+      <tr><td><b>Rifampicina (R)</b></td><td>Bactericida y, sobre todo, <span class="term">esterilizante</span> (mata los bacilos semidurmientes). Es el fármaco pilar; su resistencia define MDR.</td></tr>
+      <tr><td><b>Pirazinamida (Z)</b></td><td>Actúa en el medio ácido del interior de los macrófagos y de las lesiones caseosas; permite acortar el tratamiento.</td></tr>
+      <tr><td><b>Etambutol (E)</b></td><td>Bacteriostático; se añade para <b>prevenir que emerja resistencia</b> mientras se confirma la sensibilidad.</td></tr>
+    </table>
+    <div class="why"><b>¿Por qué 4 fármacos y 2 fases?</b> Se usan varios fármacos a la vez porque en una población grande de bacilos siempre existen mutantes resistentes a un fármaco aislado; combinándolos, un bacilo tendría que ser resistente a todos a la vez (muy improbable), lo que <b>evita la resistencia</b>. La <b>fase intensiva</b> (4 fármacos, 2 meses) reduce rápido la carga bacilar y corta el contagio; la <b>fase de continuación</b> (2 fármacos, 4 meses) elimina los bacilos persistentes y <b>previene la recaída</b>. Por eso el tratamiento debe completarse aunque el paciente ya se sienta bien.</div>
+    <h3>Situaciones especiales</h3>
+    <ul>
+      <li><b>TBC en gestante:</b> el esquema estándar (incluida la pirazinamida) es seguro y se mantiene; se asocia <b>piridoxina (vitamina B6)</b> porque la isoniacida puede causar neuropatía periférica al interferir con su metabolismo. Se evita la <b>estreptomicina</b> por ototoxicidad fetal.</li>
+      <li><b>Meningitis tuberculosa y TBC miliar:</b> fase de continuación prolongada y se añaden <b>corticoides</b>, que reducen la inflamación y la mortalidad/secuelas. El LCR muestra: aspecto claro/opalescente, <b>predominio linfocitario, hiperproteinorraquia e hipoglucorraquia</b> (glucosa baja), con ADA elevada.</li>
+      <li><b>Terapia preventiva (TPT) de TBC latente:</b> isoniacida (o esquemas más cortos como 3HP) en contactos vulnerables y personas con VIH, para evitar que la infección latente progrese a enfermedad activa.</li>
+    </ul>
+    <div class="key"><b>Lo que más cae:</b> memoriza "2RHZE/4RH" diario, SR = tos ≥15 días, Xpert como diagnóstico inicial, y la asociación isoniacida → neuropatía → se previene con piridoxina.</div>
+  </div>
+
+  <!-- ============ DENGUE ============ -->
+  <h2 id="dengue">3. Dengue — NTS N° 211-MINSA/DGIESP-2024</h2>
+  <p class="lead">El dengue es endémico-epidémico en la selva y costa norte (Iquitos, Piura). El error mortal típico es subestimar la fase crítica; el examen evalúa que sepas clasificar el riesgo y reconocer los signos de alarma a tiempo.</p>
+
+  <div class="card">
+    <h3>Fisiopatología: por qué el dengue mata</h3>
+    <p>El dengue tiene tres fases. La <b>febril</b> (días 1-3) con fiebre alta, mialgias y cefalea retroocular. Luego viene la <b>fase crítica</b> (días 4-6), que paradójicamente comienza <b>cuando cede la fiebre</b>: ahí ocurre el fenómeno central, el <span class="term">aumento de la permeabilidad capilar</span> (extravasación de plasma), por el cual el líquido sale del vaso al tercer espacio. Esto produce hemoconcentración (sube el hematocrito), ascitis/derrame, hipovolemia y, si es grave, <b>shock</b>. La trombocitopenia y la disfunción plaquetaria explican el sangrado.</p>
+    <div class="why"><b>Por eso la regla de oro:</b> el paciente "mejora" de la fiebre pero puede estar entrando a su peor momento. La <b>caída del recuento plaquetario junto con el ascenso del hematocrito</b> es la firma de la fuga de plasma y obliga a vigilar/hidratar.</div>
+  </div>
+
+  <div class="card">
+    <h3>Clasificación por grupos (decide dónde y cómo se trata)</h3>
+    <table>
+      <tr><th>Grupo</th><th>Definición</th><th>Manejo</th></tr>
+      <tr><td><b>A</b></td><td>SIN signos de alarma y SIN comorbilidad ni riesgo social.</td><td>Domicilio (ambulatorio): hidratación oral abundante + paracetamol; control diario y educación sobre signos de alarma.</td></tr>
+      <tr><td><b>B1</b></td><td>SIN signos de alarma PERO con comorbilidad, riesgo social o edades extremas (lactante, gestante, adulto mayor).</td><td>Hospitalizar para observación, porque toleran peor la fuga de plasma.</td></tr>
+      <tr><td><b>B2</b></td><td>CON signos de alarma.</td><td>Hospitalización + <b>hidratación endovenosa con cristaloides</b> y monitoreo estrecho de hematocrito y diuresis.</td></tr>
+      <tr><td><b>C</b></td><td>Dengue GRAVE: shock, dificultad respiratoria por acumulación de líquido, sangrado grave o falla orgánica.</td><td>UCI, reanimación con cristaloides; tratar el shock.</td></tr>
+    </table>
+    <h3>Signos de alarma (memorízalos: indican inicio de la fase crítica)</h3>
+    <ul>
+      <li>Dolor abdominal intenso y continuo (refleja la extravasación y el sufrimiento de órganos).</li>
+      <li>Vómitos persistentes (≥4 en 1 hora o &gt;5 en 6 horas): impiden hidratar y agravan la hipovolemia.</li>
+      <li>Acumulación clínica de líquidos: ascitis, derrame pleural.</li>
+      <li>Sangrado de mucosas (encías, nariz, digestivo).</li>
+      <li>Letargia o irritabilidad (alteración del estado de conciencia → hipoperfusión).</li>
+      <li>Hepatomegalia mayor de 2 cm.</li>
+      <li>Laboratorio: aumento del hematocrito con caída rápida y simultánea de las plaquetas.</li>
+    </ul>
+    <div class="key"><b>Claves de tratamiento:</b> <b>NUNCA</b> AINEs ni aspirina (inhiben plaquetas y dañan mucosa → más sangrado) — solo <b>paracetamol</b> para la fiebre. La transfusión profiláctica de plaquetas <b>no</b> se indica de rutina. El grupo más preguntado es el <b>B2</b> (con signos de alarma): hospitalizar e hidratar EV.</div>
+  </div>
+
+  <div class="card">
+    <h3>Otras enfermedades metaxénicas peruanas (alto rendimiento)</h3>
+    <p class="lead" style="margin-bottom:8px">"Metaxénicas" = transmitidas por un vector (mosquito, mosca, etc.). Son muy preguntadas porque son endémicas del Perú.</p>
+    <ul>
+      <li><b>Malaria (paludismo):</b> diagnóstico de elección la <b>gota gruesa</b> (microscopía que concentra los parásitos y permite ver el <i>Plasmodium</i> dentro de los glóbulos rojos). <b>P. vivax</b> (el más frecuente, selva) → cloroquina (mata la forma sanguínea) + <b>primaquina</b> (cura radical: elimina los <span class="term">hipnozoítos</span>, formas latentes en el hígado que causan recaídas). Perú incorporó (2024) la <b>tafenoquina</b> en dosis única, previa prueba de <b>G6PD</b> (porque primaquina y tafenoquina causan hemólisis en deficientes de G6PD). <b>P. falciparum</b> (el más grave, con resistencias en la Amazonía) → 1.ª línea <b>mefloquina + artesunato</b> (terapia combinada basada en artemisinina, ACT). En <b>gestante NO se da primaquina</b> (riesgo de hemólisis fetal): solo cloroquina.</li>
+      <li><b>Bartonelosis o enfermedad de Carrión:</b> causada por <i>Bartonella bacilliformis</i>, transmitida por la <span class="term">Lutzomyia</span> ("titira") en valles interandinos. Tiene dos fases: la <b>aguda anémica (fiebre de la Oroya)</b> —el bacilo invade los glóbulos rojos y causa anemia hemolítica grave, con alta letalidad si no se trata— que se maneja con <b>ciprofloxacino o cloranfenicol</b> (cubriendo además sobreinfección por Salmonella); y la <b>fase eruptiva crónica (verruga peruana)</b>, con nódulos cutáneos, tratada con <b>azitromicina</b>.</li>
+      <li><b>Leptospirosis:</b> bacteria <i>Leptospira</i> adquirida por contacto con aguas o suelos contaminados con orina de roedores. La forma grave es el <b>síndrome de Weil</b> (ictericia + falla renal + tendencia al sangrado), con mialgias intensas en pantorrillas e inyección conjuntival. Tratamiento: <b>penicilina o doxiciclina</b>.</li>
+      <li><b>Fiebre amarilla:</b> arbovirus selvático; prevenible con vacuna (de virus vivo, una dosis protege de por vida). Cursa con ictericia y falla hepática en casos graves.</li>
+    </ul>
+  </div>
+
+  <!-- ============ CRED y ANEMIA ============ -->
+  <h2 id="cred">4. CRED, AIEPI y anemia infantil</h2>
+  <p class="lead">El control del crecimiento y la anemia infantil son prioridades sanitarias nacionales: Perú tiene alta prevalencia y por eso CONAREME insiste en estos conceptos.</p>
+
+  <div class="card">
+    <h3>Crecimiento: distinguir desnutrición aguda de crónica</h3>
+    <p>El CRED (Control de Crecimiento y Desarrollo) usa indicadores antropométricos comparados con curvas de referencia, expresados en <span class="term">puntuación Z (desviaciones estándar, DE)</span> respecto a la mediana.</p>
+    <div class="def"><b>Puntuación Z:</b> indica cuántas desviaciones estándar se aleja el niño de la mediana de su edad/sexo. Entre −2 y −3 DE = desnutrición moderada; por debajo de −3 DE = severa.</div>
+    <ul>
+      <li><b>Desnutrición AGUDA (emaciación / "wasting"):</b> indicador <b>peso para la talla</b> bajo. Refleja un problema <b>reciente</b> (enfermedad, hambruna): el niño bajó de peso pero su talla aún no se afecta.</li>
+      <li><b>Desnutrición CRÓNICA (retardo del crecimiento / "stunting"):</b> indicador <b>talla para la edad</b> baja. Refleja una privación <b>prolongada</b> en los primeros años; es la forma más prevalente en el Perú y deja secuelas cognitivas.</li>
+    </ul>
+    <div class="key"><b>Clave de examen:</b> peso/talla bajo = aguda (reversible si se actúa pronto); talla/edad baja = crónica (daño acumulado, prevención en los primeros 1000 días).</div>
+  </div>
+
+  <div class="card">
+    <h3>AIEPI: detectar al niño grave a tiempo</h3>
+    <p>La estrategia <span class="term">AIEPI</span> (Atención Integrada a las Enfermedades Prevalentes de la Infancia) sistematiza la evaluación del niño para no pasar por alto una urgencia. Los <b>signos generales de peligro</b> obligan a referir de inmediato:</p>
+    <ul><li>No puede beber ni lactar · vomita todo lo que ingiere · convulsiones · letargia o inconsciencia.</li></ul>
+    <div class="why"><b>Por qué importan:</b> cualquiera de estos signos predice riesgo de muerte; su presencia cambia la conducta de "manejo ambulatorio" a "estabilizar y referir urgentemente".</div>
+  </div>
+
+  <div class="card">
+    <h3>Anemia por deficiencia de hierro — NTS N° 213-MINSA/DGIESP-2024</h3>
+    <p>Norma vigente: <b>NTS N° 213-MINSA/DGIESP-2024</b> (RM 251-2024, abril 2024), que reemplazó a la del 2017 y abarca niños, adolescentes, mujeres en edad fértil, gestantes y puérperas.</p>
+    <div class="def"><b>Por qué el lactante es tan vulnerable:</b> nace con reservas de hierro que se agotan hacia los 4-6 meses; a partir de ahí depende del aporte dietético. Si se introduce <b>leche de vaca entera antes de tiempo</b>, esta desplaza la lactancia, aporta poco hierro y puede causar microsangrado intestinal → ferropenia.</div>
+    <ul>
+      <li><b>Prevención:</b> suplementación profiláctica con hierro desde los 4 meses en el RN a término (más temprano en prematuros/bajo peso al nacer, que tienen reservas menores).</li>
+      <li><b>Diagnóstico:</b> la anemia ferropénica es <b>microcítica</b> (VCM bajo) e <b>hipocrómica</b> (HCM baja), con <b>RDW elevado</b> (anisocitosis) y <b>ferritina baja</b> (la ferritina refleja los depósitos de hierro; es el marcador más temprano y específico de ferropenia).</li>
+      <li><b>Tratamiento:</b> hierro a dosis terapéutica (≈3 mg/kg/día de hierro elemental) durante varios meses para reponer depósitos; se controla la respuesta con hemoglobina (un ascenso de reticulocitos a los pocos días confirma que el tratamiento funciona).</li>
+    </ul>
+  </div>
+
+  <!-- ============ MATERNO ============ -->
+  <h2 id="mat">5. Salud materna</h2>
+  <p class="lead">La mortalidad materna es un indicador trazador del sistema de salud. El examen evalúa el control prenatal, los tamizajes obligatorios y el manejo de las emergencias obstétricas.</p>
+
+  <div class="card">
+    <h3>Control prenatal y prevención</h3>
+    <ul>
+      <li><b>Mínimo 6 controles prenatales</b>, con tamizaje obligatorio de VIH, sífilis, hepatitis B, <b>bacteriuria</b> (urocultivo) y diabetes gestacional.</li>
+      <li><b>Suplementación:</b> ácido fólico <b>preconcepcional</b> y en el primer trimestre (previene defectos del tubo neural como espina bífida, porque el cierre del tubo ocurre en las primeras semanas); hierro durante toda la gestación (mayor demanda).</li>
+      <li><b>Bacteriuria asintomática:</b> en la gestante <b>SIEMPRE se trata</b> aunque no tenga síntomas. <span class="why" style="display:inline-block;margin:6px 0;padding:6px 10px"><b>¿Por qué?</b> En el embarazo, los cambios anatómicos y la progesterona favorecen el ascenso del germen; una bacteriuria no tratada progresa a <b>pielonefritis</b> y se asocia a parto pretérmino y bajo peso.</span></li>
+      <li><b>Sífilis en gestación:</b> tratamiento con <b>penicilina G benzatínica</b> (única que cruza la placenta y trata al feto, previniendo la sífilis congénita; ni siquiera en alérgicas se sustituye —se desensibiliza).</li>
+      <li><b>Profilaxis anti-D (Rh):</b> en gestante Rh negativo <b>no sensibilizada</b> (Coombs indirecto negativo), se administra inmunoglobulina anti-D a las 28 semanas y dentro de las 72 horas posparto si el RN es Rh positivo. <span class="why" style="display:inline-block;margin:6px 0;padding:6px 10px"><b>¿Por qué?</b> Evita que la madre se sensibilice contra el antígeno D del feto; si se sensibilizara, en un próximo embarazo sus anticuerpos atacarían los glóbulos rojos fetales (enfermedad hemolítica del recién nacido).</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Emergencias obstétricas</h3>
+    <ul>
+      <li><b>Preeclampsia con criterios de severidad / eclampsia:</b> el fármaco clave es el <b>sulfato de magnesio</b>, que <b>previene y trata las convulsiones</b> (es neuroprotector, no antihipertensivo). Se complementa con antihipertensivos. La <b>prevención</b> en gestantes de riesgo es aspirina a dosis baja desde la semana 12.</li>
+      <li><b>Hemorragia postparto:</b> la causa más frecuente es la <b>atonía uterina</b> (el útero no se contrae tras el alumbramiento; normalmente la contracción comprime los vasos). Manejo inicial: masaje uterino + oxitocina (uterotónico).</li>
+    </ul>
+    <div class="key"><b>Clave de salud pública:</b> las causas directas más frecuentes de muerte materna son la <b>hemorragia</b> y los <b>trastornos hipertensivos del embarazo</b>; por eso ambos se vigilan como prioridad nacional.</div>
+  </div>
+
+  <!-- ============ VIH/ITS ============ -->
+  <h2 id="vih">6. VIH e infecciones de transmisión sexual</h2>
+  <div class="card">
+    <ul>
+      <li><b>Gestante con VIH:</b> iniciar <b>TARGA</b> (terapia antirretroviral de gran actividad) <b>lo antes posible, independientemente del recuento de CD4</b>. <span class="why" style="display:inline-block;margin:6px 0;padding:6px 10px"><b>¿Por qué?</b> El objetivo es lograr <b>carga viral indetectable</b>: a menor carga viral materna, menor riesgo de transmisión vertical (de madre a hijo). Se complementa con profilaxis antirretroviral al recién nacido y se define la vía de parto según la carga viral cercana al término.</span></li>
+      <li><b>Tamizaje universal de VIH y sífilis</b> en toda gestante (prueba rápida/ELISA, con confirmación).</li>
+      <li><b>Sífilis — interpretación de pruebas:</b> las pruebas <b>no treponémicas</b> (RPR, VDRL) se usan para tamizaje y, sobre todo, para <b>seguir la respuesta al tratamiento</b> (sus títulos bajan si el tratamiento funciona). Las <b>treponémicas</b> (FTA-ABS, TPPA) <b>confirman</b> el diagnóstico y permanecen positivas de por vida (no sirven para seguimiento).</li>
+      <li><b>Profilaxis oftálmica neonatal:</b> aplicación ocular al nacer para prevenir la <b>oftalmía gonocócica</b> (conjuntivitis por <i>Neisseria gonorrhoeae</i> adquirida en el canal del parto, que puede causar ceguera).</li>
+    </ul>
+  </div>
+
+  <!-- ============ SALUD PÚBLICA ============ -->
+  <h2 id="sp">7. Organización y salud pública peruana</h2>
+  <div class="card">
+    <h3>Niveles de atención y el modelo de atención</h3>
+    <p>El sistema se organiza en <b>tres niveles de atención</b> según su capacidad resolutiva:</p>
+    <ul>
+      <li><b>I nivel (primer nivel):</b> puestos y centros de salud; atención primaria, promoción, prevención y problemas de baja complejidad. Es la puerta de entrada y resuelve la mayoría de la demanda.</li>
+      <li><b>II nivel:</b> hospitales con especialidades básicas y hospitalización.</li>
+      <li><b>III nivel:</b> hospitales e institutos especializados (alta complejidad).</li>
+    </ul>
+    <p>El modelo vigente es el <span class="term">MAIS-BFC</span> (Modelo de Atención Integral de Salud Basado en Familia y Comunidad): centra la atención no solo en la persona enferma sino en la familia y su entorno, con enfoque preventivo-promocional.</p>
+    <div class="def"><b>Determinantes sociales de la salud:</b> son las condiciones en que las personas nacen, crecen, viven y trabajan (educación, ingreso, vivienda, agua, entorno) que explican gran parte de las diferencias en salud entre poblaciones. Aparecen mucho en preguntas de gestión: muchas enfermedades prevalentes en Perú se explican más por estos determinantes que por la atención médica.</div>
+    <h3>Vigilancia epidemiológica</h3>
+    <p>Ciertos eventos son de <b>notificación obligatoria</b> al sistema de vigilancia (dengue, sarampión, TBC, muerte materna, etc.), porque su detección oportuna permite controlar brotes y orientar las intervenciones. La <b>muerte materna</b> y la <b>desnutrición crónica/anemia infantil</b> son indicadores prioritarios que el país vigila de forma continua.</p>
+    <div class="key"><b>Conecta conceptos:</b> los niveles de prevención de Leavell-Clark se ven mejor con ejemplos peruanos — <b>vacunación</b> (primaria, evita que aparezca la enfermedad), <b>Papanicolaou / gota gruesa</b> (secundaria, detección precoz), <b>rehabilitación post-ACV</b> (terciaria, reduce secuelas).</div>
+  </div>
+
+  <div class="warn-box">📌 <b>Cómo estudiar este módulo:</b> no memorices solo los datos sueltos. Para cada tema entiende primero <b>el porqué</b> (la fisiopatología o la lógica de salud pública) y luego ancla el dato exacto que pregunta el examen (la edad, la dosis, el esquema). Así, aunque la pregunta cambie la redacción, podrás razonar la respuesta.</div>
+
+</div>
+<footer>Módulo Perú / MINSA · CONAREME 2026 · contenido verificado contra normas MINSA vigentes (NTS 196-2022, 221-2024, 211-2024, 213-2024) y explicado con enfoque académico · junio 2026.</footer>
+</body>
+</html>
