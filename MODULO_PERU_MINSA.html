@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Módulo Perú / MINSA — Residentado CONAREME</title>
 <style>
-  :root{--bg:#0b0f1a;--panel:#161d30;--panel2:#1e2740;--ink:#eaf0fb;--muted:#9aabc9;--accent:#34d3ff;--gold:#ffd166;--green:#22d39a;--red:#ff5d7a;--violet:#a78bfa;--orange:#ff9e57;}
+  :root{--bg:#0a0a1a;--panel:#17152e;--panel2:#221f47;--ink:#f4f2fc;--muted:#aaa2c9;--accent:#9d8fff;--gold:#ffcc4d;--green:#2dd4a8;--red:#ff5d8f;--violet:#38bdf8;--orange:#ff9459;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;}
   .wrap{max-width:1000px;margin:0 auto;padding:22px;}
   #readbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));width:0%;z-index:30;transition:width .1s;}
-  header{background:radial-gradient(1000px 350px at 25% -15%,#7a1f2b,#0b0f1a 62%);border-bottom:3px solid var(--red);padding:40px 22px 30px;}
+  header{background:radial-gradient(1000px 350px at 25% -15%,#5c1f3a,#0a0a1a 62%);border-bottom:3px solid var(--red);padding:40px 22px 30px;}
   header h1{font-size:1.8rem;color:#fff;}
   header .sub{color:var(--red);font-weight:600;margin-top:4px;}
   nav{background:var(--panel);position:sticky;top:0;z-index:20;border-bottom:1px solid #2a3550;overflow-x:auto;white-space:nowrap;}
@@ -26,19 +26,39 @@
   table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88rem;}
   th{background:var(--panel2);color:var(--red);text-align:left;padding:8px 10px;font-size:.74rem;text-transform:uppercase;}
   td{padding:8px 10px;border-bottom:1px solid #2a3550;color:#dbe4f3;vertical-align:top;}
-  .why{background:rgba(52,211,255,.06);border-left:3px solid var(--accent);padding:11px 14px;border-radius:6px;margin:10px 0;font-size:.92rem;}
+  .why{background:rgba(157,143,255,.06);border-left:3px solid var(--accent);padding:11px 14px;border-radius:6px;margin:10px 0;font-size:.92rem;}
   .why b{color:var(--accent);}
-  .key{background:rgba(34,211,154,.08);border-left:3px solid var(--green);padding:10px 13px;border-radius:6px;margin-top:10px;font-size:.92rem;}
+  .key{background:rgba(45,212,168,.08);border-left:3px solid var(--green);padding:10px 13px;border-radius:6px;margin-top:10px;font-size:.92rem;}
   .key b{color:var(--green);}
   .term{color:var(--violet);font-weight:700;}
-  .def{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.3);border-radius:8px;padding:10px 13px;margin:10px 0;font-size:.88rem;}
+  .def{background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.3);border-radius:8px;padding:10px 13px;margin:10px 0;font-size:.88rem;}
   .def b{color:var(--violet);}
   ul,ol{margin:6px 0 10px 22px;} li{margin-bottom:7px;font-size:.98rem;line-height:1.55;color:#dbe4f3;}
-  .verbox{background:rgba(34,211,154,.08);border:1px solid var(--green);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:.9rem;}
+  .verbox{background:rgba(45,212,168,.08);border:1px solid var(--green);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:.9rem;}
   .verbox b{color:var(--green);}
-  .warn-box{background:rgba(255,209,102,.07);border:1px solid var(--gold);border-radius:12px;padding:14px;margin:16px 0;font-size:.86rem;}
+  .warn-box{background:rgba(255,204,77,.07);border:1px solid var(--gold);border-radius:12px;padding:14px;margin:16px 0;font-size:.86rem;}
   footer{border-top:1px solid #2a3550;padding:22px;color:var(--muted);font-size:.78rem;margin-top:36px;text-align:center;}
   @media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}nav{display:none;}.card,table,tr,.why,.def{break-inside:avoid;}}
+
+  /* === INTERACTIVIDAD MODERNA (glow + lift + transiciones suaves) === */
+  a, button, .btn, .qcard, .card, .panel, .fija, .chip, .navitem, .pdflink, .realq, .expbtn, .openbtn, .opt, th, .qa, td, .cd, input[type="checkbox"]{
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease, border-color .18s ease, background .18s ease, filter .18s ease;
+  }
+  .btn, button.btn, .openbtn{ box-shadow:0 2px 10px rgba(157,143,255,.0); }
+  .btn:hover, button.btn:hover, .openbtn:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(157,143,255,.35); filter:brightness(1.08); }
+  .btn:active, button.btn:active, .openbtn:active{ transform:translateY(0) scale(.96); box-shadow:0 2px 8px rgba(157,143,255,.25); }
+  .qcard:hover{ box-shadow:0 10px 28px rgba(157,143,255,.22), 0 0 0 1px rgba(157,143,255,.25); }
+  .card:hover, .panel:hover, .fija:hover{ border-color:rgba(157,143,255,.35); box-shadow:0 8px 24px rgba(0,0,0,.28); }
+  .chip:hover{ transform:translateY(-1px); border-color:var(--accent); }
+  .chip.on{ box-shadow:0 0 0 1px rgba(157,143,255,.3), 0 4px 12px rgba(157,143,255,.18); }
+  .navitem:hover{ transform:translateX(3px); }
+  .navitem.active{ box-shadow:inset 3px 0 0 var(--accent); }
+  .opt:hover{ transform:translateX(2px); box-shadow:0 3px 12px rgba(157,143,255,.15); }
+  .realq:hover, .qa:hover{ border-left-width:4px; }
+  .pdflink:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,93,143,.2); }
+  ::selection{ background:rgba(157,143,255,.35); color:#fff; }
+  input[type="checkbox"]{ accent-color:var(--accent); }
+  html{ scroll-behavior:smooth; }
 </style>
 </head>
 <body>

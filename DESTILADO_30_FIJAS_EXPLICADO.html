@@ -6,15 +6,15 @@
 <title>Destilado EXPLICADO de las 50 Fijas — Residentado CONAREME</title>
 <style>
   :root{
-    --bg:#0b0f1a; --panel:#161d30; --panel2:#1e2740; --ink:#eaf0fb; --muted:#9aabc9;
-    --accent:#34d3ff; --gold:#ffd166; --green:#22d39a; --red:#ff5d7a; --violet:#a78bfa; --orange:#ff9e57;
-    --med:#34d3ff; --ped:#22d39a; --cir:#ff5d7a; --gin:#ff9e57; --sp:#ffd166; --cb:#a78bfa;
+    --bg:#0a0a1a; --panel:#17152e; --panel2:#221f47; --ink:#f4f2fc; --muted:#aaa2c9;
+    --accent:#9d8fff; --gold:#ffcc4d; --green:#2dd4a8; --red:#ff5d8f; --violet:#38bdf8; --orange:#ff9459;
+    --med:#9d8fff; --ped:#2dd4a8; --cir:#ff5d8f; --gin:#ff9459; --sp:#ffcc4d; --cb:#38bdf8;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.65;}
   .wrap{max-width:1000px; margin:0 auto; padding:22px;}
   #readbar{position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--green)); width:0%; z-index:30; transition:width .1s;}
-  header{background:radial-gradient(1000px 350px at 25% -15%, #1b3a5c, #0b0f1a 62%); border-bottom:3px solid var(--accent); padding:44px 22px 34px;}
+  header{background:radial-gradient(1000px 350px at 25% -15%, #2e2260, #0a0a1a 62%); border-bottom:3px solid var(--accent); padding:44px 22px 34px;}
   header h1{font-size:1.85rem; color:#fff; margin-bottom:8px;}
   header .sub{color:var(--accent); font-weight:600; font-size:1rem;}
   header .meta{color:var(--muted); font-size:.84rem; margin-top:12px;}
@@ -31,26 +31,46 @@
   .fija .ttl{font-weight:800; font-size:1.08rem; flex:1;}
   .fija .body{padding:16px 18px;}
   .pill{display:inline-block; padding:1px 9px; border-radius:10px; font-size:.7rem; font-weight:800; white-space:nowrap;}
-  .p-MED{background:rgba(52,211,255,.18); color:var(--med);} .p-PED{background:rgba(34,211,154,.18); color:var(--ped);}
-  .p-CIR{background:rgba(255,93,122,.18); color:var(--cir);} .p-GIN{background:rgba(255,158,87,.18); color:var(--gin);}
-  .p-SP{background:rgba(255,209,102,.18); color:var(--sp);} .p-CB{background:rgba(167,139,250,.18); color:var(--cb);}
+  .p-MED{background:rgba(157,143,255,.18); color:var(--med);} .p-PED{background:rgba(45,212,168,.18); color:var(--ped);}
+  .p-CIR{background:rgba(255,93,143,.18); color:var(--cir);} .p-GIN{background:rgba(255,148,89,.18); color:var(--gin);}
+  .p-SP{background:rgba(255,204,77,.18); color:var(--sp);} .p-CB{background:rgba(56,189,248,.18); color:var(--cb);}
   .freq{display:inline-block; padding:1px 8px; border-radius:8px; font-weight:800; font-size:.72rem; background:var(--red); color:#fff;}
   .lbl{display:flex; align-items:center; gap:7px; font-weight:800; color:var(--accent); font-size:.95rem; margin:16px 0 6px;}
   .lbl:first-child{margin-top:0;}
-  .ctx{font-size:1.02rem; line-height:1.7; color:#e6edf8; background:rgba(52,211,255,.05); border-radius:8px; padding:13px 15px;}
+  .ctx{font-size:1.02rem; line-height:1.7; color:#e6edf8; background:rgba(157,143,255,.05); border-radius:8px; padding:13px 15px;}
   .qa{border-left:3px solid var(--gold); padding:9px 0 9px 14px; margin:11px 0;}
   .qa .q{font-style:italic; color:var(--gold); font-size:.96rem; margin-bottom:4px;}
   .qa .a{font-size:1rem; line-height:1.65; color:#e6edf8;}
   .qa .a b{color:var(--green);}
-  .clave{background:rgba(34,211,154,.1); border-left:4px solid var(--green); padding:12px 15px; border-radius:6px; margin-top:14px; font-size:.98rem; line-height:1.6; box-shadow:0 0 0 1px rgba(34,211,154,.08);}
+  .clave{background:rgba(45,212,168,.1); border-left:4px solid var(--green); padding:12px 15px; border-radius:6px; margin-top:14px; font-size:.98rem; line-height:1.6; box-shadow:0 0 0 1px rgba(45,212,168,.08);}
   .clave b{color:var(--green);}
-  .gloss{background:rgba(167,139,250,.07); border:1px solid rgba(167,139,250,.3); border-radius:8px; padding:11px 15px; margin-top:12px; font-size:.9rem; line-height:1.6; color:#d2dcef;}
+  .gloss{background:rgba(56,189,248,.07); border:1px solid rgba(56,189,248,.3); border-radius:8px; padding:11px 15px; margin-top:12px; font-size:.9rem; line-height:1.6; color:#d2dcef;}
   .gloss b{color:var(--violet);}
   .gloss .term{color:var(--violet); font-weight:700;}
-  .info-box{background:rgba(52,211,255,.06); border:1px solid var(--accent); border-radius:12px; padding:16px; margin:14px 0;}
-  .warn-box{background:rgba(255,209,102,.07); border:1px solid var(--gold); border-radius:12px; padding:16px; margin:14px 0; font-size:.86rem;}
+  .info-box{background:rgba(157,143,255,.06); border:1px solid var(--accent); border-radius:12px; padding:16px; margin:14px 0;}
+  .warn-box{background:rgba(255,204,77,.07); border:1px solid var(--gold); border-radius:12px; padding:16px; margin:14px 0; font-size:.86rem;}
   footer{border-top:1px solid #2a3550; padding:24px; color:var(--muted); font-size:.78rem; margin-top:40px;}
   @media print{*{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}nav{display:none;}.fija,.info-box,.warn-box{break-inside:avoid;page-break-inside:avoid;}h2{break-after:avoid;}}
+
+  /* === INTERACTIVIDAD MODERNA (glow + lift + transiciones suaves) === */
+  a, button, .btn, .qcard, .card, .panel, .fija, .chip, .navitem, .pdflink, .realq, .expbtn, .openbtn, .opt, th, .qa, td, .cd, input[type="checkbox"]{
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease, border-color .18s ease, background .18s ease, filter .18s ease;
+  }
+  .btn, button.btn, .openbtn{ box-shadow:0 2px 10px rgba(157,143,255,.0); }
+  .btn:hover, button.btn:hover, .openbtn:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(157,143,255,.35); filter:brightness(1.08); }
+  .btn:active, button.btn:active, .openbtn:active{ transform:translateY(0) scale(.96); box-shadow:0 2px 8px rgba(157,143,255,.25); }
+  .qcard:hover{ box-shadow:0 10px 28px rgba(157,143,255,.22), 0 0 0 1px rgba(157,143,255,.25); }
+  .card:hover, .panel:hover, .fija:hover{ border-color:rgba(157,143,255,.35); box-shadow:0 8px 24px rgba(0,0,0,.28); }
+  .chip:hover{ transform:translateY(-1px); border-color:var(--accent); }
+  .chip.on{ box-shadow:0 0 0 1px rgba(157,143,255,.3), 0 4px 12px rgba(157,143,255,.18); }
+  .navitem:hover{ transform:translateX(3px); }
+  .navitem.active{ box-shadow:inset 3px 0 0 var(--accent); }
+  .opt:hover{ transform:translateX(2px); box-shadow:0 3px 12px rgba(157,143,255,.15); }
+  .realq:hover, .qa:hover{ border-left-width:4px; }
+  .pdflink:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,93,143,.2); }
+  ::selection{ background:rgba(157,143,255,.35); color:#fff; }
+  input[type="checkbox"]{ accent-color:var(--accent); }
+  html{ scroll-behavior:smooth; }
 </style>
 </head>
 <body>

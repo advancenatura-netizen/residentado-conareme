@@ -6,21 +6,21 @@
 <title>Informe de Inteligencia — Residentado Médico Perú (CONAREME) 2026</title>
 <style>
   :root{
-    --bg:#0d1321; --panel:#1a2238; --panel2:#212b47; --ink:#e8ecf4; --muted:#9fb0cc;
-    --accent:#4cc9f0; --gold:#ffd166; --green:#06d6a0; --red:#ef476f; --violet:#9b5de5;
-    --med:#4cc9f0; --ped:#06d6a0; --cir:#ef476f; --gin:#ff9e6d; --sp:#ffd166; --cb:#9b5de5;
+    --bg:#0d0e1f; --panel:#1c1a38; --panel2:#26234a; --ink:#f2f0fa; --muted:#a89fc4;
+    --accent:#9d8fff; --gold:#ffcc4d; --green:#2dd4a8; --red:#ff5d8f; --violet:#38bdf8;
+    --med:#9d8fff; --ped:#2dd4a8; --cir:#ff5d8f; --gin:#ff9459; --sp:#ffcc4d; --cb:#38bdf8;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.6;}
   .wrap{max-width:1100px; margin:0 auto; padding:24px;}
-  header{background:linear-gradient(135deg,#13315c 0%,#0d1321 70%); border-bottom:3px solid var(--accent); padding:48px 24px 36px;}
+  header{background:linear-gradient(135deg,#2e2260 0%,#0d0e1f 70%); border-bottom:3px solid var(--accent); padding:48px 24px 36px;}
   header h1{font-size:2rem; color:#fff; margin-bottom:8px;}
   header .sub{color:var(--accent); font-weight:600; font-size:1.05rem;}
   header .meta{color:var(--muted); font-size:.85rem; margin-top:14px;}
   .badge{display:inline-block; padding:2px 10px; border-radius:12px; font-size:.75rem; font-weight:700; margin-right:6px;}
-  .b-ver{background:rgba(6,214,160,.15); color:var(--green); border:1px solid var(--green);}
-  .b-emp{background:rgba(76,201,240,.15); color:var(--accent); border:1px solid var(--accent);}
-  .b-warn{background:rgba(255,209,102,.15); color:var(--gold); border:1px solid var(--gold);}
+  .b-ver{background:rgba(45,212,168,.15); color:var(--green); border:1px solid var(--green);}
+  .b-emp{background:rgba(157,143,255,.15); color:var(--accent); border:1px solid var(--accent);}
+  .b-warn{background:rgba(255,204,77,.15); color:var(--gold); border:1px solid var(--gold);}
   nav{background:var(--panel); position:sticky; top:0; z-index:10; border-bottom:1px solid #2e3a5c; overflow-x:auto; white-space:nowrap;}
   nav .wrap{padding:10px 24px;}
   nav a{color:var(--muted); text-decoration:none; font-size:.82rem; margin-right:18px; font-weight:600;}
@@ -39,31 +39,31 @@
   table{width:100%; border-collapse:collapse; margin:14px 0; font-size:.9rem;}
   th{background:var(--panel2); color:var(--accent); text-align:left; padding:9px 12px; border-bottom:2px solid var(--accent); font-size:.82rem; text-transform:uppercase; letter-spacing:.4px;}
   td{padding:8px 12px; border-bottom:1px solid #2e3a5c; color:#cdd7e8;}
-  tr:hover td{background:rgba(76,201,240,.05);}
+  tr:hover td{background:rgba(157,143,255,.05);}
   .num{text-align:right; font-variant-numeric:tabular-nums;}
   .ctr{text-align:center;}
   .hl{color:var(--gold); font-weight:700;}
   .ok{color:var(--green); font-weight:700;}
-  .warn-box{background:rgba(255,209,102,.08); border:1px solid var(--gold); border-radius:10px; padding:18px; margin:16px 0;}
+  .warn-box{background:rgba(255,204,77,.08); border:1px solid var(--gold); border-radius:10px; padding:18px; margin:16px 0;}
   .warn-box b{color:var(--gold);}
-  .alert-box{background:rgba(239,71,111,.08); border:1px solid var(--red); border-radius:10px; padding:18px; margin:16px 0;}
+  .alert-box{background:rgba(255,93,143,.08); border:1px solid var(--red); border-radius:10px; padding:18px; margin:16px 0;}
   .alert-box b{color:var(--red);}
-  .info-box{background:rgba(76,201,240,.07); border:1px solid var(--accent); border-radius:10px; padding:18px; margin:16px 0;}
+  .info-box{background:rgba(157,143,255,.07); border:1px solid var(--accent); border-radius:10px; padding:18px; margin:16px 0;}
   .bar-row{display:flex; align-items:center; margin:7px 0; gap:10px;}
   .bar-label{width:200px; font-size:.85rem; color:#cdd7e8; flex-shrink:0;}
-  .bar-track{flex:1; background:#0d1321; border-radius:6px; height:26px; overflow:hidden;}
-  .bar-fill{height:100%; border-radius:6px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; font-size:.78rem; font-weight:700; color:#0d1321; min-width:36px;}
+  .bar-track{flex:1; background:#0d0e1f; border-radius:6px; height:26px; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:6px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; font-size:.78rem; font-weight:700; color:#0d0e1f; min-width:36px;}
   .timeline{border-left:3px solid var(--accent); margin-left:10px; padding-left:24px;}
   .tl-item{position:relative; margin-bottom:22px;}
   .tl-item::before{content:''; position:absolute; left:-31px; top:5px; width:13px; height:13px; border-radius:50%; background:var(--accent); border:3px solid var(--bg);}
   .tl-year{color:var(--gold); font-weight:800; font-size:1rem;}
   .pill{display:inline-block; padding:1px 9px; border-radius:10px; font-size:.74rem; font-weight:700;}
-  .p-med{background:rgba(76,201,240,.18); color:var(--med);}
-  .p-ped{background:rgba(6,214,160,.18); color:var(--ped);}
-  .p-cir{background:rgba(239,71,111,.18); color:var(--cir);}
-  .p-gin{background:rgba(255,158,109,.18); color:var(--gin);}
-  .p-sp{background:rgba(255,209,102,.18); color:var(--sp);}
-  .p-cb{background:rgba(155,93,229,.18); color:var(--cb);}
+  .p-med{background:rgba(157,143,255,.18); color:var(--med);}
+  .p-ped{background:rgba(45,212,168,.18); color:var(--ped);}
+  .p-cir{background:rgba(255,93,143,.18); color:var(--cir);}
+  .p-gin{background:rgba(255,148,89,.18); color:var(--gin);}
+  .p-sp{background:rgba(255,204,77,.18); color:var(--sp);}
+  .p-cb{background:rgba(56,189,248,.18); color:var(--cb);}
   footer{border-top:1px solid #2e3a5c; padding:28px 24px; color:var(--muted); font-size:.8rem; margin-top:48px;}
   a{color:var(--accent);}
   ul,ol{margin:0 0 12px 22px; color:#cdd7e8;}
@@ -83,6 +83,26 @@
     .bar-row{break-inside:avoid; page-break-inside:avoid;}
     .timeline{break-inside:avoid; page-break-inside:avoid;}
   }
+
+  /* === INTERACTIVIDAD MODERNA (glow + lift + transiciones suaves) === */
+  a, button, .btn, .qcard, .card, .panel, .fija, .chip, .navitem, .pdflink, .realq, .expbtn, .openbtn, .opt, th, .qa, td, .cd, input[type="checkbox"]{
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease, border-color .18s ease, background .18s ease, filter .18s ease;
+  }
+  .btn, button.btn, .openbtn{ box-shadow:0 2px 10px rgba(157,143,255,.0); }
+  .btn:hover, button.btn:hover, .openbtn:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(157,143,255,.35); filter:brightness(1.08); }
+  .btn:active, button.btn:active, .openbtn:active{ transform:translateY(0) scale(.96); box-shadow:0 2px 8px rgba(157,143,255,.25); }
+  .qcard:hover{ box-shadow:0 10px 28px rgba(157,143,255,.22), 0 0 0 1px rgba(157,143,255,.25); }
+  .card:hover, .panel:hover, .fija:hover{ border-color:rgba(157,143,255,.35); box-shadow:0 8px 24px rgba(0,0,0,.28); }
+  .chip:hover{ transform:translateY(-1px); border-color:var(--accent); }
+  .chip.on{ box-shadow:0 0 0 1px rgba(157,143,255,.3), 0 4px 12px rgba(157,143,255,.18); }
+  .navitem:hover{ transform:translateX(3px); }
+  .navitem.active{ box-shadow:inset 3px 0 0 var(--accent); }
+  .opt:hover{ transform:translateX(2px); box-shadow:0 3px 12px rgba(157,143,255,.15); }
+  .realq:hover, .qa:hover{ border-left-width:4px; }
+  .pdflink:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,93,143,.2); }
+  ::selection{ background:rgba(157,143,255,.35); color:#fff; }
+  input[type="checkbox"]{ accent-color:var(--accent); }
+  html{ scroll-behavior:smooth; }
 </style>
 </head>
 <body>

@@ -6,20 +6,20 @@
 <title>Flashcards Interactivas — Residentado CONAREME</title>
 <style>
   :root{
-    --bg:#0b0f1a; --panel:#161d30; --panel2:#1e2740; --ink:#eaf0fb; --muted:#9aabc9;
-    --accent:#34d3ff; --gold:#ffd166; --green:#22d39a; --red:#ff5d7a; --violet:#a78bfa; --orange:#ff9e57;
+    --bg:#0a0a1a; --panel:#17152e; --panel2:#221f47; --ink:#f4f2fc; --muted:#aaa2c9;
+    --accent:#9d8fff; --gold:#ffcc4d; --green:#2dd4a8; --red:#ff5d8f; --violet:#38bdf8; --orange:#ff9459;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; min-height:100vh;}
   .wrap{max-width:720px; margin:0 auto; padding:20px;}
-  header{background:radial-gradient(800px 280px at 30% -20%, #1b3a5c, #0b0f1a 65%); border-bottom:3px solid var(--accent); padding:26px 20px;}
+  header{background:radial-gradient(800px 280px at 30% -20%, #2e2260, #0a0a1a 65%); border-bottom:3px solid var(--accent); padding:26px 20px;}
   header h1{font-size:1.4rem; color:#fff;}
   header .sub{color:var(--accent); font-size:.88rem; font-weight:600; margin-top:3px;}
   .panel{background:var(--panel); border:1px solid #2a3550; border-radius:14px; padding:16px; margin:14px 0;}
   label{font-size:.82rem; color:var(--muted); font-weight:600;}
   .chips{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0;}
   .chip{background:var(--panel2); border:1px solid #2a3550; border-radius:20px; padding:6px 13px; font-size:.8rem; cursor:pointer; user-select:none; font-weight:600; color:var(--muted);}
-  .chip.on{background:rgba(52,211,255,.18); color:var(--accent); border-color:var(--accent);}
+  .chip.on{background:rgba(157,143,255,.18); color:var(--accent); border-color:var(--accent);}
   .btn{background:var(--accent); color:#06121a; border:none; border-radius:10px; padding:11px 18px; font-weight:800; cursor:pointer; margin:4px;}
   .btn:hover{filter:brightness(1.1);}
   .btn.ghost{background:transparent; color:var(--accent); border:1px solid var(--accent);}
@@ -30,7 +30,7 @@
   .card{position:relative; width:100%; min-height:340px; transition:transform .55s; transform-style:preserve-3d; cursor:pointer;}
   .card.flipped{transform:rotateY(180deg);}
   .face{position:absolute; inset:0; backface-visibility:hidden; border-radius:18px; padding:26px; padding-top:40px; display:flex; flex-direction:column; justify-content:center; border:1px solid #2a3550; overflow-y:auto;}
-  .front{background:linear-gradient(160deg,#1e2740,#161d30);}
+  .front{background:linear-gradient(160deg,#221f47,#17152e);}
   .back{background:linear-gradient(160deg,#13322a,#0f2620); transform:rotateY(180deg); border-color:var(--green);}
   .tag{position:absolute; top:14px; left:18px; font-size:.72rem; font-weight:800; color:var(--violet); text-transform:uppercase; letter-spacing:.5px;}
   .hint{position:absolute; bottom:10px; right:18px; font-size:.72rem; color:var(--muted);}
@@ -48,6 +48,27 @@
   .stat{display:flex; gap:12px; justify-content:center; margin-top:10px; font-size:.85rem;}
   .stat div{background:var(--panel2); border:1px solid #2a3550; border-radius:8px; padding:6px 12px;}
   footer{color:var(--muted); font-size:.76rem; padding:18px; text-align:center;}
+
+  /* === INTERACTIVIDAD MODERNA (glow + lift + transiciones suaves) === */
+  a, button, .btn, .qcard, .panel, .fija, .chip, .navitem, .pdflink, .realq, .expbtn, .openbtn, .opt, th, .qa, td, .cd, input[type="checkbox"]{
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease, border-color .18s ease, background .18s ease, filter .18s ease;
+  }
+  .btn, button.btn, .openbtn{ box-shadow:0 2px 10px rgba(157,143,255,.0); }
+  .btn:hover, button.btn:hover, .openbtn:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(157,143,255,.35); filter:brightness(1.08); }
+  .btn:active, button.btn:active, .openbtn:active{ transform:translateY(0) scale(.96); box-shadow:0 2px 8px rgba(157,143,255,.25); }
+  .qcard:hover{ box-shadow:0 10px 28px rgba(157,143,255,.22), 0 0 0 1px rgba(157,143,255,.25); }
+  .panel:hover, .fija:hover{ border-color:rgba(157,143,255,.35); box-shadow:0 8px 24px rgba(0,0,0,.28); }
+  .scene .card:hover{ filter:brightness(1.04); }
+  .chip:hover{ transform:translateY(-1px); border-color:var(--accent); }
+  .chip.on{ box-shadow:0 0 0 1px rgba(157,143,255,.3), 0 4px 12px rgba(157,143,255,.18); }
+  .navitem:hover{ transform:translateX(3px); }
+  .navitem.active{ box-shadow:inset 3px 0 0 var(--accent); }
+  .opt:hover{ transform:translateX(2px); box-shadow:0 3px 12px rgba(157,143,255,.15); }
+  .realq:hover, .qa:hover{ border-left-width:4px; }
+  .pdflink:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,93,143,.2); }
+  ::selection{ background:rgba(157,143,255,.35); color:#fff; }
+  input[type="checkbox"]{ accent-color:var(--accent); }
+  html{ scroll-behavior:smooth; }
 </style>
 </head>
 <body>

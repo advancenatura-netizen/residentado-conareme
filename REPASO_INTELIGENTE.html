@@ -4,8 +4,8 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎯 Repaso Inteligente</title>
 <style>
-:root{--bg:#0b0f1a;--panel:#161d30;--panel2:#1e2740;--ink:#eaf0fb;--muted:#9aabc9;--accent:#34d3ff;--gold:#ffd166;--green:#22d39a;--red:#ff5d7a;
---MED:#34d3ff;--PED:#22d39a;--CIR:#ff5d7a;--GIN:#ff9e57;--SP:#ffd166;--CB:#a78bfa;}
+:root{--bg:#0a0a1a;--panel:#17152e;--panel2:#221f47;--ink:#f4f2fc;--muted:#aaa2c9;--accent:#9d8fff;--gold:#ffcc4d;--green:#2dd4a8;--red:#ff5d8f;
+--MED:#9d8fff;--PED:#2dd4a8;--CIR:#ff5d8f;--GIN:#ff9459;--SP:#ffcc4d;--CB:#38bdf8;}
 *{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:18px}
 .wrap{max-width:760px;margin:0 auto}
 h1{font-size:1.4rem;margin:0 0 4px}
@@ -13,15 +13,15 @@ h1{font-size:1.4rem;margin:0 0 4px}
 .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:var(--panel);border:1px solid #2a3550;border-radius:12px;padding:12px 16px;margin-bottom:16px}
 .card{background:var(--panel);border:1px solid #2a3550;border-radius:14px;padding:22px;min-height:220px;display:flex;flex-direction:column;justify-content:center}
 .pill{display:inline-block;padding:2px 9px;border-radius:8px;font-size:.7rem;font-weight:800;margin-bottom:10px}
-.pill.MED{background:rgba(52,211,255,.18);color:var(--MED)}.pill.PED{background:rgba(34,211,154,.18);color:var(--PED)}
-.pill.CIR{background:rgba(255,93,122,.18);color:var(--CIR)}.pill.GIN{background:rgba(255,158,87,.18);color:var(--GIN)}
-.pill.SP{background:rgba(255,209,102,.18);color:var(--SP)}.pill.CB{background:rgba(167,139,250,.18);color:var(--CB)}
+.pill.MED{background:rgba(157,143,255,.18);color:var(--MED)}.pill.PED{background:rgba(45,212,168,.18);color:var(--PED)}
+.pill.CIR{background:rgba(255,93,143,.18);color:var(--CIR)}.pill.GIN{background:rgba(255,148,89,.18);color:var(--GIN)}
+.pill.SP{background:rgba(255,204,77,.18);color:var(--SP)}.pill.CB{background:rgba(56,189,248,.18);color:var(--CB)}
 .front{font-size:1.08rem;line-height:1.5}
 .opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
 .opt{background:var(--panel2);border:1px solid #2a3550;border-radius:10px;padding:10px 14px;cursor:pointer;font-size:.92rem;text-align:left}
 .opt:hover{border-color:var(--accent)}
-.opt.correct{border-color:var(--green);background:rgba(34,211,154,.12)}
-.opt.wrong{border-color:var(--red);background:rgba(255,93,122,.12)}
+.opt.correct{border-color:var(--green);background:rgba(45,212,168,.12)}
+.opt.wrong{border-color:var(--red);background:rgba(255,93,143,.12)}
 .back{margin-top:14px;padding-top:14px;border-top:1px dashed #2a3550;font-size:.95rem;color:#d2dcef}
 .explain{margin-top:10px;font-size:.85rem;color:var(--muted)}
 .btnrow{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
@@ -35,6 +35,26 @@ h1{font-size:1.4rem;margin:0 0 4px}
 .reveal{display:none}
 .centermsg{text-align:center;color:var(--muted);padding:40px 10px}
 a.back-link{color:var(--accent);text-decoration:none;font-size:.85rem}
+
+  /* === INTERACTIVIDAD MODERNA (glow + lift + transiciones suaves) === */
+  a, button, .btn, .qcard, .card, .panel, .fija, .chip, .navitem, .pdflink, .realq, .expbtn, .openbtn, .opt, th, .qa, td, .cd, input[type="checkbox"]{
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease, border-color .18s ease, background .18s ease, filter .18s ease;
+  }
+  .btn, button.btn, .openbtn{ box-shadow:0 2px 10px rgba(157,143,255,.0); }
+  .btn:hover, button.btn:hover, .openbtn:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(157,143,255,.35); filter:brightness(1.08); }
+  .btn:active, button.btn:active, .openbtn:active{ transform:translateY(0) scale(.96); box-shadow:0 2px 8px rgba(157,143,255,.25); }
+  .qcard:hover{ box-shadow:0 10px 28px rgba(157,143,255,.22), 0 0 0 1px rgba(157,143,255,.25); }
+  .card:hover, .panel:hover, .fija:hover{ border-color:rgba(157,143,255,.35); box-shadow:0 8px 24px rgba(0,0,0,.28); }
+  .chip:hover{ transform:translateY(-1px); border-color:var(--accent); }
+  .chip.on{ box-shadow:0 0 0 1px rgba(157,143,255,.3), 0 4px 12px rgba(157,143,255,.18); }
+  .navitem:hover{ transform:translateX(3px); }
+  .navitem.active{ box-shadow:inset 3px 0 0 var(--accent); }
+  .opt:hover{ transform:translateX(2px); box-shadow:0 3px 12px rgba(157,143,255,.15); }
+  .realq:hover, .qa:hover{ border-left-width:4px; }
+  .pdflink:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,93,143,.2); }
+  ::selection{ background:rgba(157,143,255,.35); color:#fff; }
+  input[type="checkbox"]{ accent-color:var(--accent); }
+  html{ scroll-behavior:smooth; }
 </style>
 </head>
 <body>
