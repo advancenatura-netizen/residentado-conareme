@@ -62,6 +62,31 @@
   .chkitem label{cursor:pointer; color:#d2dcef;} .chkitem.done label{color:var(--muted); text-decoration:line-through;}
   .pill{display:inline-block; padding:0 6px; border-radius:7px; font-size:.62rem; font-weight:800; margin-left:4px;}
   .pS{background:var(--red);color:#fff;} .pA{background:var(--orange);color:#1a1208;} .pB{background:rgba(52,211,255,.3);color:var(--accent);}
+  /* TEMA EXPANDIDO (contenido reutilizado del Destilado + preguntas reales) */
+  .chkhead{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .expbtn{background:transparent; border:1px solid #2a3550; color:var(--accent); border-radius:7px; padding:2px 8px; font-size:.72rem; cursor:pointer; flex-shrink:0; white-space:nowrap;}
+  .expbtn:hover{border-color:var(--accent);}
+  .temabox{column-span:all; background:var(--panel2); border:1px solid #2a3550; border-radius:12px; margin:8px 0 14px; padding:16px 18px; display:none;}
+  .temabox.show{display:block;}
+  .temabox .p-MED{background:rgba(52,211,255,.18); color:var(--accent);} .temabox .p-PED{background:rgba(34,211,154,.18); color:var(--green);}
+  .temabox .p-CIR{background:rgba(255,93,122,.18); color:var(--red);} .temabox .p-GIN{background:rgba(255,158,87,.18); color:var(--orange);}
+  .temabox .p-SP{background:rgba(255,209,102,.18); color:var(--gold);} .temabox .p-CB{background:rgba(167,139,250,.18); color:var(--violet);}
+  .temabox .freq{display:inline-block; padding:1px 8px; border-radius:8px; font-weight:800; font-size:.72rem; background:var(--red); color:#fff;}
+  .temabox .lbl{display:flex; align-items:center; gap:7px; font-weight:800; color:var(--accent); font-size:.95rem; margin:16px 0 6px;}
+  .temabox .lbl:first-child{margin-top:0;}
+  .temabox .ctx{font-size:.95rem; color:#e6edf8; background:rgba(52,211,255,.05); border-radius:8px; padding:11px 13px;}
+  .temabox .qa{border-left:3px solid var(--gold); padding:8px 0 8px 13px; margin:9px 0;}
+  .temabox .qa .q{font-style:italic; color:var(--gold); font-size:.92rem; margin-bottom:3px;}
+  .temabox .qa .a{font-size:.94rem; color:#e6edf8;} .temabox .qa .a b{color:var(--green);}
+  .temabox .clave{background:rgba(34,211,154,.08); border-left:3px solid var(--green); padding:10px 13px; border-radius:6px; margin-top:12px; font-size:.93rem;} .temabox .clave b{color:var(--green);}
+  .temabox .gloss{background:rgba(167,139,250,.07); border:1px solid rgba(167,139,250,.3); border-radius:8px; padding:10px 13px; margin-top:12px; font-size:.86rem; color:#d2dcef;} .temabox .gloss b{color:var(--violet);} .temabox .gloss .term{color:var(--violet); font-weight:700;}
+  .realq{background:var(--panel); border:1px solid #2a3550; border-radius:10px; padding:12px 14px; margin:10px 0;}
+  .realq .qh{font-weight:700; margin-bottom:6px;}
+  .realq .op{font-size:.86rem; color:var(--muted); margin:2px 0;}
+  .realq .op.ok{color:var(--green); font-weight:700;}
+  .realq .expl{font-size:.85rem; margin-top:8px; padding-top:8px; border-top:1px dashed #2a3550; color:#d2dcef;}
+  .realq .expl b{color:var(--gold);}
+  .realqhead{color:var(--gold); font-weight:800; margin:18px 0 8px; font-size:1rem;}
   .resetbtn{background:transparent; border:1px solid var(--muted); color:var(--muted); border-radius:8px; padding:6px 12px; font-size:.78rem; cursor:pointer; margin-top:10px;}
   .resetbtn:hover{border-color:var(--red); color:var(--red);}
   .note{font-size:.82rem; color:var(--muted);}
@@ -126,6 +151,8 @@
       <h1>MiResidentado — Portal de Estudio CONAREME 2026</h1>
       <div class="subt">Momar, postulante a Pediatría · examen: domingo 6 de septiembre de 2026</div>
       <div class="countdown" id="countdown"></div>
+
+      <div class="panel" id="vacpanel" style="margin-top:14px"></div>
 
       <div class="guide">
         <div class="guidehead">👋 Hola Momar — ¿cómo uso esto?</div>
@@ -207,6 +234,12 @@
 
 </div>
 
+<script src="datos_banco.js"></script>
+<script src="examenes_data.js"></script>
+<script src="datos_examenes/2022.js"></script>
+<script src="datos_examenes/2024.js"></script>
+<script src="datos_examenes/2025.js"></script>
+<script>window.EXAMENES=(window.EXAMENES||[]).concat(typeof EXAMENES_2022!=='undefined'?EXAMENES_2022:[],typeof EXAMENES_2024!=='undefined'?EXAMENES_2024:[],typeof EXAMENES_2025!=='undefined'?EXAMENES_2025:[]);</script>
 <script>
 // NAV
 const items=document.querySelectorAll(".navitem");
@@ -238,21 +271,144 @@ function go(view){setActive(view);}
     '<div class="cd"><div class="n">90</div><div class="l">flashcards</div></div>';
 })();
 
+// VACANTES / PUNTAJE / FECHAS 2026 (datos reales del Cuadro General de Vacantes 2026 y el Cronograma 2026 de conareme.org.pe, verificado 23-jul-2026)
+(function(){
+  function diasHasta(y,m,d,h,mi){
+    const f=new Date(y,m,d,h||23,mi||59), now=new Date();
+    const ms=f-now; if(ms<=0) return null;
+    return Math.ceil(ms/86400000);
+  }
+  const dPago=diasHasta(2026,6,24,18,0);       // viernes 24 jul 2026, 18:00 (fecha límite pago)
+  const dSigesin=diasHasta(2026,6,27,23,59);   // lunes 27 jul 2026, 23:59 (fecha límite inscripción SIGESIN)
+  function urg(d){ return d===null?"vencido":d===0?"¡HOY!":d===1?"mañana":"en "+d+" días"; }
+  const html = `
+    <h2 style="color:var(--accent,#34d3ff);font-size:1.05rem;margin-bottom:10px">🎯 Pediatría 2026 — vacantes, puntaje y fechas clave</h2>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="cd" style="min-width:110px"><div class="n">286</div><div class="l">vacantes Pediatría a nivel nacional</div></div>
+      <div class="cd" style="min-width:110px"><div class="n">221</div><div class="l">libres · 65 cautivas</div></div>
+      <div class="cd" style="min-width:110px"><div class="n">34</div><div class="l">solo en el Instituto Nacional de Salud del Niño</div></div>
+    </div>
+    <p class="sd" style="margin-bottom:10px">Fuente: Cuadro General de Vacantes 2026 de CONAREME (aprobado 3-jul, reconsiderado 7-jul-2026) — suma de los cuadros <b>MINSA (104)</b> + <b>EsSalud (52)</b> + <b>Gobiernos Regionales (130)</b>. No incluye Sanidades FF.AA./PNP ni privados (baja relevancia para postulante de modalidad general). Las sedes con más vacantes en Lima: Instituto Nacional de Salud del Niño (34), Hospital San Bartolomé (14), Hospital Cayetano Heredia (12).</p>
+    <p class="sd" style="margin-bottom:10px">⚠ <b>CONAREME no publica una nota de corte oficial</b> por especialidad (se entra por estricto orden de mérito, sin puntaje mínimo). Como referencia de tus simulacros: históricamente, un <b>acierto ≥70-75%</b> en el examen real (≈14-15/20 de nota) suele dejarte en zona competitiva para Pediatría dado el volumen de vacantes; por debajo de 55-60% el margen se estrecha. Esto es una estimación orientativa, no un dato oficial.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <div class="cd" style="min-width:150px"><div class="n" style="font-size:1.3rem">${dPago===null?"Cerrado":urg(dPago)}</div><div class="l">pago a cuenta recaudadora — vence vie 24 jul 18:00</div></div>
+      <div class="cd" style="min-width:150px"><div class="n" style="font-size:1.3rem">${dSigesin===null?"Cerrado":urg(dSigesin)}</div><div class="l">inscripción SIGESIN — vence lun 27 jul 23:59</div></div>
+    </div>
+  `;
+  document.getElementById("vacpanel").innerHTML = html;
+})();
+
 // TRACKER
 const FIJAS=[["Trauma / ATLS","S"],["Patología biliar","S"],["Ictericia neonatal","S"],["Bioestadística y diseños","S"],["Neumonía","S"],["Tuberculosis","S"],["IAM / SCA","S"],["Preeclampsia","S"],["APGAR / reanimación neonatal","S"],["PTI","A"],["TEP","A"],["Sepsis neonatal","A"],["Convulsión febril","A"],["Cáncer de endometrio","A"],["Vulvovaginitis","A"],["Cetoacidosis diabética","A"],["Meningitis bacteriana","A"],["Anemia falciforme","A"],["Torsión testicular","A"],["FA / TPSV","A"],["Obstrucción/diverticulitis/hernias","A"],["Bronquiolitis","B"],["Hemorragias obstétricas","B"],["Diabetes gestacional","B"],["Intoxicaciones","B"],["EPOC exacerbado","B"],["Cáncer de cérvix","B"],["Taquipnea transitoria RN","B"],["Henoch-Schönlein","B"],["Niveles de prevención","B"]];
+// palabras clave para emparejar cada tema con preguntas reales de examenes_data.js / datos_examenes / datos_banco.js
+const TEMAKW=[
+  ["atls","politraumat","neumotórax a tensión","tórax inestable","trauma abdom","fast "],
+  ["colecistitis","colangitis","coledocolitiasis","murphy","cpre","vía biliar"],
+  ["ictericia neonatal","hemólisis neonat","coombs","kernicterus","bilirrubina"],
+  ["cohorte","casos y controles","sensibilidad","especificidad","odds ratio","riesgo relativo","prevalencia","incidencia","diseño de estudio","diseño epidemiol"],
+  ["neumonía","curb-65","curb65","neumococo"],
+  ["tuberculosis","tbc","baciloscop","piridoxina","isoniacida","rifampicina"],
+  ["infarto","síndrome coronario","sindrome coronario","troponina","angioplastia","iam "],
+  ["preeclampsia","eclampsia","sulfato de magnesio"],
+  ["apgar","reanimación neonatal","reanimacion neonatal","ventilación a presión positiva"],
+  ["trombocitopenia inmune","púrpura trombocitopénica","purpura trombocitopenica","pti "],
+  ["tromboembolismo pulmonar","embolia pulmonar","dímero d","dimero d","angio-tc","angiotc"],
+  ["sepsis neonatal","estreptococo del grupo b","corioamnionitis"],
+  ["convulsión febril","convulsion febril"],
+  ["cáncer de endometrio","cancer de endometrio","sangrado postmenopáusico","sangrado postmenopausico"],
+  ["vulvovaginitis","vaginosis","tricomoniasis","candidiasis vaginal","amsel"],
+  ["cetoacidosis","kussmaul","estado hiperosmolar"],
+  ["meningitis"],
+  ["anemia falciforme","drepanocitosis","drepanocítica","drepanocitica"],
+  ["torsión testicular","torsion testicular","cremastérico","cremasterico"],
+  ["fibrilación auricular","fibrilacion auricular","tpsv","adenosina","taquicardia paroxística","taquicardia paroxistica"],
+  ["obstrucción intestinal","obstruccion intestinal","diverticulitis","hinchey","hernia","bridas"],
+  ["bronquiolitis","virus sincitial"],
+  ["atonía uterina","atonia uterina","placenta previa","desprendimiento de placenta","hemorragia postparto","hemorragia post parto"],
+  ["diabetes gestacional","ptog"],
+  ["intoxicación","intoxicacion","organofosforado","antídoto","antidoto","naloxona"],
+  ["epoc"],
+  ["cáncer de cérvix","cancer de cervix","cáncer cervical","cancer cervical","figo"],
+  ["taquipnea transitoria"],
+  ["henoch-schönlein","henoch-schonlein","henoch schönlein","henoch schonlein","púrpura de henoch","purpura de henoch"],
+  ["nivel de prevención","niveles de prevención","nivel de prevencion","niveles de prevencion","prevención primaria","prevencion primaria","leavell"]
+];
 const KEY="conareme_progreso_v1";
 let state=JSON.parse(localStorage.getItem(KEY)||"{}");
 const cl=document.getElementById("checklist");
 FIJAS.forEach((f,i)=>{
   const id="fija"+i, div=document.createElement("div");
   div.className="chkitem"+(state[id]?" done":"");
-  div.innerHTML='<input type="checkbox" id="'+id+'" '+(state[id]?"checked":"")+'><label for="'+id+'">'+(i+1)+'. '+f[0]+'<span class="pill p'+f[1]+'">'+f[1]+'</span></label>';
+  div.innerHTML='<div class="chkhead" style="width:100%"><span><input type="checkbox" id="'+id+'" '+(state[id]?"checked":"")+'><label for="'+id+'" style="margin-left:6px">'+(i+1)+'. '+f[0]+'<span class="pill p'+f[1]+'">'+f[1]+'</span></label></span><button class="expbtn" onclick="toggleTema('+i+')" id="expbtn'+i+'">▸ Ver tema</button></div>';
   div.querySelector("input").addEventListener("change",function(){state[id]=this.checked;localStorage.setItem(KEY,JSON.stringify(state));div.className="chkitem"+(this.checked?" done":"");updateProg();});
   cl.appendChild(div);
+  const box=document.createElement("div"); box.className="temabox"; box.id="temabox"+i;
+  cl.appendChild(box);
 });
 function updateProg(){const n=FIJAS.filter((f,i)=>state["fija"+i]).length,pct=Math.round(n/FIJAS.length*100);document.getElementById("progFill").style.width=pct+"%";document.getElementById("progText").textContent=n+" de "+FIJAS.length+" temas marcados ("+pct+"%)";}
 function resetProg(){if(confirm("¿Reiniciar todo tu progreso?")){state={};localStorage.removeItem(KEY);document.querySelectorAll(".chkitem input").forEach(c=>c.checked=false);document.querySelectorAll(".chkitem").forEach(c=>c.className="chkitem");updateProg();}}
 updateProg();
+
+// CONTENIDO POR TEMA (reutiliza el Destilado ya escrito) + preguntas reales emparejadas
+let destiladoBodies=null; // se llena una sola vez con fetch()
+async function getDestiladoBodies(){
+  if(destiladoBodies) return destiladoBodies;
+  try{
+    const res=await fetch("DESTILADO_30_FIJAS_EXPLICADO.html");
+    const html=await res.text();
+    const doc=new DOMParser().parseFromString(html,"text/html");
+    destiladoBodies=[...doc.querySelectorAll(".fija")].map(f=>({
+      head:f.querySelector(".head")?f.querySelector(".head").innerHTML:"",
+      body:f.querySelector(".body")?f.querySelector(".body").innerHTML:""
+    }));
+  }catch(err){ destiladoBodies=[]; }
+  return destiladoBodies;
+}
+const ANAMES2={MED:"Medicina",PED:"Pediatría",CIR:"Cirugía",GIN:"Gineco-Obst.",SP:"Salud Pública",CB:"C. Básicas"};
+function preguntasParaTema(i){
+  const kws=TEMAKW[i]||[];
+  if(kws.length===0) return [];
+  const pool=[]
+    .concat(typeof BANK!=="undefined"?BANK:[])
+    .concat(window.EXAMENES||[]);
+  const seen=new Set(), out=[];
+  pool.forEach(q=>{
+    if(!q||!q.q||!Array.isArray(q.o)) return;
+    const hay=((q.tema||"")+" "+q.q).toLowerCase();
+    if(!kws.some(k=>hay.includes(k))) return;
+    const key=(q.q||"").slice(0,60);
+    if(seen.has(key)) return;
+    seen.add(key); out.push(q);
+  });
+  return out;
+}
+const L5=["A","B","C","D","E","F"];
+function renderPreguntas(qs){
+  if(qs.length===0) return "<p class='sd'>Todavía no hay preguntas reales identificadas para este tema exacto en el banco cargado — usa el Destilado de arriba y practica este tema en Simulacros/Banco filtrando por área.</p>";
+  return qs.map((q,idx)=>{
+    const opts=q.o.map((op,j)=>"<div class='op"+(j===q.c?" ok":"")+"'>"+L5[j]+". "+op+(j===q.c?" ✓":"")+"</div>").join("");
+    return "<div class='realq'><div class='qh'>"+(idx+1)+". <span class='pill p-"+q.area+"'>"+(ANAMES2[q.area]||q.area)+"</span> "+q.q+"</div>"+opts+(q.e?"<div class='expl'><b>Explicación:</b> "+q.e+"</div>":"")+"</div>";
+  }).join("");
+}
+async function toggleTema(i){
+  const box=document.getElementById("temabox"+i), btn=document.getElementById("expbtn"+i);
+  const showing=box.classList.contains("show");
+  if(showing){ box.classList.remove("show"); btn.textContent="▸ Ver tema"; return; }
+  btn.textContent="▾ Ocultar"; box.classList.add("show");
+  if(!box.dataset.loaded){
+    box.innerHTML="<p class='sd'>Cargando contenido…</p>";
+    const bodies=await getDestiladoBodies();
+    const d=bodies[i];
+    const qs=preguntasParaTema(i);
+    let html="";
+    if(d) html+=d.body;
+    else html+="<p class='sd'>No se pudo cargar el contenido del Destilado para este tema.</p>";
+    html+="<div class='realqhead'>📝 Preguntas reales relacionadas con este tema ("+qs.length+")</div>";
+    html+=renderPreguntas(qs);
+    box.innerHTML=html;
+    box.dataset.loaded="1";
+  }
+}
 </script>
 </body>
 </html>

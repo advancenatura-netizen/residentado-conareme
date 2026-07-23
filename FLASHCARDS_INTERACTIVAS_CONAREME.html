@@ -58,12 +58,32 @@
 
 <div class="wrap">
   <div class="panel" id="config">
-    <label>Elige las áreas/temas a repasar:</label>
+    <label>Elige las áreas a repasar:</label>
+    <div style="margin:4px 0"><button class="btn ghost" style="padding:5px 12px;font-size:.78rem" onclick="setAllAreas(true)">Todo</button> <button class="btn ghost" style="padding:5px 12px;font-size:.78rem" onclick="setAllAreas(false)">Ninguno</button></div>
     <div class="chips" id="chips"></div>
-    <div style="margin-top:8px">
-      <label>Modo:</label><br>
-      <button class="btn green" onclick="start(false)">📚 Repaso normal</button>
-      <button class="btn gold" onclick="start(true)">🔀 Mezclar (aleatorio)</button>
+
+    <div style="margin-top:12px">
+      <label>Personaliza por subtema (opcional — deja todos activos para no filtrar):</label>
+      <div style="margin:4px 0"><button class="btn ghost" style="padding:5px 12px;font-size:.78rem" onclick="setAllSub(true)">Todo</button> <button class="btn ghost" style="padding:5px 12px;font-size:.78rem" onclick="setAllSub(false)">Ninguno</button></div>
+      <div class="chips" id="subChips" style="max-height:150px;overflow-y:auto"></div>
+    </div>
+
+    <div style="margin-top:12px">
+      <label>¿Cuántas tarjetas?</label><br>
+      <div class="chips" id="cantChips">
+        <div class="chip" data-n="10">10</div>
+        <div class="chip" data-n="20">20</div>
+        <div class="chip on" data-n="0">Todas las que califiquen</div>
+        <div class="chip" data-n="custom">Otra cantidad…</div>
+      </div>
+      <input type="number" id="cantCustom" min="1" placeholder="ej. 15" class="hidden" style="width:110px;background:var(--panel2);color:var(--ink);border:1px solid #2a3550;border-radius:8px;padding:8px 10px;margin-top:6px;">
+      <div class="muted" id="cantInfo" style="margin-top:6px;font-size:.8rem"></div>
+    </div>
+
+    <div style="margin-top:10px">
+      <label>Orden:</label><br>
+      <button class="btn green" onclick="start(false)">📚 Ordenado (como aparecen)</button>
+      <button class="btn gold" onclick="start(true)">🔀 Aleatorio (mezclado)</button>
     </div>
     <p style="font-size:.8rem;color:var(--muted);margin-top:10px">En cada tarjeta: lee la pregunta, piensa tu respuesta, toca la tarjeta para voltearla y comprobar. Luego marca si la sabías o no — al final repasas solo las que fallaste.</p>
   </div>
@@ -104,18 +124,53 @@
 <script src="datos_flashcards.js"></script>
 <script>
 
-let pool=[],i=0,ok=0,bad=0,wrong=[],graded=new Set();
+let pool=[],i=0,ok=0,bad=0,wrong=[],graded=new Set(),wantCount=0;
 const chipsEl=document.getElementById("chips");
 const groups=[...new Set(CARDS.map(c=>c.t.split(" · ")[0]))];
 const GN={PED:"Pediatría",MED:"Medicina",CIR:"Cirugía",GIN:"Gineco-Obst.",SP:"Salud Pública",CB:"C. Básicas"};
 let active=new Set(groups);
-groups.forEach(g=>{const d=document.createElement("div");d.className="chip on";d.textContent=GN[g]+" ("+CARDS.filter(c=>c.t.startsWith(g)).length+")";d.onclick=()=>{d.classList.toggle("on");active.has(g)?active.delete(g):active.add(g);};chipsEl.appendChild(d);});
+const ALL_SUBS=[...new Set(CARDS.map(c=>c.t))].sort((a,b)=>a.localeCompare(b,'es'));
+let activeSub=new Set(ALL_SUBS);
+groups.forEach(g=>{const d=document.createElement("div");d.className="chip on";d.dataset.g=g;d.textContent=GN[g]+" ("+CARDS.filter(c=>c.t.startsWith(g)).length+")";d.onclick=()=>{d.classList.toggle("on");active.has(g)?active.delete(g):active.add(g);updateCantInfo();};chipsEl.appendChild(d);});
+
+function buildSubChips(){
+  const sc=document.getElementById("subChips"); sc.innerHTML="";
+  ALL_SUBS.forEach(t=>{
+    const d=document.createElement("div");
+    d.className="chip"+(activeSub.has(t)?" on":"");
+    d.style.fontSize=".75rem";
+    d.textContent=t+" ("+CARDS.filter(c=>c.t===t).length+")";
+    d.onclick=()=>{d.classList.toggle("on");activeSub.has(t)?activeSub.delete(t):activeSub.add(t);updateCantInfo();};
+    sc.appendChild(d);
+  });
+}
+function setAllAreas(on){active=on?new Set(groups):new Set();chipsEl.querySelectorAll(".chip").forEach(d=>d.classList.toggle("on",on));updateCantInfo();}
+function setAllSub(on){activeSub=on?new Set(ALL_SUBS):new Set();buildSubChips();updateCantInfo();}
+function matchingPool(){return CARDS.filter(c=>active.has(c.t.split(" · ")[0])&&activeSub.has(c.t));}
+function updateCantInfo(){
+  const n=matchingPool().length;
+  document.getElementById("cantInfo").textContent=n+" tarjeta"+(n===1?"":"s")+" disponibles"+(wantCount>0?" · se usarán "+Math.min(wantCount,n):"");
+}
+document.querySelectorAll("#cantChips .chip").forEach(c=>{
+  c.onclick=()=>{
+    document.querySelectorAll("#cantChips .chip").forEach(x=>x.classList.remove("on"));
+    c.classList.add("on");
+    const custom=document.getElementById("cantCustom");
+    if(c.dataset.n==="custom"){custom.classList.remove("hidden");custom.focus();wantCount=parseInt(custom.value)||0;}
+    else{custom.classList.add("hidden");wantCount=parseInt(c.dataset.n);}
+    updateCantInfo();
+  };
+});
+document.getElementById("cantCustom").addEventListener("input",e=>{wantCount=parseInt(e.target.value)||0;updateCantInfo();});
+buildSubChips();
+updateCantInfo();
 
 function shuffle(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]];}return a;}
 function start(mix){
-  pool=CARDS.filter(c=>active.has(c.t.split(" · ")[0]));
-  if(pool.length===0){alert("Selecciona al menos un área.");return;}
+  pool=matchingPool().slice();
+  if(pool.length===0){alert("Selecciona al menos un área/subtema con tarjetas.");return;}
   if(mix)shuffle(pool);
+  if(wantCount>0)pool=pool.slice(0,wantCount);
   i=0;ok=0;bad=0;wrong=[];graded=new Set();
   document.getElementById("config").classList.add("hidden");
   document.getElementById("done").classList.add("hidden");

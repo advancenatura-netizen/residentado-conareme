@@ -100,7 +100,8 @@
     <div class="stat"><div>Correctas <b id="rOk"></b></div><div>Incorrectas <b id="rBad"></b></div><div>Tiempo <b id="rTime"></b></div><div id="rNotaWrap" style="display:none">Nota /20 <b id="rNota"></b></div></div>
     <div id="byArea" style="margin-top:14px"></div>
     <div id="competit" class="warn hidden" style="margin-top:12px"></div>
-    <div style="margin-top:14px;text-align:center"><button class="btn" onclick="location.reload()">Volver al menú</button> <button class="btn ghost" onclick="reviewWrong()">Revisar falladas</button></div>
+    <div style="margin-top:14px;text-align:center"><button class="btn" onclick="location.reload()">Volver al menú</button> <button class="btn ghost" onclick="reviewWrong()">Repasar en modo tarjeta</button></div>
+    <div id="detailFeedback" style="margin-top:20px"></div>
   </div>
 </div>
 <footer>Simulacros oficiales CONAREME · banco de preguntas reales 2018-2023 · claves por IA, contrasta con guías · para Momar.</footer>
@@ -185,7 +186,7 @@ function choose(i,btn){
   if(aStats[q.area])aStats[q.area].tot++;
   document.querySelectorAll("#opts .opt").forEach(o=>o.classList.add("disabled"));
   if(i===q.c){ok++;if(aStats[q.area])aStats[q.area].ok++;btn.classList.add("correct");}
-  else{bad++;btn.classList.add("wrong");wrong.push(q);if(logging)saveError(q,i);if(!timed)document.querySelectorAll("#opts .opt")[q.c].classList.add("correct");}
+  else{bad++;btn.classList.add("wrong");wrong.push(Object.assign({_chosen:i},q));if(logging)saveError(q,i);if(!timed)document.querySelectorAll("#opts .opt")[q.c].classList.add("correct");}
   if(!timed){document.getElementById("exp").className="exp show";document.getElementById("exp").innerHTML="<b>Respuesta: "+["A","B","C","D","E","F"][q.c]+".</b> "+(q.e||"");}
   document.getElementById("btnNext").classList.remove("hidden");
   if(timed)setTimeout(next,200);
@@ -220,6 +221,25 @@ function finish(){
   let html="<h2 style='font-size:1rem;color:var(--gold)'>Desempeño por área (esta sesión)</h2>";
   AREAS.forEach(a=>{const s=aStats[a];if(!s||s.tot===0)return;const p=Math.round(s.ok/s.tot*100);html+="<div class='arearow'><div class='arealbl'><span class='pill "+a+"'>"+ANAMES[a]+"</span></div><div class='areabar'><div style='width:"+Math.max(p,8)+"%;background:var(--"+a+")'>"+s.ok+"/"+s.tot+" ("+p+"%)</div></div></div>";});
   document.getElementById("byArea").innerHTML=html;
+  renderDetailFeedback();
+}
+function renderDetailFeedback(){
+  const box=document.getElementById("detailFeedback");
+  if(wrong.length===0){box.innerHTML="<div class='warn'>🎉 No fallaste ninguna pregunta en esta sesión.</div>";return;}
+  const L=["A","B","C","D","E","F"];
+  let html="<h2 style='font-size:1rem;color:var(--red);margin-bottom:6px'>📕 Feedback de tus "+wrong.length+" respuesta"+(wrong.length===1?"":"s")+" errónea"+(wrong.length===1?"":"s")+"</h2>";
+  wrong.forEach((q,idx2)=>{
+    const chosenTxt = (typeof q._chosen==="number" && q.o[q._chosen]!==undefined) ? L[q._chosen]+". "+q.o[q._chosen] : "—";
+    const correctTxt = L[q.c]+". "+q.o[q.c];
+    html+="<div class='panel' style='margin:10px 0;padding:14px'>"
+      +"<div style='margin-bottom:6px'><span class='pill "+q.area+"'>"+(ANAMES[q.area]||q.area)+"</span> <span class='muted'>"+(q.tema||"")+" · "+(q.ex||"Banco")+(q.n?" · N°"+q.n:"")+"</span></div>"
+      +"<div style='font-weight:600;margin-bottom:8px'>"+(idx2+1)+". "+q.q+"</div>"
+      +"<div style='color:var(--red);margin-bottom:4px'>✗ Tu respuesta: "+chosenTxt+"</div>"
+      +"<div style='color:var(--green);margin-bottom:8px'>✓ Respuesta correcta: "+correctTxt+"</div>"
+      +(q.e?"<div class='exp show'><b>Por qué:</b> "+q.e+"</div>":"")
+      +"</div>";
+  });
+  box.innerHTML=html;
 }
 function reviewWrong(){if(wrong.length===0){alert("¡No fallaste ninguna! 🎉");return;}queue=wrong.slice();idx=0;ok=0;bad=0;wrong=[];timed=false;isSim=false;logging=false;AREAS.forEach(a=>aStats[a]={ok:0,tot:0});document.getElementById("result").classList.add("hidden");document.getElementById("quiz").classList.remove("hidden");document.getElementById("timer").classList.add("hidden");render();}
 function quit(){if(timerInt)clearInterval(timerInt);if(ok+bad>0)finish();else location.reload();}

@@ -84,6 +84,24 @@
       </div>
     </div>
     <div style="margin-top:10px">
+      <label>Temas específicos (opcional — deja todos activos para no filtrar por tema):</label>
+      <div style="margin:6px 0"><input type="text" id="temaSearch" placeholder="🔍 Buscar tema..." style="width:100%;max-width:320px;background:var(--panel2);color:var(--ink);border:1px solid #2a3550;border-radius:8px;padding:8px 10px;"></div>
+      <div style="margin:4px 0"><button class="btn ghost" style="padding:5px 12px;font-size:.78rem" onclick="setAllTemas(true)">Todos</button> <button class="btn ghost" style="padding:5px 12px;font-size:.78rem" onclick="setAllTemas(false)">Ninguno</button></div>
+      <div class="chips" id="temaChips" style="max-height:160px;overflow-y:auto"></div>
+    </div>
+    <div style="margin-top:14px">
+      <label>¿Cuántas preguntas quieres hacer?</label><br>
+      <div class="chips" id="cantChips">
+        <div class="chip" data-n="10">10</div>
+        <div class="chip" data-n="20">20</div>
+        <div class="chip" data-n="50">50</div>
+        <div class="chip on" data-n="0">Todas las que califiquen</div>
+        <div class="chip" data-n="custom">Otra cantidad…</div>
+      </div>
+      <input type="number" id="cantCustom" min="1" placeholder="ej. 35" class="hidden" style="width:110px;background:var(--panel2);color:var(--ink);border:1px solid #2a3550;border-radius:8px;padding:8px 10px;margin-top:6px;">
+      <div class="muted" id="cantInfo" style="margin-top:6px"></div>
+    </div>
+    <div style="margin-top:10px">
       <label>Modo:</label><br>
       <button class="btn green" onclick="start('estudio')">📖 Modo estudio (feedback inmediato)</button>
       <button class="btn gold" onclick="start('simulacro')">⏱️ Modo simulacro (cronometrado)</button>
@@ -136,6 +154,9 @@
 const AREAS=["MED","PED","CIR","GIN","SP","CB"];
 const ANAMES={MED:"Medicina",PED:"Pediatría",CIR:"Cirugía",GIN:"Gineco-Obst.",SP:"Salud Pública",CB:"C. Básicas"};
 let activeAreas=new Set(AREAS), activeLvls=new Set(["S","A","B"]);
+const ALL_TEMAS=[...new Set(BANK.map(q=>q.tema).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+let activeTemas=new Set(ALL_TEMAS);
+let wantCount=0; // 0 = todas las que califiquen
 let queue=[], idx=0, mode="estudio", okCount=0, badCount=0, answered=false, wrongList=[], areaStats={}, t0=0, timerInt=null;
 
 function buildChips(){
@@ -144,19 +165,59 @@ function buildChips(){
     const d=document.createElement("div");
     d.className="chip on"; d.textContent=ANAMES[a]+" ("+BANK.filter(q=>q.area===a).length+")";
     d.dataset.area=a;
-    d.onclick=()=>{ d.classList.toggle("on"); if(activeAreas.has(a))activeAreas.delete(a); else activeAreas.add(a); };
+    d.onclick=()=>{ d.classList.toggle("on"); if(activeAreas.has(a))activeAreas.delete(a); else activeAreas.add(a); updateCantInfo(); };
     ac.appendChild(d);
   });
   document.querySelectorAll("#lvlChips .chip").forEach(c=>{
-    c.onclick=()=>{ c.classList.toggle("on"); const l=c.dataset.lvl; if(activeLvls.has(l))activeLvls.delete(l); else activeLvls.add(l); };
+    c.onclick=()=>{ c.classList.toggle("on"); const l=c.dataset.lvl; if(activeLvls.has(l))activeLvls.delete(l); else activeLvls.add(l); updateCantInfo(); };
   });
+  buildTemaChips("");
+  document.getElementById("temaSearch").addEventListener("input",e=>buildTemaChips(e.target.value));
+  document.querySelectorAll("#cantChips .chip").forEach(c=>{
+    c.onclick=()=>{
+      document.querySelectorAll("#cantChips .chip").forEach(x=>x.classList.remove("on"));
+      c.classList.add("on");
+      const custom=document.getElementById("cantCustom");
+      if(c.dataset.n==="custom"){ custom.classList.remove("hidden"); custom.focus(); wantCount=parseInt(custom.value)||0; }
+      else{ custom.classList.add("hidden"); wantCount=parseInt(c.dataset.n); }
+      updateCantInfo();
+    };
+  });
+  document.getElementById("cantCustom").addEventListener("input",e=>{ wantCount=parseInt(e.target.value)||0; updateCantInfo(); });
+  updateCantInfo();
+}
+function buildTemaChips(filterText){
+  const tc=document.getElementById("temaChips"); tc.innerHTML="";
+  const ft=(filterText||"").toLowerCase();
+  ALL_TEMAS.filter(t=>t.toLowerCase().includes(ft)).forEach(t=>{
+    const d=document.createElement("div");
+    d.className="chip"+(activeTemas.has(t)?" on":"");
+    d.style.fontSize=".75rem";
+    d.textContent=t+" ("+BANK.filter(q=>q.tema===t).length+")";
+    d.onclick=()=>{ d.classList.toggle("on"); if(activeTemas.has(t))activeTemas.delete(t); else activeTemas.add(t); updateCantInfo(); };
+    tc.appendChild(d);
+  });
+}
+function setAllTemas(on){
+  activeTemas = on ? new Set(ALL_TEMAS) : new Set();
+  buildTemaChips(document.getElementById("temaSearch").value);
+  updateCantInfo();
+}
+function matchingPool(){
+  return BANK.filter(q=>activeAreas.has(q.area)&&activeLvls.has(q.nivel)&&activeTemas.has(q.tema));
+}
+function updateCantInfo(){
+  const n=matchingPool().length;
+  document.getElementById("cantInfo").textContent=n+" pregunta"+(n===1?"":"s")+" disponibles con estos filtros"+(wantCount>0?" · se usarán "+Math.min(wantCount,n):"");
 }
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function start(m){
   mode=m;
-  queue=shuffle(BANK.filter(q=>activeAreas.has(q.area)&&activeLvls.has(q.nivel)).slice());
-  if(queue.length===0){alert("Selecciona al menos un área y un nivel con preguntas.");return;}
+  let pool=shuffle(matchingPool().slice());
+  if(pool.length===0){alert("Selecciona al menos un área, un nivel y un tema con preguntas.");return;}
+  if(wantCount>0) pool=pool.slice(0,wantCount);
+  queue=pool;
   idx=0;okCount=0;badCount=0;wrongList=[];areaStats={};
   AREAS.forEach(a=>areaStats[a]={ok:0,tot:0});
   document.getElementById("config").classList.add("hidden");
