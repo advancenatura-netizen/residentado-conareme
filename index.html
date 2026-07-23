@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MiResidentado · Portal CONAREME 2026</title>
+<title>MOMAR EVOLUTION · Portal CONAREME 2026</title>
 <style>
   :root{
     --bg:#0a0a1a; --panel:#17152e; --panel2:#221f47; --ink:#f4f2fc; --muted:#aaa2c9;
@@ -14,8 +14,10 @@
   body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); display:flex; min-height:100vh;}
   /* SIDEBAR */
   .sidebar{width:248px; background:linear-gradient(180deg,#13203a,#0a0a1a); border-right:1px solid #2a3550; padding:18px 14px; position:fixed; top:0; bottom:0; left:0; overflow-y:auto; z-index:50;}
-  .mamor{display:flex;align-items:center;justify-content:center;gap:8px;font-size:1.5rem;font-weight:900;padding:6px 8px 10px;margin-bottom:4px;border-bottom:1px solid #2a3550;letter-spacing:1px;}
+  .mamor{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-weight:900;padding:10px 8px 10px;margin-bottom:4px;border-bottom:1px solid #2a3550;}
+  .mamor-row{display:flex;align-items:center;gap:6px;font-size:1.2rem;letter-spacing:.5px;}
   .mamor-txt{background:linear-gradient(90deg,#9d8fff,#38bdf8,#ff5d8f);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;}
+  .mamor-evo{font-size:.62rem;color:var(--muted);letter-spacing:3px;font-weight:800;margin-top:1px;}
   .mamor .heart{color:#ff5d8f;animation:beat 1.3s ease-in-out infinite;display:inline-block;}
   @keyframes beat{0%,100%{transform:scale(1);}15%{transform:scale(1.25);}30%{transform:scale(1);}45%{transform:scale(1.18);}}
   .brand{font-size:1.15rem; font-weight:900; color:#fff; padding:6px 8px 4px;}
@@ -38,7 +40,7 @@
   /* INICIO */
   .inner{padding:26px; max-width:1000px; margin:0 auto; width:100%;}
   h1{font-size:1.8rem; color:#fff; margin-bottom:6px;}
-  .herobrand{display:flex;align-items:center;gap:12px;font-size:2.6rem;font-weight:900;letter-spacing:2px;margin-bottom:6px;}
+  .herobrand{display:flex;align-items:center;gap:10px;font-size:2rem;font-weight:900;letter-spacing:1px;margin-bottom:6px;flex-wrap:wrap;}
   .hb-txt{background:linear-gradient(90deg,#9d8fff,#38bdf8,#ff5d8f);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   .hb-heart{color:#ff5d8f;animation:beat 1.3s ease-in-out infinite;display:inline-block;}
   .subt{color:var(--accent); font-weight:600; margin-bottom:18px;}
@@ -137,8 +139,8 @@
 <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
 
 <nav class="sidebar">
-  <div class="mamor">🩺 <span class="mamor-txt">MAMOR</span> <span class="heart">❤</span></div>
-  <div class="brand">Mi<span>Residentado</span><small>CONAREME 2026 · Momar</small></div>
+  <div class="mamor"><div class="mamor-row">🩺 <span class="mamor-txt">MOMAR</span> <span class="heart">❤</span></div><div class="mamor-evo">EVOLUTION</div></div>
+  <div class="brand">Portal <span>CONAREME</span><small>Preparación 2026 · Momar</small></div>
 
   <div class="navsec">Centro</div>
   <a class="navitem active" data-view="inicio"><span class="em">🏠</span> Inicio</a>
@@ -168,8 +170,8 @@
   <!-- INICIO -->
   <section class="view active" id="view-inicio">
     <div class="inner">
-      <div class="herobrand">🩺 <span class="hb-txt">MAMOR</span> <span class="hb-heart">❤</span></div>
-      <h1>MiResidentado — Portal de Estudio CONAREME 2026</h1>
+      <div class="herobrand">🩺 <span class="hb-txt">MOMAR EVOLUTION</span> <span class="hb-heart">❤</span></div>
+      <h1>MOMAR EVOLUTION — Portal de Estudio CONAREME 2026</h1>
       <div class="subt">Momar, postulante a Pediatría · examen: domingo 6 de septiembre de 2026</div>
       <div class="countdown" id="countdown"></div>
 

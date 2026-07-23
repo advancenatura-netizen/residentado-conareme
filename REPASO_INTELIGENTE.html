@@ -18,12 +18,16 @@ h1{font-size:1.4rem;margin:0 0 4px}
 .pill.SP{background:rgba(255,204,77,.18);color:var(--SP)}.pill.CB{background:rgba(56,189,248,.18);color:var(--CB)}
 .front{font-size:1.08rem;line-height:1.5}
 .opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
-.opt{background:var(--panel2);border:1px solid #2a3550;border-radius:10px;padding:10px 14px;cursor:pointer;font-size:.92rem;text-align:left}
+.opt{background:var(--panel2);border:1px solid #2a3550;border-radius:10px;padding:12px 15px;cursor:pointer;font-size:.95rem;text-align:left;color:var(--ink);font-family:inherit;display:block;width:100%}
 .opt:hover{border-color:var(--accent)}
-.opt.correct{border-color:var(--green);background:rgba(45,212,168,.12)}
-.opt.wrong{border-color:var(--red);background:rgba(255,93,143,.12)}
+.opt.correct{border-color:var(--green);background:rgba(45,212,168,.16);color:#eafff8}
+.opt.wrong{border-color:var(--red);background:rgba(255,93,143,.16);color:#ffeef4}
+.opt.disabled{cursor:default;opacity:.92}
 .back{margin-top:14px;padding-top:14px;border-top:1px dashed #2a3550;font-size:.95rem;color:#d2dcef}
-.explain{margin-top:10px;font-size:.85rem;color:var(--muted)}
+.explain{margin-top:12px;font-size:.95rem;line-height:1.6;color:var(--ink);background:rgba(157,143,255,.08);border:1px solid rgba(157,143,255,.25);border-radius:10px;padding:14px 16px}
+.explain b{color:var(--accent)}
+.explain .correcta{color:var(--green);font-weight:800;display:block;margin-bottom:6px}
+.explain .incorrecta{color:var(--red);font-weight:800;display:block;margin-bottom:6px}
 .btnrow{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
 .btn{flex:1;min-width:90px;border:none;border-radius:10px;padding:10px;font-weight:800;font-size:.82rem;cursor:pointer;color:#06121a}
 .b0{background:var(--red)}.b1{background:var(--gold)}.b2{background:var(--accent)}.b3{background:var(--green)}
@@ -159,6 +163,7 @@ function renderMCQ(it){
     </div>
     <div class="opts reveal" id="opts"></div>
     <div class="explain reveal" id="expl"></div>
+    <button class="bigbtn reveal" id="btnSiguiente" style="margin-top:14px;display:none" onclick="avanzar()">Siguiente pregunta →</button>
   </div>`;
 }
 
@@ -171,22 +176,36 @@ function elegirConfianza(n){
   optsEl.innerHTML=it.o.map((op,i)=>`<button class="opt" data-i="${i}" onclick="responder(${i})">${String.fromCharCode(65+i)}. ${op}</button>`).join("");
 }
 
+let gradoPendiente=null;
+const L6=["A","B","C","D","E","F"];
 function responder(i){
   const it=cola[idx];
   const botones=[...document.querySelectorAll("#opts .opt")];
-  botones.forEach(b=>b.onclick=null);
+  botones.forEach(b=>{ b.onclick=null; b.classList.add("disabled"); });
   botones[it.c].classList.add("correct");
   const acerto = i===it.c;
   if(!acerto) botones[i].classList.add("wrong");
   const explEl=document.getElementById("expl");
   explEl.style.display="block";
-  explEl.innerHTML=(acerto?"✅ ¡Correcto! ":"❌ Incorrecto. ")+(it.e||"");
+  const encabezado = acerto
+    ? `<span class="correcta">✅ ¡Correcto! Respuesta: ${L6[it.c]}. ${it.o[it.c]}</span>`
+    : `<span class="incorrecta">❌ Incorrecto — tú elegiste ${L6[i]}. La respuesta correcta es ${L6[it.c]}. ${it.o[it.c]}</span>`;
+  explEl.innerHTML = encabezado + `<b>Por qué:</b> ${it.e||"(esta pregunta no tiene explicación registrada todavía)"}`;
   SRS.registrarConfianza(confActual, acerto);
   // deriva la calificación SM-2 de la confianza + acierto (menos fricción que pedir 2 pasos)
   let g;
   if(!acerto) g=0;
   else g = confActual===2?3 : confActual===1?2 : 1;
-  setTimeout(()=>calificar(g), 900);
+  gradoPendiente=g;
+  const btn=document.getElementById("btnSiguiente");
+  btn.style.display="block";
+  btn.textContent = idx>=cola.length-1 ? "Terminar sesión 🏁" : "Siguiente pregunta →";
+}
+
+function avanzar(){
+  if(gradoPendiente===null) return;
+  calificar(gradoPendiente);
+  gradoPendiente=null;
 }
 
 function calificar(g){
