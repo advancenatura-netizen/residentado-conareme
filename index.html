@@ -234,12 +234,6 @@
 
 </div>
 
-<script src="datos_banco.js"></script>
-<script src="examenes_data.js"></script>
-<script src="datos_examenes/2022.js"></script>
-<script src="datos_examenes/2024.js"></script>
-<script src="datos_examenes/2025.js"></script>
-<script>window.EXAMENES=(window.EXAMENES||[]).concat(typeof EXAMENES_2022!=='undefined'?EXAMENES_2022:[],typeof EXAMENES_2024!=='undefined'?EXAMENES_2024:[],typeof EXAMENES_2025!=='undefined'?EXAMENES_2025:[]);</script>
 <script>
 // NAV
 const items=document.querySelectorAll(".navitem");
@@ -350,6 +344,33 @@ function resetProg(){if(confirm("¿Reiniciar todo tu progreso?")){state={};local
 updateProg();
 
 // CONTENIDO POR TEMA (reutiliza el Destilado ya escrito) + preguntas reales emparejadas
+// Los bancos de preguntas (~1.2MB) se cargan bajo demanda, solo la primera vez que el usuario
+// expande un tema, en vez de en cada carga de index.html (optimizacion de rendimiento).
+let heavyDataPromise=null;
+function loadScript(src){
+  return new Promise((resolve,reject)=>{
+    const s=document.createElement("script");
+    s.src=src; s.onload=resolve; s.onerror=()=>resolve(); // no bloquear si un archivo falta
+    document.body.appendChild(s);
+  });
+}
+function loadHeavyData(){
+  if(heavyDataPromise) return heavyDataPromise;
+  heavyDataPromise=Promise.all([
+    loadScript("datos_banco.js"),
+    loadScript("examenes_data.js"),
+    loadScript("datos_examenes/2022.js"),
+    loadScript("datos_examenes/2024.js"),
+    loadScript("datos_examenes/2025.js")
+  ]).then(()=>{
+    window.EXAMENES=(window.EXAMENES||[]).concat(
+      typeof EXAMENES_2022!=='undefined'?EXAMENES_2022:[],
+      typeof EXAMENES_2024!=='undefined'?EXAMENES_2024:[],
+      typeof EXAMENES_2025!=='undefined'?EXAMENES_2025:[]
+    );
+  });
+  return heavyDataPromise;
+}
 let destiladoBodies=null; // se llena una sola vez con fetch()
 async function getDestiladoBodies(){
   if(destiladoBodies) return destiladoBodies;
@@ -397,7 +418,7 @@ async function toggleTema(i){
   btn.textContent="▾ Ocultar"; box.classList.add("show");
   if(!box.dataset.loaded){
     box.innerHTML="<p class='sd'>Cargando contenido…</p>";
-    const bodies=await getDestiladoBodies();
+    const [bodies]=await Promise.all([getDestiladoBodies(), loadHeavyData()]);
     const d=bodies[i];
     const qs=preguntasParaTema(i);
     let html="";
