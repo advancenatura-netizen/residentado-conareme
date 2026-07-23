@@ -293,7 +293,7 @@ function go(view){setActive(view);}
 })();
 
 // TRACKER
-const FIJAS=[["Trauma / ATLS","S"],["Patología biliar","S"],["Ictericia neonatal","S"],["Bioestadística y diseños","S"],["Neumonía","S"],["Tuberculosis","S"],["IAM / SCA","S"],["Preeclampsia","S"],["APGAR / reanimación neonatal","S"],["PTI","A"],["TEP","A"],["Sepsis neonatal","A"],["Convulsión febril","A"],["Cáncer de endometrio","A"],["Vulvovaginitis","A"],["Cetoacidosis diabética","A"],["Meningitis bacteriana","A"],["Anemia falciforme","A"],["Torsión testicular","A"],["FA / TPSV","A"],["Obstrucción/diverticulitis/hernias","A"],["Bronquiolitis","B"],["Hemorragias obstétricas","B"],["Diabetes gestacional","B"],["Intoxicaciones","B"],["EPOC exacerbado","B"],["Cáncer de cérvix","B"],["Taquipnea transitoria RN","B"],["Henoch-Schönlein","B"],["Niveles de prevención","B"]];
+const FIJAS=[["Trauma / ATLS","S"],["Patología biliar","S"],["Ictericia neonatal","S"],["Bioestadística y diseños","S"],["Neumonía","S"],["Tuberculosis","S"],["IAM / SCA","S"],["Preeclampsia","S"],["APGAR / reanimación neonatal","S"],["PTI","A"],["TEP","A"],["Sepsis neonatal","A"],["Convulsión febril","A"],["Cáncer de endometrio","A"],["Vulvovaginitis","A"],["Cetoacidosis diabética","A"],["Meningitis bacteriana","A"],["Anemia falciforme","A"],["Torsión testicular","A"],["FA / TPSV","A"],["Obstrucción/diverticulitis/hernias","A"],["Bronquiolitis","B"],["Hemorragias obstétricas","B"],["Diabetes gestacional","B"],["Intoxicaciones","B"],["EPOC exacerbado","B"],["Cáncer de cérvix","B"],["Taquipnea transitoria RN","B"],["Henoch-Schönlein","B"],["Niveles de prevención","B"],["Déficit de zinc / acrodermatitis","B"],["Atresia esofágica","B"],["Rubéola congénita","B"],["Enfermedades exantemáticas","B"],["Kawasaki","B"],["Galactosemia","B"],["Hernia diafragmática congénita","B"],["Síndrome urémico hemolítico","B"],["Crisis de ausencia","B"],["Desarrollo psicomotor","B"],["Addison","B"],["Hiperaldosteronismo (Conn)","B"],["Mieloma / Fanconi renal","B"],["Guillain-Barré","B"],["Fracturas / síndrome compartimental","B"],["Ovario poliquístico (SOP)","B"],["EPI / absceso tuboovárico","B"],["Embarazo ectópico","B"],["Anticoncepción","B"],["Pruebas diagnósticas / medicina ocupacional","B"]];
 // palabras clave para emparejar cada tema con preguntas reales de examenes_data.js / datos_examenes / datos_banco.js
 const TEMAKW=[
   ["atls","politraumat","neumotórax a tensión","tórax inestable","trauma abdom","fast "],
@@ -325,7 +325,27 @@ const TEMAKW=[
   ["cáncer de cérvix","cancer de cervix","cáncer cervical","cancer cervical","figo"],
   ["taquipnea transitoria"],
   ["henoch-schönlein","henoch-schonlein","henoch schönlein","henoch schonlein","púrpura de henoch","purpura de henoch"],
-  ["nivel de prevención","niveles de prevención","nivel de prevencion","niveles de prevencion","prevención primaria","prevencion primaria","leavell"]
+  ["nivel de prevención","niveles de prevención","nivel de prevencion","niveles de prevencion","prevención primaria","prevencion primaria","leavell"],
+  ["déficit de zinc","deficit de zinc","acrodermatitis"],
+  ["atresia esofágica","atresia esofagica","fístula traqueoesofágica","fistula traqueoesofagica"],
+  ["rubéola congénita","rubeola congenita","síndrome de rubéola","tríada de gregg"],
+  ["exantema súbito","exantema subito","sarampión","sarampion","roséola","roseola","manchas de koplik","varicela"],
+  ["kawasaki"],
+  ["galactosemia"],
+  ["hernia diafragmática","hernia diafragmatica","bochdalek"],
+  ["síndrome urémico hemolítico","sindrome uremico hemolitico","suh "],
+  ["crisis de ausencia","ausencia típica","ausencia tipica","pequeño mal","pequeno mal"],
+  ["desarrollo psicomotor","hitos del desarrollo"],
+  ["addison","insuficiencia suprarrenal"],
+  ["hiperaldosteronismo","síndrome de conn","sindrome de conn"],
+  ["mieloma múltiple","mieloma multiple","fanconi renal","bence-jones","bence jones"],
+  ["guillain-barré","guillain-barre","guillain barré","guillain barre"],
+  ["síndrome compartimental","sindrome compartimental","fasciotomía","fasciotomia"],
+  ["ovario poliquístico","ovario poliquistico","síndrome de ovario poliquístico","sindrome de ovario poliquistico","sop "],
+  ["enfermedad pélvica inflamatoria","enfermedad pelvica inflamatoria","absceso tuboovárico","absceso tuboovarico","epi "],
+  ["embarazo ectópico","embarazo ectopico"],
+  ["anticoncepción","anticoncepcion","anticonceptivo"],
+  ["sensibilidad","especificidad","snnout","sppin","neumoconiosis","silicosis","medicina ocupacional"]
 ];
 const KEY="conareme_progreso_v1";
 let state=JSON.parse(localStorage.getItem(KEY)||"{}");
