@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 Repaso Inteligente</title>
+<style>
+:root{--bg:#0b0f1a;--panel:#161d30;--panel2:#1e2740;--ink:#eaf0fb;--muted:#9aabc9;--accent:#34d3ff;--gold:#ffd166;--green:#22d39a;--red:#ff5d7a;
+--MED:#34d3ff;--PED:#22d39a;--CIR:#ff5d7a;--GIN:#ff9e57;--SP:#ffd166;--CB:#a78bfa;}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:18px}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:1.4rem;margin:0 0 4px}
+.sub{color:var(--muted);font-size:.85rem;margin-bottom:14px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:var(--panel);border:1px solid #2a3550;border-radius:12px;padding:12px 16px;margin-bottom:16px}
+.card{background:var(--panel);border:1px solid #2a3550;border-radius:14px;padding:22px;min-height:220px;display:flex;flex-direction:column;justify-content:center}
+.pill{display:inline-block;padding:2px 9px;border-radius:8px;font-size:.7rem;font-weight:800;margin-bottom:10px}
+.pill.MED{background:rgba(52,211,255,.18);color:var(--MED)}.pill.PED{background:rgba(34,211,154,.18);color:var(--PED)}
+.pill.CIR{background:rgba(255,93,122,.18);color:var(--CIR)}.pill.GIN{background:rgba(255,158,87,.18);color:var(--GIN)}
+.pill.SP{background:rgba(255,209,102,.18);color:var(--SP)}.pill.CB{background:rgba(167,139,250,.18);color:var(--CB)}
+.front{font-size:1.08rem;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.opt{background:var(--panel2);border:1px solid #2a3550;border-radius:10px;padding:10px 14px;cursor:pointer;font-size:.92rem;text-align:left}
+.opt:hover{border-color:var(--accent)}
+.opt.correct{border-color:var(--green);background:rgba(34,211,154,.12)}
+.opt.wrong{border-color:var(--red);background:rgba(255,93,122,.12)}
+.back{margin-top:14px;padding-top:14px;border-top:1px dashed #2a3550;font-size:.95rem;color:#d2dcef}
+.explain{margin-top:10px;font-size:.85rem;color:var(--muted)}
+.btnrow{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.btn{flex:1;min-width:90px;border:none;border-radius:10px;padding:10px;font-weight:800;font-size:.82rem;cursor:pointer;color:#06121a}
+.b0{background:var(--red)}.b1{background:var(--gold)}.b2{background:var(--accent)}.b3{background:var(--green)}
+.bigbtn{background:linear-gradient(90deg,var(--accent),var(--green));border:none;border-radius:12px;padding:14px;font-weight:900;color:#06121a;cursor:pointer;font-size:1rem;width:100%}
+.confrow{display:flex;gap:8px;margin-top:16px}
+.confbtn{flex:1;padding:10px;border-radius:10px;border:1px solid #2a3550;background:var(--panel2);color:var(--ink);cursor:pointer;font-size:.82rem}
+.confbtn:hover{border-color:var(--accent)}
+.stat{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+.reveal{display:none}
+.centermsg{text-align:center;color:var(--muted);padding:40px 10px}
+a.back-link{color:var(--accent);text-decoration:none;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="index.html">← volver al portal</a>
+<h1>🎯 Repaso Inteligente</h1>
+<div class="sub">Repetición espaciada (SM-2) + preguntas intercaladas de todas las áreas. Prioriza lo que se te olvida.</div>
+<div class="top">
+  <div class="stat" id="statTop">Cargando...</div>
+  <div id="gamiWidget"></div>
+</div>
+<div id="stage"></div>
+</div>
+
+<script src="datos_banco.js"></script>
+<script src="datos_flashcards.js"></script>
+<script src="examenes_data.js"></script>
+<script src="datos_examenes/2022.js"></script>
+<script src="datos_examenes/2024.js"></script>
+<script src="datos_examenes/2025.js"></script>
+<script>window.EXAMENES=(window.EXAMENES||[]).concat(typeof EXAMENES_2022!=='undefined'?EXAMENES_2022:[],typeof EXAMENES_2024!=='undefined'?EXAMENES_2024:[],typeof EXAMENES_2025!=='undefined'?EXAMENES_2025:[]);</script>
+<script src="motor_srs.js"></script>
+<script src="motor_gamificacion.js"></script>
+<script>
+const ANAMES={MED:"Medicina",PED:"Pediatría",CIR:"Cirugía",GIN:"Gineco-Obst.",SP:"Salud Pública",CB:"C. Básicas"};
+
+// ---- Construir pool unificado ----
+let pool=[];
+(typeof CARDS!=='undefined'?CARDS:[]).forEach((c,i)=>{
+  const [a,tema]=(c.t||"· ").split(" · ");
+  pool.push({id:"fc"+i, kind:"fc", area:(a||"MED").trim(), tema:tema||"", front:c.f, back:c.b});
+});
+(typeof BANK!=='undefined'?BANK:[]).forEach((q,i)=>{
+  pool.push({id:"bk"+i, kind:"mcq", area:q.area, tema:q.tema||"", q:q.q, o:q.o, c:q.c, e:q.e});
+});
+(window.EXAMENES||[]).forEach((q,i)=>{
+  pool.push({id:"ex"+(q.ex||"")+"_"+(q.n||i), kind:"mcq", area:q.area, tema:q.tema||"", q:q.q, o:q.o, c:q.c, e:q.e, src:q.ex});
+});
+
+const EXAMEN=new Date(2026,8,6);
+const diasAlExamen=Math.max(0,Math.ceil((EXAMEN-new Date())/86400000));
+
+let cola=[], idx=0, sesXP=0, sesN=0;
+const stage=document.getElementById("stage");
+
+function refreshTop(){
+  const c=SRS.contarVencidosYNuevos(pool);
+  document.getElementById("statTop").innerHTML=
+    `<span>📌 ${c.vencidos} para repasar</span><span>🆕 ${c.nuevos} nuevas</span><span>✅ ${c.dominadas} dominadas</span><span>📅 ${diasAlExamen} días al examen</span>`;
+  document.getElementById("gamiWidget").innerHTML=GAMI.widgetHTML();
+}
+refreshTop();
+
+function iniciar(){
+  cola=SRS.construirCola(pool,{diasAlExamen, maxItems:30});
+  idx=0; sesXP=0; sesN=0;
+  if(cola.length===0){
+    stage.innerHTML='<div class="centermsg">🎉 No tienes nada pendiente ahora mismo. Vuelve más tarde o repasa igual desde Flashcards/Banco.</div>';
+    return;
+  }
+  mostrar();
+}
+
+function mostrar(){
+  if(idx>=cola.length){ return terminar(); }
+  const it=cola[idx];
+  if(it.kind==="fc") renderFC(it); else renderMCQ(it);
+}
+
+function renderFC(it){
+  stage.innerHTML=`<div class="card">
+    <span class="pill ${it.area}">${ANAMES[it.area]||it.area}${it.tema?" · "+it.tema:""}</span>
+    <div class="front">${it.front}</div>
+    <div class="back reveal" id="back"><b>Respuesta:</b> ${it.back}</div>
+    <button class="bigbtn" id="flip">Voltear 🔄</button>
+    <div class="btnrow reveal" id="grades">
+      <button class="btn b0" onclick="calificar(0)">Otra vez</button>
+      <button class="btn b1" onclick="calificar(1)">Difícil</button>
+      <button class="btn b2" onclick="calificar(2)">Bien</button>
+      <button class="btn b3" onclick="calificar(3)">Fácil</button>
+    </div>
+  </div>`;
+  document.getElementById("flip").onclick=()=>{
+    document.getElementById("back").style.display="block";
+    document.getElementById("grades").style.display="flex";
+    document.getElementById("flip").style.display="none";
+  };
+}
+
+let confActual=null;
+function renderMCQ(it){
+  stage.innerHTML=`<div class="card">
+    <span class="pill ${it.area}">${ANAMES[it.area]||it.area}${it.tema?" · "+it.tema:""}</span>
+    <div class="front">${it.q}</div>
+    <div id="confArea">
+      <div style="font-size:.8rem;color:var(--muted);margin-top:10px">¿Qué tan seguro estás antes de ver las opciones?</div>
+      <div class="confrow">
+        <button class="confbtn" onclick="elegirConfianza(0)">🤔 Adivinando</button>
+        <button class="confbtn" onclick="elegirConfianza(1)">🙂 Algo seguro</button>
+        <button class="confbtn" onclick="elegirConfianza(2)">💪 Muy seguro</button>
+      </div>
+    </div>
+    <div class="opts reveal" id="opts"></div>
+    <div class="explain reveal" id="expl"></div>
+  </div>`;
+}
+
+function elegirConfianza(n){
+  confActual=n;
+  const it=cola[idx];
+  document.getElementById("confArea").style.display="none";
+  const optsEl=document.getElementById("opts");
+  optsEl.style.display="flex";
+  optsEl.innerHTML=it.o.map((op,i)=>`<button class="opt" data-i="${i}" onclick="responder(${i})">${String.fromCharCode(65+i)}. ${op}</button>`).join("");
+}
+
+function responder(i){
+  const it=cola[idx];
+  const botones=[...document.querySelectorAll("#opts .opt")];
+  botones.forEach(b=>b.onclick=null);
+  botones[it.c].classList.add("correct");
+  const acerto = i===it.c;
+  if(!acerto) botones[i].classList.add("wrong");
+  const explEl=document.getElementById("expl");
+  explEl.style.display="block";
+  explEl.innerHTML=(acerto?"✅ ¡Correcto! ":"❌ Incorrecto. ")+(it.e||"");
+  SRS.registrarConfianza(confActual, acerto);
+  // deriva la calificación SM-2 de la confianza + acierto (menos fricción que pedir 2 pasos)
+  let g;
+  if(!acerto) g=0;
+  else g = confActual===2?3 : confActual===1?2 : 1;
+  setTimeout(()=>calificar(g), 900);
+}
+
+function calificar(g){
+  const it=cola[idx];
+  SRS.grade(it.id, g);
+  const xp = 6 + g*3; // más XP por dominar bien, no por adivinar
+  GAMI.sumarXP(xp);
+  sesXP+=xp; sesN++;
+  idx++;
+  refreshTop();
+  mostrar();
+}
+
+function terminar(){
+  const cal=SRS.calibracion();
+  const calHtml=cal.filter(c=>c.n>0).map(c=>`<div>${c.nivel}: acertaste ${c.pct}% (${c.n} veces)</div>`).join("");
+  stage.innerHTML=`<div class="card" style="text-align:center">
+    <div style="font-size:2rem">🏁</div>
+    <div style="font-weight:800;font-size:1.1rem;margin:8px 0">Sesión terminada</div>
+    <div style="color:var(--muted);margin-bottom:10px">${sesN} ítems repasados · +${sesXP} XP</div>
+    <div style="font-size:.82rem;color:var(--muted);text-align:left;max-width:320px;margin:0 auto">
+      <b style="color:var(--ink)">Tu calibración (¿sabes cuándo sabes?):</b><br>${calHtml||"Aún no hay datos suficientes."}
+    </div>
+    <button class="bigbtn" style="margin-top:16px" onclick="iniciar()">Otra ronda ↻</button>
+  </div>`;
+  refreshTop();
+}
+
+iniciar();
+</script>
+</body>
+</html>

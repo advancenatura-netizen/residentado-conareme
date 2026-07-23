@@ -100,7 +100,8 @@
   <a class="navitem" data-view="memoria" data-src="MEMORIA.html"><span class="em">📒</span> Mi memoria</a>
 
   <div class="navsec">Interactivo</div>
-  <a class="navitem" data-view="simulacros" data-src="SIMULACROS_OFICIALES.html"><span class="em">🏆</span> Simulacros oficiales (897)</a>
+  <a class="navitem" data-view="repaso" data-src="REPASO_INTELIGENTE.html"><span class="em">🎯</span> Repaso Inteligente (SRS)</a>
+  <a class="navitem" data-view="simulacros" data-src="SIMULACROS_OFICIALES.html"><span class="em">🏆</span> Simulacros oficiales</a>
   <a class="navitem" data-view="banco" data-src="BANCO_PREGUNTAS_CONAREME.html"><span class="em">🧠</span> Banco (208 preg.)</a>
   <a class="navitem" data-view="flashcards" data-src="FLASHCARDS_INTERACTIVAS_CONAREME.html"><span class="em">🔄</span> Flashcards</a>
 
@@ -140,6 +141,7 @@
 
       <h2>Empieza aquí — accesos rápidos</h2>
       <div class="quickgrid">
+        <div class="qcard" onclick="go('repaso')"><div class="em">🎯</div><div class="t">Repaso Inteligente</div><div class="d">Repetición espaciada + XP y racha diaria — lo nuevo, empieza aquí cada día</div></div>
         <div class="qcard" onclick="go('simulacros')"><div class="em">🏆</div><div class="t">Simulacros oficiales</div><div class="d">897 preguntas REALES (2018-2023) resueltas + simulacro de 200 y analítica</div></div>
         <div class="qcard" onclick="go('banco')"><div class="em">🧠</div><div class="t">Banco de Preguntas</div><div class="d">208 preguntas comentadas · modo estudio y simulacro</div></div>
         <div class="qcard" onclick="go('escalas')"><div class="em">📏</div><div class="t">Escalas y criterios</div><div class="d">CURB-65, Alvarado, Apgar, Wells... buscables</div></div>
@@ -171,6 +173,7 @@
   </section>
 
   <!-- FRAMED VIEWS -->
+  <section class="view" id="view-repaso"><div class="framehead"><span class="t">🎯 Repaso Inteligente (repetición espaciada)</span><a class="openbtn" href="REPASO_INTELIGENTE.html" target="_blank">Abrir a pantalla completa ↗</a></div><iframe data-name="repaso"></iframe></section>
   <section class="view" id="view-memoria"><div class="framehead"><span class="t">📒 Mi memoria (historial + cuaderno de errores)</span><a class="openbtn" href="MEMORIA.html" target="_blank">Abrir a pantalla completa ↗</a></div><iframe data-name="memoria"></iframe></section>
   <section class="view" id="view-simulacros"><div class="framehead"><span class="t">🏆 Simulacros oficiales (897 preguntas reales)</span><a class="openbtn" href="SIMULACROS_OFICIALES.html" target="_blank">Abrir a pantalla completa ↗</a></div><iframe data-name="simulacros"></iframe></section>
   <section class="view" id="view-escalas"><div class="framehead"><span class="t">📏 Escalas y criterios</span><a class="openbtn" href="ESCALAS_Y_CRITERIOS.html" target="_blank">Abrir a pantalla completa ↗</a></div><iframe data-name="escalas"></iframe></section>
