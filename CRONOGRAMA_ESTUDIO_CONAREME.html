@@ -58,6 +58,19 @@
   .daygrid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:8px;}
   @media(max-width:820px){.daygrid{grid-template-columns:repeat(2,1fr);}}
   .day{background:var(--panel2); border:1px solid #2a3550; border-radius:8px; padding:8px; font-size:.78rem; min-height:74px;}
+  .techcard{background:var(--panel2); border-radius:12px; padding:18px 20px; margin:14px 0; border-left:4px solid var(--accent);}
+  .techcard h4{color:#fff; font-size:1.02rem; margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+  .techcard .eviden{font-size:.9rem; color:#d2dcef; margin-bottom:10px;}
+  .techcard .aqui{background:rgba(157,143,255,.08); border:1px solid rgba(157,143,255,.25); border-radius:8px; padding:10px 13px; font-size:.88rem; margin-top:8px;}
+  .techcard .aqui b{color:var(--accent);}
+  .techcard .errorbox{background:rgba(255,93,143,.08); border-left:3px solid var(--red); border-radius:6px; padding:8px 12px; font-size:.85rem; margin-top:8px; color:#ffe3ec;}
+  .techcard.c1{border-color:var(--red);} .techcard.c2{border-color:var(--gold);} .techcard.c3{border-color:var(--green);}
+  .techcard.c4{border-color:var(--violet);} .techcard.c5{border-color:var(--orange);} .techcard.c6{border-color:var(--accent);}
+  .flowstep{display:flex; gap:12px; align-items:flex-start; padding:10px 0; border-bottom:1px dashed #2a3550;}
+  .flowstep:last-child{border-bottom:none;}
+  .flowstep .fn{background:var(--accent); color:#06121a; font-weight:900; border-radius:50%; width:28px; height:28px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.85rem;}
+  .mistakebox{background:rgba(255,93,143,.06); border:1px solid var(--red); border-radius:10px; padding:16px 18px; margin-top:10px;}
+  .mistakebox li{margin-bottom:8px; font-size:.92rem;}
   .day .d{font-weight:800; color:var(--gold); font-size:.72rem; text-transform:uppercase; margin-bottom:3px;}
   .info-box{background:rgba(157,143,255,.06); border:1px solid var(--accent); border-radius:12px; padding:16px; margin:14px 0;}
   .warn-box{background:rgba(255,204,77,.07); border:1px solid var(--gold); border-radius:12px; padding:16px; margin:14px 0;}
@@ -105,6 +118,7 @@
   <a href="#fases">4 fases</a>
   <a href="#semanas">Semana a semana</a>
   <a href="#dia">El día tipo</a>
+  <a href="#tecnicas">Cómo estudiar</a>
   <a href="#admin">Hitos admin</a>
   <a href="#reglas">Reglas de oro</a>
 </div></nav>
@@ -304,34 +318,91 @@
 
 <section id="dia">
   <h2>5. El día tipo (4–6 horas)</h2>
-  <div class="grid2">
-    <div class="card">
-      <h3 style="margin-top:0">Estructura diaria</h3>
-      <table>
-        <tr><th>Bloque</th><th>Qué</th></tr>
-        <tr><td class="hl">0:00–0:15</td><td>Repaso de flashcards del día anterior (repetición espaciada)</td></tr>
-        <tr><td class="hl">0:15–2:00</td><td>Tema nuevo nº1: leer el ángulo (Destilado) + fuente/guía + hacer tus propias notas</td></tr>
-        <tr><td class="hl">2:00–2:15</td><td>Descanso</td></tr>
-        <tr><td class="hl">2:15–3:45</td><td>Tema nuevo nº2 (o pediatría si el nº1 fue médica)</td></tr>
-        <tr><td class="hl">3:45–4:30</td><td><b>Banco de preguntas</b> del tema visto hoy (active recall)</td></tr>
-        <tr><td class="hl">4:30–5:00</td><td>Crear flashcards de lo que fallaste hoy</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <h3 style="margin-top:0">Técnica de estudio (lo que funciona)</h3>
-      <ul style="font-size:.92rem">
-        <li><b>Active recall:</b> después de leer, cierra y responde preguntas. Recordar &gt; releer.</li>
-        <li><b>Repetición espaciada:</b> repasa cada tema a las 24h, 7 días y 21 días (las flashcards lo automatizan).</li>
-        <li><b>Aprende el "ángulo":</b> CONAREME pregunta el diagnóstico más probable, la conducta inicial o el examen confirmatorio. Estudia con esa lente.</li>
-        <li><b>Casos clínicos:</b> ~75% son viñetas. Practica el patrón "paciente → respuesta" más que listas.</li>
-        <li><b>Cuaderno de errores:</b> todo lo que fallas va a una hoja; esa hoja es tu repaso final.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h3 style="margin-top:0">Estructura diaria</h3>
+    <table>
+      <tr><th>Bloque</th><th>Qué</th></tr>
+      <tr><td class="hl">0:00–0:15</td><td>Repaso de flashcards del día anterior (repetición espaciada)</td></tr>
+      <tr><td class="hl">0:15–2:00</td><td>Tema nuevo nº1: leer el ángulo (Destilado) + fuente/guía + hacer tus propias notas</td></tr>
+      <tr><td class="hl">2:00–2:15</td><td>Descanso</td></tr>
+      <tr><td class="hl">2:15–3:45</td><td>Tema nuevo nº2 (o pediatría si el nº1 fue médica)</td></tr>
+      <tr><td class="hl">3:45–4:30</td><td><b>Banco de preguntas</b> del tema visto hoy (active recall)</td></tr>
+      <tr><td class="hl">4:30–5:00</td><td>Crear flashcards de lo que fallaste hoy</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="tecnicas">
+  <h2>6. Cómo estudiar de verdad — la ciencia detrás de cada técnica</h2>
+  <p>Esto no son "tips" sueltos: son las técnicas con más evidencia científica en psicología del aprendizaje (Dunlosky et al. 2013, la revisión más citada sobre qué funciona y qué no), y cada una ya está construida dentro de esta web para que no tengas que organizarla tú a mano. Léelo una vez, entiéndelo, y confía en el sistema.</p>
+
+  <div class="techcard c1">
+    <h4>🎯 1. Active recall (evocación activa) — la más importante de todas</h4>
+    <div class="eviden"><b>Qué es:</b> en vez de releer un tema o subrayarlo, cierras el material y te obligas a recordarlo desde cero, como si te tomaran examen. <b>Por qué funciona:</b> recordar algo con esfuerzo fortalece la conexión neuronal muchísimo más que volver a leerlo — el "esfuerzo de recuperación" es lo que consolida la memoria a largo plazo. Estudios en estudiantes de medicina muestran ~50% más retención a una semana comparado con releer el mismo tiempo. Releer se siente productivo (falsa fluidez: "esto ya lo sé, se ve familiar") pero engaña: reconocer no es lo mismo que recordar.</div>
+    <div class="aqui"><b>Cómo lo usas aquí:</b> nunca leas el Destilado o el Módulo Perú/MINSA y pases a otra cosa. Después de cada tema, ve directo al <b>Banco de Preguntas</b> o a <b>Repaso Inteligente</b> filtrando ese tema, y respóndelo sin mirar el material. Si fallas, eso te dice exactamente qué no sabías — mucho más útil que "sentir" que ya lo estudiaste.</div>
+    <div class="errorbox">⚠ Error común: pasar horas hermoseando resúmenes o subrayando en colores. Se siente productivo pero es de las técnicas con MENOR evidencia de utilidad real.</div>
+  </div>
+
+  <div class="techcard c2">
+    <h4>🔁 2. Repetición espaciada (algoritmo SM-2)</h4>
+    <div class="eviden"><b>Qué es:</b> repasar un tema justo antes de que lo vayas a olvidar, con intervalos que se alargan cada vez que lo recuerdas bien (1 día → 3 días → 7 días → 21 días...) y se acortan cuando fallas. <b>Por qué funciona:</b> la curva del olvido de Ebbinghaus muestra que olvidamos rápido en los primeros días; cada repaso justo a tiempo "reinicia" esa curva y la hace más plana, por lo que cada vez te cuesta menos recordarlo. Repasar algo que ya tienes fresco es poco eficiente (ya lo sabes); repasar algo que ya olvidaste totalmente es como aprenderlo de cero — el punto óptimo es el repaso justo antes del olvido.</div>
+    <div class="aqui"><b>Cómo lo usas aquí:</b> esto es exactamente lo que hace <b>🎯 Repaso Inteligente</b> por ti, automáticamente: calcula cuándo te toca repasar cada pregunta/tarjeta según cómo te fue la última vez (Otra vez / Difícil / Bien / Fácil) y arma tu cola del día. <b>No necesitas planificar tus repasos a mano</b> — entra a Repaso Inteligente todos los días y confía en la cola que te arma.</div>
+    <div class="errorbox">⚠ Error común: estudiar todo de nuevo la noche antes del examen ("cramming"). Sirve para reconocimiento a corto plazo, pero se olvida en días — lo opuesto de lo que necesitas para un examen que mide medicina que vas a ejercer.</div>
+  </div>
+
+  <div class="techcard c3">
+    <h4>🔀 3. Interleaving (intercalado de temas)</h4>
+    <div class="eviden"><b>Qué es:</b> mezclar áreas y temas distintos en una misma sesión de práctica, en vez de hacer 50 preguntas seguidas del mismo tema ("estudio en bloque"). <b>Por qué funciona:</b> aunque se siente MÁS difícil e incómodo en el momento (por eso casi nadie lo hace por su cuenta), obliga a tu cerebro a decidir activamente "¿qué tipo de problema es este y qué estrategia le aplico?" cada vez — que es justo lo que te va a pedir el examen real, donde las 200 preguntas vienen mezcladas sin avisarte el área. Estudios comparando ambos métodos muestran hasta 3 veces mejor retención a largo plazo con intercalado, pese a que en el momento el estudiante siente que rindió peor.</div>
+    <div class="aqui"><b>Cómo lo usas aquí:</b> <b>Repaso Inteligente</b> ya intercala las áreas automáticamente (nunca repite la misma dos veces seguidas). En <b>Simulacros</b> y <b>Banco</b>, usa el modo "Mixto" con varias áreas activadas en vez de practicar un área sola — y de vez en cuando corre un <b>Simulacro de 200</b> completo, la máxima expresión de intercalado real.</div>
+    <div class="errorbox">⚠ Error común: "primero domino Medicina a la perfección y luego paso a Pediatría". Se siente más ordenado, pero entrena peor la habilidad real que te van a examinar: reconocer de qué tema se trata sin que te lo digan.</div>
+  </div>
+
+  <div class="techcard c4">
+    <h4>💡 4. Elaboración — pregúntate "¿por qué?", no solo "¿qué?"</h4>
+    <div class="eviden"><b>Qué es:</b> en vez de memorizar el dato suelto ("el sulfato de magnesio se usa en preeclampsia severa"), preguntarte y responderte el mecanismo ("¿por qué sulfato de magnesio y no un antihipertensivo? porque previene convulsiones, no baja presión — es anticonvulsivante"). <b>Por qué funciona:</b> un dato aislado se olvida fácil porque no está conectado a nada; un dato que entiendes queda enganchado a una red de conceptos relacionados (fisiopatología, otros fármacos con mecanismo similar, contraindicaciones), así que tienes muchas más "puertas" para recordarlo después, incluso si la pregunta lo redacta distinto a como lo estudiaste.</div>
+    <div class="aqui"><b>Cómo lo usas aquí:</b> por eso cada ficha del <b>Destilado</b> y cada tema de <b>Mi Progreso</b> no solo te da la respuesta — te explica el "por qué" antes. No te saltes esos párrafos pensando que "ya sé la respuesta"; el por qué es lo que te va a salvar cuando la pregunta del examen real esté redactada distinto a lo que memorizaste.</div>
+    <div class="errorbox">⚠ Error común: memorizar la respuesta de una pregunta específica en vez del concepto. CONAREME rara vez repite la pregunta EXACTA — casi siempre repite el concepto con otro caso clínico.</div>
+  </div>
+
+  <div class="techcard c5">
+    <h4>📊 5. Calibración de confianza (metacognición)</h4>
+    <div class="eviden"><b>Qué es:</b> antes de responder, evaluar honestamente qué tan seguro estás, y después comparar esa confianza contra si realmente acertaste. <b>Por qué funciona:</b> la investigación en educación médica muestra que los estudiantes sistemáticamente <b>sobreestiman</b> lo que saben — te "suena" una respuesta y la marcas sin darte cuenta de que en realidad estabas adivinando. Medir la confianza y contrastarla con el resultado real te muestra tus puntos ciegos: temas donde te sientes seguro pero fallas seguido son mucho más peligrosos que temas donde sabes que no sabes (esos últimos ya los vas a repasar).</div>
+    <div class="aqui"><b>Cómo lo usas aquí:</b> en <b>Repaso Inteligente</b>, antes de cada pregunta de opción múltiple te pregunta "¿qué tan seguro estás?" (Adivinando / Algo seguro / Muy seguro). Al final de cada sesión revisa tu reporte de calibración — si un nivel de "muy seguro" tiene menos de 90% de acierto real, ahí tienes una alerta de sobreconfianza que vale más que 10 preguntas nuevas.</div>
+    <div class="errorbox">⚠ Error común: ignorar el reporte de calibración porque "ya vi mi puntaje". El puntaje te dice CUÁNTO sabes; la calibración te dice DÓNDE te engañas a ti mismo, que es más difícil de detectar solo.</div>
+  </div>
+
+  <div class="techcard c6">
+    <h4>🩺 6. Práctica con casos clínicos, no con listas</h4>
+    <div class="eviden"><b>Qué es:</b> entrenar el patrón "viñeta de paciente (edad, síntomas, examen, laboratorio) → diagnóstico o conducta", en vez de memorizar listas de datos sueltos por enfermedad. <b>Por qué funciona:</b> ~75% de las preguntas reales de CONAREME son casos clínicos (no preguntas directas de definición), y esa proporción sube cada año más reciente. El examen no te pregunta "¿qué es la preeclampsia?" — te da una gestante de 34 semanas con presión 160/110 y cefalea, y evalúa si reconoces el patrón. Ese reconocimiento de patrones es una habilidad distinta a memorizar y solo se entrena resolviendo muchas viñetas reales.</div>
+    <div class="aqui"><b>Cómo lo usas aquí:</b> los <b>897+ preguntas de Simulacros</b> son exámenes reales de CONAREME 2018-2025, casi todas en formato de viñeta — es tu fuente más fiel al estilo real del examen. Complementa con el <b>Banco de 208 preguntas</b> (mismo formato, generado para reforzar las fijas).</div>
+    <div class="errorbox">⚠ Error común: estudiar solo teoría "en limpio" (definiciones, clasificaciones) sin nunca practicarla en formato de caso. Sabrás la teoría pero fallarás en reconocerla disfrazada de paciente.</div>
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <h3 style="margin-top:0">🗺️ Flujo de estudio recomendado por tema (usando todas las herramientas juntas)</h3>
+    <div class="flowstep"><div class="fn">1</div><div><b>Lee el tema</b> en el Destilado o en Mi Progreso (contexto + por qué, no solo el dato).</div></div>
+    <div class="flowstep"><div class="fn">2</div><div><b>Practícalo de inmediato</b> con las preguntas reales que aparecen automáticamente al final de ese tema en Mi Progreso — es active recall inmediato mientras está fresco.</div></div>
+    <div class="flowstep"><div class="fn">3</div><div><b>Ese mismo día</b>, agrégalo a tu rotación de <b>Repaso Inteligente</b> (ya se agrega solo la primera vez que respondes algo de ese tema) — de ahí en adelante el sistema decide cuándo te toca repasarlo.</div></div>
+    <div class="flowstep"><div class="fn">4</div><div><b>Cada 1-2 semanas</b>, resuelve un examen completo real en <b>Simulacros</b> (modo por examen o mixto) para practicar el formato e intercalado real.</div></div>
+    <div class="flowstep"><div class="fn">5</div><div><b>Revisa tu Cuaderno de errores</b> en Mi Memoria semanalmente — son tus temas de mayor prioridad, más que cualquier tema nuevo.</div></div>
+    <div class="flowstep"><div class="fn">6</div><div><b>Últimas 2 semanas:</b> prioriza Simulacros de 200 cronometrados (condiciones reales) y repasa solo lo que Repaso Inteligente te marque como vencido — ya no es momento de contenido 100% nuevo.</div></div>
+  </div>
+
+  <div class="mistakebox">
+    <b style="color:var(--red)">🚫 Errores frecuentes que sabotean el estudio (evítalos):</b>
+    <ul style="margin-top:8px;margin-left:18px">
+      <li><b>Solo releer o subrayar</b> — se siente productivo, aporta poco. Cambia siempre a modo pregunta.</li>
+      <li><b>Estudiar en bloque</b> (todo Medicina, luego todo Pediatría) — intercala desde el día 1, aunque se sienta más difícil.</li>
+      <li><b>Dejar el repaso para "cuando tenga tiempo"</b> — sin repaso espaciado, lo que estudiaste hace un mes ya se perdió en gran parte. Entra a Repaso Inteligente TODOS los días, aunque sea 15 minutos.</li>
+      <li><b>Evitar tus áreas débiles</b> porque "dan flojera" — son las que más puntos te van a dar si las atacas, precisamente porque nadie más las estudia bien.</li>
+      <li><b>No cronometrarte nunca</b> — practicar sin tiempo no te prepara para la presión real de ~1 min/pregunta del examen. Usa el modo cronometrado al menos 1 vez por semana desde la Fase 2.</li>
+      <li><b>Dormir poco antes del examen "para aprovechar el tiempo"</b> — la consolidación de memoria ocurre durmiendo; una noche sin dormir borra parte de lo aprendido esa semana.</li>
+    </ul>
   </div>
 </section>
 
 <section id="admin">
-  <h2>6. Hitos administrativos (no los pierdas de vista)</h2>
+  <h2>7. Hitos administrativos (no los pierdas de vista)</h2>
   <div class="warn-box">
     <table>
       <tr><th>Fecha 2026</th><th>Trámite</th></tr>
@@ -347,7 +418,7 @@
 </section>
 
 <section id="reglas">
-  <h2>7. Reglas de oro</h2>
+  <h2>8. Reglas de oro</h2>
   <div class="card">
     <ol>
       <li><b>Constancia &gt; intensidad.</b> 4 horas diarias sostenidas 13 semanas ganan a maratones aislados.</li>
