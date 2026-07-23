@@ -27,15 +27,15 @@
   .counter{text-align:center; color:var(--muted); font-size:.85rem; margin:8px 0;}
   /* CARD */
   .scene{perspective:1400px; margin:18px 0;}
-  .card{position:relative; width:100%; min-height:280px; transition:transform .55s; transform-style:preserve-3d; cursor:pointer;}
+  .card{position:relative; width:100%; min-height:340px; transition:transform .55s; transform-style:preserve-3d; cursor:pointer;}
   .card.flipped{transform:rotateY(180deg);}
-  .face{position:absolute; inset:0; backface-visibility:hidden; border-radius:18px; padding:26px; display:flex; flex-direction:column; justify-content:center; border:1px solid #2a3550;}
+  .face{position:absolute; inset:0; backface-visibility:hidden; border-radius:18px; padding:26px; padding-top:40px; display:flex; flex-direction:column; justify-content:center; border:1px solid #2a3550; overflow-y:auto;}
   .front{background:linear-gradient(160deg,#1e2740,#161d30);}
   .back{background:linear-gradient(160deg,#13322a,#0f2620); transform:rotateY(180deg); border-color:var(--green);}
   .tag{position:absolute; top:14px; left:18px; font-size:.72rem; font-weight:800; color:var(--violet); text-transform:uppercase; letter-spacing:.5px;}
-  .hint{position:absolute; bottom:14px; right:18px; font-size:.72rem; color:var(--muted);}
+  .hint{position:absolute; bottom:10px; right:18px; font-size:.72rem; color:var(--muted);}
   .face .q{font-size:1.15rem; font-weight:700; color:#fff; text-align:center;}
-  .face .a{font-size:1.05rem; color:#d6f7ec; text-align:center;}
+  .face .a{font-size:1rem; line-height:1.55; color:#d6f7ec; text-align:left;}
   .face .alabel{font-size:.72rem; color:var(--green); font-weight:800; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; text-align:center;}
   .controls{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:8px;}
   .selfeval{display:none; gap:10px; justify-content:center; margin-top:10px;}
@@ -53,7 +53,7 @@
 <body>
 <header><div class="wrap" style="padding:0">
   <h1>🔄 Flashcards Interactivas — CONAREME</h1>
-  <div class="sub">90 tarjetas de las fijas · toca para voltear · autoevalúate</div>
+  <div class="sub">92 tarjetas de las fijas, con explicación extendida · toca para voltear · autoevalúate</div>
 </div></header>
 
 <div class="wrap">
