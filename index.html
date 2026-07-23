@@ -87,6 +87,7 @@
   .realq .expl{font-size:.85rem; margin-top:8px; padding-top:8px; border-top:1px dashed #2a3550; color:#d2dcef;}
   .realq .expl b{color:var(--gold);}
   .realqhead{color:var(--gold); font-weight:800; margin:18px 0 8px; font-size:1rem;}
+  .recur{background:rgba(255,209,102,.1); border:1px solid var(--gold); border-radius:8px; padding:9px 13px; font-size:.85rem; margin-bottom:10px;}
   .resetbtn{background:transparent; border:1px solid var(--muted); color:var(--muted); border-radius:8px; padding:6px 12px; font-size:.78rem; cursor:pointer; margin-top:10px;}
   .resetbtn:hover{border-color:var(--red); color:var(--red);}
   .note{font-size:.82rem; color:var(--muted);}
@@ -424,12 +425,29 @@ function preguntasParaTema(i){
   return out;
 }
 const L5=["A","B","C","D","E","F"];
+function aniosDe(qs){
+  const anios=new Set();
+  qs.forEach(q=>{
+    const m=(q.ex||"").match(/20\d\d/);
+    if(m) anios.add(m[0]);
+  });
+  return [...anios].sort();
+}
+function renderRecurrencia(qs){
+  const anios=aniosDe(qs);
+  if(anios.length===0) return "";
+  const nivel = anios.length>=4 ? "🔥 Tema muy recurrente" : anios.length>=2 ? "📌 Tema recurrente" : "🆕 Visto en un solo examen hasta ahora";
+  return "<div class='recur'>"+nivel+" — apareció en <b>"+anios.length+" examen"+(anios.length===1?"":"es")+" distinto"+(anios.length===1?"":"s")+"</b> de los que tenemos cargados: "+anios.join(", ")+".</div>";
+}
 function renderPreguntas(qs){
   if(qs.length===0) return "<p class='sd'>Todavía no hay preguntas reales identificadas para este tema exacto en el banco cargado — usa el Destilado de arriba y practica este tema en Simulacros/Banco filtrando por área.</p>";
-  return qs.map((q,idx)=>{
+  let html=renderRecurrencia(qs);
+  if(qs.length<2) html+="<p class='sd' style='margin-bottom:8px'>⚠ Por ahora solo encontramos "+qs.length+" pregunta real con estas palabras clave — a medida que se sumen más exámenes (2012-2017 pendientes) debería aparecer más de una.</p>";
+  html+=qs.map((q,idx)=>{
     const opts=q.o.map((op,j)=>"<div class='op"+(j===q.c?" ok":"")+"'>"+L5[j]+". "+op+(j===q.c?" ✓":"")+"</div>").join("");
-    return "<div class='realq'><div class='qh'>"+(idx+1)+". <span class='pill p-"+q.area+"'>"+(ANAMES2[q.area]||q.area)+"</span> "+q.q+"</div>"+opts+(q.e?"<div class='expl'><b>Explicación:</b> "+q.e+"</div>":"")+"</div>";
+    return "<div class='realq'><div class='qh'>"+(idx+1)+". <span class='pill p-"+q.area+"'>"+(ANAMES2[q.area]||q.area)+"</span> <span class='sd'>"+(q.ex||"Banco")+"</span> "+q.q+"</div>"+opts+(q.e?"<div class='expl'><b>Explicación:</b> "+q.e+"</div>":"")+"</div>";
   }).join("");
+  return html;
 }
 async function toggleTema(i){
   const box=document.getElementById("temabox"+i), btn=document.getElementById("expbtn"+i);

@@ -11,8 +11,9 @@
     --med:#34d3ff; --ped:#22d39a; --cir:#ff5d7a; --gin:#ff9e57; --sp:#ffd166; --cb:#a78bfa;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.6;}
+  body{font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.65;}
   .wrap{max-width:1000px; margin:0 auto; padding:22px;}
+  #readbar{position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--green)); width:0%; z-index:30; transition:width .1s;}
   header{background:radial-gradient(1000px 350px at 25% -15%, #1b3a5c, #0b0f1a 62%); border-bottom:3px solid var(--accent); padding:44px 22px 34px;}
   header h1{font-size:1.85rem; color:#fff; margin-bottom:8px;}
   header .sub{color:var(--accent); font-weight:600; font-size:1rem;}
@@ -36,14 +37,14 @@
   .freq{display:inline-block; padding:1px 8px; border-radius:8px; font-weight:800; font-size:.72rem; background:var(--red); color:#fff;}
   .lbl{display:flex; align-items:center; gap:7px; font-weight:800; color:var(--accent); font-size:.95rem; margin:16px 0 6px;}
   .lbl:first-child{margin-top:0;}
-  .ctx{font-size:.95rem; color:#e6edf8; background:rgba(52,211,255,.05); border-radius:8px; padding:11px 13px;}
-  .qa{border-left:3px solid var(--gold); padding:8px 0 8px 13px; margin:9px 0;}
-  .qa .q{font-style:italic; color:var(--gold); font-size:.92rem; margin-bottom:3px;}
-  .qa .a{font-size:.94rem; color:#e6edf8;}
+  .ctx{font-size:1.02rem; line-height:1.7; color:#e6edf8; background:rgba(52,211,255,.05); border-radius:8px; padding:13px 15px;}
+  .qa{border-left:3px solid var(--gold); padding:9px 0 9px 14px; margin:11px 0;}
+  .qa .q{font-style:italic; color:var(--gold); font-size:.96rem; margin-bottom:4px;}
+  .qa .a{font-size:1rem; line-height:1.65; color:#e6edf8;}
   .qa .a b{color:var(--green);}
-  .clave{background:rgba(34,211,154,.08); border-left:3px solid var(--green); padding:10px 13px; border-radius:6px; margin-top:12px; font-size:.93rem;}
+  .clave{background:rgba(34,211,154,.1); border-left:4px solid var(--green); padding:12px 15px; border-radius:6px; margin-top:14px; font-size:.98rem; line-height:1.6; box-shadow:0 0 0 1px rgba(34,211,154,.08);}
   .clave b{color:var(--green);}
-  .gloss{background:rgba(167,139,250,.07); border:1px solid rgba(167,139,250,.3); border-radius:8px; padding:10px 13px; margin-top:12px; font-size:.86rem; color:#d2dcef;}
+  .gloss{background:rgba(167,139,250,.07); border:1px solid rgba(167,139,250,.3); border-radius:8px; padding:11px 15px; margin-top:12px; font-size:.9rem; line-height:1.6; color:#d2dcef;}
   .gloss b{color:var(--violet);}
   .gloss .term{color:var(--violet); font-weight:700;}
   .info-box{background:rgba(52,211,255,.06); border:1px solid var(--accent); border-radius:12px; padding:16px; margin:14px 0;}
@@ -53,6 +54,7 @@
 </style>
 </head>
 <body>
+<div id="readbar"></div>
 <header>
   <div class="wrap" style="padding:0">
     <h1>📖 Destilado EXPLICADO de las 50 Fijas — CONAREME</h1>
@@ -729,5 +731,12 @@
 </div>
 
 <footer>Destilado EXPLICADO de las 50 fijas (ampliado de 30 a 50 en jul-2026, cubre todo el Nivel S+A+B) · Concurso Nacional de Admisión al Residentado Médico 2026 (CONAREME) · versión amigable con contexto, preguntas con respuesta y glosario · para Momar, 10 de junio de 2026.</footer>
+<script>
+window.addEventListener("scroll",()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById("readbar").style.width=Math.min(100,Math.max(0,pct))+"%";
+});
+</script>
 </body>
 </html>

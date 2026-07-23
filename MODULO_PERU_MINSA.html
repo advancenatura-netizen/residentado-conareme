@@ -9,6 +9,7 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;}
   .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  #readbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));width:0%;z-index:30;transition:width .1s;}
   header{background:radial-gradient(1000px 350px at 25% -15%,#7a1f2b,#0b0f1a 62%);border-bottom:3px solid var(--red);padding:40px 22px 30px;}
   header h1{font-size:1.8rem;color:#fff;}
   header .sub{color:var(--red);font-weight:600;margin-top:4px;}
@@ -32,7 +33,7 @@
   .term{color:var(--violet);font-weight:700;}
   .def{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.3);border-radius:8px;padding:10px 13px;margin:10px 0;font-size:.88rem;}
   .def b{color:var(--violet);}
-  ul,ol{margin:6px 0 10px 22px;} li{margin-bottom:6px;font-size:.93rem;color:#dbe4f3;}
+  ul,ol{margin:6px 0 10px 22px;} li{margin-bottom:7px;font-size:.98rem;line-height:1.55;color:#dbe4f3;}
   .verbox{background:rgba(34,211,154,.08);border:1px solid var(--green);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:.9rem;}
   .verbox b{color:var(--green);}
   .warn-box{background:rgba(255,209,102,.07);border:1px solid var(--gold);border-radius:12px;padding:14px;margin:16px 0;font-size:.86rem;}
@@ -41,6 +42,7 @@
 </style>
 </head>
 <body>
+<div id="readbar"></div>
 <header><div class="wrap" style="padding:0">
   <h1>🇵🇪 Módulo Perú / MINSA — CONAREME</h1>
   <div class="sub">Las normas nacionales explicadas a fondo: qué dicen, por qué, y cómo lo pregunta el examen</div>
@@ -407,5 +409,12 @@
 
 </div>
 <footer>Módulo Perú / MINSA · CONAREME 2026 · TBC (NTS 221-2024) y Dengue (NTS 211-2024) verificados línea por línea contra el PDF oficial · Vacunación y VIH con nota de discrepancia de documento (ver secciones) · GPC Diabetes (RM 719-2015), HTA (RM 031-2015) y Neumonía niño (RM 1041-2019) verificadas contra su GPC real · julio 2026.</footer>
+<script>
+window.addEventListener("scroll",()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById("readbar").style.width=Math.min(100,Math.max(0,pct))+"%";
+});
+</script>
 </body>
 </html>
